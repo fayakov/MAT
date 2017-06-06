@@ -30,7 +30,6 @@ public class MATServerController extends AbstractServer
 		if (command == 1)
 		{
 			MessageGetTeacher getTeacher = new MessageGetTeacher(rcvMessage);
-			StringBuilder  teacher = new StringBuilder();
 /*			if(matDAL.getTeacher(teacher,getTeacher.getTeacherID()))
 			{
 				Message sendMessage = new Message(3);
@@ -40,7 +39,7 @@ public class MATServerController extends AbstractServer
 				try
 				{
 					//client.sendToClient(sendTeacher.getString());
-					client.sendToClient(matDAL.getTeacher(teacher,getTeacher.getTeacherID()));
+					client.sendToClient(matDAL.getTeacher(getTeacher.getTeacherID()));
 				}
 				catch(IOException ioExp)
 				{
