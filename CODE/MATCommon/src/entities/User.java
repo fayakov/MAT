@@ -12,6 +12,9 @@ public class User implements Serializable
 	private boolean isLogged;
 	private boolean isLocked;
 	
+	public User(){
+	}
+	
 	public User(int id, String firstName, String lastName, String  password){
 		this.id= id;
 		this.firstName= firstName;

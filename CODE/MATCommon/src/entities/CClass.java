@@ -1,8 +1,10 @@
 package entities;
-import java.util.ArrayList;
-import java.io.Serializable;
 
-public class Class implements Serializable {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class CClass implements Serializable {
+	
 	public String classNumber;
 	  public ArrayList<Student> studentList;
 	  
@@ -19,4 +21,5 @@ public class Class implements Serializable {
 	public void setStudentList(ArrayList<Student> studentList) {
 		this.studentList = studentList;
 	}
+
 }
