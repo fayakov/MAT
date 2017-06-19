@@ -1,10 +1,13 @@
 package entities;
 import java.util.ArrayList;
-import java.io.Serializable;
 
-public class Class implements Serializable {
+public class Class {
 	public String classNumber;
-	  public ArrayList<Student> studentList;
+    public ArrayList<Student> studentList;
+    
+    public Class(String number) {
+    	classNumber = number;
+    }
 	  
 	  
 	public String getClassNumber() {
@@ -13,10 +16,13 @@ public class Class implements Serializable {
 	public void setClassNumber(String classNumber) {
 		this.classNumber = classNumber;
 	}
+	public Boolean addStudent(Student newStudent) {
+		return studentList.add(newStudent);
+	}
+	public Boolean deleteStudent(Student delStudent) {
+		return studentList.remove(delStudent);
+	}	
 	public ArrayList<Student> getStudentList() {
 		return studentList;
-	}
-	public void setStudentList(ArrayList<Student> studentList) {
-		this.studentList = studentList;
 	}
 }
