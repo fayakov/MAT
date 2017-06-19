@@ -11,7 +11,7 @@ public class DALTestMain {
 		CDal dl = new CDal();
 		dl.connect("admin");
 		int id = 123;
-		/*Teacher teacher = dl.getTeacher(id);
+		Teacher teacher = dl.getTeacher(id);
 		User user = new User();
 		if(dl.getUserData(id, user))
 		{
@@ -28,75 +28,7 @@ public class DALTestMain {
 			System.out.println("no value");
 		}
 		
-		
-		*/
-		 CDALError error = new CDALError();
-		if(dl.connectUser(true,id, "321", error))
-		{
-			System.out.println("true");
-		}
-		else
-		{
-			System.out.println("false");
-		}
-		
-		error.serError(EDALError.ENoError);
-		if(!dl.connectUser(true,id, "322", error))
-		{
-			if(error.getError() == EDALError.EWrongPasswordOrId)
-			{
-				System.out.println("true");
-			}
-			else
-			{
-				System.out.println("false");
-			}
-		}
-		
-		error.serError(EDALError.ENoError);
-		if(!dl.connectUser(true,id, "321", error))
-		{
-			if(error.getError() == EDALError.EUserAllreadyConnectedDisconnected)
-			{
-				System.out.println("true");
-			}
-			else
-			{
-				System.out.println("false");
-			}
-		}
-		else
-		{
-			System.out.println("false");
-		}
-		
-		error.serError(EDALError.ENoError);
-		if(dl.connectUser(false,id, "321", error))
-		{
-			System.out.println("true");
-		}
-		else
-		{
-			System.out.println("false");
-		}
-
-		
-		error.serError(EDALError.ENoError);
-		if(!dl.connectUser(false,id, "321", error))
-		{
-			if(error.getError() == EDALError.EUserAllreadyConnectedDisconnected)
-			{
-				System.out.println("true");
-			}
-			else
-			{
-				System.out.println("false");
-			}
-		}
-		else
-		{
-			System.out.println("false");
-		}
+		dl.connectUser(id, "abc123");
 	}
 
 }
