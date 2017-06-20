@@ -12,16 +12,26 @@ public class User implements Serializable
 	private boolean isLogged;
 	private boolean isLocked;
 	
-	public User(){
+	
+	public User() {
+		super();
+	
+	}
+
+
+	public User(int id, String firstName, String lastName, String password, String userType, boolean isLogged,
+			boolean isLocked) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		setUserType(userType);
+		this.isLogged = isLogged;
+		this.isLocked = isLocked;
 	}
 	
-	public User(int id, String firstName, String lastName, String  password){
-		this.id= id;
-		this.firstName= firstName;
-		this.lastName= lastName;
-		this.password = password;
-	}	
-	
+
 	public int getId() {
 		return id;
 	}
@@ -51,8 +61,28 @@ public class User implements Serializable
 		return userType;
 	}
 
-	public void setUserType(EUserType userType) {
-		this.userType = userType;
+	public void setUserType(String userTypes) {
+		switch(userTypes)
+		{
+		case "EUserTeacher":
+			this.userType=EUserType.EUserTeacher;
+			break;
+		case "EUserStudent":
+			this.userType=EUserType.EUserStudent;
+			break;
+		case "EUserSecretary":
+			this.userType=EUserType.EUserSecretary;
+			break;
+		case "EUserPrincipal":
+			this.userType=EUserType.EUserPrincipal;
+			break;
+		case "EUserParent":
+			this.userType=EUserType.EUserParent;
+			break;
+		case "EUserSystemManager":
+			this.userType=EUserType.EUserSystemManager;
+			break;
+		}
 	}
 	
 	public Boolean getIsLogged() {
@@ -71,3 +101,4 @@ public class User implements Serializable
 		this.isLocked = isLocked;
 	}
 }
+
