@@ -37,8 +37,42 @@ public class SecretaryController {
 		Stage primaryStage = new Stage();
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
     }
+    /*
+    void AddClassToCourse() throws Exception {
+    	
+    	Pane root = FXMLLoader.load(getClass().getResource("/MATGui/AddClassToCourse.fxml"));
+		Scene scene = new Scene(root);
+		Stage primaryStage = new Stage();
+		primaryStage.setScene(scene);
+		primaryStage.show();
+    }
+    void DefineClass() throws Exception {
+    	
+    	Pane root = FXMLLoader.load(getClass().getResource("/MATGui/DefineClass.fxml"));
+		Scene scene = new Scene(root);
+		Stage primaryStage = new Stage();
+		primaryStage.setScene(scene);
+		primaryStage.show();
+    }
+    void OpenSemester() throws Exception {
+    	
+    	Pane root = FXMLLoader.load(getClass().getResource("/MATGui/OpenSemester.fxml"));
+		Scene scene = new Scene(root);
+		Stage primaryStage = new Stage();
+		primaryStage.setScene(scene);
+		primaryStage.show();
+    }
+    void AddTeacherToCourseClass() throws Exception {
+    	
+    	Pane root = FXMLLoader.load(getClass().getResource("/MATGui/AddTeacherToCourseClass.fxml"));
+		Scene scene = new Scene(root);
+		Stage primaryStage = new Stage();
+		primaryStage.setScene(scene);
+		primaryStage.show();
+    }
+    */
+    
     
     public void start(Stage primaryStage) throws Exception {
 		
@@ -53,6 +87,16 @@ public class SecretaryController {
     	String option = secretaryCombox.getValue().toString();
     	if(option.equalsIgnoreCase("Add student to class"))
     		AddStudentToClass();
+    	/*
+    	if(option.equalsIgnoreCase("Add class to course"))
+    		AddClassToCourse();
+    	if(option.equalsIgnoreCase("Define class"))
+    		AddStudentToClass();
+    	if(option.equalsIgnoreCase("Open semester"))
+    		AddStudentToClass();
+    	if(option.equalsIgnoreCase("Add teacher to course in class"))
+    		AddStudentToClass();
+    	*/
     }
 
     @FXML
@@ -67,7 +111,6 @@ public class SecretaryController {
 		
 		list = FXCollections.observableArrayList(options);
 		secretaryCombox.setItems(list);
-	//	secretaryCombox.getSelectionModel().selectFirst();
 	}	
 
     
