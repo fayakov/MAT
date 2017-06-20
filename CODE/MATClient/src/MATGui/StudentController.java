@@ -73,10 +73,10 @@ public class StudentController implements Initializable
     @FXML
     private Label labelStudentMenu;
     @FXML
-<<<<<<< HEAD
+
     public void loadStudent(Student s1){
 		this.s=s1;
-=======
+    }
     private Button ButtonMyData;
     
     
@@ -89,7 +89,7 @@ public class StudentController implements Initializable
 		Pane root = loader.load(getClass().getResource("/MATGui/StudentData.fxml").openStream());
 		
 		StudentController studentController = loader.getController();	
->>>>>>> bb4e0e2ba7c7e8fc197926f3190efeb1e69a1fb9
+
 		this.textFName.setText(s.getFirstName());
 		this.textLName.setText(s.getLastName());		
 		this.textClasses.setText(s.getClassID());
@@ -133,17 +133,13 @@ public class StudentController implements Initializable
 			e.printStackTrace();
 		}
 	}
-<<<<<<< HEAD
-=======
-    
+
     
     //@Override
-	public void initialize(URL arg0, ResourceBundle arg1) 
-	{
+	public void initialize(URL arg0, ResourceBundle arg1) {
 		labelStudentMenu.setText("Accepted");
 		ButtonMyData.setText("Say 'Hello World'");
     	//ButtonMyData.setValue("select student");
 		
 	}
->>>>>>> bb4e0e2ba7c7e8fc197926f3190efeb1e69a1fb9
 }
