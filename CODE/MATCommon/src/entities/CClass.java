@@ -1,20 +1,16 @@
 package entities;
-<<<<<<< HEAD:CODE/MATCommon/src/entities/CClass.java
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
-public class CClass implements Serializable {
 	
-=======
 import java.util.ArrayList;
 
-public class Class {
->>>>>>> refs/remotes/origin/my-branch:CODE/MATCommon/src/entities/Class.java
+public class CClass implements Serializable{
 	public String classNumber;
     public ArrayList<Student> studentList;
     
-    public Class(String number) {
+    public CClass(String number) {
     	classNumber = number;
     }
 	  
@@ -34,11 +30,7 @@ public class Class {
 	public ArrayList<Student> getStudentList() {
 		return studentList;
 	}
-<<<<<<< HEAD:CODE/MATCommon/src/entities/CClass.java
 	public void setStudentList(ArrayList<Student> studentList) {
 		this.studentList = studentList;
 	}
-
-=======
->>>>>>> refs/remotes/origin/my-branch:CODE/MATCommon/src/entities/Class.java
 }
