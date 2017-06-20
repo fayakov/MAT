@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StudentController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MATGui.StudentController">
    <children>
       <Label fx:id="labelStudentData" layoutX="218.0" layoutY="27.0" prefHeight="29.0" prefWidth="165.0" text="Student Data:">
          <font>
@@ -25,7 +25,7 @@
       <TextField fx:id="textLName" layoutX="202.0" layoutY="182.0" />
       <TextField fx:id="textClasses" layoutX="202.0" layoutY="221.0" />
       <TextField fx:id="textCourses" layoutX="202.0" layoutY="260.0" />
-      <Button fx:id="buttenExit" layoutX="523.0" layoutY="350.0" mnemonicParsing="false" onAction="#loadStudent" text="exit" />
+      <Button fx:id="buttenExit" layoutX="523.0" layoutY="350.0" mnemonicParsing="false" onAction="#StudentInfo" text="exit" />
    </children>
 </Pane>
 

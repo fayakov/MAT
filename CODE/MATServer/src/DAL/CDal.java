@@ -123,20 +123,43 @@ public class CDal {
 		return retVal;
 	}
 	
-	public static boolean connectUser(int userId, String passWord)
+	public static boolean connectUser(boolean connect,int userId, String password, CDALError error)
 	{
 		boolean retVal = true;
 		try 
 		{
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("UPDATE user SET isLogged = true WHERE user.passWord = '"+ passWord+ "';");
-			/*if (resultSet.next()) {
-				System.out.println("found");
+			ResultSet resultSet  = stmt.executeQuery("SELECT isLogged FROM user WHERE user.password = '"+ password+ "' && user.id = '" +userId + "';");
+			if(resultSet.first())
+			{
+				boolean connectStatus = (resultSet.getInt(1)==1);
+				if((connectStatus && connect) || ( !connectStatus && !connect) ){
+					retVal = false;
+					error.serError(EDALError.EUserAllreadyConnectedDisconnected);
+				}
+				else{
+					
+					int numOfUpdates;
+					if(connect)
+					{
+						numOfUpdates = stmt.executeUpdate("UPDATE user SET isLogged = true WHERE user.id = '"+ userId+ "';");
+					}
+					else
+					{
+						numOfUpdates = stmt.executeUpdate("UPDATE user SET isLogged = false WHERE user.id = '"+ userId+ "';");
+					}
+					if(numOfUpdates == 0)
+					{
+						retVal = false;
+						error.serError(EDALError.EUpdateNotSucced);
+					}
+				} 
 			}
 			else
 			{
 				retVal = false;
-			}*/
+				error.serError(EDALError.EWrongPasswordOrId);
+			}
 		}
 		catch (SQLException e) {e.printStackTrace();}
 		return retVal;
