@@ -19,7 +19,7 @@ public class StudentController {
 
     @FXML
     private Label labelStudentID;
-
+    
     @FXML
     private Label labelFNName;
 
@@ -51,8 +51,6 @@ public class StudentController {
     private Button buttenExit;
 
     @FXML
-    
-    
     public void loadStudent(Student s1){
 		this.s=s1;
 		this.textFName.setText(s.getFirstName());
@@ -61,6 +59,4 @@ public class StudentController {
 		//this.textStudentID.setText(s.getId());
 		//this.textCourses.setText(s1.getID());
 	}
-    
-  
 }
