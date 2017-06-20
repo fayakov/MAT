@@ -1,6 +1,7 @@
 package MATGui;
 
 import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -11,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 public class SecretaryController {
 	
 	ObservableList<String> list ;
-
+	
     @FXML
     private ResourceBundle resources;
 
@@ -38,7 +38,7 @@ public class SecretaryController {
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }
-    /*
+    
     void AddClassToCourse() throws Exception {
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/MATGui/AddClassToCourse.fxml"));
@@ -55,6 +55,7 @@ public class SecretaryController {
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }
+    
     void OpenSemester() throws Exception {
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/MATGui/OpenSemester.fxml"));
@@ -63,6 +64,7 @@ public class SecretaryController {
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }
+    
     void AddTeacherToCourseClass() throws Exception {
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/MATGui/AddTeacherToCourseClass.fxml"));
@@ -71,7 +73,7 @@ public class SecretaryController {
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }
-    */
+    
     
     
     public void start(Stage primaryStage) throws Exception {
@@ -86,17 +88,16 @@ public class SecretaryController {
     	//String name = StudentName.getValue().toString();
     	String option = secretaryCombox.getValue().toString();
     	if(option.equalsIgnoreCase("Add student to class"))
-    		AddStudentToClass();
-    	/*
+    		AddStudentToClass();	
     	if(option.equalsIgnoreCase("Add class to course"))
     		AddClassToCourse();
     	if(option.equalsIgnoreCase("Define class"))
-    		AddStudentToClass();
+    		DefineClass();
     	if(option.equalsIgnoreCase("Open semester"))
-    		AddStudentToClass();
+    		OpenSemester();
     	if(option.equalsIgnoreCase("Add teacher to course in class"))
-    		AddStudentToClass();
-    	*/
+    		AddTeacherToCourseClass();
+    	
     }
 
     @FXML

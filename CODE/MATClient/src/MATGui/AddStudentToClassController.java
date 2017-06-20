@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class AddStudentToClassController {
@@ -25,7 +24,7 @@ public class AddStudentToClassController {
     private TextField StudentID;
 
     @FXML
-    void send(ActionEvent event) {
+    void sendAddStudent(ActionEvent event) {
     	
     	String sid = StudentID.getText().toString();
     	String cid = ClassID.getText().toString();
@@ -35,13 +34,8 @@ public class AddStudentToClassController {
     	
     	// if succeeded
     	Alert alert = new Alert(AlertType.INFORMATION);
-    	alert.setHeaderText("student added successfully!");
+    	alert.setHeaderText("student " + sid + " added successfully to class " + cid);
     	alert.show();
-
-    }
-    
-    void Exit(ActionEvent event) {
-    	
     }
 
     @FXML
