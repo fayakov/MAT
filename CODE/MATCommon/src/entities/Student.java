@@ -10,7 +10,7 @@ public class Student  extends User {
 	 
 	 public Student(String classID, int ID,  String FName,  String LName, String password  ) 
 	 	{
-			super( ID,  FName,  LName, password);
+			super();
 		}
 	 
 	 
