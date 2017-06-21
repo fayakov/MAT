@@ -14,7 +14,8 @@ public class DALTestMain {
 		//checkGetUserType(dl);
 		//checkIsExistClass(dl);
 		//checkAddClass(dl);
-		checkAddStudentToClass(dl);
+		//checkAddStudentToClass(dl);
+		checkCreateCourse(dl);
 		/*Teacher teacher = dl.getTeacher(id);*/
 
 	}
@@ -152,6 +153,11 @@ public class DALTestMain {
 	
 	public static void checkAddStudentToClass(CDal dl){
 		System.out.println(dl.addStudentToClass("a1", 124));
+	}
+	
+	public static void checkCreateCourse(CDal dl)
+	{
+		System.out.println(dl.createCourse("algebra1"));
 	}
 	
 }
