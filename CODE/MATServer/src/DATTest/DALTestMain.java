@@ -13,8 +13,8 @@ public class DALTestMain {
 		//checkGetUserData(dl);
 		//checkGetUserType(dl);
 		//checkIsExistClass(dl);
-		checkAddClass(dl);
-		
+		//checkAddClass(dl);
+		checkAddStudentToClass(dl);
 		/*Teacher teacher = dl.getTeacher(id);*/
 
 	}
@@ -148,6 +148,10 @@ public class DALTestMain {
 		System.out.println(dl.isClassExist("a1"));
 		System.out.println(dl.isClassExist("asdasd") == false);
 
+	}
+	
+	public static void checkAddStudentToClass(CDal dl){
+		System.out.println(dl.addStudentToClass("a1", 124));
 	}
 	
 }

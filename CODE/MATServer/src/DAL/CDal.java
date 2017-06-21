@@ -248,6 +248,95 @@ public class CDal {
 			e.printStackTrace();			
 		}		
 		return retVal;
+	}
+	
+	public static int getClassId(String className){
+		int retVal = 0;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT classId FROM class WHERE class.name = '" +className + "';");
+			if(resultSet.first()) {
+
+				retVal = resultSet.getInt(1);
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	public static boolean isStudentExist(int userId)
+	{
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT studentId FROM student WHERE student.user_id = '" +userId + "';");
+			if(resultSet.first()) {
+
+				retVal = true;
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	public static boolean createStudent(int userId)
+	{
+		boolean retVal = true;
+		try 
+		{
+			if(isStudentExist(userId))
+			{
+				retVal = false;
+			}
+			else
+			{
+				Statement stmt = connection.createStatement();
+				stmt.executeUpdate("INSERT INTO student (user_id) VALUES ('" +userId+"')");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();			
+		}		
+		return retVal;
+	}
+	
+	public static boolean addStudentToClass(String className, int userId){
+		boolean retVal = true;
+		
+		if(getUserType(userId) == EUserType.EUserStudent)
+		{
+
+			try 
+			{
+				int classId = getClassId(className);
+				if(classId == 0)
+				{
+					retVal = false;
+				}
+				else
+				{
+					createStudent(userId);
+					
+					Statement stmt = connection.createStatement();
+					if(stmt.executeUpdate("UPDATE student SET class_classId='" + classId + "' where user_id = '"+userId+"';" ) == 0)
+					{
+						retVal = false;
+					}
+	
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace();			
+			}		
+		}
+		else
+		{
+			retVal = false;
+		}
+		
+		return retVal;
 		
 	}
 	

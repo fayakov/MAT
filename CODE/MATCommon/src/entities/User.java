@@ -19,7 +19,7 @@ public class User implements Serializable
 	}
 
 
-	public User(int id, String firstName, String lastName, String password, String userType, boolean isLogged,
+	public User(int id, String firstName, String lastName, String password, EUserType userType, boolean isLogged,
 			boolean isLocked) {
 		super();
 		this.id = id;
@@ -60,7 +60,7 @@ public class User implements Serializable
 	public EUserType getUserType(){
 		return userType;
 	}
-
+	/*
 	public void setUserType(String userTypes) {
 		switch(userTypes)
 		{
@@ -83,6 +83,9 @@ public class User implements Serializable
 			this.userType=EUserType.EUserSystemManager;
 			break;
 		}
+	}*/
+	public void setUserType(EUserType userType) {
+		this.userType = userType;
 	}
 	
 	public Boolean getIsLogged() {
