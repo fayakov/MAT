@@ -1,4 +1,4 @@
-import MATGui.MATClientConsole;
+import controller.MATClientConsole;
 
 
 public class MATClientMain {

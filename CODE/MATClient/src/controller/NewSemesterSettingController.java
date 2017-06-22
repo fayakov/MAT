@@ -1,4 +1,4 @@
-package MATGui;
+package controller;
 
 import java.net.URL;
 
@@ -16,7 +16,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class SecretaryController {
+public class NewSemesterSettingController {
 	
 	ObservableList<String> list ;
 	
@@ -34,7 +34,7 @@ public class SecretaryController {
     
     void AddStudentToClass() throws Exception {
     	
-    	Pane root = FXMLLoader.load(getClass().getResource("/MATGui/AddStudentToClass.fxml"));
+    	Pane root = FXMLLoader.load(getClass().getResource("/gui/AddStudentToClass.fxml"));
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
 		primaryStage.setScene(scene);
@@ -43,7 +43,7 @@ public class SecretaryController {
     
     void AddClassToCourse() throws Exception {
     	
-    	Pane root = FXMLLoader.load(getClass().getResource("/MATGui/AddClassToCourse.fxml"));
+    	Pane root = FXMLLoader.load(getClass().getResource("/gui/AddClassToCourse.fxml"));
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
 		primaryStage.setScene(scene);
@@ -51,7 +51,7 @@ public class SecretaryController {
     }
     void DefineClass() throws Exception {
     	
-    	Pane root = FXMLLoader.load(getClass().getResource("/MATGui/DefineClass.fxml"));
+    	Pane root = FXMLLoader.load(getClass().getResource("/gui/DefineClass.fxml"));
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
 		primaryStage.setScene(scene);
@@ -60,7 +60,7 @@ public class SecretaryController {
     
     void OpenSemester() throws Exception {
     	
-    	Pane root = FXMLLoader.load(getClass().getResource("/MATGui/OpenSemester.fxml"));
+    	Pane root = FXMLLoader.load(getClass().getResource("/gui/OpenSemester.fxml"));
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
 		primaryStage.setScene(scene);
@@ -69,7 +69,7 @@ public class SecretaryController {
     
     void AddTeacherToCourseClass() throws Exception {
     	
-    	Pane root = FXMLLoader.load(getClass().getResource("/MATGui/AddTeacherToCourseClass.fxml"));
+    	Pane root = FXMLLoader.load(getClass().getResource("/gui/AddTeacherToCourseClass.fxml"));
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
 		primaryStage.setScene(scene);
@@ -80,7 +80,7 @@ public class SecretaryController {
     
     public void start(Stage primaryStage) throws Exception {
 		
-		Parent root = FXMLLoader.load(getClass().getResource("/MATGui/NewSemesterSettingSecretary.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/gui/NewSemesterSettingSecretary.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();

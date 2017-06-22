@@ -1,4 +1,4 @@
-package control;
+package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,13 +18,13 @@ public class ClassController implements Initializable {
 	//	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/MATGui/DefineClass.fxml").openStream());
+		Pane root = loader.load(getClass().getResource("/gui/DefineClass.fxml").openStream());
 		
 		//StudentFormController studentFormController = loader.getController();
 		//studentFormController.loadStudent(Test.students.get(itemIndex));
 		
 		Scene scene = new Scene(root);			
-		scene.getStylesheets().add(getClass().getResource("/MATGui/DefineClass.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/gui/DefineClass.css").toExternalForm());
 		
 		primaryStage.setScene(scene);		
 		primaryStage.show();

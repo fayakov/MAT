@@ -1,6 +1,6 @@
 package test;
 
-import MATGui.SecretaryController;
+import controller.NewSemesterSettingController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -14,7 +14,7 @@ public class SecretaryTest extends Application {
 	@Override
 	public void start(Stage arg0) throws Exception {
 		
-		SecretaryController secController = new SecretaryController();
+		NewSemesterSettingController secController = new NewSemesterSettingController();
 		secController.start(arg0);
 	}
 	

@@ -1,4 +1,4 @@
-package MATGui;
+package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,7 +21,7 @@ public class AssignmentController implements Initializable
 			public void start(Stage primaryStage) throws Exception
 			{
 				try {
-					Parent root = FXMLLoader.load(getClass().getResource("/MATGui/StudentMenu.fxml"));
+					Parent root = FXMLLoader.load(getClass().getResource("/gui/StudentMenu.fxml"));
 					Scene scene = new Scene(root);
 					scene.getStylesheets().add(getClass().getResource("/test/application.css").toExternalForm());//שיניתי לאפליקישיין
 					primaryStage.setTitle("Student Menu");

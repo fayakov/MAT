@@ -1,4 +1,4 @@
-package MATGui;
+package controller;
 
 import java.io.*;
 

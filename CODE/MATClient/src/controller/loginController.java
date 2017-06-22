@@ -1,4 +1,4 @@
-package MATGui;
+package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -86,7 +86,7 @@ public class loginController implements Initializable {
     
 	public void start(Stage primaryStage) throws Exception {	
 	    
-	    Parent root = FXMLLoader.load(getClass().getResource("/MATGui/logIn.fxml"));
+	    Parent root = FXMLLoader.load(getClass().getResource("/gui/logIn.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
