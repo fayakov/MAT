@@ -15,8 +15,7 @@
       <TextField fx:id="textYear" layoutX="279.0" layoutY="122.0" />
       <Text layoutX="221.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year" />
       <Text layoutX="222.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Semester" />
-      <RadioButton fx:id="btnA" layoutX="300.0" layoutY="192.0" mnemonicParsing="false" text="A" />
-      <RadioButton fx:id="btnB" layoutX="365.0" layoutY="192.0" mnemonicParsing="false" text="B" />
       <Button layoutX="275.0" layoutY="262.0" mnemonicParsing="false" onAction="#createSemester" text="Create" />
+      <ComboBox fx:id="semesterCombo" layoutX="279.0" layoutY="188.0" prefWidth="150.0" promptText="choose semester" />
    </children>
 </AnchorPane>

@@ -17,5 +17,6 @@
       <TextField fx:id="classId" layoutX="275.0" layoutY="130.0" />
       <TextField fx:id="courseId" layoutX="275.0" layoutY="188.0" />
       <Button layoutX="274.0" layoutY="261.0" mnemonicParsing="false" onAction="#sendAddClass" text="Send" />
+      <Button fx:id="btnClose" layoutX="495.0" layoutY="349.0" mnemonicParsing="false" onAction="#close" text="Close" />
    </children>
 </AnchorPane>
