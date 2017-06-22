@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="152.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add student to course">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Text layoutX="243.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Request">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
+      <Text layoutX="129.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Id:" />
+      <TextField fx:id="studentIdTextField" layoutX="232.0" layoutY="168.0" />
+      <Text layoutX="147.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="class:" />
+      <TextField fx:id="classTextField" layoutX="232.0" layoutY="223.0" />
+      <Text layoutX="147.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="course:" />
+      <TextField fx:id="courseTextField" layoutX="232.0" layoutY="287.0" />
+   </children>
+</AnchorPane>

@@ -67,7 +67,7 @@ public class secretaryController {
     
     @FXML
     public void send(ActionEvent event) throws Exception {
-    	//String name = StudentName.getValue().toString();
+    	
     	String option = secretaryMenuCombox.getValue().toString();
     	if(option.equalsIgnoreCase("Add student to course"))
     		AddStudentToCourse();	
