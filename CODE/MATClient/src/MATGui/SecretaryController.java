@@ -28,6 +28,11 @@ public class SecretaryController {
     
     @FXML
     private ComboBox<String> secretaryCombox;
+    
+    @FXML
+    private ComboBox<String> secretaryCombox2;
+    
+    
 
     
     void AddStudentToClass() throws Exception {
@@ -98,6 +103,11 @@ public class SecretaryController {
     	if(option.equalsIgnoreCase("Add teacher to course in class"))
     		AddTeacherToCourseClass();
     	
+    }
+    
+    @FXML
+    void send2(ActionEvent event) {
+
     }
 
     @FXML
