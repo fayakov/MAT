@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
 
 public class AddTeacherToCourseClassController {
 
@@ -20,6 +21,9 @@ public class AddTeacherToCourseClassController {
 
     @FXML
     private TextField courseId;
+    
+    @FXML
+    private Button btnClose;
 
     @FXML
     void AddTeacher(ActionEvent event) {
@@ -35,6 +39,12 @@ public class AddTeacherToCourseClassController {
     	Alert alert = new Alert(AlertType.INFORMATION);
     	alert.setHeaderText("teacher " + tid + " added successfully to course " + coid);
     	alert.show();
+    }
+    
+    @FXML
+    void closeAddTeacher(ActionEvent event) {	
+	    Stage stage = (Stage) btnClose.getScene().getWindow();
+	    stage.close();
     }
 
 }

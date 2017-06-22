@@ -7,6 +7,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class AddStudentToClassController {
@@ -16,6 +18,9 @@ public class AddStudentToClassController {
 
     @FXML
     private URL location;
+    
+    @FXML
+    private Button btnClose;
 
     @FXML
     private TextField ClassID;
@@ -36,6 +41,12 @@ public class AddStudentToClassController {
     	Alert alert = new Alert(AlertType.INFORMATION);
     	alert.setHeaderText("student " + sid + " added successfully to class " + cid);
     	alert.show();
+    }
+    
+    @FXML
+    void closeAddStodent(ActionEvent event) {	
+	    Stage stage = (Stage) btnClose.getScene().getWindow();
+	    stage.close();
     }
 
     @FXML

@@ -3,9 +3,11 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
 
 public class OpenSemester {
 	
@@ -17,6 +19,9 @@ public class OpenSemester {
 
 	    @FXML
 	    private RadioButton btnA;
+	    
+	    @FXML
+	    private Button btnClose;
 
 	    @FXML
 	    void createSemester(ActionEvent event)	{
@@ -33,6 +38,12 @@ public class OpenSemester {
 	    	alert.setHeaderText("semester was added succesfully");
 	    	alert.show();
 
+	    }
+	    
+	    @FXML
+	    void closeOpenSemester(ActionEvent event) {	
+		    Stage stage = (Stage) btnClose.getScene().getWindow();
+		    stage.close();
 	    }
 	    
 }

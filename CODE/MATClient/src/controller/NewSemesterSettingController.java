@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -19,6 +20,9 @@ import javafx.stage.Stage;
 public class NewSemesterSettingController {
 	
 	ObservableList<String> list ;
+	
+	@FXML
+	private Button btnClose;
 	
     @FXML
     private ResourceBundle resources;
@@ -98,8 +102,13 @@ public class NewSemesterSettingController {
     	if(option.equalsIgnoreCase("Open semester"))
     		OpenSemester();
     	if(option.equalsIgnoreCase("Add teacher to course in class"))
-    		AddTeacherToCourseClass();
-    	
+    		AddTeacherToCourseClass();    	
+    }
+    
+    @FXML
+    void close(ActionEvent event) {	
+	    Stage stage = (Stage) btnClose.getScene().getWindow();
+	    stage.close();
     }
     
 
