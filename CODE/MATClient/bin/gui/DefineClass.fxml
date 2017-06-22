@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DefineClassController">
+   <children>
+      <Text layoutX="214.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Define Class">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
+      <TextField fx:id="className" layoutX="251.0" layoutY="141.0" />
+      <Text layoutX="171.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class name" />
+      <Button layoutX="259.0" layoutY="223.0" mnemonicParsing="false" onAction="#createClass" text="Create" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="530.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TeacherController">
+   <children>
+      <Label fx:id="LabelTeacherMenu" layoutX="121.0" layoutY="27.0" prefHeight="44.0" prefWidth="225.0" text="Teacher Menu">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+      <Button fx:id="ButtonDefineAssignment" layoutX="30.0" layoutY="145.0" mnemonicParsing="false" onAction="#SelectDefineAssignment" text="Define Assignment">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

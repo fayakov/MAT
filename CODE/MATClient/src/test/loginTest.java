@@ -1,10 +1,11 @@
 package test;
 
-import MATGui.loginController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.util.Vector;
+
+import controller.loginController;
 
 
 public class loginTest extends Application {

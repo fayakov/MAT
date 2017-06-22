@@ -1,6 +1,6 @@
 package test;
 
-import MATGui.loginController;
+import controller.loginController;
 import entities.EUserType;
 
 public class staticClient {

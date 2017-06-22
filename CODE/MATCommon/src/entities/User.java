@@ -19,7 +19,7 @@ public class User implements Serializable
 	}
 
 
-	public User(int id, String firstName, String lastName, String password, String userType, boolean isLogged,
+	public User(int id, String firstName, String lastName, String password, EUserType userType, boolean isLogged,
 			boolean isLocked) {
 		super();
 		this.id = id;
@@ -61,28 +61,8 @@ public class User implements Serializable
 		return userType;
 	}
 
-	public void setUserType(String userTypes) {
-		switch(userTypes)
-		{
-		case "EUserTeacher":
-			this.userType=EUserType.EUserTeacher;
-			break;
-		case "EUserStudent":
-			this.userType=EUserType.EUserStudent;
-			break;
-		case "EUserSecretary":
-			this.userType=EUserType.EUserSecretary;
-			break;
-		case "EUserPrincipal":
-			this.userType=EUserType.EUserPrincipal;
-			break;
-		case "EUserParent":
-			this.userType=EUserType.EUserParent;
-			break;
-		case "EUserSystemManager":
-			this.userType=EUserType.EUserSystemManager;
-			break;
-		}
+	public void setUserType(EUserType userType) {
+		this.userType = userType;
 	}
 	
 	public Boolean getIsLogged() {
