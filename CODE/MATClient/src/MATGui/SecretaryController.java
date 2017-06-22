@@ -29,9 +29,6 @@ public class SecretaryController {
     @FXML
     private ComboBox<String> secretaryCombox;
     
-    @FXML
-    private ComboBox<String> secretaryCombox2;
-    
     
 
     
@@ -105,10 +102,6 @@ public class SecretaryController {
     	
     }
     
-    @FXML
-    void send2(ActionEvent event) {
-
-    }
 
     @FXML
     void initialize() {
