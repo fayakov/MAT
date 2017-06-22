@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="472.0" prefWidth="481.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <Label layoutX="166.0" layoutY="25.0" prefHeight="23.0" prefWidth="168.0" text="Define Assignment:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="42.0" layoutY="78.0" text="Upload File:" />
+      <Label layoutX="40.0" layoutY="134.0" text="Define Date Submission:" />
+      <Label layoutX="42.0" layoutY="190.0" text="Choose Class:" />
+      <Label layoutX="41.0" layoutY="248.0" text="Choose Course Number:" />
+      <DatePicker layoutX="226.0" layoutY="130.0" />
+      <ComboBox layoutX="226.0" layoutY="186.0" prefHeight="23.0" prefWidth="169.0" />
+      <ComboBox layoutX="226.0" layoutY="244.0" prefHeight="23.0" prefWidth="169.0" />
+   </children>
+</AnchorPane>
