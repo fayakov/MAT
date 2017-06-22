@@ -1,24 +1,27 @@
 package controller;
 
+import java.util.ArrayList;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class OpenSemester {
 	
+		ObservableList<String> list;
+	
 	 	@FXML
 	    private TextField textYear;
-
-	    @FXML
-	    private RadioButton btnB;
-
-	    @FXML
-	    private RadioButton btnA;
+	 	
+	 	@FXML
+	    private ComboBox<String> semesterCombo;
 	    
 	    @FXML
 	    private Button btnClose;
@@ -32,18 +35,33 @@ public class OpenSemester {
 	    	 * send to server
 	    	 * create semester
 	    	*/
-	    	
-	    	//if succeeded
-	    	Alert alert = new Alert(AlertType.INFORMATION);
-	    	alert.setHeaderText("semester was added succesfully");
+	    	if(year.isEmpty() || semesterCombo.getSelectionModel().isEmpty()) {
+	    	Alert alert = new Alert(AlertType.ERROR);
+	    	alert.setHeaderText("one or more of the fields is empty");
 	    	alert.show();
+	    	}
+	    	else {
+	    		Alert alert = new Alert(AlertType.INFORMATION);
+		    	alert.setHeaderText("semester was added succesfully");
+		    	alert.show();    	
+	    	}
 
 	    }
 	    
 	    @FXML
-	    void closeOpenSemester(ActionEvent event) {	
+	    void closeSemester(ActionEvent event) {	
 		    Stage stage = (Stage) btnClose.getScene().getWindow();
 		    stage.close();
+	    }
+	    
+	    @FXML
+	    void initialize() {
+	    	ArrayList<String> options = new ArrayList<String>();	    	
+	    	options.add("A");
+	    	options.add("B");
+	    	
+	    	list = FXCollections.observableArrayList(options);
+	    	semesterCombo.setItems(list);   
 	    }
 	    
 }
