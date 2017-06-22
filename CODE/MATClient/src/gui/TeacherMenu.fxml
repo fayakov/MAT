@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="530.0" prefWidth="499.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="MATGui.TeacherController">
+<AnchorPane prefHeight="530.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TeacherController">
    <children>
       <Label fx:id="LabelTeacherMenu" layoutX="121.0" layoutY="27.0" prefHeight="44.0" prefWidth="225.0" text="Teacher Menu">
          <font>
