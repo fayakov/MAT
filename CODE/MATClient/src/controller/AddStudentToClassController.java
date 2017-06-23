@@ -3,7 +3,6 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import entities.CClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -14,7 +13,7 @@ import javafx.scene.control.TextField;
 
 public class AddStudentToClassController {
 	
-	int sid, cid;
+	int sid, cid;   // student id, class id
 
     @FXML
     private ResourceBundle resources;
@@ -32,39 +31,29 @@ public class AddStudentToClassController {
     private TextField StudentID;
 
     @FXML
-    void sendAddStudent(ActionEvent event) {
-    /*
-    	try {
-    	sid = Integer.parseInt(StudentID.getText());
-    	cid = Integer.parseInt(ClassID.getText());
-    	} catch NumberFormatException();
-    */	
+    void sendAddStudent(ActionEvent event) {      	
+    	
     	if(ClassID.getText().isEmpty() || StudentID.getText().isEmpty()) {
     		Alert alert = new Alert(AlertType.ERROR);
     		alert.setHeaderText("one or more of the fields is empty");
     		alert.show();
+    		Prompt.alert(3,"one or more of the fields is empty");
     	}
-    	else { // if succeeded
-    		
-	    	/* add student to class */
-    		sid = Integer.parseInt(StudentID.getText());
-        	cid = Integer.parseInt(ClassID.getText());
-    		Alert alert = new Alert(AlertType.INFORMATION);
-    		alert.setHeaderText("student " + sid + " added successfully to class " + cid);
-    		alert.show();
+    	else { // add student to db
+    		try {
+    	    	sid = Integer.parseInt(StudentID.getText());
+    	    	cid = Integer.parseInt(ClassID.getText());
+    	    	} catch(NumberFormatException e){
+    	    	Prompt.alert(3,"please enter numerical value");
+    	    	return;
+    	    	}  		
+        	Prompt.alert(1,"student " + sid + " added successfully to class " + cid);
     	}
     }
-    
+      
     @FXML
     void closeAddStodent(ActionEvent event) {	
 	    Stage stage = (Stage) btnClose.getScene().getWindow();
 	    stage.close();
-    }
-
-    @FXML
-    void initialize() {
-        assert ClassID != null : "fx:id=\"ClassID\" was not injected: check your FXML file 'AddStudentToClass.fxml'.";
-        assert StudentID != null : "fx:id=\"StudentID\" was not injected: check your FXML file 'AddStudentToClass.fxml'.";
-
     }
 }
