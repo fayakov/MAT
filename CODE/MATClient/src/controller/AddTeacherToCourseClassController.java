@@ -2,10 +2,8 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class AddTeacherToCourseClassController {
@@ -30,18 +28,19 @@ public class AddTeacherToCourseClassController {
     @FXML
     void AddTeacher(ActionEvent event) {
     	
-    	if(classId.getText().isEmpty() || teacherId.getText().isEmpty() || courseId.getText().isEmpty()){
-    		Alert alert = new Alert(AlertType.ERROR);
-    		alert.setHeaderText("one or more of the fields is empty");
-    		alert.show();
-    	}	
+    	if(classId.getText().isEmpty() || teacherId.getText().isEmpty() || courseId.getText().isEmpty())
+    		Prompt.alert(3, "one or more of the fields is empty");   		
+    		
     	else { 
+    		try {
     		tid = Integer.parseInt(teacherId.getText());
         	coid = Integer.parseInt(courseId.getText());
         	clid = Integer.parseInt( classId.getText());
-        	Alert alert = new Alert(AlertType.INFORMATION);
-        	alert.setHeaderText("teacher " + tid + " added successfully to course " + coid);
-        	alert.show();
+    		} catch(NumberFormatException e){
+    			Prompt.alert(3,"please enter numerical value");
+		    	return;
+    		}
+    		Prompt.alert(1, "teacher " + tid + " added successfully to course " + coid);
     	}
     }
     
