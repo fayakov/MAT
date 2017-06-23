@@ -3,30 +3,30 @@ package entities;
 
 public class Semester {
 
-	private String semesterNumber;
-	private String semesterName;
+	private int semesterNumber;
+	private int year;
 	private String semesterAB;   //{ A, B}
 	
 	//private Date startDate = new Date();
 	//private Date endDate = new Date();
 	
-	public Semester(String num, String name, String semester){
+	public Semester(int num, int getYear, String semester){
 		semesterNumber = num;
-		semesterName = name;
+		year = getYear;
 		semesterAB = semester;
 	}
 	
-	public String getSemesterNumber() {
+	public int getSemesterNumber() {
 		return semesterNumber;
 	}
-	public void setSemesterNumber(String semesterNum) {
+	public void setSemesterNumber(int semesterNum) {
 		this.semesterNumber = semesterNum;
 	}
-	public String getSemesterName() {
-		return semesterName;
+	public int getSemesterYear() {
+		return year;
 	}
-	public void setSemesterName(String semesterName) {
-		this.semesterName = semesterName;
+	public void setSemesterYear(int semesterYear) {
+		this.year = semesterYear;
 	}
 	public String getSemester() {
 		return semesterAB;
@@ -34,5 +34,4 @@ public class Semester {
 	public void setSemester(String semester) {
 		this.semesterAB = semester;
 	}
-
 }

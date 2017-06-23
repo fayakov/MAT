@@ -19,6 +19,7 @@ public class OpenSemesterController {
 	ArrayList<Semester> semester = new ArrayList<Semester>();
 	
 		ObservableList<String> list;
+		private int year;
 		
 	
 	 	@FXML
@@ -33,24 +34,27 @@ public class OpenSemesterController {
 	    @FXML
 	    void createSemester(ActionEvent event)	{
 	    	
-	    	String year = textYear.getText().toString();
+	    	if(!textYear.getText().isEmpty())
+	    		year = Integer.parseInt(textYear.getText());
 	    	// get button value
 	    	/*
 	    	 * send to server
 	    	 * create semester
 	    	*/
-	    	if(year.isEmpty() || semesterCombo.getSelectionModel().isEmpty()) {
+	    	if(textYear.getText().isEmpty() || semesterCombo.getSelectionModel().isEmpty()) {
 	    	Alert alert = new Alert(AlertType.ERROR);
 	    	alert.setHeaderText("one or more of the fields is empty");
 	    	alert.show();
 	    	}
 	    	else {
-	    		semester.add(new Semester("01", year, semesterCombo.getValue()));
+	    		semester.add(new Semester(1, year, semesterCombo.getValue()));
 	    		Alert alert = new Alert(AlertType.INFORMATION);
 		    	alert.setHeaderText("semester was added succesfully");
 		    	alert.show();
 	    	}
-
+	    	//System.out.println("semester " + semester.get(0).getSemester() +
+	    	//"\n" + semester.get(0).getSemesterYear() + "\n" + semester.get(0).getSemesterNumber());
+	    
 	    }
 	    
 	    @FXML
