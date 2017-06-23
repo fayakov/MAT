@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import entities.Semester;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,9 +14,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class OpenSemester {
+public class OpenSemesterController {
+	
+	ArrayList<Semester> semester = new ArrayList<Semester>();
 	
 		ObservableList<String> list;
+		
 	
 	 	@FXML
 	    private TextField textYear;
@@ -41,9 +45,10 @@ public class OpenSemester {
 	    	alert.show();
 	    	}
 	    	else {
+	    		semester.add(new Semester("01", year, semesterCombo.getValue()));
 	    		Alert alert = new Alert(AlertType.INFORMATION);
 		    	alert.setHeaderText("semester was added succesfully");
-		    	alert.show();    	
+		    	alert.show();
 	    	}
 
 	    }
