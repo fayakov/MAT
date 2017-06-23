@@ -1,7 +1,7 @@
 package test;
 
 import controller.NewSemesterSettingController;
-import controller.StudentController;
+
 import controller.secretaryController;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -17,7 +17,7 @@ public class SecretaryTest extends Application {
 	public void start(Stage arg0) throws Exception {
 		
 		//secretaryController secController = new secretaryController();
-		StudentController secController = new StudentController();
+		NewSemesterSettingController secController = new NewSemesterSettingController();
 		secController.start(arg0);
 	}
 	

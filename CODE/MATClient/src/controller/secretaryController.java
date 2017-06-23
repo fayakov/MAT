@@ -1,6 +1,9 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+import javax.print.DocFlavor.URL;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +21,13 @@ public class secretaryController {
 
 	ObservableList<String> list ;
 
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    
     @FXML
     private ComboBox<String> secretaryMenuCombox;
     
