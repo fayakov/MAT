@@ -20,15 +20,17 @@ public class DefineClassController {
     void createClass(ActionEvent event) {
     	
     	String cName = className.getText().toString();
-    	/*
-    	 * send to server
-    	 * add class
-    	 * */
     	
-    	// if succeeded
-    	Alert alert = new Alert(AlertType.INFORMATION);
-    	alert.setHeaderText("class " + cName + " was added succesfully");
-    	alert.show();
+    	if(className.getText().isEmpty()) {
+    		Alert alert = new Alert(AlertType.ERROR);
+    		alert.setHeaderText("one or more of the fields is empty");
+    		alert.show();
+    	}    	
+    	else {
+    		Alert alert = new Alert(AlertType.INFORMATION);
+    		alert.setHeaderText("class " + cName + " was added succesfully");
+    		alert.show();
+    	}
     }
     
     @FXML

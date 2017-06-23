@@ -15,6 +15,8 @@ import javafx.fxml.FXML;
 
 public class AddClassToCourseController {
 	
+	 int clid, coid;
+	
 	 @FXML
      private ResourceBundle resources;
 
@@ -32,21 +34,26 @@ public class AddClassToCourseController {
 	 
 	 @FXML
 	 void sendAddClass(ActionEvent event) {
-	    		    	
-	    	String clid = classId.getText().toString();
-	    	String coid = courseId.getText().toString();
-	    	/* send request to server
-	    	*  add student to class
-	    	*/
 	    	
-	    	// if succeeded   	
-	    	Alert alert = new Alert(AlertType.INFORMATION);
-	    	alert.setHeaderText("class " + clid + " added successfully to course " + coid);
-	    	alert.show();
+	    	if(classId.getText().isEmpty() || courseId.getText().isEmpty()) {
+	    		
+		    	Alert alert = new Alert(AlertType.ERROR);
+		    	alert.setHeaderText("one or more of the fields is empty");
+		    	alert.show();
+		    	}
+	    	else {  	
+	    		clid = Integer.parseInt(classId.getText());
+		    	coid = Integer.parseInt(courseId.getText());
+		    	/* add class to db*/
+		    	
+		    	Alert alert = new Alert(AlertType.INFORMATION);
+		    	alert.setHeaderText("class " + clid + " added successfully to course " + coid);
+		    	alert.show();
+	    	}
 	    }
 	 
 	 @FXML
-	    void close(ActionEvent event) {		
+	 void close(ActionEvent event) {		
 		    Stage stage = (Stage) btnClose.getScene().getWindow();
 		    stage.close();
 	 }

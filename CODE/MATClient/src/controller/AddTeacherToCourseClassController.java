@@ -9,6 +9,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class AddTeacherToCourseClassController {
+	
+	int tid, coid, clid;
 
     @FXML
     private TextField classId;
@@ -28,17 +30,19 @@ public class AddTeacherToCourseClassController {
     @FXML
     void AddTeacher(ActionEvent event) {
     	
-    	String tid = teacherId.getText().toString();
-    	String coid = courseId.getText().toString();
-    	String clid = classId.getText().toString();
-    	/* send request to server
-    	*  add teacher
-    	*/
-    	
-    	// if succeeded
-    	Alert alert = new Alert(AlertType.INFORMATION);
-    	alert.setHeaderText("teacher " + tid + " added successfully to course " + coid);
-    	alert.show();
+    	if(classId.getText().isEmpty() || teacherId.getText().isEmpty() || courseId.getText().isEmpty()){
+    		Alert alert = new Alert(AlertType.ERROR);
+    		alert.setHeaderText("one or more of the fields is empty");
+    		alert.show();
+    	}	
+    	else { 
+    		tid = Integer.parseInt(teacherId.getText());
+        	coid = Integer.parseInt(courseId.getText());
+        	clid = Integer.parseInt( classId.getText());
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setHeaderText("teacher " + tid + " added successfully to course " + coid);
+        	alert.show();
+    	}
     }
     
     @FXML

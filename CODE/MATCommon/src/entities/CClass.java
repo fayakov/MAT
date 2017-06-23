@@ -3,19 +3,19 @@ package entities;
 import java.util.ArrayList;
 
 public class CClass {
-	private String classNumber;
+	private int classNumber;
 	private String className;
 	private ArrayList<Student> studentList;
     
-    public CClass(String number, String name) {
+    public CClass(int number, String name) {
     	classNumber = number;
     	className = name;
     }  
 	  
-	public String getClassNumber() {
+	public int getClassNumber() {
 		return classNumber;
 	}
-	public void setClassNumber(String classNumber) {
+	public void setClassNumber(int classNumber) {
 		this.classNumber = classNumber;
 	}
 	public String getClassNane() {
