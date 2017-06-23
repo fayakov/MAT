@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OpenSemester">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OpenSemesterController">
    <children>
       <Text layoutX="192.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Open Semester">
          <font>
@@ -17,5 +17,6 @@
       <Text layoutX="222.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Semester" />
       <Button layoutX="275.0" layoutY="262.0" mnemonicParsing="false" onAction="#createSemester" text="Create" />
       <ComboBox fx:id="semesterCombo" layoutX="279.0" layoutY="188.0" prefWidth="150.0" promptText="choose semester" />
+      <Button fx:id="btnClose" layoutX="515.0" layoutY="343.0" mnemonicParsing="false" onAction="#closeSemester" text="Close" />
    </children>
 </AnchorPane>

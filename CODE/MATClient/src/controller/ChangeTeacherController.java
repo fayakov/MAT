@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class AddStudentToCourseController 
+public class ChangeTeacherController 
 {
 
     @FXML
@@ -16,25 +16,26 @@ public class AddStudentToCourseController
     private URL location;
 
     @FXML
-    private TextField studentIdTextField;
+    private TextField classNumberTextFiled;
 
     @FXML
-    private TextField courseTextField;
+    private TextField studentIdTextFiled;
 
     @FXML
-    private TextField classTextField;
+    private TextField courseIdTextFiled;
 
     @FXML
-    void sendRequest1(ActionEvent event) {
+    void SendRequest3(ActionEvent event) {
 
     }
-    
+
     @FXML
-    void closeRequest1(ActionEvent event) {
+    void close3(ActionEvent event) {
 
     }
+
     @FXML
     void initialize() {
-
+   
     }
 }

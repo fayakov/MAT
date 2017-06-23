@@ -36,8 +36,7 @@ public class StudentController {
     private Button btnSend;
 
     @FXML
-    public void StudentInfo(ActionEvent event) throws Exception
-    {
+    public void StudentInfo(ActionEvent event) {
     	
 		String option = comboStudentMenu.getValue().toString();
     	/*if(option.equalsIgnoreCase("Student Data"))

@@ -1,15 +1,11 @@
 package entities;
 
-
-import java.io.Serializable;
-import java.util.ArrayList;
-	
 import java.util.ArrayList;
 
-public class CClass implements Serializable{
-	public String classNumber;
-	public String className;
-    public ArrayList<Student> studentList;
+public class CClass {
+	private String classNumber;
+	private String className;
+	private ArrayList<Student> studentList;
     
     public CClass(String number, String name) {
     	classNumber = number;

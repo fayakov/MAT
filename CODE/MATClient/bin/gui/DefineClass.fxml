@@ -15,5 +15,6 @@
       <TextField fx:id="className" layoutX="251.0" layoutY="141.0" />
       <Text layoutX="171.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class name" />
       <Button layoutX="259.0" layoutY="223.0" mnemonicParsing="false" onAction="#createClass" text="Create" />
+      <Button fx:id="btnClose" layoutX="508.0" layoutY="345.0" mnemonicParsing="false" onAction="#closeDefineClass" text="Close" />
    </children>
 </AnchorPane>

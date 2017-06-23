@@ -1,13 +1,13 @@
 package controller;
 
-import java.awt.event.ActionEvent;
+
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class AddStudentToCourseController 
-{
+public class RemoveStudentFromCourseController {
 
     @FXML
     private ResourceBundle resources;
@@ -16,23 +16,25 @@ public class AddStudentToCourseController
     private URL location;
 
     @FXML
-    private TextField studentIdTextField;
+    private TextField classNumberTextFiled;
 
     @FXML
-    private TextField courseTextField;
+    private TextField StudentIdTextField;
 
     @FXML
-    private TextField classTextField;
+    private TextField courseIdTextField;
 
     @FXML
-    void sendRequest1(ActionEvent event) {
+    void SendRequest2(ActionEvent event) {
 
     }
-    
+
     @FXML
-    void closeRequest1(ActionEvent event) {
+    void closeRequest2(ActionEvent event) {
 
     }
+
+
     @FXML
     void initialize() {
 

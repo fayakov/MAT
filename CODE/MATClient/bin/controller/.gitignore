@@ -9,3 +9,7 @@
 /OpenSemester.class
 /loginController.class
 /StudentController.class
+/AddStudentToCourseController.class
+/ChangeTeacherController.class
+/RemoveStudentFromCourseController.class
+/OpenSemesterController.class
