@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="comboStudentMenu" prefHeight="636.0" prefWidth="471.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StudentController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StudentController">
    <children>
-      <Label fx:id="labelStudentMenu" layoutX="128.0" layoutY="52.0" text="Student Menu">
+      <Text layoutX="200.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Menu">
          <font>
-            <Font size="30.0" />
+            <Font size="32.0" />
          </font>
-      </Label>
-      <ComboBox fx:id="comboStudentMenu" layoutX="146.0" layoutY="155.0" prefWidth="150.0" promptText="choose option" />
-      <Button fx:id="btnSend" layoutX="197.0" layoutY="318.0" mnemonicParsing="false" onAction="#StudentInfo" text="SEND" />
+      </Text>
+      <ComboBox fx:id="optionCombo" layoutX="150.0" layoutY="156.0" prefWidth="150.0" promptText="choose option" />
+      <Button layoutX="351.0" layoutY="156.0" mnemonicParsing="false" onAction="#StudentInfo" text="Send" />
    </children>
 </AnchorPane>
