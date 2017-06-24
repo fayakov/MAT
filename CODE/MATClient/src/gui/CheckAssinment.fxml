@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
 
+<AnchorPane prefHeight="545.0" prefWidth="595.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.CheckAssignmentController">
+   <children>
+      <Label fx:id="labelCheckAss" layoutX="177.0" layoutY="40.0" prefHeight="45.0" prefWidth="241.0" text="Check Assignmnt">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="41.0" layoutY="104.0" />
+      <Label fx:id="labelSubNum" layoutX="59.0" layoutY="104.0" text="Submission Number:" />
+      <TextField fx:id="textFieldSubNum" layoutX="263.0" layoutY="98.0" />
+      <Label fx:id="labelDownload" layoutX="59.0" layoutY="235.0" text="Download File Of Submission:" />
+      <Button fx:id="buttonDownload" layoutX="339.0" layoutY="229.0" mnemonicParsing="false" text="DOWNLOAD" />
+      <Label fx:id="labelUpload" layoutX="59.0" layoutY="285.0" prefHeight="27.0" prefWidth="183.0" text="Upload Checked File:" />
+      <Button fx:id="buttonApload" layoutX="339.0" layoutY="279.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="127.0" text="UPLOAD" />
+      <Button fx:id="buttonNext" layoutX="242.0" layoutY="403.0" mnemonicParsing="false" onAction="#nextToStep2" text="NEXT" />
+      <Label fx:id="labelStep1" layoutX="59.0" layoutY="160.0" prefHeight="27.0" prefWidth="74.0" text="Step 1:" underline="true" />
+   </children>
+</AnchorPane>
