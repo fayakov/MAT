@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ChangeTeacherController">
    <children>
       <Text layoutX="243.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Request">
          <font>
@@ -29,6 +28,6 @@
       <TextField fx:id="classNumberTextFiled" layoutX="253.0" layoutY="188.0" />
       <TextField fx:id="courseIdTextFiled" layoutX="253.0" layoutY="237.0" />
       <Button layoutX="283.0" layoutY="318.0" mnemonicParsing="false" onAction="#SendRequest3" text="Send Request" />
-      <Button layoutX="508.0" layoutY="343.0" mnemonicParsing="false" onAction="#close3" text="close" />
+      <Button fx:id="btnClose" layoutX="508.0" layoutY="343.0" mnemonicParsing="false" onAction="#close3" text="close" />
    </children>
 </AnchorPane>
