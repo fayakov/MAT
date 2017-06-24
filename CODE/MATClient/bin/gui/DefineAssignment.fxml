@@ -21,5 +21,6 @@
       <TextField fx:id="textFieldInsertClass" layoutX="277.0" layoutY="198.0" />
       <TextField fx:id="textFieldInsertCouse" layoutX="277.0" layoutY="268.0" />
       <Button layoutX="277.0" layoutY="66.0" mnemonicParsing="false" text="UPLOAD" />
+      <Button fx:id="buttonSendDefineAss" layoutX="238.0" layoutY="384.0" mnemonicParsing="false" onAction="#sendDefineAssignment" text="SEND" />
    </children>
 </AnchorPane>

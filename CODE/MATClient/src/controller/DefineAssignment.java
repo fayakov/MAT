@@ -2,42 +2,63 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 
 public class DefineAssignment 
 {
-	@FXML
-    private ResourceBundle resources;
+	int clid, coid;  // class id, course id
+	
+	 @FXML
+	    private Label labelDefineAss;
 
-    @FXML
-    private URL location;
+	    @FXML
+	    private Label labelUpload;
 
-    @FXML
-    private Label labelDefineAss;
+	    @FXML
+	    private Label labelInsertClass;
 
-    @FXML
-    private Label labelUpload;
+	    @FXML
+	    private Label labelInsertCourse;
 
-    @FXML
-    private Label labelInsertClass;
+	    @FXML
+	    private DatePicker datePickerDefineDate;
 
-    @FXML
-    private Label labelInsertCourse;
+	    @FXML
+	    private TextField textFieldInsertClass;
 
-    @FXML
-    private DatePicker datePickerDefineDate;
+	    @FXML
+	    private TextField textFieldInsertCouse;
 
-    @FXML
-    private TextField textFieldInsertClass;
+	    @FXML
+	    private Button buttonSendDefineAss;
 
-    @FXML
-    private TextField textFieldInsertCouse;
+	    @FXML
+	    private Label labelDefineDate;
 
-    @FXML
-    private Label labelDefineDate;
+	    @FXML
+	    void sendDefineAssignment(ActionEvent event) 
+	    {
+	    	 if(textFieldInsertClass.getText().isEmpty() || textFieldInsertCouse.getText().isEmpty()) 
+				 	Prompt.alert(3,"one or more of the fields is empty");		    	
+		     else {  	
+		    		//add
+		    	 try {
+					    clid = Integer.parseInt(textFieldInsertClass.getText());
+				    	coid = Integer.parseInt(textFieldInsertCouse.getText());
+				    	} 
+		    	 catch(NumberFormatException e){
+				    	Prompt.alert(3,"please enter numerical value");
+				    	return;
+				    	}  	
+		    	  Prompt.alert(1, "Assignment added successfully to class:" + clid + ",course:" +coid);		    			 
+		    	  }
+	    }
 
     
     @FXML
@@ -47,6 +68,16 @@ public class DefineAssignment
     }
 	
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
