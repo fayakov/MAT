@@ -28,6 +28,6 @@
       <TextField fx:id="textLName" layoutX="287.0" layoutY="174.0" />
       <TextField fx:id="textClasses" layoutX="287.0" layoutY="218.0" />
       <TextField fx:id="textCourses" layoutX="287.0" layoutY="258.0" />
-      <Button fx:id="buttenExit" layoutX="606.0" layoutY="406.0" mnemonicParsing="false" text="exit" />
+      <Button fx:id="buttenExit" layoutX="606.0" layoutY="406.0" mnemonicParsing="false" onAction="#StudentInfo" text="exit" />
    </children>
 </Pane>
