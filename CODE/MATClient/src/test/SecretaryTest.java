@@ -1,5 +1,6 @@
 package test;
 
+import controller.DefineCourseController;
 import controller.NewSemesterSettingController;
 
 import controller.secretaryController;
@@ -17,7 +18,8 @@ public class SecretaryTest extends Application {
 	public void start(Stage arg0) throws Exception {
 		
 		//secretaryController secController = new secretaryController();
-		NewSemesterSettingController secController = new NewSemesterSettingController();
+		DefineCourseController secController = new DefineCourseController();
+		//NewSemesterSettingController secController = new NewSemesterSettingController();
 		secController.start(arg0);
 	}
 	

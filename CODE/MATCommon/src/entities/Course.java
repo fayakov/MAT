@@ -1,23 +1,23 @@
 package entities;
-import java.util.ArrayList;
-import java.io.Serializable;
 
-public class Course implements Serializable {
+
+public class Course  {
 	
-	public String classNumber;
-	  public ArrayList<Student> studentList;
+	private int courseId;
+	private String courseName;
+	
+	
+	public int getCourseId() {
+		return courseId;
+	}
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
+	}
+	public String getCourseName() {
+		return courseName;
+	}
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}  
 	  
-	  
-	public String getClassNumber() {
-		return classNumber;
-	}
-	public void setClassNumber(String classNumber) {
-		this.classNumber = classNumber;
-	}
-	public ArrayList<Student> getStudentList() {
-		return studentList;
-	}
-	public void setStudentList(ArrayList<Student> studentList) {
-		this.studentList = studentList;
-	}
 }
