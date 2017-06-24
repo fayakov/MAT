@@ -42,7 +42,7 @@ public class TeacherController
     void checkAssignment() throws Exception 
     {
         	
-        	Pane root = FXMLLoader.load(getClass().getResource("/gui/SubmissionStudentController.fxml"));
+        	Pane root = FXMLLoader.load(getClass().getResource("/gui/SubmissionsOfStudents.fxml"));
     		Scene scene = new Scene(root);
     		Stage primaryStage = new Stage();
     		primaryStage.setScene(scene);
@@ -57,7 +57,6 @@ public class TeacherController
     		defineAssignment();	
     	if(option.equalsIgnoreCase("Show Submission Of Student"))
     		checkAssignment();
-    	
     }
     
     
@@ -65,7 +64,7 @@ public class TeacherController
     public void start(Stage primaryStage) throws Exception 
     {
 		
-		Parent root = FXMLLoader.load(getClass().getResource("/gui/TeachertMenu.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/gui/TeacherMenu.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();

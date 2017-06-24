@@ -2,8 +2,11 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +20,8 @@ import javafx.stage.Stage;
 
 public class SubmissionStudentController 
 {
+	ObservableList<String> listAss;
+	
 	 @FXML
 	    private ResourceBundle resources;
 
@@ -39,7 +44,7 @@ public class SubmissionStudentController
 	    	String option = comboChooseSub.getValue().toString();
 	    	int assNum = Integer.parseInt(option); //save the option to next window
 	    	
-	    	Pane root = FXMLLoader.load(getClass().getResource("/gui/CheckAssignment.fxml"));
+	    	Pane root = FXMLLoader.load(getClass().getResource("/gui/CheckAssinment.fxml"));
 			Scene scene = new Scene(root);
 			Stage primaryStage = new Stage();
 			primaryStage.setScene(scene);
@@ -49,6 +54,12 @@ public class SubmissionStudentController
     @FXML
     void initialize() 
     {
+    	ArrayList<String> optionsSub = new ArrayList<String>();	    	
+    	optionsSub.add("Submission A");
+    	optionsSub.add("Submission B");	
+    	
+    	listAss = FXCollections.observableArrayList(optionsSub);
+    	comboChooseSub.setItems(listAss);
         
     }
 }
