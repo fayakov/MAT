@@ -18,5 +18,10 @@
             <Font size="19.0" />
          </font>
       </Button>
+      <Button layoutX="275.0" layoutY="147.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="199.0" text="Check Assignment">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
