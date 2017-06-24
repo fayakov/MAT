@@ -1,5 +1,7 @@
 package controller;
 
+
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -29,7 +31,7 @@ public class PrincipalController {
 
     
     @FXML
-    private ComboBox<String> PrincipalComboBox;
+    private ComboBox<String> principalComboBox;
     
     @FXML
     private Button btnClose;
@@ -69,7 +71,7 @@ public class PrincipalController {
 	
     void request() throws Exception {
     	
-    	Pane root = FXMLLoader.load(getClass().getResource("/gui/request.fxml"));
+    	Pane root = FXMLLoader.load(getClass().getResource("/gui/RequestPrincipal.fxml"));
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
 		primaryStage.setScene(scene);
@@ -90,7 +92,7 @@ public class PrincipalController {
     @FXML
     public void send(ActionEvent event) throws Exception {
     	
-    	String option = PrincipalComboBox.getValue().toString();
+    	String option = principalComboBox.getValue().toString();
     	if(option.equalsIgnoreCase("Get Statistics"))
     		statistics();	
     	if(option.equalsIgnoreCase("Show Student Data"))
@@ -117,7 +119,7 @@ public class PrincipalController {
       	options.add("Request");
 		
 		list = FXCollections.observableArrayList(options);
-		PrincipalComboBox.setItems(list);
+		principalComboBox.setItems(list);
 	}	
 
     
