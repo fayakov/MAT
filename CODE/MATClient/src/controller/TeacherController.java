@@ -42,7 +42,7 @@ public class TeacherController
     void checkAssignment() throws Exception 
     {
         	
-        	Pane root = FXMLLoader.load(getClass().getResource("/gui/CheckAssignment.fxml"));
+        	Pane root = FXMLLoader.load(getClass().getResource("/gui/SubmissionStudentController.fxml"));
     		Scene scene = new Scene(root);
     		Stage primaryStage = new Stage();
     		primaryStage.setScene(scene);

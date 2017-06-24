@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="810.0" prefWidth="765.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <Label layoutX="37.0" layoutY="44.0" prefHeight="45.0" prefWidth="125.0" text="Step 2:" underline="true">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="27.0" layoutY="684.0" text="Final Grade:" />
+      <TextField layoutX="139.0" layoutY="672.0" prefHeight="39.0" prefWidth="74.0" />
+      <TextArea layoutX="27.0" layoutY="164.0" prefHeight="451.0" prefWidth="706.0" />
+      <Label layoutX="37.0" layoutY="127.0" text="Comments:" />
+      <Button layoutX="331.0" layoutY="730.0" mnemonicParsing="false" text="SEND" />
+   </children>
+</AnchorPane>

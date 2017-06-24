@@ -22,7 +22,7 @@ public class SubmissionStudentController
     private Button buttonNext;
 
     @FXML
-    private ComboBox<?> comboChooseSub;
+    private ComboBox<String> comboChooseSub;
 
     @FXML
     void initialize() 
