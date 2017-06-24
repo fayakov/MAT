@@ -2,6 +2,7 @@ package DAL;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import entities.*;
 public class CDal {
@@ -404,6 +405,37 @@ public class CDal {
 		return retVal;
 	}
 	
+	public static int createNewCourseDetailesToStudentWithCourseId()
+	{
+		int retVal = 0;
+			try {
+			Statement stmt = connection.createStatement();
+			if(stmt.executeUpdate("INSERT INTO finished_course_detailes  "
+								+ "(isNew) "
+								+ "values (true);") != 0)
+			
+				{
+					ResultSet resultSet  = stmt.executeQuery("SELECT finished_course_id  "
+							+ "FROM finished_course_detailes "
+							+ "WHERE finished_course_detailes.isNew = true;");
+					if(resultSet.first()) {
+						retVal = resultSet.getInt(1);
+						if(0 == stmt.executeUpdate("UPDATE finished_course_detailes SET "
+								+ "isNew = false WHERE finished_course_detailes.finished_course_id = '"+ retVal+ "';"))
+						{
+							retVal = 0;
+						}
+						
+						
+					}
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+				}
+
+		return retVal;
+	}
 	
 	public static boolean addStudentToCourse(String courseName, int userId){
 		boolean retVal = true;
@@ -423,12 +455,82 @@ public class CDal {
 					int studentId = getStudentId(userId);
 					if(studentId != 0)
 					{
-						if(isStudentInCourse(courseId, userId))
+						if(isStudentFinishedPrevCourse(studentId,courseId))
+						{
+							int studentCourseId = getStudentInCourseId(courseId, studentId);
+							if(studentCourseId == 0)
+							{
+								int newCourseDetailesId = createNewCourseDetailesToStudentWithCourseId();
+								if(newCourseDetailesId == 0)
+								{
+									retVal = false;
+								}
+								else
+								{
+									Statement stmt = connection.createStatement();
+									if(stmt.executeUpdate("INSERT INTO student_has_course  "
+														+ "(student_has_course.student_idstudent, "
+														+ "student_has_course.student_user_id, "
+														+ "student_has_course.course_courseId,"
+														+ "student_has_course.finished_course_detailes_finished_course_id ) "
+														+ "values ("+studentId+ "," + userId +","+ courseId +","+newCourseDetailesId+");") == 0)
+									
+									{
+										retVal = false;
+									}
+								}
+							}
+							else
+							{
+								retVal = false;
+							}
+						}
+						else
+						{
+							retVal = false;
+						}
+						
+					}
+
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace();			
+			}		
+		}
+		else
+		{
+			retVal = false;
+		}
+		
+		return retVal;
+	}
+	
+	public static boolean addStudentToPrev(String courseName, int userId){
+		boolean retVal = true;
+		
+		if(getUserType(userId) == EUserType.EUserStudent)
+		{
+
+			try 
+			{
+				int courseId = getCourseId(courseName);
+				if(courseId == 0)
+				{
+					retVal = false;
+				}
+				else
+				{
+					int studentId = getStudentId(userId);
+					if(studentId != 0)
+					{
+						if(getStudentInCourseId(courseId, studentId) == 0)
 						{
 							retVal = false;
 						}
 						else
 						{
+							//to 
 							Statement stmt = connection.createStatement();
 							if(stmt.executeUpdate("INSERT INTO student_has_course  "
 												+ "(student_has_course.student_idstudent, "
@@ -510,18 +612,18 @@ public class CDal {
 	
 	
 	
-	public static boolean isStudentInCourse(int courseId, int userId){
+	public static int getStudentInCourseId(int courseId, int studentId){
 		
-		boolean retVal = false;
+		int	 retVal = 0;
 		try 
 		{
 			Statement stmt = connection.createStatement();
-			ResultSet resultSet  = stmt.executeQuery("SELECT * FROM student_has_course "
-					+ "WHERE student_has_course.student_user_id = '" +userId + "' "
+			ResultSet resultSet  = stmt.executeQuery("SELECT student_has_courseId FROM student_has_course "
+					+ "WHERE student_has_course.student_idstudent = '" +studentId + "' "
 							+ "AND student_has_course.course_courseId = '" +courseId+ "';");
 			if(resultSet.first()) {
 
-				retVal = true;
+				retVal = resultSet.getInt(1);
 			}
 		}
 		catch (SQLException e) {e.printStackTrace();}
@@ -562,7 +664,6 @@ public class CDal {
 			while(resultSet.next())
 	 		{				
 				myList.add(resultSet.getInt(1));
-				//users = addElement(users, resultSet.getInt(1));
 	 		} 
 		}
 		catch (SQLException e) {e.printStackTrace();}
@@ -708,6 +809,24 @@ public class CDal {
 		return retVal;
 	}
 	
+	
+	public static boolean isCourseInPrevCourse(int courseId, int prevCourseId){
+		
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT * FROM prev_requested_course "
+					+ "WHERE prev_requested_course.course_courseId = '" +courseId + "' "
+							+ "&& prev_requested_course.course_courseId1 = '" +prevCourseId+ "';");
+			if(resultSet.first()) {
+
+				retVal = true;
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
 	public static boolean addCourseToClass(int classId, int courseId){
 		boolean retVal = true;
 
@@ -927,6 +1046,82 @@ public class CDal {
 		return retVal;
 	}
 	
+
+
+	
+	public static ArrayList<Integer> getStudentFinishedCourses(int studentId)
+	{
+		ArrayList<Integer> courseIdList = new ArrayList<Integer>();
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery(
+					"SELECT student_has_course.course_courseId "
+					+ "FROM student_has_course "
+					+ "RIGHT JOIN finished_course_detailes "
+					+ "ON student_has_course.student_has_courseId = finished_course_detailes.finished_course_id  "
+					+ "WHERE finished_course_detailes.isFinished = 1 "
+					+ "and student_has_course.student_idstudent = "+studentId+";");
+			while(resultSet.next())
+	 		{				
+				courseIdList.add(resultSet.getInt(1));
+	 		} 
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return courseIdList;
+	}
+	
+	public static ArrayList<Integer> getPrevCourses(int courseId)
+	{
+		ArrayList<Integer> courseIdList = new ArrayList<Integer>();
+		ArrayList<Integer> courentIdList = new ArrayList<Integer>();
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery(
+					"SELECT course_courseId1 FROM prev_requested_course "
+					+ "WHERE prev_requested_course.course_courseId = "+courseId+";");
+			
+			while(resultSet.next())
+	 		{				
+				courentIdList.add(resultSet.getInt(1));
+				courseIdList.add(resultSet.getInt(1));
+	 		} 
+			
+			while(!courentIdList.isEmpty())
+			{
+				stmt = connection.createStatement();
+				resultSet  = stmt.executeQuery(
+						"SELECT course_courseId1 FROM prev_requested_course "
+						+ "WHERE prev_requested_course.course_courseId = "+courentIdList.remove(0)+";");
+				
+				while(resultSet.next())
+		 		{				
+					courentIdList.add(resultSet.getInt(1));
+					courseIdList.add(resultSet.getInt(1));
+		 		} 
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return courseIdList;
+	}
+	
+	
+	public static boolean isStudentFinishedPrevCourse(int studentId, int courseId){
+		boolean retVal = true;
+		ArrayList<Integer> prevCourseIdList = getPrevCourses(courseId);
+		ArrayList<Integer> studentFinishedCourseIdList = getStudentFinishedCourses(studentId);
+
+		boolean good = true;
+		for (int i = 0; i < prevCourseIdList.size(); i ++) {
+		    if (!(studentFinishedCourseIdList.contains(prevCourseIdList.get(i)))) {
+		    	retVal = false;
+		        break;
+		    }
+		}
+		return retVal;
+	}
+	
 	public static int getTeachingUnitIdFromUnitName(String unitName)
 	{
 		int retVal = 0;
@@ -950,20 +1145,26 @@ public class CDal {
 		{
 			if(isCourseExist(courseId))
 			{
-				//todo check if tu exist
-				if(isTeachingUnitInCourse(courseId))
+				if(isTeachingUnitExist(unitId))
 				{
-					retVal = false;
-				}
-				else
-				{
-					//update mat_db.course set mat_db.course.teachingunit_teachingUnitId = 1 where mat_db.course.courseId = 1;
-					Statement stmt = connection.createStatement();
-					if(stmt.executeUpdate("UPDATE course SET teachingunit_teachingUnitId=" + courseId + " WHERE courseId=" + courseId ) == 0)
+					if(isTeachingUnitInCourse(courseId))
 					{
 						retVal = false;
 					}
+					else
+					{
+						Statement stmt = connection.createStatement();
+						if(stmt.executeUpdate("UPDATE course SET teachingunit_teachingUnitId=" + courseId + " WHERE courseId=" + courseId ) == 0)
+						{
+							retVal = false;
+						}
+					}
 				}
+				else
+				{
+					retVal = false;
+				}
+
 			}
 			else
 			{
@@ -1015,6 +1216,100 @@ public class CDal {
 	}
 	
 	
+	public static boolean addPrevCourseToCourse(int courseId, int prevCourseId){
+		boolean retVal = true;
+
+		try 
+		{
+			if(isCourseExist(courseId))
+			{
+				if(isCourseExist(prevCourseId))
+				{
+					
+					if(isCourseInPrevCourse(courseId, prevCourseId))
+					{
+						retVal = false;
+					}
+					else
+					{
+						int courseIdTeachingUint = getCourseTeachingUnitId(courseId);
+						int prevCourseIdTeachingUint = getCourseTeachingUnitId(prevCourseId);
+						Statement stmt = connection.createStatement();
+						if(stmt.executeUpdate("INSERT INTO prev_requested_course  "
+											+ "(prev_requested_course.course_courseId, "
+											+ "prev_requested_course.course_courseId1, "
+											+ "prev_requested_course.course_teachingunit_teachingUnitId,"
+											+ "prev_requested_course.course_teachingunit_teachingUnitId1) "
+											+ "values ("+courseId+","+ prevCourseId +","
+											+ courseIdTeachingUint + ","+ prevCourseIdTeachingUint + ");") == 0)
+						
+						{
+							retVal = false;
+						}
+					}
+				}
+				else
+				{
+					retVal = false;
+				}
+			}
+			else
+			{
+				retVal = false;
+			}	
+		}
+		catch (SQLException e) {
+			e.printStackTrace();			
+		}		
+		return retVal;
+	}	
+	public static boolean updateFinishedCourseDetailes(int studentCourseDetailesId,int grade, int semester){
+		boolean retVal = true;
+		try{
+			Statement stmt = connection.createStatement();
+			if(0 == stmt.executeUpdate("UPDATE finished_course_detailes SET "
+					+ "isFinished = 1, grade = "+grade+", semester = "+ semester +
+					" WHERE finished_course_detailes.finished_course_id = '"+ studentCourseDetailesId+ "';"))
+			{
+				retVal = false;
+			}
+		}
+		catch (SQLException e) {
+			retVal = false;
+			e.printStackTrace();			
+		}
+		return retVal;
+	}
+	
+	public static boolean finishCourse(int courseId, int studentId, int grade, int semester){
+		boolean retVal = true;
+		int studentCourseId = getStudentInCourseId(courseId, studentId);
+		if(studentCourseId != 0)
+		{
+			updateFinishedCourseDetailes(studentCourseId, grade, semester);
+		}
+		else
+		{
+			retVal = false;
+		}
+		
+		return retVal;
+	}
+	
+	public ArrayList<Integer> getClassTeachersStatistics(){
+		ArrayList<Integer> myList = new ArrayList<Integer>();
+		return myList;
+	}
+	
+	public ArrayList<Integer> getTeacherClassesStatistics(){
+		ArrayList<Integer> myList = new ArrayList<Integer>();
+		return myList;
+	}
+	
+	public ArrayList<Integer> getClassesCoursesStatistics(){
+		ArrayList<Integer> myList = new ArrayList<Integer>();
+		return myList;
+	}
 }
 
 

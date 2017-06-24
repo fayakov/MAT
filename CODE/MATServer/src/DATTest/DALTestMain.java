@@ -24,15 +24,16 @@ public class DALTestMain {
 		//checkCreateCourse(dl);
 		//checkGetStudentsInCourse(dl);
 		/*Teacher teacher = dl.getTeacher(id);*/
-		//checkAddStudentToClass(dl);
 		//checkGetStudentsInClass( dl);
 		//checkAddCourseToClass(dl);
 		//checkCreateTeachingUnit(dl);
 		//checkCreateAddTeachingUnitToCourse(dl);
 		//checkAddTeacherToCourseWithClass(dl);
 		//checkCreateTeacher(dl);
-		checkAddTeacherToCourseWithClass(dl);
-
+		//checkAddTeacherToCourseWithClass(dl);
+		//checkAddPrevCourseToCourse(dl);
+		//checkFinishCourse(dl);
+		checkisFinishedPrevCourse(dl);
 	}
 	public static void checkLogin(CDal dl )
 	{
@@ -180,15 +181,16 @@ public class DALTestMain {
 	
 	public static void checkAddStudentToCourse(CDal dl)
 	{
-		System.out.println(dl.addStudentToCourse("Algebra2", 124 ) == false);
-		System.out.println(dl.addStudentToCourse("Algebra3", 124 ));
+		System.out.println(dl.addStudentToCourse("Algebra1", 124 ));
+		System.out.println(dl.addStudentToCourse("Algebra2", 124 ));
+		//System.out.println(dl.addStudentToCourse("Algebra3", 124 ));
 	}	
 	
 	public static void chekcIsStudentInCourse(CDal dl)
 	{
-		System.out.println(dl.isStudentInCourse(2, 124));	
-		System.out.println(dl.isStudentInCourse(3, 124) == false);
-		System.out.println(dl.isStudentInCourse(2, 125) == false);	
+		//System.out.println(dl.isStudentInCourse(2, 124));	
+		//System.out.println(dl.isStudentInCourse(3, 124) == false);
+		//System.out.println(dl.isStudentInCourse(2, 125) == false);	
 	}
 	
 	public static void checkGetStudentsInCourse(CDal dl)
@@ -252,5 +254,24 @@ public class DALTestMain {
 		System.out.println(dl.createTeacher(124, 20, 1) == false);
 		System.out.println(dl.createTeacher(123, 20, 1) == false);
 	}
+	
+	public static void checkAddPrevCourseToCourse(CDal dl)
+	{
+		System.out.println(dl.addPrevCourseToCourse(2, 1));
+		System.out.println(dl.addPrevCourseToCourse(3, 2));
+	}
+	
+	public static void checkFinishCourse(CDal dl)
+	{
+		System.out.println(dl.finishCourse(1, 1, 100, 1));
+	}
+	
+	public static void checkisFinishedPrevCourse(CDal dl)
+	{
+		System.out.println(dl.isStudentFinishedPrevCourse(1,1) == true);
+		System.out.println(dl.isStudentFinishedPrevCourse(1,2) == true);
+		System.out.println(dl.isStudentFinishedPrevCourse(1,3) == false);
+	}
+	
 	
 }
