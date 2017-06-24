@@ -9,12 +9,15 @@ import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import entities.ERequestType;
 
 public class AddStudentToCourseController {
 	
 	int sid, cid, oid;
 	
 	String isConfirmed, isHandeled;
+	
+	int ERequestType;
 
     @FXML
     private ResourceBundle resources;
@@ -47,6 +50,8 @@ public class AddStudentToCourseController {
     	    	oid = Integer.parseInt(courseTextField.getText());
     	    	isConfirmed = null;
     	    	isHandeled = null;
+    	    	ERequestType = 1;
+    	    	
     	    	
     	    	} catch(NumberFormatException e){
     	    	Prompt.alert(3,"please enter numerical value");
