@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import entities.ERequestType;
 
-public class AddStudentToCourseController {
+public class RequestAddStudentToCourseController {
 	
 	int sid, cid, oid;
 	
