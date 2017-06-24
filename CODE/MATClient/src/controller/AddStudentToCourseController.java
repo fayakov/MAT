@@ -6,14 +6,16 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 public class AddStudentToCourseController {
 	
 	int sid, cid, oid;
+	
+	String isConfirmed, isHandeled;
 
     @FXML
     private ResourceBundle resources;
@@ -40,19 +42,24 @@ public class AddStudentToCourseController {
     		Alert alert = new Alert(AlertType.ERROR);
     		alert.setHeaderText("one or more of the fields is empty");
     		alert.show();
+    		Prompt.alert(3,"one or more of the fields is empty");
     	}
-    	else { // if succeeded
-    		
-	    	/* add student to course */
-    		sid = Integer.parseInt(studentIdTextField.getText());
-        	cid = Integer.parseInt(classTextField.getText());
-        	oid = Integer.parseInt(courseTextField.getText());
-    		Alert alert = new Alert(AlertType.INFORMATION);
-    		alert.setHeaderText("student " + sid + " added successfully to class " + cid);
-    		alert.show();
+    	else { // add request to db
+    		try {
+    			sid = Integer.parseInt(studentIdTextField.getText());
+    			cid = Integer.parseInt(classTextField.getText());
+    	    	oid = Integer.parseInt(courseTextField.getText());
+    	    	isConfirmed = null;
+    	    	isHandeled = null;
+    	    	
+    	    	} catch(NumberFormatException e){
+    	    	Prompt.alert(3,"please enter numerical value");
+    	    	return;
+    	    	}  		
+        	Prompt.alert(2,"The request added successfully ");
     	}
     }
-
+    
     @FXML
     void closeRequest1(ActionEvent event) {
         Stage stage = (Stage) btnClose.getScene().getWindow();
@@ -60,8 +67,4 @@ public class AddStudentToCourseController {
 
     }
 
-    @FXML
-    void initialize() {
-
-    }
 }
