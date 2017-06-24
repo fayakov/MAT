@@ -1,18 +1,17 @@
 
 package controller;
 
+
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class RemoveStudentFromCourseController {
+
+public class RemoveStudentFromCourseController{
 	
 	int sid, cid, oid;
 	
@@ -39,12 +38,9 @@ public class RemoveStudentFromCourseController {
     @FXML
     void sendRequest2(ActionEvent event) {
 
-    	if(studentIdTextField.getText().isEmpty() || courseTextField.getText().isEmpty()|| classTextField.getText().isEmpty()) {
-    		Alert alert = new Alert(AlertType.ERROR);
-    		alert.setHeaderText("one or more of the fields is empty");
-    		alert.show();
+    	if(studentIdTextField.getText().isEmpty() || courseTextField.getText().isEmpty()|| classTextField.getText().isEmpty()) 
     		Prompt.alert(3,"one or more of the fields is empty");
-    	}
+    	
     	else { // add request to db
     		try {
     			sid = Integer.parseInt(studentIdTextField.getText());
@@ -57,7 +53,7 @@ public class RemoveStudentFromCourseController {
     	    	Prompt.alert(3,"please enter numerical value");
     	    	return;
     	    	}  		
-        	Prompt.alert(2,"The request added successfully ");
+        	Prompt.alert(1,"The request added successfully ");
     	}
     }
     

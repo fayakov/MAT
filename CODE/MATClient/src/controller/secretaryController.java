@@ -47,7 +47,7 @@ public class secretaryController {
     
     void ChangeTeacher() throws Exception {
     	
-    	Pane root = FXMLLoader.load(getClass().getResource("/gui/ChangeTeacher.fxml"));
+    	Pane root = FXMLLoader.load(getClass().getResource("/gui/RequestChangeTeacher.fxml"));
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
 		primaryStage.setScene(scene);
@@ -57,7 +57,7 @@ public class secretaryController {
     
     void RemoveStudentFromCourse() throws Exception {
     	
-    	Pane root = FXMLLoader.load(getClass().getResource("/gui/RemoveStudentFromCourse.fxml"));
+    	Pane root = FXMLLoader.load(getClass().getResource("/gui/RequestRemoveStudentFromCourse.fxml"));
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
 		primaryStage.setScene(scene);
@@ -67,7 +67,7 @@ public class secretaryController {
     
     void AddStudentToCourse() throws Exception {
     	
-    	Pane root = FXMLLoader.load(getClass().getResource("/gui/AddStudentToCourse.fxml"));
+    	Pane root = FXMLLoader.load(getClass().getResource("/gui/RequestAddStudentToCourse.fxml"));
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
 		primaryStage.setScene(scene);
