@@ -17,8 +17,8 @@ public class SecretaryTest extends Application {
 	@Override
 	public void start(Stage arg0) throws Exception {
 		
-		//secretaryController secController = new secretaryController();
-		DefineCourseController secController = new DefineCourseController();
+		secretaryController secController = new secretaryController();
+		//DefineCourseController secController = new DefineCourseController();
 		//NewSemesterSettingController secController = new NewSemesterSettingController();
 		secController.start(arg0);
 	}
