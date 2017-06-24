@@ -1,11 +1,10 @@
 package test;
 
-import controller.DefineCourseController;
+
 import controller.TeacherController;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import controller.DefineCourseController;
-import controller.NewSemesterSettingController;
+
 
 import controller.secretaryController;
 import javafx.application.Application;

@@ -21,7 +21,6 @@ public class StudentController
     private ComboBox<String> optionCombo;
     
     
-    
     public void studentData1() throws Exception 
     {
     	

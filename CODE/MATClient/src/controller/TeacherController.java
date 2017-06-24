@@ -32,7 +32,7 @@ public class TeacherController
     void defineAssignment() throws Exception 
     {
         	
-        	Pane root = FXMLLoader.load(getClass().getResource("/gui/RequestRemoveStudentFromCourse.fxml"));
+        	Pane root = FXMLLoader.load(getClass().getResource("/gui/DefineAssignment.fxml"));
     		Scene scene = new Scene(root);
     		Stage primaryStage = new Stage();
     		primaryStage.setScene(scene);
@@ -42,7 +42,7 @@ public class TeacherController
     void checkAssignment() throws Exception 
     {
         	
-        	Pane root = FXMLLoader.load(getClass().getResource("/gui/RequestRemoveStudentFromCourse.fxml"));
+        	Pane root = FXMLLoader.load(getClass().getResource("/gui/CheckAssignment.fxml"));
     		Scene scene = new Scene(root);
     		Stage primaryStage = new Stage();
     		primaryStage.setScene(scene);
@@ -62,9 +62,6 @@ public class TeacherController
     
     
 
-    
-    
-    
     public void start(Stage primaryStage) throws Exception 
     {
 		

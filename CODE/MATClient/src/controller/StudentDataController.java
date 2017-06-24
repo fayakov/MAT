@@ -1,7 +1,5 @@
 package controller;
 
-
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -11,7 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class StudentDataController {
+public class StudentDataController 
+{
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -55,13 +54,22 @@ public class StudentDataController {
     @FXML // fx:id="labelStudentData"
     private Label labelStudentData; // Value injected by FXMLLoader
 
+    
     @FXML
-    void StudentInfo(ActionEvent event) {
+    void StudentInfo(ActionEvent event) 
+    {
 
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
-    void initialize() {
-  
+    void initialize() 
+    {
+    	textStudentID.setText("30529");
+    	textFName.setText("tal");
+    	textLName.setText("chen");
+    	textClasses.setText("L703");
+    	//textCourses.setText
+    	
+    	
     }
 }
