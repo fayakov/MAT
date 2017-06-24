@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddStudentToCourseController">
    <children>
       <Text layoutX="249.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Request">
          <font>
@@ -25,6 +25,6 @@
       <Text layoutX="166.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Id: " />
       <TextField fx:id="courseTextField" layoutX="266.0" layoutY="273.0" />
       <Button layoutX="296.0" layoutY="334.0" mnemonicParsing="false" onAction="#sendRequest1" text="Send Request" />
-      <Button layoutX="521.0" layoutY="359.0" mnemonicParsing="false" onAction="#closeRequest1" text="close" />
+      <Button fx:id="btnClose" layoutX="521.0" layoutY="359.0" mnemonicParsing="false" onAction="#closeRequest1" text="close" />
    </children>
 </AnchorPane>

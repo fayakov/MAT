@@ -6,19 +6,20 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="472.0" prefWidth="481.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="531.0" prefWidth="591.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DefineAssignment">
    <children>
-      <Label layoutX="166.0" layoutY="25.0" prefHeight="23.0" prefWidth="168.0" text="Define Assignment:">
+      <Label fx:id="labelDefineAss" layoutX="166.0" layoutY="25.0" prefHeight="45.0" prefWidth="284.0" text="Define Assignment:">
          <font>
-            <Font size="18.0" />
+            <Font size="30.0" />
          </font>
       </Label>
-      <Label layoutX="42.0" layoutY="78.0" text="Upload File:" />
-      <Label layoutX="40.0" layoutY="134.0" text="Define Date Submission:" />
-      <Label layoutX="42.0" layoutY="190.0" text="Choose Class:" />
-      <Label layoutX="41.0" layoutY="248.0" text="Choose Course Number:" />
-      <DatePicker layoutX="226.0" layoutY="130.0" />
-      <ComboBox layoutX="226.0" layoutY="186.0" prefHeight="23.0" prefWidth="169.0" />
-      <ComboBox layoutX="226.0" layoutY="244.0" prefHeight="23.0" prefWidth="169.0" />
+      <Label fx:id="labelUpload" layoutX="42.0" layoutY="78.0" text="Upload File:" />
+      <Label fx:id="labelDefineDate" layoutX="40.0" layoutY="134.0" text="Define Date Submission:" />
+      <Label fx:id="labelInsertClass" layoutX="42.0" layoutY="204.0" prefHeight="27.0" prefWidth="179.0" text="Insert Class Number:" />
+      <Label fx:id="labelInsertCourse" layoutX="40.0" layoutY="287.0" text="Insert Course Number:" />
+      <DatePicker fx:id="datePickerDefineDate" layoutX="277.0" layoutY="128.0" />
+      <TextField fx:id="textFieldInsertClass" layoutX="277.0" layoutY="198.0" />
+      <TextField fx:id="textFieldInsertCouse" layoutX="277.0" layoutY="268.0" />
+      <Button layoutX="277.0" layoutY="66.0" mnemonicParsing="false" text="UPLOAD" />
    </children>
 </AnchorPane>

@@ -13,15 +13,17 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class StudentController {
-	
+public class StudentController 
+{
 	ObservableList<String> list ;
-	String option;
 
     @FXML
     private ComboBox<String> optionCombo;
     
-    public void studentData1() throws Exception {
+    
+    public void studentData1() throws Exception 
+    {
+    	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/StudentData.fxml"));
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
@@ -29,7 +31,19 @@ public class StudentController {
 		primaryStage.show();
     }
     
-    public void start(Stage primaryStage) throws Exception {
+    public void assignment() throws Exception 
+    {
+    	
+    	Pane root = FXMLLoader.load(getClass().getResource("/gui/AssignmentsStudent.fxml"));
+		Scene scene = new Scene(root);
+		Stage primaryStage = new Stage();
+		primaryStage.setScene(scene);
+		primaryStage.show();
+    }
+    
+    
+    public void start(Stage primaryStage) throws Exception 
+    {
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/StudentMenu.fxml"));
 		Scene scene = new Scene(root);
@@ -38,17 +52,19 @@ public class StudentController {
 	}   
     
     @FXML
-    public void StudentInfo(ActionEvent event) throws Exception {
+    public void StudentInfo(ActionEvent event) throws Exception 
+    {
     	
-	option = optionCombo.getValue().toString();
+	String option = optionCombo.getValue().toString();
     	if(option.equalsIgnoreCase("Student Data"))
     		studentData1();	
-    	//if(option.equalsIgnoreCase("Assignment"))
-    		//assignment();*
+    	if(option.equalsIgnoreCase("Assignment"))
+    		assignment();
     }
 
     @FXML
-    void initialize() {
+    void initialize() 
+    {
     	ArrayList<String> options = new ArrayList<String>();
     	
     	options.add("Student Data");

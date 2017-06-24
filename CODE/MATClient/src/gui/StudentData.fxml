@@ -11,23 +11,23 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StudentController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StudentDataController">
    <children>
-      <Label fx:id="labelStudentData" layoutX="218.0" layoutY="27.0" prefHeight="29.0" prefWidth="165.0" text="Student Data:">
+      <Label fx:id="labelStudentData" layoutX="262.0" layoutY="26.0" prefHeight="45.0" prefWidth="193.0" text="Student Data:">
          <font>
-            <Font size="23.0" />
+            <Font size="30.0" />
          </font>
       </Label>
       <Label fx:id="labelStudentID" layoutX="33.0" layoutY="97.0" prefHeight="14.0" prefWidth="65.0" text="ID:" />
       <Label fx:id="labelFNName" layoutX="32.0" layoutY="141.0" text="First Name:" />
       <Label fx:id="labelLName" layoutX="33.0" layoutY="186.0" text="Last Name:" />
-      <Label fx:id="labelCllassID" layoutX="33.0" layoutY="225.0" prefHeight="14.0" prefWidth="65.0" text="Class ID:" />
+      <Label fx:id="labelCllassID" layoutX="33.0" layoutY="225.0" prefHeight="27.0" prefWidth="77.0" text="Class ID:" />
       <Label fx:id="labelCourses" layoutX="33.0" layoutY="264.0" text="Courses In Current Semester:" />
-      <TextField fx:id="textStudentID" layoutX="202.0" layoutY="93.0" />
-      <TextField fx:id="textFName" layoutX="202.0" layoutY="137.0" />
-      <TextField fx:id="textLName" layoutX="202.0" layoutY="182.0" />
-      <TextField fx:id="textClasses" layoutX="202.0" layoutY="221.0" />
-      <TextField fx:id="textCourses" layoutX="202.0" layoutY="260.0" />
-      <Button fx:id="buttenExit" layoutX="523.0" layoutY="350.0" mnemonicParsing="false" onAction="#StudentInfo" text="exit" />
+      <TextField fx:id="textStudentID" layoutX="287.0" layoutY="85.0" />
+      <TextField fx:id="textFName" layoutX="287.0" layoutY="130.0" />
+      <TextField fx:id="textLName" layoutX="287.0" layoutY="174.0" />
+      <TextField fx:id="textClasses" layoutX="287.0" layoutY="218.0" />
+      <TextField fx:id="textCourses" layoutX="287.0" layoutY="258.0" />
+      <Button fx:id="buttenExit" layoutX="606.0" layoutY="406.0" mnemonicParsing="false" text="exit" />
    </children>
 </Pane>
