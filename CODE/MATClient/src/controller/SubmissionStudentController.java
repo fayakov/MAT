@@ -37,7 +37,7 @@ public class SubmissionStudentController
 	    void nextStudentSubmission(ActionEvent event) throws Exception 
 	    {
 	    	String option = comboChooseSub.getValue().toString();
-	    	int assNum = Integer.parseInt(option);
+	    	int assNum = Integer.parseInt(option); //save the option to next window
 	    	
 	    	Pane root = FXMLLoader.load(getClass().getResource("/gui/CheckAssignment.fxml"));
 			Scene scene = new Scene(root);
