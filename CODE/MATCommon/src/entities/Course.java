@@ -5,6 +5,7 @@ public class Course  {
 	
 	private int courseId;
 	private String courseName;
+	private int teachingUnit;
 	
 	
 	public int getCourseId() {
@@ -18,6 +19,12 @@ public class Course  {
 	}
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
+	}
+	public int getTeachingUnit() {
+		return teachingUnit;
+	}
+	public void setTeachingUnit(int teachingUnit) {
+		this.teachingUnit = teachingUnit;
 	}  
 	  
 }
