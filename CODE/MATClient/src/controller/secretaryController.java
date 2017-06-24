@@ -3,7 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javax.print.DocFlavor.URL;
+import java.net.URL;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
