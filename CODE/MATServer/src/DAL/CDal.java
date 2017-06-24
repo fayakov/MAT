@@ -1,6 +1,7 @@
 package DAL;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import entities.*;
 public class CDal {
@@ -229,6 +230,22 @@ public class CDal {
 		return retVal;
 	}
 	
+	public static boolean isClassExist(int classId){
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT classId FROM class WHERE class.classId = '" +classId + "';");
+			if(resultSet.first()) {
+
+				retVal = true;
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	
 	public static boolean addNewClass(String className)
 	{
 		boolean retVal = true;
@@ -247,6 +264,36 @@ public class CDal {
 		catch (SQLException e) {
 			e.printStackTrace();			
 		}		
+		return retVal;
+	}
+	
+	public static int getTeacherUnitId(int teacherId){
+		int retVal = 0;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT teachingUnit_teachingUnitId FROM teacher WHERE teacher.teacherId = '" + teacherId + "';");
+			if(resultSet.first()) {
+
+				retVal = resultSet.getInt(1);
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	public static int getTeacherId(int userId){
+		int retVal = 0;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT teacherId FROM teacher WHERE teacher.user_id = '" + userId + "';");
+			if(resultSet.first()) {
+
+				retVal = resultSet.getInt(1);
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
 		return retVal;
 	}
 	
@@ -292,48 +339,21 @@ public class CDal {
 			}
 			else
 			{
-				Statement stmt = connection.createStatement();
-				stmt.executeUpdate("INSERT INTO student (user_id) VALUES ('" +userId+"')");
+				if(getUserType(userId)  == EUserType.EUserStudent)
+				{
+					Statement stmt = connection.createStatement();
+					stmt.executeUpdate("INSERT INTO student (user_id) VALUES ('" +userId+"')");
+				}
+				else
+				{
+					Statement stmt = connection.createStatement();
+					stmt.executeUpdate("INSERT INTO student (user_id) VALUES ('" +userId+"')");
+				}
 			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();			
 		}		
-		return retVal;
-	}
-	
-	public static boolean addStudentToClass(String className, int userId){
-		boolean retVal = true;
-		
-		if(getUserType(userId) == EUserType.EUserStudent)
-		{
-
-			try 
-			{
-				int classId = getClassId(className);
-				if(classId == 0)
-				{
-					retVal = false;
-				}
-				else
-				{
-					Statement stmt = connection.createStatement();
-					createStudent(userId);
-					if(stmt.executeUpdate("UPDATE student SET class_classId='" + classId + "' where user_id = '"+userId+"';" ) == 0)
-					{
-						retVal = false;
-					}
-				}
-			}
-			catch (SQLException e) {
-				e.printStackTrace();			
-			}		
-		}
-		else
-		{
-			retVal = false;
-		}
-		
 		return retVal;
 	}
 	
@@ -353,6 +373,38 @@ public class CDal {
 		return retVal;
 	}
 	
+	
+	public static int getCourseTeachingUnitId(int courseId){
+		int retVal = 0;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT teachingunit_teachingUnitId FROM course WHERE course.courseId = '" +courseId + "';");
+			if(resultSet.first()) {
+
+				retVal = resultSet.getInt(1);
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	public static int getStudentId(int userId){
+		int retVal = 0;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT idstudent FROM student WHERE student.user_id = '" +userId + "';");
+			if(resultSet.first()) {
+
+				retVal = resultSet.getInt(1);
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	
 	public static boolean addStudentToCourse(String courseName, int userId){
 		boolean retVal = true;
 		
@@ -368,12 +420,32 @@ public class CDal {
 				}
 				else
 				{
-					Statement stmt = connection.createStatement();
-					createStudent(userId);
-					if(stmt.executeUpdate("UPDATE student SET course_courseId='" + courseId + "' where user_id = '"+userId+"';" ) == 0)
+					int studentId = getStudentId(userId);
+					if(studentId != 0)
+					{
+						if(isStudentInCourse(courseId, userId))
+						{
+							retVal = false;
+						}
+						else
+						{
+							Statement stmt = connection.createStatement();
+							if(stmt.executeUpdate("INSERT INTO student_has_course  "
+												+ "(student_has_course.student_idstudent, "
+												+ "student_has_course.student_user_id, "
+												+ "student_has_course.course_courseId ) "
+												+ "values ("+studentId+ "," + userId +","+ courseId +");") == 0)
+							
+							{
+								retVal = false;
+							}
+						}
+					}
+					else
 					{
 						retVal = false;
 					}
+
 				}
 			}
 			catch (SQLException e) {
@@ -388,6 +460,22 @@ public class CDal {
 		return retVal;
 	}
 	
+	public static boolean isCourseExist(int courseId){
+		
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT courseId FROM course WHERE course.courseId = '" +courseId + "';");
+			if(resultSet.first()) {
+
+				retVal = true;
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
 	public static boolean isCourseExist(String courseName){
 		
 		boolean retVal = false;
@@ -395,6 +483,42 @@ public class CDal {
 		{
 			Statement stmt = connection.createStatement();
 			ResultSet resultSet  = stmt.executeQuery("SELECT courseId FROM course WHERE course.name = '" +courseName + "';");
+			if(resultSet.first()) {
+
+				retVal = true;
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	public static boolean isTeacherExist(int userId){
+		
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT teacherId FROM teacher WHERE teacher.user_id = '" +userId + "';");
+			if(resultSet.first()) {
+
+				retVal = true;
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	
+	
+	public static boolean isStudentInCourse(int courseId, int userId){
+		
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT * FROM student_has_course "
+					+ "WHERE student_has_course.student_user_id = '" +userId + "' "
+							+ "AND student_has_course.course_courseId = '" +courseId+ "';");
 			if(resultSet.first()) {
 
 				retVal = true;
@@ -416,7 +540,7 @@ public class CDal {
 			else
 			{
 				Statement stmt = connection.createStatement();
-				//stmt.executeUpdate("INSERT INTO course (name) VALUES ('" +courseName+"')");
+				stmt.executeUpdate("INSERT INTO course (name) VALUES ('" +courseName+"')");
 			}
 		}
 		catch (SQLException e) {
@@ -425,20 +549,472 @@ public class CDal {
 		return retVal;
 	}
 	
-    private static void writeMetaData(){
-
-    	try{
-	    		
-	    	Statement stmt = connection.createStatement();
-			ResultSet resultSet  = stmt.executeQuery("SELECT * FROM user;");
-	        System.out.println("The columns in the table are: ");
+	public ArrayList<Integer> getStudensInCourse(int courseId)
+	{
+		ArrayList<Integer> myList = new ArrayList<Integer>();
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT student_user_id FROM student_has_course "
+					+ "WHERE student_has_course.course_courseId = '" +courseId + "';");
+			
+			
+			while(resultSet.next())
+	 		{				
+				myList.add(resultSet.getInt(1));
+				//users = addElement(users, resultSet.getInt(1));
+	 		} 
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return myList;
+	}
 	
-	        System.out.println("Table: " + resultSet.getMetaData().getTableName(1));
-	        for  (int i = 1; i<= resultSet.getMetaData().getColumnCount(); i++){
-	                System.out.println("Column " +i  + " "+ resultSet.getMetaData().getColumnName(i));
-	        }
-	    }
-    	catch (SQLException e) {e.printStackTrace();}
-    }
+	public static int getClassIdFromClassName(String className)
+	{
+		int retVal = 0;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT classId FROM class WHERE class.name = '" + className + "';");
+			if(resultSet.first()) {
+
+				retVal = resultSet.getInt(1);
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	public static boolean isStudentInClass(int classId, int userId){
+		
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT * FROM class_has_student "
+					+ "WHERE class_has_student.student_user_id = '" +userId + "' "
+							+ "&& class_has_student.class_classId = '" +classId+ "';");
+			if(resultSet.first()) {
+
+				retVal = true;
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	public static boolean addStudentToClass(String className, int userId){
+		boolean retVal = true;
+		int classId = getClassId(className);
+		if(classId == 0)
+		{
+			retVal = false;
+		}
+		else
+		{
+			retVal =  addStudentToClass(classId, userId);
+		}
+		return retVal;
+	}
+	
+	public static boolean addStudentToClass(int classId, int userId){
+		boolean retVal = true;
+		
+		if(getUserType(userId) == EUserType.EUserStudent)
+		{
+
+			try 
+			{
+				if(isClassExist(classId))
+				{
+					int studentId = getStudentId(userId);
+					if(studentId != 0)
+					{
+						
+						if(isStudentInClass(classId, userId))
+						{
+							retVal = false;
+						}
+						else
+						{
+							Statement stmt = connection.createStatement();
+							if(stmt.executeUpdate("INSERT INTO class_has_student  "
+												+ "(class_has_student.student_idstudent, "
+												+ "class_has_student.student_user_id, "
+												+ "class_has_student.class_classId ) "
+												+ "values ("+studentId+ "," + userId +","+ classId +");") == 0)
+							
+							{
+								retVal = false;
+							}
+						}
+					}
+					else
+					{
+						retVal = false;
+					}
+				}
+				else
+				{
+					retVal = false;
+				}	
+			}
+			catch (SQLException e) {
+				e.printStackTrace();			
+			}		
+		}
+		else
+		{
+			retVal = false;
+		}
+		
+		return retVal;
+	}
+	
+	public ArrayList<Integer> getStudensInClass(int classId)
+	{
+		ArrayList<Integer> myList = new ArrayList<Integer>();
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT student_user_id FROM class_has_student "
+					+ "WHERE class_has_student.class_classId = '" +classId + "';");
+			
+			
+			while(resultSet.next())
+	 		{				
+				myList.add(resultSet.getInt(1));
+	 		} 
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return myList;
+	}
+	
+	public static boolean isCourseInClass(int classId, int courseId){
+		
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT * FROM class_has_course "
+					+ "WHERE class_has_course.course_courseId = '" +courseId + "' "
+							+ "&& class_has_course.class_classId = '" +classId+ "';");
+			if(resultSet.first()) {
+
+				retVal = true;
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	public static boolean addCourseToClass(int classId, int courseId){
+		boolean retVal = true;
+
+		try 
+		{
+			if(isClassExist(classId))
+			{
+				if(isCourseExist(courseId))
+				{
+					if(isCourseInClass(classId, courseId))
+					{
+						retVal = false;
+					}
+					else
+					{
+						Statement stmt = connection.createStatement();
+						if(stmt.executeUpdate("INSERT INTO class_has_course  "
+											+ "(class_has_course.class_classId, "
+											+ "class_has_course.course_courseId ) "
+											+ "values ("+classId+","+ courseId +");") == 0)
+						
+						{
+							retVal = false;
+						}
+					}
+				}
+				else
+				{
+					retVal = false;
+				}
+			}
+			else
+			{
+				retVal = false;
+			}	
+		}
+		catch (SQLException e) {
+			e.printStackTrace();			
+		}		
+		return retVal;
+	}
+
+	public static boolean isTeacherInClassWithCourse(int teacherId, int classId, int courseId){
+		
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT class_has_course.teacher_teacherId FROM class_has_course "
+					+ "WHERE class_has_course.class_classId = '" +classId + "' "
+							+ "AND class_has_course.course_courseId = '" +courseId+ "';");
+			if(resultSet.first()) {
+
+				retVal = true;
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	
+	public static boolean addTeacherToCourseInClass(int classId, int courseId, int userID){
+		boolean retVal = true;
+		try 
+		{
+			if(isClassExist(classId))
+			{
+				if(isCourseExist(courseId))
+				{
+					if(isCourseInClass(classId, courseId))
+					{
+						int teacherId = getTeacherId(userID);
+						if(teacherId != 0)
+						{
+							int teachingUnit = getTeacherUnitId(teacherId);
+							if(teachingUnit != 0)
+							{
+								int courseTeachingUnit = getCourseTeachingUnitId(classId);
+								if(courseTeachingUnit != 0)
+								{
+									if(courseTeachingUnit == teachingUnit)
+									{
+										if(!isTeacherInClassWithCourse(teacherId, classId, courseId))
+										{
+											Statement stmt = connection.createStatement();
+											if(stmt.executeUpdate("UPDATE class_has_course SET "
+													+ "class_has_course.teacher_teacherId = "+teacherId +", "
+													+ "class_has_course.teacher_user_id  = "+ userID +""
+													+ " WHERE class_has_course.class_classId = " +classId +" AND"
+													+ " class_has_course.course_courseId = "+ courseId + ";") == 0)
+											{
+												retVal = false;
+											}
+										}
+										else
+										{
+											retVal = false;
+										}
+	
+									}
+									else
+									{
+										retVal = false;
+									}
+								}
+								else
+								{
+									retVal = false;
+								}
+							}
+							else
+							{
+								retVal = false;
+							}
+						}
+						else
+						{
+							retVal = false;
+						}
+					}
+					else
+					{
+						retVal = false;
+					}
+				}
+				else
+				{
+					retVal = false;
+				}
+			}
+			else
+			{
+				retVal = false;
+			}	
+		}
+		catch (SQLException e) {
+			e.printStackTrace();			
+		}		
+		return retVal;
+	}
+	
+	
+	public static boolean isTeachingUnitExist(String unitName){
+		
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT teachingUnitId FROM teachingunit WHERE teachingunit.name = '" +unitName + "';");
+			if(resultSet.first()) {
+
+				retVal = true;
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+
+	public static boolean isTeachingUnitExist(int unitId){
+		
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT teachingUnitId FROM teachingunit WHERE teachingunit.teachingUnitId = '" +unitId + "';");
+			if(resultSet.first()) {
+
+				retVal = true;
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	
+	public static boolean createTeachingUnit( String unitName){
+		
+		boolean retVal = true;
+		try 
+		{
+			if(isTeachingUnitExist(unitName))
+			{
+				retVal = false;
+			}
+			else
+			{
+				Statement stmt = connection.createStatement();
+				stmt.executeUpdate("INSERT INTO teachingunit (name) VALUES ('" +unitName+"')");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();			
+		}		
+		return retVal;
+	}
+	
+	public static boolean isTeachingUnitInCourse(int courseId){
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT teachingunit_teachingUnitId FROM course WHERE course.courseId = '" +courseId + "';");
+			if(resultSet.first()) {
+
+				if(resultSet.getInt(1) == 0)
+				{
+					retVal = false;
+				}
+				else
+				{
+					retVal = true;
+				}
+				
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	public static int getTeachingUnitIdFromUnitName(String unitName)
+	{
+		int retVal = 0;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT teachingUnitId FROM teachingunit WHERE teachingunit.name = '" + unitName + "';");
+			if(resultSet.first()) {
+
+				retVal = resultSet.getInt(1);
+			}
+			
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	public static boolean addTeachingUnitToCourse(int unitId , int courseId){
+		boolean retVal = true;
+		try 
+		{
+			if(isCourseExist(courseId))
+			{
+				//todo check if tu exist
+				if(isTeachingUnitInCourse(courseId))
+				{
+					retVal = false;
+				}
+				else
+				{
+					//update mat_db.course set mat_db.course.teachingunit_teachingUnitId = 1 where mat_db.course.courseId = 1;
+					Statement stmt = connection.createStatement();
+					if(stmt.executeUpdate("UPDATE course SET teachingunit_teachingUnitId=" + courseId + " WHERE courseId=" + courseId ) == 0)
+					{
+						retVal = false;
+					}
+				}
+			}
+			else
+			{
+				retVal = false;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();			
+		}		
+		
+		return retVal;
+	}
+	
+	
+	public static boolean createTeacher(int userId, int maxTeachingHours, int teachingUnit)
+	{
+		boolean retVal = true;
+		try 
+		{
+			if(isTeacherExist(userId))
+			{
+				retVal = false;
+			}
+			else
+			{
+				if(getUserType(userId)  == EUserType.EUserTeacher)
+				{
+					if(isTeachingUnitExist(teachingUnit))
+					{
+						Statement stmt = connection.createStatement();
+						stmt.executeUpdate("INSERT INTO teacher (user_id, maxHours, teachingUnit_teachingUnitId) VALUES ('" +userId+"','"+ maxTeachingHours +"','" +teachingUnit +"')");
+						
+					}
+					else
+					{
+						retVal = false;
+					}
+				}
+				else
+				{
+					retVal = false;
+				}
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();			
+		}		
+		return retVal;
+	}
+	
 	
 }
+
+

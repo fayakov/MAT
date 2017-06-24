@@ -1,5 +1,8 @@
 package DATTest;
 import entities.*;
+
+import java.util.ArrayList;
+
 import DAL.*;
 
 public class DALTestMain {
@@ -15,8 +18,20 @@ public class DALTestMain {
 		//checkIsExistClass(dl);
 		//checkAddClass(dl);
 		//checkAddStudentToClass(dl);
-		checkCreateCourse(dl);
+		//checkGetStudentId(dl);
+		//chekcIsStudentInCourse(dl);
+		//checkAddStudentToCourse(dl);
+		//checkCreateCourse(dl);
+		//checkGetStudentsInCourse(dl);
 		/*Teacher teacher = dl.getTeacher(id);*/
+		//checkAddStudentToClass(dl);
+		//checkGetStudentsInClass( dl);
+		//checkAddCourseToClass(dl);
+		//checkCreateTeachingUnit(dl);
+		//checkCreateAddTeachingUnitToCourse(dl);
+		//checkAddTeacherToCourseWithClass(dl);
+		//checkCreateTeacher(dl);
+		checkAddTeacherToCourseWithClass(dl);
 
 	}
 	public static void checkLogin(CDal dl )
@@ -151,13 +166,91 @@ public class DALTestMain {
 
 	}
 	
-	public static void checkAddStudentToClass(CDal dl){
-		System.out.println(dl.addStudentToClass("a1", 124));
-	}
-	
 	public static void checkCreateCourse(CDal dl)
 	{
-		System.out.println(dl.createCourse("algebra1"));
+		System.out.println(dl.createCourse("algebra3"));
+	}
+	
+	public static void checkGetStudentId(CDal dl)
+	{
+		System.out.println(dl.getStudentId(124) != 0);
+		System.out.println(dl.getStudentId(123) == 0);
+	}
+	
+	
+	public static void checkAddStudentToCourse(CDal dl)
+	{
+		System.out.println(dl.addStudentToCourse("Algebra2", 124 ) == false);
+		System.out.println(dl.addStudentToCourse("Algebra3", 124 ));
+	}	
+	
+	public static void chekcIsStudentInCourse(CDal dl)
+	{
+		System.out.println(dl.isStudentInCourse(2, 124));	
+		System.out.println(dl.isStudentInCourse(3, 124) == false);
+		System.out.println(dl.isStudentInCourse(2, 125) == false);	
+	}
+	
+	public static void checkGetStudentsInCourse(CDal dl)
+	{
+		ArrayList<Integer> users = dl.getStudensInCourse(1);
+		for (Integer id : users) {
+			System.out.println(id);
+		}
+	}
+	
+	public static void checkAddStudentToClass(CDal dl)
+	{
+		System.out.println(dl.addStudentToClass(1, 124) == false);
+		System.out.println(dl.addStudentToClass(5, 124 )==false);
+		System.out.println(dl.addStudentToClass(1, 129)==false);
+	}	
+	
+	public static void checkAddCourseToClass(CDal dl)
+	{
+		System.out.println(dl.addCourseToClass(1, 1) == false);
+		System.out.println(dl.addCourseToClass(1, 124 )==false);
+		System.out.println(dl.addCourseToClass(124, 1 )==false);
+	}	
+	
+	
+	public static void checkGetStudentsInClass(CDal dl)
+	{
+		ArrayList<Integer> users = dl.getStudensInClass(1);
+		for (Integer id : users) {
+			System.out.println(id);
+		}
+	}
+	
+	public static void checkAddTeacherToCourseWithClass(CDal dl)
+	{
+		//addTeacherToCourseInClass(int classId, int courseId, int userID)
+		System.out.println(dl.addTeacherToCourseInClass(1, 1, 1) == false);
+		System.out.println(dl.addTeacherToCourseInClass(1233, 1, 123) == false);
+		System.out.println(dl.addTeacherToCourseInClass(1, 1234, 123) == false);
+		System.out.println(dl.addTeacherToCourseInClass(1, 1, 123) == false);
+	}
+	
+	public static void checkCreateTeachingUnit(CDal dl)
+	{
+		System.out.println(dl.createTeachingUnit("Mathematics"));
+		System.out.println(dl.createTeachingUnit("Physics"));
+		System.out.println(dl.createTeachingUnit("Mathematics") == false);
+	}
+	
+	public static void checkCreateAddTeachingUnitToCourse(CDal dl)
+	{
+		System.out.println(dl.addTeachingUnitToCourse(1,2) == false);
+		
+		//System.out.println(dl.createTeachingUnit("Physics"));
+		//System.out.println(dl.createTeachingUnit("Mathematics") == false);
+	}
+	
+	public static void checkCreateTeacher(CDal dl)
+	{
+		System.out.println(dl.createTeacher(123, 20, 20) == false);
+		System.out.println(dl.createTeacher(124, 20, 1) == false);
+		System.out.println(dl.createTeacher(123, 20, 1) == false);
 	}
 	
 }
