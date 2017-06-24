@@ -30,6 +30,7 @@ public class StudentController
     
     public void studentData1() throws Exception 
     {
+    	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/StudentData.fxml"));
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
