@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 
 
 public class StatisticTeacherAndClassesController {
+	
+		private int tid;
 
 	    @FXML
 	    private TextField TeacherID;
@@ -21,16 +23,18 @@ public class StatisticTeacherAndClassesController {
 	    @FXML
 	    void StatisticTeacherAndClasses(ActionEvent event) {
 	    	
-	    	String tID = TeacherID.getText().toString();
-	    	/*
-	    	 * send to server
-	    	 * chack if tecaher ID exist
-	    	 * */
-	    	
-	    	// if succeeded
-	    	//Alert alert = new Alert(AlertType.INFORMATION);
-	    	//alert.setHeaderText("class " + cName + " was added succesfully");
-	    	//alert.show(); //להציג בהיסטוגרמה
+	    	 if(TeacherID.getText().isEmpty()) 
+				 	Prompt.alert(3,"please enter teacher Id");		    	
+		     else {  	
+		    		
+		    	 try {
+					    tid = Integer.parseInt(TeacherID.getText());
+				    	
+				    	} catch(NumberFormatException e){
+				    	Prompt.alert(3,"please enter numerical value");
+				    	return;
+				    	}  	
+		     }	    			 
 	    }
 	    
 	    @FXML

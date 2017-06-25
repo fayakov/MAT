@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 
 
 public class StatisticClassAndTeachersController {
+	
+		private int clid;
 
 	    @FXML
 	    private TextField ClassNumber;
@@ -20,16 +22,18 @@ public class StatisticClassAndTeachersController {
 	    @FXML
 	    void StatisticClassAndTeachers(ActionEvent event) {
 	    	
-	    	String cNum = ClassNumber.getText().toString();
-	    	/*
-	    	 * send to server
-	    	 * check if Class Number exist
-	    	 * */
-	    	
-	    	// if succeeded
-	    	//Alert alert = new Alert(AlertType.INFORMATION);
-	    	//alert.setHeaderText("class " + cName + " was added succesfully");
-	    	//alert.show(); //מפה אם קיים צריך לעבור למסך שמראה את ההיסטוגרמה  
+	    	 if(ClassNumber.getText().isEmpty()) 
+				 	Prompt.alert(3,"please enter class number");		    	
+		     else {  	
+		    		
+		    	 try {
+					    clid = Integer.parseInt(ClassNumber.getText());
+				    	
+				    	} catch(NumberFormatException e){
+				    	Prompt.alert(3,"please enter numerical value");
+				    	return;
+				    	}  	
+		     }	    			 
 	    }
 	    
 	    @FXML

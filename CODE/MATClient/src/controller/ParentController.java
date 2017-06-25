@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 
 
 public class ParentController {
+	
+		private int sid;
 
 	    @FXML
 	    private TextField StudentID;
@@ -27,24 +29,28 @@ public class ParentController {
 	    	 * check if student ID exist if student ID exist show Data Student
 	    	 * */
 	    	
-	    	// if succeeded
-	    //	Alert alert = new Alert(AlertType.INFORMATION);
-	    	//alert.setHeaderText("class " + cName + " was added succesfully");
-	    	//alert.show(); // אם הסטודנט קיים לעבור למסך של הסטודנט
+	    	
 			
-			
-			//נסיון ניראה לי ככה צריך:
-			
-	    	 @FXML
+	    	@FXML
 	 	    void searchstudentID (ActionEvent event) throws Exception {
 	    	
-			String sID = StudentID.getText().toString();
-			// check student
+	    	if(StudentID.getText().isEmpty()) 
+	    		Prompt.alert(3,"please enter student id");
+	    		
+			else {
+				try {
+				    sid = Integer.parseInt(StudentID.getText());
+			    	
+			    	} catch(NumberFormatException e){
+			    	Prompt.alert(3,"please enter numerical value");
+			    	return;
+			    	}  	
 	    	Pane root = FXMLLoader.load(getClass().getResource("/gui/StudentData.fxml"));
 			Scene scene = new Scene(root);
 			Stage primaryStage = new Stage();
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			}
 	    }
 	    	 
 	   	 public void start(Stage primaryStage) throws Exception {

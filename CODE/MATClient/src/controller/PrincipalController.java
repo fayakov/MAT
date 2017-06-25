@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 public class PrincipalController {
 
 	ObservableList<String> list ;
+	String option;
 
     @FXML
     private ResourceBundle resources;
@@ -92,15 +93,21 @@ public class PrincipalController {
     @FXML
     public void send(ActionEvent event) throws Exception {
     	
-    	String option = principalComboBox.getValue().toString();
+    	try{
+    	option = principalComboBox.getValue().toString(); }
+    	catch(Exception e){
+    		Prompt.alert(3, "please choose option");
+    	}
+    	
     	if(option.equalsIgnoreCase("Get Statistics"))
     		statistics();	
     	if(option.equalsIgnoreCase("Show Student Data"))
     		ShowStudentData();
     	if(option.equalsIgnoreCase("Block Parent"))
     		BlockParent();
-	if(option.equalsIgnoreCase("Request"))
+    	if(option.equalsIgnoreCase("Request"))
     		request();
+    	//if(principalComboBox.getValue().isEmpty())		
     }
     
     @FXML

@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 
 
 public class BlockParentController {
+	
+	private int pid;
 
     @FXML
     private TextField ParentID;
@@ -22,16 +24,17 @@ public class BlockParentController {
 	    @FXML
 	    void BlockParent(ActionEvent event) {
 	    	
-	    	String pId = ParentID.getText().toString();
-	    	/*
-	    	 * send to server
-	    	 * search parent exist and chack if parent already block or not
-	    	 * */
-	    	
-	    	// if succeeded
-	    	Alert alert = new Alert(AlertType.INFORMATION);
-	    	alert.setHeaderText("parent " + pId + " Blocked");
-	    	alert.show();
+	    	if(ParentID.getText().isEmpty()) 
+			 	Prompt.alert(3,"please enter class number");		    	
+	    	else {  		    		
+	    		try {
+				    pid = Integer.parseInt(ParentID.getText());
+			    	
+			    	} catch(NumberFormatException e){
+			    	Prompt.alert(3,"please enter numerical value");
+			    	return;
+			    	}  	
+	    		}	    			
 	    }
 	    
 	    @FXML

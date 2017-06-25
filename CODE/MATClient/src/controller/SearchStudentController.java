@@ -12,6 +12,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class SearchStudentController {
+	
+	private int sid;
 
     @FXML
     private Button closebtn;
@@ -22,18 +24,17 @@ public class SearchStudentController {
     @FXML
     void send(ActionEvent event) throws Exception {
     	
-    	String cName = studentId.getText().toString();
-    	
     	if(studentId.getText().isEmpty()) 
-    		Prompt.alert(3,  "the field is empty");    
-    	
-    	else {  
-    		Pane root = FXMLLoader.load(getClass().getResource("/gui/StudentData.fxml"));
-    		Scene scene = new Scene(root);
-    		Stage primaryStage = new Stage();
-    		primaryStage.setScene(scene);
-    		primaryStage.show();
-    	}
+		 	Prompt.alert(3,"please enter class number");		    	
+    	else {  		    		
+    		try {
+			    sid = Integer.parseInt(studentId.getText());
+		    	
+		    	} catch(NumberFormatException e){
+		    	Prompt.alert(3,"please enter numerical value");
+		    	return;
+		    	}  	
+    		}	    	
 
     }
 

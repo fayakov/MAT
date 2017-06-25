@@ -10,6 +10,8 @@ package controller;
 	import javafx.stage.Stage;
 
 public class StatisticClassAndCoursesController {
+	
+		private int clid;
 
 	    @FXML
 	    private TextField classNumber;
@@ -20,17 +22,22 @@ public class StatisticClassAndCoursesController {
 	    @FXML
 	    void StatisticClassAndCourses(ActionEvent event) {
 	    	
-	    	String cNum = classNumber.getText().toString();
-	    	/*
-	    	 * send to server
-	    	 * check if class number exist
-	    	 * */
-	    	
-	    	// if succeeded
-	    	//Alert alert = new Alert(AlertType.INFORMATION);
-	    	//alert.setHeaderText("class " + cName + " was added succesfully");
-	    	//alert.show(); //להציג היסטוגרמה
-	    }
+	    	 if(classNumber.getText().isEmpty()) 
+				 	Prompt.alert(3,"please enter class number");		    	
+		     else {  	
+		    		
+		    	 try {
+					    clid = Integer.parseInt(classNumber.getText());
+				    	
+				    	} catch(NumberFormatException e){
+				    	Prompt.alert(3,"please enter numerical value");
+				    	return;
+				    	}  	
+		          		    			 
+		    	  }
+		    }
+	    		    	
+	    
 	    
 	    @FXML
 	    void close(ActionEvent event) {		
