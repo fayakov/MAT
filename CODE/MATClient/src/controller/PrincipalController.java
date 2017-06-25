@@ -40,7 +40,7 @@ public class PrincipalController {
   
     void statistics() throws Exception {
     	
-    	Pane root = FXMLLoader.load(getClass().getResource("/gui/statistics.fxml"));
+    	Pane root = FXMLLoader.load(getClass().getResource("/gui/StatisticsData.fxml"));
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
 		primaryStage.setScene(scene);
@@ -50,7 +50,7 @@ public class PrincipalController {
     
     void ShowStudentData() throws Exception {
     	
-    	Pane root = FXMLLoader.load(getClass().getResource("/gui/ShowStudentData.fxml"));
+    	Pane root = FXMLLoader.load(getClass().getResource("/gui/SearchStudent.fxml"));
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
 		primaryStage.setScene(scene);

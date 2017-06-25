@@ -13,17 +13,16 @@ import javafx.stage.Stage;
 
 public class BlockParentController {
 
+    @FXML
+    private TextField ParentID;
 
-	    @FXML
-	    private TextField ParentID;
-	    
-	    @FXML
-	    private Button btnClose;
+    @FXML
+    private Button btnClose;
 
 	    @FXML
 	    void BlockParent(ActionEvent event) {
 	    	
-	    	String pId = parentID.getText().toString();
+	    	String pId = ParentID.getText().toString();
 	    	/*
 	    	 * send to server
 	    	 * search parent exist and chack if parent already block or not
@@ -31,7 +30,7 @@ public class BlockParentController {
 	    	
 	    	// if succeeded
 	    	Alert alert = new Alert(AlertType.INFORMATION);
-	    	alert.setHeaderText("parent " + pID + " Blocked");
+	    	alert.setHeaderText("parent " + pId + " Blocked");
 	    	alert.show();
 	    }
 	    

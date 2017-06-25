@@ -33,10 +33,10 @@ public class StatisticClassAndCoursesController {
 	    }
 	    
 	    @FXML
-	    void closeStatisticClassAndCourses(ActionEvent event) {	
+	    void close(ActionEvent event) {		
 		    Stage stage = (Stage) btnClose.getScene().getWindow();
 		    stage.close();
-	    }
+	 }
 	}
 
 

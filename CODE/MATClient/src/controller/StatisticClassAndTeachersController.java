@@ -33,7 +33,7 @@ public class StatisticClassAndTeachersController {
 	    }
 	    
 	    @FXML
-	    void close StatisticClassAndTeachers(ActionEvent event) {	
+	    void closeStatisticClassAndTeachers(ActionEvent event) {	
 		    Stage stage = (Stage) btnClose.getScene().getWindow();
 		    stage.close();
 	    }
