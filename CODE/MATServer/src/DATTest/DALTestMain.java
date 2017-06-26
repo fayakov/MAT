@@ -1,6 +1,7 @@
 package DATTest;
 import entities.*;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import DAL.*;
@@ -17,7 +18,7 @@ public class DALTestMain {
 		//checkGetUserType(dl);
 		//checkIsExistClass(dl);
 		//checkAddClass(dl);
-		//checkAddStudentToClass(dl);
+		checkAddStudentToClass(dl);
 		//checkGetStudentId(dl);
 		//chekcIsStudentInCourse(dl);
 		//checkAddStudentToCourse(dl);
@@ -33,7 +34,12 @@ public class DALTestMain {
 		//checkAddTeacherToCourseWithClass(dl);
 		//checkAddPrevCourseToCourse(dl);
 		//checkFinishCourse(dl);
-		checkisFinishedPrevCourse(dl);
+		//checkisFinishedPrevCourse(dl);
+		//checkFinishedGrade(dl);
+		//checkClassTecherStatistics(dl);
+		//checkTecherClassStatistics(dl);
+		//checkCourseClassStatistics(dl);
+		//checkCreateNewSemester(dl);
 	}
 	public static void checkLogin(CDal dl )
 	{
@@ -181,7 +187,7 @@ public class DALTestMain {
 	
 	public static void checkAddStudentToCourse(CDal dl)
 	{
-		System.out.println(dl.addStudentToCourse("Algebra1", 124 ));
+		//System.out.println(dl.addStudentToCourse("Algebra1", 124 ));
 		System.out.println(dl.addStudentToCourse("Algebra2", 124 ));
 		//System.out.println(dl.addStudentToCourse("Algebra3", 124 ));
 	}	
@@ -195,7 +201,7 @@ public class DALTestMain {
 	
 	public static void checkGetStudentsInCourse(CDal dl)
 	{
-		ArrayList<Integer> users = dl.getStudensInCourse(1);
+		ArrayList<Integer> users = dl.getStudensInCourse(1,dl.getCurrentSemester());
 		for (Integer id : users) {
 			System.out.println(id);
 		}
@@ -230,7 +236,7 @@ public class DALTestMain {
 		System.out.println(dl.addTeacherToCourseInClass(1, 1, 1) == false);
 		System.out.println(dl.addTeacherToCourseInClass(1233, 1, 123) == false);
 		System.out.println(dl.addTeacherToCourseInClass(1, 1234, 123) == false);
-		System.out.println(dl.addTeacherToCourseInClass(1, 1, 123) == false);
+		System.out.println(dl.addTeacherToCourseInClass(1, 1, 123) == true);
 	}
 	
 	public static void checkCreateTeachingUnit(CDal dl)
@@ -271,6 +277,49 @@ public class DALTestMain {
 		System.out.println(dl.isStudentFinishedPrevCourse(1,1) == true);
 		System.out.println(dl.isStudentFinishedPrevCourse(1,2) == true);
 		System.out.println(dl.isStudentFinishedPrevCourse(1,3) == false);
+	}
+	
+	public static void checkFinishedGrade(CDal dl)
+	{
+		System.out.println(dl.getFinishedGrade(1, 1) == 100);
+		System.out.println(dl.getFinishedGrade(1, 2) == -1);
+		System.out.println(dl.getFinishedGrade(21, 2) == -1);
+	}
+	
+	public static void checkClassTecherStatistics(CDal dl)
+	{
+		ArrayList<TeacherWithGrade> mylist =dl.getClassTeacherStatistics(1,dl.getCurrentSemester());
+		for(TeacherWithGrade teacher  : mylist)
+		{
+			System.out.println("teacher: "+ teacher.getName()+ " grade: "+teacher.getGrade());
+		}
+	}
+
+	public static void checkTecherClassStatistics(CDal dl)
+	{
+		ArrayList<ClassWithGrade> mylist =dl.getTeacherClassesStatistics(1,dl.getCurrentSemester());
+		for(ClassWithGrade classWithG  : mylist)
+		{
+			System.out.println("class: "+ classWithG.getName()+ " grade: "+classWithG.getGrade());
+		}
+	}
+	
+	public static void checkCourseClassStatistics(CDal dl)
+	{
+		
+		ArrayList<CourseWithGrade> mylist =dl.getClassesCoursesStatistics(1,dl.getCurrentSemester());
+		for(CourseWithGrade courseWithG  : mylist)
+		{
+			System.out.println("course: "+ courseWithG.getName()+ " grade: "+courseWithG.getGrade());
+		}
+	}
+	
+	public static void checkCreateNewSemester(CDal dl)
+	{
+		Date start = new Date(2017,10,9);
+		Date end  = new Date(2017,11,9);
+		//System.out.println(start.getYear()+" "+start.getMonth()+" "+start.getDate());
+		System.out.println(dl.createNewSemester(start, end) == false);
 	}
 	
 	
