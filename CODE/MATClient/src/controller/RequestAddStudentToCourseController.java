@@ -3,21 +3,33 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import communication.AddStudentRequest;
+import communication.AddStudentResponse;
+import communication.Dispatcher;
+import communication.LoginRequestMsg;
+import communication.LoginResponseMsg;
+import communication.MATClientController;
+import communication.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
+import javafx.fxml.Initializable;
 import javafx.stage.Stage;
+import utils.Handler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import entities.ERequestType;
 
-public class RequestAddStudentToCourseController {
+public class RequestAddStudentToCourseController implements Initializable, Handler {
 	
 	int sid, cid, oid;
 	
 	String isConfirmed, isHandeled;
 	
 	int ERequestType;
+	
+	public RequestAddStudentToCourseController(){
+		Dispatcher.addHandler(AddStudentResponse.class.getCanonicalName(), this);
+	}
 
     @FXML
     private ResourceBundle resources;
@@ -52,6 +64,9 @@ public class RequestAddStudentToCourseController {
     	    	isHandeled = null;
     	    	ERequestType = 1;
     	    	
+    	    	AddStudentRequest addstureq= new AddStudentRequest(sid, cid, oid, ERequestType);
+    			MATClientController.getInstance().sendRequestToServer(addstureq);
+    	    	
     	    	
     	    	} catch(NumberFormatException e){
     	    	Prompt.alert(3,"please enter numerical value");
@@ -67,5 +82,15 @@ public class RequestAddStudentToCourseController {
 	    stage.close();
 
     }
+
+	public void handle(Message msg, Object obj) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
