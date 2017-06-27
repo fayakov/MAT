@@ -18,7 +18,7 @@ public class DALTestMain {
 		//checkGetUserType(dl);
 		//checkIsExistClass(dl);
 		//checkAddClass(dl);
-		checkAddStudentToClass(dl);
+		//checkAddStudentToClass(dl);
 		//checkGetStudentId(dl);
 		//chekcIsStudentInCourse(dl);
 		//checkAddStudentToCourse(dl);
@@ -30,7 +30,7 @@ public class DALTestMain {
 		//checkCreateTeachingUnit(dl);
 		//checkCreateAddTeachingUnitToCourse(dl);
 		//checkAddTeacherToCourseWithClass(dl);
-		//checkCreateTeacher(dl);
+		checkCreateTeacher(dl);
 		//checkAddTeacherToCourseWithClass(dl);
 		//checkAddPrevCourseToCourse(dl);
 		//checkFinishCourse(dl);
