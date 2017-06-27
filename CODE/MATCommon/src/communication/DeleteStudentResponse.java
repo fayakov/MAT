@@ -7,6 +7,8 @@ public class DeleteStudentResponse extends Message {
 	boolean requestSaved;
 	String requestId;	
 	private String errText;
+	
+	
 	public DeleteStudentResponse(boolean requestSaved, String requestId,
 			String errText) {
 		super();
@@ -14,6 +16,8 @@ public class DeleteStudentResponse extends Message {
 		this.requestId = requestId;
 		this.errText = errText;
 	}
+	
+	
 	public boolean isRequestSaved() {
 		return requestSaved;
 	}

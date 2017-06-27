@@ -3,30 +3,79 @@ package communication;
 public class DeleteStudentRequest extends Message {
 	private static final long serialVersionUID = 1L;
 	
-	private String userId;
-	private String password;
+	private int studentID;
+	private int classNumber;
+	private int courseId;
+	private int ERequestType;
+	private boolean isConfirmed;
+	private boolean isHandeled;
 	
-	public DeleteStudentRequest(String userId, String password) {
-		this.userId = userId;
-		this.password = password;
-	}
 	
-	public String getUserId() {
-		return userId;
+	
+	
+	
+	public DeleteStudentRequest(int studentID, int classNumber, int courseId, int eRequestType, boolean isConfirmed,
+			boolean isHandeled) {
+		
+		this.studentID = studentID;
+		this.classNumber = classNumber;
+		this.courseId = courseId;
+		ERequestType = eRequestType;
+		this.isConfirmed = isConfirmed;
+		this.isHandeled = isHandeled;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+
+
+	public boolean isConfirmed() {
+		return isConfirmed;
 	}
 
-	public String getPassword() {
-		return password;
+
+	public void setConfirmed(boolean isConfirmed) {
+		this.isConfirmed = isConfirmed;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+
+	public boolean isHandeled() {
+		return isHandeled;
 	}
+
+
+	public void setHandeled(boolean isHandeled) {
+		this.isHandeled = isHandeled;
+	}
+
+	public int getStudentID() {
+		return studentID;
+	}
+	public void setStudentID(int studentID) {
+		this.studentID = studentID;
+	}
+	public int getClassNumber() {
+		return classNumber;
+	}
+	public void setClassNumber(int classNumber) {
+		this.classNumber = classNumber;
+	}
+	public int getCourseId() {
+		return courseId;
+	}
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
+	}
+
+	public int getERequestType() {
+		return ERequestType;
+	}
+
+
+	public void setERequestType(int eRequestType) {
+		ERequestType = eRequestType;
+	}
+
 	
+
 	
 	
 }

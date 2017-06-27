@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="593.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OpenAndSubmitAssignmentByStudentController">
+   <children>
+      <Label fx:id="labelDownload" layoutX="61.0" layoutY="158.0" text="Download Assignment File:" />
+      <Label fx:id="labelUpload" layoutX="67.0" layoutY="283.0" text="Upload Submission File:" />
+      <Label fx:id="labelAssNum" layoutX="67.0" layoutY="41.0" text="Assignment Number:">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <TextField fx:id="textFieldAssNum" layoutX="396.0" layoutY="43.0" />
+      <Button layoutX="396.0" layoutY="152.0" mnemonicParsing="false" text="DOWNLOAD" />
+      <Button layoutX="396.0" layoutY="277.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="127.0" text="UPLOAD" />
+      <Button fx:id="buttonSendSub" layoutX="284.0" layoutY="433.0" mnemonicParsing="false" onAction="#sendSubmission" text="SEND" />
+   </children>
+</AnchorPane>

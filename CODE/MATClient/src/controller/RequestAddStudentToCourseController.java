@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import communication.AddStudentRequest;
 import communication.AddStudentResponse;
 import communication.Dispatcher;
+import communication.LoginResponseMsg;
 import communication.MATClientController;
 import communication.Message;
 import javafx.event.ActionEvent;
@@ -19,11 +20,11 @@ import entities.ERequestType;
 
 public class RequestAddStudentToCourseController implements Initializable, Handler {
 	
-	int sid, cid, oid;
+	int sid, cid, oid, ERequestType;
 	
-	String isConfirmed, isHandeled;
+	boolean isConfirmed, isHandeled;
 	
-	int ERequestType;
+	
 	
 	public RequestAddStudentToCourseController(){
 		Dispatcher.addHandler(AddStudentResponse.class.getCanonicalName(), this);
@@ -58,11 +59,11 @@ public class RequestAddStudentToCourseController implements Initializable, Handl
     			sid = Integer.parseInt(studentIdTextField.getText());
     			cid = Integer.parseInt(classTextField.getText());
     	    	oid = Integer.parseInt(courseTextField.getText());
-    	    	isConfirmed = null;
-    	    	isHandeled = null;
+    	    	isConfirmed = false;
+    	    	isHandeled = false;
     	    	ERequestType = 1;
     	    	
-    	    	AddStudentRequest addstureq= new AddStudentRequest(sid, cid, oid, ERequestType);
+    	    	AddStudentRequest addstureq= new AddStudentRequest(sid, cid, oid, ERequestType, isConfirmed, isHandeled);
     			MATClientController.getInstance().sendRequestToServer(addstureq);
     	    	
     	    	
@@ -83,7 +84,14 @@ public class RequestAddStudentToCourseController implements Initializable, Handl
 
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
-		
+		if (msg instanceof AddStudentResponse) {
+			AddStudentResponse res = (AddStudentResponse)msg;
+			if (res.isRequestSaved()) {
+				System.out.println("Server response: Success");
+			} else {
+				System.out.println("Server response:" + res.getErrText());
+			}
+		}
 	}
 
 	public void initialize(URL location, ResourceBundle resources) {

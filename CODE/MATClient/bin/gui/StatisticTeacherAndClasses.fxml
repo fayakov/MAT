@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StatisticTeacherAndClassesController">
+   <children>
+      <Text layoutX="107.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Statistic Teacher And Classes">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
+      <Text layoutX="170.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TeacherId">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="TeacherID" layoutX="266.0" layoutY="139.0" />
+      <Button layoutX="424.0" layoutY="338.0" mnemonicParsing="false" onAction="#StatisticTeacherAndClasses" text="send" />
+      <Button fx:id="btnClose" layoutX="150.0" layoutY="338.0" mnemonicParsing="false" onAction="#closeStatisticTeacherAndClasses" text="close" />
+   </children>
+</AnchorPane>

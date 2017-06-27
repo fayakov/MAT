@@ -7,17 +7,44 @@ public class AddStudentRequest extends Message {
 	private int classNumber;
 	private int courseId;
 	private int ERequestType;
+	private boolean isConfirmed;
+	private boolean isHandeled;
 	
 	
 	
-	public AddStudentRequest(int studentID, int classNumber, int courseId, int eRequestType) {
+	
+	
+	public AddStudentRequest(int studentID, int classNumber, int courseId, int eRequestType, boolean isConfirmed,
+			boolean isHandeled) {
 		
 		this.studentID = studentID;
 		this.classNumber = classNumber;
 		this.courseId = courseId;
 		ERequestType = eRequestType;
+		this.isConfirmed = isConfirmed;
+		this.isHandeled = isHandeled;
 	}
 
+
+
+	public boolean isConfirmed() {
+		return isConfirmed;
+	}
+
+
+	public void setConfirmed(boolean isConfirmed) {
+		this.isConfirmed = isConfirmed;
+	}
+
+
+	public boolean isHandeled() {
+		return isHandeled;
+	}
+
+
+	public void setHandeled(boolean isHandeled) {
+		this.isHandeled = isHandeled;
+	}
 
 	public int getStudentID() {
 		return studentID;
@@ -37,7 +64,6 @@ public class AddStudentRequest extends Message {
 	public void setCourseId(int courseId) {
 		this.courseId = courseId;
 	}
-
 
 	public int getERequestType() {
 		return ERequestType;

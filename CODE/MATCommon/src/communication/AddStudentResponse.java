@@ -4,9 +4,11 @@ public class AddStudentResponse extends Message {
 
 	private static final long serialVersionUID = 1L;
 	
-	boolean requestSaved;
-	String requestId;	
+	private boolean requestSaved;
+	private String requestId;	
 	private String errText;
+	
+	
 	public AddStudentResponse(boolean requestSaved, String requestId,
 			String errText) {
 		super();
@@ -14,6 +16,8 @@ public class AddStudentResponse extends Message {
 		this.requestId = requestId;
 		this.errText = errText;
 	}
+	
+	
 	public boolean isRequestSaved() {
 		return requestSaved;
 	}

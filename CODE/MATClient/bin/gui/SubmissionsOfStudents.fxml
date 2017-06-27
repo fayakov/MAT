@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="499.0" prefWidth="503.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SubmissionStudentController">
+   <children>
+      <Label fx:id="labelListOfStuSub" layoutX="90.0" layoutY="38.0" text="List Of Student Submissions:">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboChooseSub" layoutX="70.0" layoutY="132.0" prefHeight="39.0" prefWidth="223.0" promptText="choose submission" />
+      <Button fx:id="buttonNext" layoutX="218.0" layoutY="336.0" mnemonicParsing="false" onAction="#nextStudentSubmission" text="NEXT" />
+   </children>
+</AnchorPane>
