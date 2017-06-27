@@ -3,15 +3,28 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import communication.Dispatcher;
+import communication.GetStudentDataResponse;
+import communication.LoginRequestMsg;
+import communication.LoginResponseMsg;
+import communication.MATClientController;
+import communication.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import utils.Handler;
 
-public class StudentDataController 
+public class StudentDataController  implements Initializable, Handler
 {
-
+	public StudentDataController()
+	{
+		Dispatcher.addHandler(GetStudentDataResponse.class.getCanonicalName(), this);
+	}
+	
+	
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
@@ -58,7 +71,8 @@ public class StudentDataController
     @FXML
     void StudentInfo(ActionEvent event) 
     {
-
+    	//GetStudentDataRequest GetStudentDataReq = new GetStudentDataRequest(userIdStr);//מאיפה ת.ז?
+		//MATClientController.getInstance().sendRequestToServer(GetStudentDataRequest);
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -72,4 +86,25 @@ public class StudentDataController
     	
     	
     }
+
+	public void handle(Message msg, Object obj) 
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void initialize(URL location, ResourceBundle resources) 
+	{
+		// TODO Auto-generated method stub
+		if (msg instanceof LoginResponseMsg) {
+			LoginResponseMsg res = (LoginResponseMsg)msg;
+			if (res.isValidUser()) {
+				System.out.println("Server response: Success");
+			} else {
+				System.out.println("Server response:" + res.getErrText());
+			}
+			
+		}
+		
+	}
 }
