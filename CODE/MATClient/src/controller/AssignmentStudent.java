@@ -41,7 +41,7 @@ public class AssignmentStudent
     @FXML
     void AssignmentNext(ActionEvent event) throws IOException 
     {
-    	Pane root = FXMLLoader.load(getClass().getResource("/gui/OpenAndSubmitAssignmentByStudent.fxml"));
+    	Pane root = FXMLLoader.load(getClass().getResource("/gui/OpenAndSubmitAssigmentByStudent.fxml"));
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
 		primaryStage.setScene(scene);

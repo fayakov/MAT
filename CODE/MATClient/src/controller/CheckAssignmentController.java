@@ -50,7 +50,7 @@ public class CheckAssignmentController
 	    private Button buttonApload;
 
 	    
-	    @FXML
+	   @FXML
 	    void downloadSubmission(ActionEvent event) 
 	    {
 

@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -30,13 +31,18 @@ public class OpenAndSubmitAssignmentByStudentController
 
     @FXML
     private Label labelDownload;
+    
+    @FXML
+    private Button buttonSendSub;
 
     
     @FXML
-    void assignmentNuber(ActionEvent event) 
+    void sendSubmission(ActionEvent event) 
     {
-
+    	//need to check validation of format
+        	Prompt.alert(1,"Submission file was added successfully ");
     }
+
     
     @FXML
     void initialize() {

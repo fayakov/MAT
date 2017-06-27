@@ -1,6 +1,7 @@
 package controller;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -44,6 +45,10 @@ public class DefineAssignment
 	    @FXML
 	    void sendDefineAssignment(ActionEvent event) 
 	    {
+	    	
+	    	LocalDate date = datePickerDefineDate.getValue();
+	         System.err.println("Selected date: " + date);
+	    	
 	    	 if(textFieldInsertClass.getText().isEmpty() || textFieldInsertCouse.getText().isEmpty()) 
 				 	Prompt.alert(3,"one or more of the fields is empty");		    	
 		     else {  	
