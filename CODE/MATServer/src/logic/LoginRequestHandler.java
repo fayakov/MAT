@@ -2,6 +2,8 @@ package logic;
 
 import java.io.IOException;
 
+import DAL.CDALError;
+import DAL.CDal;
 import communication.LoginRequestMsg;
 import communication.LoginResponseMsg;
 import communication.Message;
@@ -18,8 +20,10 @@ public class LoginRequestHandler implements Handler {
 		System.out.println("User Password:\t" + loginMsg.getPassword());
 		
 		// TODO Check in database
+		CDALError error = new CDALError();
+		boolean connectionSecceded = CDal.connectUser(loginMsg.isToConnect(), loginMsg.getUserId(), loginMsg.getPassword(), error);		
 		
-		LoginResponseMsg res = new LoginResponseMsg(false, "Invalid username or password");
+		LoginResponseMsg res = new LoginResponseMsg(connectionSecceded, error.getString());
 		try {
 			client.sendToClient(res);
 		} catch (IOException e) {

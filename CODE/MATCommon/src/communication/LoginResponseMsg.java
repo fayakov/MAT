@@ -7,9 +7,9 @@ public class LoginResponseMsg extends Message {
 	private boolean isValidUser;
 	private String errText;
 	
-	public LoginResponseMsg(boolean isValidUser, String errText) {
+	public LoginResponseMsg(boolean connectionSecceded, String errText) {
 		super();
-		this.isValidUser = isValidUser;
+		this.isValidUser = connectionSecceded;
 		this.errText = errText;
 	}
 	

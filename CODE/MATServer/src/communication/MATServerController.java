@@ -1,7 +1,5 @@
 package communication;
 
-import java.io.IOException;
-
 import DAL.*;
 import logic.LoginRequestHandler;
 import ocsf.server.AbstractServer;
@@ -20,8 +18,8 @@ public class MATServerController extends AbstractServer
 		
 		bindHandlersToMessages();
 		
-		matDAL = new CDal();
-//		matDAL.connect(db_password);
+		//matDAL = new CDal();
+		CDal.connect(db_password);
 	}
 	
 	public static MATServerController getInstance() {
@@ -32,8 +30,9 @@ public class MATServerController extends AbstractServer
 	}
 
 	private void bindHandlersToMessages() {
-		Dispatcher.addHandler(LoginRequestMsg.class.getCanonicalName(), new LoginRequestHandler());
 		
+		Dispatcher.addHandler(LoginRequestMsg.class.getCanonicalName(), new LoginRequestHandler());
+				
 	}
 	
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) 

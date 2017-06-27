@@ -21,4 +21,10 @@ public class CDALError {
 		return this.error;
 	}
 
+	public String getString() {
+		// TODO Auto-generated method stub
+		// Yinon: Convert error code to string...
+		return "";
+	}
+
 }
