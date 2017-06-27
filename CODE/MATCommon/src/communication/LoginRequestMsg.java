@@ -3,19 +3,21 @@ package communication;
 public class LoginRequestMsg extends Message {
 	private static final long serialVersionUID = 1L;
 	
-	private String userId;
+	private int userId;
 	private String password;
+	private boolean toConnect;
 	
-	public LoginRequestMsg(String userId, String password) {
+	public LoginRequestMsg(int userId, String password, boolean toConnect) {
 		this.userId = userId;
 		this.password = password;
+		this.toConnect = toConnect;
 	}
 	
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
@@ -26,7 +28,12 @@ public class LoginRequestMsg extends Message {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-	
+
+	public boolean isToConnect() {
+		return toConnect;
+	}
+
+	public void setToConnect(boolean toConnect) {
+		this.toConnect = toConnect;
+	}	
 }

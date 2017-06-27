@@ -64,9 +64,9 @@ public class loginController implements Initializable, Handler {
     	}
     	else{
     		try{
-//    			int userId = Integer.parseInt(userIdStr);
+    			int userId = Integer.parseInt(userIdStr);
 //    			clientTest.staticController.sendReq(userId, userPassword);
-    			LoginRequestMsg loginReqMsg = new LoginRequestMsg(userIdStr, userPassword);
+    			LoginRequestMsg loginReqMsg = new LoginRequestMsg(userId, userPassword,true);
     			MATClientController.getInstance().sendRequestToServer(loginReqMsg);
     			
     		}catch (NumberFormatException nfe) {
