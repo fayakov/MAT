@@ -4,20 +4,32 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import communication.AddStudentRequest;
+import communication.AddStudentResponse;
+import communication.ChangeTeacherRequest;
+import communication.ChangeTeacherResponse;
+import communication.Dispatcher;
+import communication.MATClientController;
+import communication.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import utils.Handler;
 
-public class RequestChangeTeacherController 
+public class RequestChangeTeacherController implements Initializable, Handler
 {
 
-	int sid, cid, oid;
+	int sid, cid, oid, ERequestType;
 	
-	String isConfirmed, isHandeled;
+	boolean isConfirmed, isHandeled;
 	
-	int ERequestType;
+	
+	public RequestChangeTeacherController(){
+		Dispatcher.addHandler(ChangeTeacherResponse.class.getCanonicalName(), this);
+	}
 	
     @FXML
     private ResourceBundle resources;
@@ -47,9 +59,12 @@ public class RequestChangeTeacherController
     			sid = Integer.parseInt(studentIdTextFiled.getText());
     			cid = Integer.parseInt(classNumberTextFiled.getText());
     	    	oid = Integer.parseInt(courseIdTextFiled.getText());
-    	    	isConfirmed = null;
-    	    	isHandeled = null;
+    	    	isConfirmed = false;
+    	    	isHandeled = false;
     	    	ERequestType = 3;
+    	    	
+    	    	ChangeTeacherRequest changeTeachreq= new ChangeTeacherRequest(sid, cid, oid, ERequestType, isConfirmed, isHandeled);
+    			MATClientController.getInstance().sendRequestToServer(changeTeachreq);
     	    	
     	    	
     	    	} catch(NumberFormatException e){
@@ -68,6 +83,24 @@ public class RequestChangeTeacherController
 
 
     }
+
+	public void handle(Message msg, Object obj) {
+		// TODO Auto-generated method stub
+		if (msg instanceof ChangeTeacherResponse) {
+			ChangeTeacherResponse res = (ChangeTeacherResponse)msg;
+			if (res.isRequestSaved()) {
+				System.out.println("Server response: Success");
+			} else {
+				System.out.println("Server response:" + res.getErrText());
+			}
+		}
+		
+	}
+
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
+	}
 
  
 }
