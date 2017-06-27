@@ -46,7 +46,7 @@ public class RequestPrincipalController {
     
     void ResponseRemoveStudentFromCourse() throws Exception {
     	
-    	Pane root = FXMLLoader.load(getClass().getResource("/gui/RequestRemoveStudentFromCourse.fxml"));
+    	Pane root = FXMLLoader.load(getClass().getResource("/gui/ResponseAddStudentToCourse.fxml"));
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
 		primaryStage.setScene(scene);
