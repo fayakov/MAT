@@ -1,6 +1,7 @@
 package controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import communication.Dispatcher;
@@ -9,16 +10,24 @@ import communication.LoginRequestMsg;
 import communication.LoginResponseMsg;
 import communication.MATClientController;
 import communication.Message;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import utils.Handler;
+import entities.User;
+import entities.Student;
 
 public class StudentDataController  implements Initializable, Handler
 {
+	ObservableList<String> list ;
+	
 	public StudentDataController()
 	{
 		Dispatcher.addHandler(GetStudentDataResponse.class.getCanonicalName(), this);
@@ -46,8 +55,8 @@ public class StudentDataController  implements Initializable, Handler
     @FXML // fx:id="labelCourses"
     private Label labelCourses; // Value injected by FXMLLoader
 
-    @FXML // fx:id="textCourses"
-    private TextField textCourses; // Value injected by FXMLLoader
+    @FXML
+    private ComboBox<String> comboxListCourses;
 
     @FXML // fx:id="labelStudentID"
     private Label labelStudentID; // Value injected by FXMLLoader
@@ -78,11 +87,6 @@ public class StudentDataController  implements Initializable, Handler
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() 
     {
-    	textStudentID.setText("30529");
-    	textFName.setText("tal");
-    	textLName.setText("chen");
-    	textClasses.setText("L703");
-    	//textCourses.setText
     	
     	
     }
@@ -90,21 +94,36 @@ public class StudentDataController  implements Initializable, Handler
 	public void handle(Message msg, Object obj) 
 	{
 		// TODO Auto-generated method stub
-		
-	}
-
-	public void initialize(URL location, ResourceBundle resources) 
-	{
-		// TODO Auto-generated method stub
-		if (msg instanceof LoginResponseMsg) {
-			LoginResponseMsg res = (LoginResponseMsg)msg;
-			if (res.isValidUser()) {
-				System.out.println("Server response: Success");
+		if (msg instanceof GetStudentDataResponse) {
+			GetStudentDataResponse res = (GetStudentDataResponse)msg;
+			if (res.isRequestSecceded()) 
+			{
+				//System.out.println("Server response: Success");
+				Student student= (Student)obj;
+				String strStudentID = Integer.toString(student.getId());
+				textStudentID.setText(strStudentID);
+		    	textFName.setText(student.getFirstName());
+		    	textLName.setText(student.getLastName());
+		    	textClasses.setText(student.getClassID());
+		    	
+		    	ArrayList<String> options = new ArrayList<String>();
+		    	options= student.getCourse();
+				list = FXCollections.observableArrayList(options);
+				comboxListCourses.setItems(list);
+				
+				
+				
 			} else {
 				System.out.println("Server response:" + res.getErrText());
 			}
 			
 		}
+	}
+
+	public void initialize(URL location, ResourceBundle resources) 
+	{
+		// TODO Auto-generated method stub
+		
 		
 	}
 }

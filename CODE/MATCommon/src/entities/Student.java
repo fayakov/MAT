@@ -1,11 +1,12 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Student  extends User {
 	 public String parentID;
 	 public String classID;
-	 public String course; //just for printf
+	 public  ArrayList<String> course = new ArrayList<String>(); 
 
 	 
 	 public Student(String classID, int ID,  String FName,  String LName, String password  ) 
@@ -25,5 +26,15 @@ public class Student  extends User {
 	}
 	public void setClassID(String classID) {
 		this.classID = classID;
+	}
+
+
+	public ArrayList<String> getCourse() {
+		return course;
+	}
+
+
+	public void setCourse(ArrayList<String> course) {
+		this.course = course;
 	}
 }
