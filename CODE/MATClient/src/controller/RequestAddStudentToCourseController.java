@@ -6,8 +6,6 @@ import java.util.ResourceBundle;
 import communication.AddStudentRequest;
 import communication.AddStudentResponse;
 import communication.Dispatcher;
-import communication.LoginRequestMsg;
-import communication.LoginResponseMsg;
 import communication.MATClientController;
 import communication.Message;
 import javafx.event.ActionEvent;
