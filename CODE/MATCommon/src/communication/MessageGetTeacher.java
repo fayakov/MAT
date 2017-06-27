@@ -5,8 +5,8 @@ public class MessageGetTeacher extends Message{
 	protected StringBuilder str;
 	public MessageGetTeacher(Message msg)
 	{
-		tokens = msg.tokens;
-		str = msg.str;
+		//tokens = msg.tokens;
+		//str = msg.str;
 	}
 	public int getTeacherID()
 	{

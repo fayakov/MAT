@@ -7,8 +7,8 @@ public class MessageSetTeacherUnit extends Message
 	
 	public MessageSetTeacherUnit(Message msg)
 	{
-		tokens = msg.tokens;
-		str = msg.str;
+	//	tokens = msg.tokens;
+	//	str = msg.str;
 	}
 	
 	public int getTeacherID()

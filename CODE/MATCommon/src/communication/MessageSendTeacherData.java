@@ -14,8 +14,8 @@ public class MessageSendTeacherData {
 	
 	public MessageSendTeacherData(Message msg)
 	{
-		tokens = msg.tokens;
-		str = msg.str;
+		//tokens = msg.tokens;
+		//str = msg.str;
 	}
 	public int getTeacherID()
 	{
