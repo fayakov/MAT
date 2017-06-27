@@ -19,7 +19,8 @@ import entities.ERequestType;
 
 public class RequestAddStudentToCourseController implements Initializable, Handler {
 	
-	int sid, cid, oid, ERequestType;
+	int studentid, classid, courseid;
+	ERequestType requestType;
 	
 	boolean isConfirmed, isHandeled;
 	
@@ -55,14 +56,14 @@ public class RequestAddStudentToCourseController implements Initializable, Handl
     	
     	else { // add request to db
     		try {
-    			sid = Integer.parseInt(studentIdTextField.getText());
-    			cid = Integer.parseInt(classTextField.getText());
-    	    	oid = Integer.parseInt(courseTextField.getText());
+    			studentid = Integer.parseInt(studentIdTextField.getText());
+    			classid = Integer.parseInt(classTextField.getText());
+    	    	courseid = Integer.parseInt(courseTextField.getText());
     	    	isConfirmed = false;
     	    	isHandeled = false;
-    	    	ERequestType = 1;
+    	    	requestType = requestType.addStudent;
     	    	
-    	    	AddStudentRequest addstureq= new AddStudentRequest(sid, cid, oid, ERequestType, isConfirmed, isHandeled);
+    	    	AddStudentRequest addstureq= new AddStudentRequest(studentid, classid, courseid, requestType, isConfirmed, isHandeled);
     			MATClientController.getInstance().sendRequestToServer(addstureq);
     	    	
     	    	
