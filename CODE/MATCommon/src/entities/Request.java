@@ -6,6 +6,9 @@ public class Request implements Serializable
 {
 
 	private int requestNumber;
+	private User userid;
+	private CClass classNumber;
+	private Course courseId;
 	private boolean isConfirmed;
 	private boolean isHandeled;
 	private ERequestType requestType;
@@ -17,18 +20,53 @@ public class Request implements Serializable
 	
 	}  
 	
+
 	
-	public Request(int requestNumber, boolean isConfirmed, boolean isHandeled, ERequestType requestType) 
-	{
+	public Request(int requestNumber, User userid, CClass classNumber, Course courseId, boolean isConfirmed,
+			boolean isHandeled, ERequestType requestType) {
 		super();
 		this.requestNumber = requestNumber;
+		this.userid = userid;
+		this.classNumber = classNumber;
+		this.courseId = courseId;
 		this.isConfirmed = isConfirmed;
 		this.isHandeled = isHandeled;
 		this.requestType = requestType;
 	}
 
 
-	
+
+
+	public User getUserid() {
+		return userid;
+	}
+
+
+	public void setUserid(User userid) {
+		this.userid = userid;
+	}
+
+
+	public CClass getClassNumber() {
+		return classNumber;
+	}
+
+
+	public void setClassNumber(CClass classNumber) {
+		this.classNumber = classNumber;
+	}
+
+
+	public Course getCourseId() {
+		return courseId;
+	}
+
+
+	public void setCourseId(Course courseId) {
+		this.courseId = courseId;
+	}
+
+
 	public int getRequestNumber() {
 		return requestNumber;
 	}

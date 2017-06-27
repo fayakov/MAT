@@ -1,30 +1,29 @@
 package communication;
 
+import entities.ERequestType;
+
 public class AddStudentRequest extends Message {
 	private static final long serialVersionUID = 1L;
 	
 	private int studentID;
 	private int classNumber;
 	private int courseId;
-	private int ERequestType;
+	private ERequestType requestType;
 	private boolean isConfirmed;
 	private boolean isHandeled;
 	
-	
-	
-	
-	
-	public AddStudentRequest(int studentID, int classNumber, int courseId, int eRequestType, boolean isConfirmed,
-			boolean isHandeled) {
-		
+
+
+	public AddStudentRequest(int studentID, int classNumber, int courseId, ERequestType requestType,
+			boolean isConfirmed, boolean isHandeled) {
+		super();
 		this.studentID = studentID;
 		this.classNumber = classNumber;
 		this.courseId = courseId;
-		ERequestType = eRequestType;
+		this.requestType = requestType;
 		this.isConfirmed = isConfirmed;
 		this.isHandeled = isHandeled;
 	}
-
 
 
 	public boolean isConfirmed() {
@@ -65,14 +64,16 @@ public class AddStudentRequest extends Message {
 		this.courseId = courseId;
 	}
 
-	public int getERequestType() {
-		return ERequestType;
+
+	public ERequestType getRequestType() {
+		return requestType;
 	}
 
 
-	public void setERequestType(int eRequestType) {
-		ERequestType = eRequestType;
+	public void setRequestType(ERequestType requestType) {
+		this.requestType = requestType;
 	}
+
 
 	
 
