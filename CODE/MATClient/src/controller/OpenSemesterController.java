@@ -1,29 +1,41 @@
 package controller;
 
-import java.util.ArrayList;
+import java.util.Date;
 
-import entities.Semester;
-import javafx.collections.FXCollections;
+import communication.Dispatcher;
+import communication.MATClientController;
+import communication.Message;
+import communication.OpenSemesterRequest;
+import communication.OpenSemesterResponse;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import utils.Handler;
 
-public class OpenSemesterController {
+public class OpenSemesterController implements Handler {
 	
-	ArrayList<Semester> semester = new ArrayList<Semester>();
+	public OpenSemesterController(){
+		Dispatcher.addHandler(OpenSemesterResponse.class.getCanonicalName(), this);
+	}
 	
+		//ArrayList<Semester> semester = new ArrayList<Semester>();
 		ObservableList<String> list;
-		private int year;		
+		private int sid;
+		private String semName;
+		private Date sDate, eDate;
 		
-	 	@FXML
-	    private TextField textYear;
-	 	
-	 	@FXML
-	    private ComboBox<String> semesterCombo;
+		@FXML
+	    private TextField semesterName;
+	    
+		@FXML
+		private DatePicker endDate;
+
+		@FXML
+		private DatePicker startDate;
 	    
 	    @FXML
 	    private Button btnClose;
@@ -31,20 +43,20 @@ public class OpenSemesterController {
 	    @FXML
 	    void createSemester(ActionEvent event)	{
 	    	
-	    	if(textYear.getText().isEmpty() || semesterCombo.getSelectionModel().isEmpty())
+	    	semName = semesterName.getText().toString();
+	    	
+	    	if(semName == "") // + date check
 	    		Prompt.alert(3, "one or more of the fields is empty");    	    	
-	    	else {  // add semester to db
+	    	else { 
 	    		try {
-	    		year = Integer.parseInt(textYear.getText()); }
+	    		 }
 	    		catch(NumberFormatException e){
 	    			Prompt.alert(3,"please enter numerical value");
 			    	return;
 	    			}
-	    		Prompt.alert(1, "semester " +  semesterCombo.getValue() + " " +
-	    		year + " was added succesfully");
-	    		}
-	    	//System.out.println("semester " + semester.get(0).getSemester() +
-	    	//"\n" + semester.get(0).getSemesterYear() + "\n" + semester.get(0).getSemesterNumber());
+	    		OpenSemesterRequest openSemesterReq = new OpenSemesterRequest(semName, sDate, eDate);
+		        MATClientController.getInstance().sendRequestToServer(openSemesterReq);
+	    		}    	
 	    }	    		    		
 	    		    
 	  	    
@@ -53,14 +65,19 @@ public class OpenSemesterController {
 		    Stage stage = (Stage) btnClose.getScene().getWindow();
 		    stage.close();
 	    }
-	    
-	    @FXML
-	    void initialize() {
-	    	ArrayList<String> options = new ArrayList<String>();	    	
-	    	options.add("A");
-	    	options.add("B");	
-	    	
-	    	list = FXCollections.observableArrayList(options);
-	    	semesterCombo.setItems(list);   
-	    }    
+
+
+		public void handle(Message msg, Object obj) {
+			// TODO Auto-generated method stub
+			if (msg instanceof OpenSemesterRequest) {
+				OpenSemesterResponse res = (OpenSemesterResponse)msg;
+				if (res.actionSucceed()) {
+					Prompt.alert(1, "semester " +  semName + " was added succesfully");
+				} else {
+					Prompt.alert(3, res.getErrText());	
+				}
+				
+			}
+			
+		}    
 }
