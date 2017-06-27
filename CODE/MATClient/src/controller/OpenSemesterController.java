@@ -29,16 +29,16 @@ public class OpenSemesterController implements Handler {
 		private LocalDate sDate, eDate;
 		
 		@FXML
-	    private TextField semesterName;
-	    
-		@FXML
-		private DatePicker endDate;
-
-		@FXML
-		private DatePicker startDate;
-	    
-	    @FXML
 	    private Button btnClose;
+
+	    @FXML
+	    private DatePicker endDate;
+
+	    @FXML
+	    private TextField semesterName;
+
+	    @FXML
+	    private DatePicker startDate;
 
 	    @FXML
 	    void createSemester(ActionEvent event)	{
@@ -57,6 +57,8 @@ public class OpenSemesterController implements Handler {
 	    			}
 	    		OpenSemesterRequest openSemesterReq = new OpenSemesterRequest(semName, sDate, eDate);
 		        MATClientController.getInstance().sendRequestToServer(openSemesterReq);
+		        Prompt.alert(1, "semester " +  semName + " was added succesfully\n"
+						+ sDate + "\n" + eDate);
 	    		}    	
 	    }	    		    		
 	    		    

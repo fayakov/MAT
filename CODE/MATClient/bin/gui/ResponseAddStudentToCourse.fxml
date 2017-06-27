@@ -19,13 +19,13 @@
             <Font size="28.0" />
          </font>
       </Text>
-      <TableView layoutX="110.0" layoutY="126.0" prefHeight="218.0" prefWidth="417.0">
+      <TableView fx:id="table" layoutX="110.0" layoutY="126.0" prefHeight="218.0" prefWidth="417.0">
         <columns>
-          <TableColumn prefWidth="98.0" text="request number" />
-          <TableColumn prefWidth="73.0" text="student id" />
-            <TableColumn prefWidth="87.0" text="class number" />
-            <TableColumn prefWidth="67.0" text="course id" />
-            <TableColumn prefWidth="90.0" text="is handeled" />
+          <TableColumn fx:id="requestNumber" prefWidth="98.0" text="request number" />
+          <TableColumn fx:id="studentId" prefWidth="73.0" text="student id" />
+            <TableColumn fx:id="classNumber" prefWidth="87.0" text="class number" />
+            <TableColumn fx:id="courseId" prefWidth="67.0" text="course id" />
+            <TableColumn fx:id="isHandeled" prefWidth="90.0" text="is handeled" />
         </columns>
       </TableView>
    </children>
