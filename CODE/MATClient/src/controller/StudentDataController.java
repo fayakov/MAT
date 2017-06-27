@@ -94,22 +94,21 @@ public class StudentDataController  implements Initializable, Handler
 	public void handle(Message msg, Object obj) 
 	{
 		// TODO Auto-generated method stub
-		if (msg instanceof GetStudentDataResponse) {
+		if (msg instanceof GetStudentDataResponse) 
+		{
 			GetStudentDataResponse res = (GetStudentDataResponse)msg;
 			if (res.isRequestSecceded()) 
 			{
-				//System.out.println("Server response: Success");
-				Student student= (Student)obj;
 				
-				String strStudentID = Integer.toString(student.getId());
+				String strStudentID = Integer.toString(res.getStudentData().getId());
 				textStudentID.setText(strStudentID);
 				
-		    	textFName.setText(student.getFirstName());
-		    	textLName.setText(student.getLastName());
-		    	textClasses.setText(student.getClassID());
+		    	textFName.setText(res.getStudentData().getFirstName());
+		    	textLName.setText(res.getStudentData().getLastName());
+		    	textClasses.setText(res.getStudentData().getClassID());
 		    	
 		    	ArrayList<String> options = new ArrayList<String>();
-		    	options= student.getCourse();
+		    	options= res.getStudentData().getCourse();
 				list = FXCollections.observableArrayList(options);
 				comboxListCourses.setItems(list);
 				
