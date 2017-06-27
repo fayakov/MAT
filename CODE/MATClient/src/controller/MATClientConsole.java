@@ -26,16 +26,7 @@ public class MATClientConsole
 
 	public MATClientConsole(String host, int port) 
 	{
-	 try 
-	 {
-	   client= new MATClientController(host, port);
-	 } 
-	 catch(IOException exception) 
-	 {
-	   System.out.println("Error: Can't setup connection!"
-	             + " Terminating client.");
-	   System.exit(1);
-	 }
+	   client= MATClientController.getInstance();
 	}
 	
 	/**
@@ -44,7 +35,7 @@ public class MATClientConsole
 	*/
 	public void accept() 
 	{
-	 try
+/*	 try
 	 {
 	   BufferedReader fromConsole = 
 	     new BufferedReader(new InputStreamReader(System.in));
@@ -85,7 +76,7 @@ public class MATClientConsole
 	 {
 	   System.out.println
 	     ("Unexpected error while reading from console!");
-	 }
+	 }*/
 	}
 	
 	public void display(String message) 
