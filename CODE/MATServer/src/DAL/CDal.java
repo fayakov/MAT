@@ -1696,17 +1696,6 @@ public class CDal {
 		return false;
 	}
 	
-	//add block unblock parent
-	
-	// add request
-	//get request
-	// add assignment
-	// get assignment
-	// avaluation form
-	
-	
-	
-	
 	
 }
 
