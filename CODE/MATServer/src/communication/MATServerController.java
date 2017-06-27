@@ -24,7 +24,7 @@ public class MATServerController extends AbstractServer
 	
 	public static MATServerController getInstance() {
 		if (instance == null)
-			instance = new MATServerController("", DEFAULT_PORT);
+			instance = new MATServerController("admin", DEFAULT_PORT);
 		
 		return instance;
 	}

@@ -1696,6 +1696,220 @@ public class CDal {
 		return false;
 	}
 	
+	public static int getParentId(int userId){
+		int retVal = 0;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT parentId FROM parent WHERE parent.user_id = '" +userId + "';");
+			if(resultSet.first()) {
+
+				retVal = resultSet.getInt(1);
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	public static boolean isParentHasStudent(int parentId, int studentId)
+	{
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT student_idstudent FROM parent_has_student "
+					+ "WHERE parent_has_student.parent_parentId = " +parentId + " "
+					+ "AND parent_has_student.student_idstudent =" +studentId + ";");
+			if(resultSet.first()) {
+
+				retVal = true;
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	public static boolean addStudentToParent(int parentUserId, int studentUserId)
+	{	
+		boolean retVal = true;
+		int studentId = getStudentId(studentUserId);
+		if(studentId != 0)
+		{
+			int parentId = getParentId(parentUserId);
+			if(parentId != 0)
+			{
+				
+				if(!isParentHasStudent(parentId, studentId))
+				{
+					try{
+						Statement stmt = connection.createStatement();
+						if(stmt.executeUpdate("INSERT INTO parent_has_student  "
+											+ "(parent_has_student.parent_parentId, "
+											+ "parent_has_student.student_idstudent, "
+											+ "parent_has_student.student_user_id) "
+											+ "values ("+parentId+ "," + studentId +","+ studentUserId +");") == 0)
+						{
+							retVal = false;
+						}
+					}
+					catch (SQLException e) {
+						retVal = false;
+						e.printStackTrace();			
+					}	
+				}
+				else
+				{
+					retVal = false;
+				}
+				
+			}
+			else
+			{
+				retVal = false;
+			}
+
+		}
+				
+		return retVal;
+	
+		
+	}
+	
+	public static boolean blockParent(int parentId, int studentId ,boolean toBlock)
+	{
+		boolean retVal = true;
+		if(isParentHasStudent(parentId, studentId))
+		{		
+			boolean isBlocked  = isParentHasStudentBlocked(parentId, studentId);
+			if(toBlock)
+			{
+				if(isBlocked)
+				{
+					retVal = false;
+				}
+				else
+				{
+					try{ 
+						Statement stmt = connection.createStatement();
+						retVal = (stmt.executeUpdate("UPDATE parent_has_student SET isBlocked = 1 "
+								+ "WHERE parent_has_student.parent_parentId = " + parentId +" "
+								+ " AND parent_has_student.student_idstudent = "+studentId+";") > 0);
+					}
+					catch (SQLException e) {
+						retVal = false;
+						e.printStackTrace();			
+					}
+				}
+			}
+			else
+			{
+				if(!isBlocked)
+				{
+					retVal = false;
+				}
+				else
+				{
+					try{ 
+						Statement stmt = connection.createStatement();
+						retVal = (stmt.executeUpdate("UPDATE parent_has_student SET isBlocked = 0 "
+								+ "WHERE parent_has_student.parent_parentId = " + parentId +" "
+								+ " AND parent_has_student.student_idstudent = "+studentId+";") > 0);
+					}
+					catch (SQLException e) {
+						retVal = false;
+						e.printStackTrace();			
+					}
+				}
+			}
+
+		}
+		else
+		{
+			retVal = false;
+		}
+		return retVal;
+	}
+
+	public static ArrayList<Integer> getParentsChildrens(int parentId)
+	{
+		ArrayList<Integer> myList = new ArrayList<Integer>();
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT student_idstudent FROM parent_has_student "
+					+ "WHERE parent_has_student.parent_parentId = " +parentId +";");
+			
+			
+			while(resultSet.next())
+	 		{				
+				myList.add(resultSet.getInt(1));
+	 		} 
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return myList;
+	}
+	
+	public static boolean isParentHasStudentBlocked(int parentId, int studentId)
+	{
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT isBlocked FROM parent_has_student "
+					+ "WHERE parent_has_student.parent_parentId = " +parentId + " "
+					+ "AND parent_has_student.student_idstudent = " + studentId + ";");
+			if(resultSet.first()) {
+
+				retVal = resultSet.getBoolean(1);
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	public static boolean isParentExist(int userId)
+	{
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT parentId FROM parent WHERE parent.user_id = '" +userId + "';");
+			if(resultSet.first()) {
+
+				retVal = true;
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	public static boolean createParant(int userId)
+	{
+		boolean retVal = true;
+		if(isParentExist(userId))
+		{
+			retVal = false;
+		}
+		else
+		{
+			if(getUserType(userId)  == EUserType.EUserParent)
+			{
+				
+				try{ 
+					Statement stmt = connection.createStatement();
+					stmt.executeUpdate("INSERT INTO parent (user_id) VALUES ('" +userId+"')");
+				}
+				catch (SQLException e) {
+					e.printStackTrace();			
+				}
+			}
+			else
+			{
+				retVal = false;
+			}
+		}
+		return retVal;
+	}
 	
 }
 

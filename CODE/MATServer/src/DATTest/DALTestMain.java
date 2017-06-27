@@ -18,7 +18,7 @@ public class DALTestMain {
 		//checkGetUserType(dl);
 		//checkIsExistClass(dl);
 		//checkAddClass(dl);
-		checkAddStudentToClass(dl);
+		//checkAddStudentToClass(dl);
 		//checkGetStudentId(dl);
 		//chekcIsStudentInCourse(dl);
 		//checkAddStudentToCourse(dl);
@@ -40,6 +40,9 @@ public class DALTestMain {
 		//checkTecherClassStatistics(dl);
 		//checkCourseClassStatistics(dl);
 		//checkCreateNewSemester(dl);
+		//checkCreateParant(dl);
+		//checkAddStudentToParent(dl);
+		checkBlockParent(dl);
 	}
 	public static void checkLogin(CDal dl )
 	{
@@ -322,5 +325,18 @@ public class DALTestMain {
 		System.out.println(dl.createNewSemester(start, end) == false);
 	}
 	
+	public static void checkCreateParant(CDal dl)
+	{
+		System.out.println(dl.createParant(127) == false);
+	}
 	
+	public static void checkAddStudentToParent(CDal dl)
+	{
+		System.out.println(dl.addStudentToParent(127, 124) == true);
+	}
+	
+	public static void checkBlockParent(CDal dl)
+	{
+		System.out.println(dl.blockParent(1, 1, false) == true);
+	}
 }
