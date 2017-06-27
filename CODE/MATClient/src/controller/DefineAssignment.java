@@ -47,7 +47,7 @@ public class DefineAssignment
 	    {
 	    	
 	    	LocalDate date = datePickerDefineDate.getValue();
-	         System.err.println("Selected date: " + date);
+	         //System.err.println("Selected date: " + date);
 	    	
 	    	 if(textFieldInsertClass.getText().isEmpty() || textFieldInsertCouse.getText().isEmpty()) 
 				 	Prompt.alert(3,"one or more of the fields is empty");		    	
