@@ -3,30 +3,28 @@ package communication;
 public class DefineClassRequest extends Message {
 	private static final long serialVersionUID = 1L;
 	
-	private String userId;
-	private String password;
+	private int classId;
+	private String className;
 	
-	public DefineClassRequest(String userId, String password) {
-		this.userId = userId;
-		this.password = password;
-	}
-	
-	public String getUserId() {
-		return userId;
+	public DefineClassRequest(int classId, String className) {
+		this.classId = classId;
+		this.className = className;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public int getClassId() {
+		return classId;
 	}
 
-	public String getPassword() {
-		return password;
+	public void setClassId(int classId) {
+		this.classId = classId;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public String getClassName() {
+		return className;
 	}
-	
-	
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
 	
 }
