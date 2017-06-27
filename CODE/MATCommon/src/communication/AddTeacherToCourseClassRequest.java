@@ -3,30 +3,44 @@ package communication;
 public class AddTeacherToCourseClassRequest extends Message {
 	private static final long serialVersionUID = 1L;
 	
-	private String userId;
-	private String password;
+	private int teacherId, courseId, classId;
+
 	
-	public AddTeacherToCourseClassRequest(String userId, String password) {
-		this.userId = userId;
-		this.password = password;
-	}
-	
-	public String getUserId() {
-		return userId;
+	public AddTeacherToCourseClassRequest(int tid, int coid, int clid) {
+		teacherId = tid;
+		courseId = coid;
+		classId = clid;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+
+	public int getTeacherId() {
+		return teacherId;
 	}
 
-	public String getPassword() {
-		return password;
+
+	public void setTeacherId(int teacherId) {
+		this.teacherId = teacherId;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+
+	public int getCourseId() {
+		return courseId;
 	}
-	
+
+
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
+	}
+
+
+	public int getClassId() {
+		return classId;
+	}
+
+
+	public void setClassId(int classId) {
+		this.classId = classId;
+	}
 	
 	
 }
