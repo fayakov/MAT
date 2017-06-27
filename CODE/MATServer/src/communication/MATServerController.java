@@ -3,6 +3,7 @@ package communication;
 import java.io.IOException;
 
 import DAL.*;
+import logic.LoginRequestHandler;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 
@@ -12,71 +13,32 @@ public class MATServerController extends AbstractServer
 
 	CDal matDAL;
 	
-	public MATServerController(String db_password, int port) {
+	private static MATServerController instance = null;
+	
+	private MATServerController(String db_password, int port) {
 		super(port);
-		// TODO Auto-generated constructor stub
 		
-		// TODO Auto-generated method stub
+		bindHandlersToMessages();
+		
 		matDAL = new CDal();
-		matDAL.connect(db_password);
+//		matDAL.connect(db_password);
+	}
+	
+	public static MATServerController getInstance() {
+		if (instance == null)
+			instance = new MATServerController("", DEFAULT_PORT);
+		
+		return instance;
 	}
 
-	protected void handleMessageFromClient(Object msg, ConnectionToClient client) 
-	{
+	private void bindHandlersToMessages() {
+		Dispatcher.addHandler(LoginRequestMsg.class.getCanonicalName(), new LoginRequestHandler());
 		
-		Message rcvMessage = new Message();
-		rcvMessage.toData(msg.toString());
-		int command = rcvMessage.getType();
-		if (command == 1)
-		{
-			MessageGetTeacher getTeacher = new MessageGetTeacher(rcvMessage);
-/*			if(matDAL.getTeacher(teacher,getTeacher.getTeacherID()))
-			{
-				Message sendMessage = new Message(3);
-				MessageSendTeacherData sendTeacher = new MessageSendTeacherData(sendMessage);
-				sendTeacher.setString(teacher.toString());
-				//System.out.println(teacher.toString());*/
-				try
-				{
-					//client.sendToClient(sendTeacher.getString());
-					client.sendToClient(matDAL.getTeacher(getTeacher.getTeacherID()));
-				}
-				catch(IOException ioExp)
-				{
-					System.out.println("cant send to client");
-				}
-			//}
+	}
 	
-		}
-		else if (command == 2)
-		{
-			MessageSetTeacherUnit setTeacherUnit = new MessageSetTeacherUnit(rcvMessage);
-			if(matDAL.setTeacherUnit(setTeacherUnit.getTeacherID(), setTeacherUnit.getTeachingUnit()))
-			{
-				System.out.println("update teching unit succeeded.");
-/*				Message sendMessage = new Message(3);
-				MessageSendTeacherData sendTeacher = new MessageSendTeacherData(sendMessage);
-				sendTeacher.setString(Teacher.toString());
-				try
-				{
-					client.sendToClient(sendTeacher.getString());
-				}
-				catch(IOException ioExp)
-				{
-					System.out.println("cant send to client");
-				} */
-			}
-			else
-				System.out.println("update teching unit failed.");
-//			int teacherId = 123;
-	//		int teachingUnit = 2;
-		//	matDAL.setTeacherUnit(teacherId, teachingUnit);
-			
-		}
-		else
-		{
-			System.out.println("Error: received unknown command <" + msg + "> from " + client);
-		}
+	protected void handleMessageFromClient(Object msg, ConnectionToClient client) 
+	{		
+		Dispatcher.handleMessage((Message)msg, client);
 	}
 	
 	protected void serverStarted()

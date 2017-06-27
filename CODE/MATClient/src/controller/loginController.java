@@ -1,11 +1,17 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import communication.Dispatcher;
+import communication.LoginRequestMsg;
+import communication.LoginResponseMsg;
+import communication.MATClientController;
+import communication.Message;
 import javafx.fxml.Initializable;
 import test.clientTest;
-
+import utils.Handler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,9 +31,10 @@ import javafx.stage.Stage;
 import entities.EUserType;
 
 
-public class loginController implements Initializable {
+public class loginController implements Initializable, Handler {
 
 	public loginController(){
+		Dispatcher.addHandler(LoginResponseMsg.class.getCanonicalName(), this);
 	}
 	
 	public void setClient(clientTest clientTst){
@@ -57,8 +64,11 @@ public class loginController implements Initializable {
     	}
     	else{
     		try{
-    			int userId = Integer.parseInt(userIdStr);
-    			clientTest.staticController.sendReq(userId, userPassword);
+//    			int userId = Integer.parseInt(userIdStr);
+//    			clientTest.staticController.sendReq(userId, userPassword);
+    			LoginRequestMsg loginReqMsg = new LoginRequestMsg(userIdStr, userPassword);
+    			MATClientController.getInstance().sendRequestToServer(loginReqMsg);
+    			
     		}catch (NumberFormatException nfe) {
 	    		errorText.setText("id must be number");
 	    	}
@@ -90,5 +100,19 @@ public class loginController implements Initializable {
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+	}
+
+	// handle response from server
+	public void handle(Message msg, Object obj) {
+		// TODO Auto-generated method stub
+		if (msg instanceof LoginResponseMsg) {
+			LoginResponseMsg res = (LoginResponseMsg)msg;
+			if (res.isValidUser()) {
+				System.out.println("Server response: Success");
+			} else {
+				System.out.println("Server response:" + res.getErrText());
+			}
+			
+		}
 	}
 }

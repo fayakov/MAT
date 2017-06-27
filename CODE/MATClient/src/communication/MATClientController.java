@@ -5,18 +5,45 @@ import ocsf.client.*;
 import java.io.*;
 
 import entities.Teacher;
+//import logic.LoginRequestHandler;
 
 public class MATClientController extends AbstractClient
 {
-	public MATClientController(String host, int port) throws IOException 
+	final private static String	DEFAULT_HOST = "127.0.0.1";
+	final private static int	DEFAULT_PORT = 5555;
+
+	private static MATClientController instance = null;
+	
+	private MATClientController(String host, int port) throws IOException 
 	{
 		super(host, port); //Call the superclass constructor
 
 		openConnection();
 	}
+	
+	public static MATClientController getInstance() {
+		if (instance == null)
+			try {
+				instance = new MATClientController(DEFAULT_HOST, DEFAULT_PORT);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		return instance;
+	}
+	
 
+	private void bindHandlersToMessages() {
+		//Dispatcher.addHandler(LoginMsgRes.class.getCanonicalName(), new LoginResHandler());
+	
+	}
+	
 	protected void handleMessageFromServer(Object msg) 
 	{
+		Dispatcher.handleMessage((Message)msg, null);
+		
+		/*
 		if (msg instanceof Teacher)
 		{
 			Teacher teacher = (Teacher)msg;
@@ -42,10 +69,10 @@ public class MATClientController extends AbstractClient
 			{
 				System.out.println("Error: received unknown command <" + msg + "> from server");
 			}
-		}		
+		}*/		
 	}
 
-	public void handleMessageFromClientUI(Object message) 
+	public void sendRequestToServer(Object message) 
 	{
 		// TODO Auto-generated method stub
 		try
@@ -56,5 +83,5 @@ public class MATClientController extends AbstractClient
 	    {
 	    	System.out.println("Could not send message to server.  Terminating client.");	      
 	    }
-	}		
+	}
 }

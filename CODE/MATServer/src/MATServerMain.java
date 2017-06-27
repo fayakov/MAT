@@ -18,12 +18,10 @@ public class MATServerMain {
 	    {
 	      port = 5555; //DEFAULT_PORT; //Set port to 5555
 	    }
-			   
-	    MATServerController serverController = new MATServerController(pass, port);
-	    
+			   	    	   
 	    try 
 	    {
-	      serverController.listen(); //Start listening for connections
+	    	MATServerController.getInstance().listen(); //Start listening for connections
 	    } 
 	    catch (Exception ex) 
 	    {
