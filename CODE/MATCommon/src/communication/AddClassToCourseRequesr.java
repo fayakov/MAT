@@ -3,29 +3,32 @@ package communication;
 public class AddClassToCourseRequesr extends Message {
 	private static final long serialVersionUID = 1L;
 	
-	private String userId;
-	private String password;
+	private int classId;
+	private int courseId;
 	
-	public AddClassToCourseRequesr(String userId, String password) {
-		this.userId = userId;
-		this.password = password;
+	public AddClassToCourseRequesr(int classId, int courseId) {
+		this.classId = classId;
+		this.courseId = courseId;
+	}
+
+	public int getClassId() {
+		return classId;
+	}
+
+	public void setClassId(int classId) {
+		this.classId = classId;
+	}
+
+	public int getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
 	}
 	
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	
+	
 	
 	
 	
