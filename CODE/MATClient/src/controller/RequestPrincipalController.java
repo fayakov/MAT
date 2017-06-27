@@ -56,7 +56,7 @@ public class RequestPrincipalController {
     
     void ResponseAddStudentToCourse() throws Exception {
     	
-    	Pane root = FXMLLoader.load(getClass().getResource("/gui/RequestAddStudentToCourse.fxml"));
+    	Pane root = FXMLLoader.load(getClass().getResource("/gui/ResponseAddStudentToCourse.fxml"));
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
 		primaryStage.setScene(scene);
