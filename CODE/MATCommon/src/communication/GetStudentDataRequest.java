@@ -4,11 +4,11 @@ public class GetStudentDataRequest extends Message {
 	private static final long serialVersionUID = 1L;
 	
 	private String userId;
-	private String password;
+	//private String password;
 	
-	public GetStudentDataRequest(String userId, String password) {
+	public GetStudentDataRequest(String userId) {
 		this.userId = userId;
-		this.password = password;
+		//this.password = password;
 	}
 	
 	public String getUserId() {
@@ -19,13 +19,13 @@ public class GetStudentDataRequest extends Message {
 		this.userId = userId;
 	}
 
-	public String getPassword() {
+	/*public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
+	} */
 	
 	
 	

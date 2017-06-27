@@ -100,8 +100,10 @@ public class StudentDataController  implements Initializable, Handler
 			{
 				//System.out.println("Server response: Success");
 				Student student= (Student)obj;
+				
 				String strStudentID = Integer.toString(student.getId());
 				textStudentID.setText(strStudentID);
+				
 		    	textFName.setText(student.getFirstName());
 		    	textLName.setText(student.getLastName());
 		    	textClasses.setText(student.getClassID());
@@ -110,7 +112,6 @@ public class StudentDataController  implements Initializable, Handler
 		    	options= student.getCourse();
 				list = FXCollections.observableArrayList(options);
 				comboxListCourses.setItems(list);
-				
 				
 				
 			} else {
