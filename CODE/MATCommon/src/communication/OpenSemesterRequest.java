@@ -1,19 +1,20 @@
 package communication;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class OpenSemesterRequest extends Message {
 	private static final long serialVersionUID = 1L;
 	
 	private String semName;
-	Date sDate, eDate;
+	LocalDate sDate, eDate;
 
 	
-	public OpenSemesterRequest(String semName, Date sDate, Date eDate) {
+	public OpenSemesterRequest(String semName, LocalDate sDate, LocalDate eDate) {
 		this.semName = semName;
 		this.sDate = sDate;
 		this.eDate = eDate;
 	}
+	
 
 
 	public String getSemName() {
@@ -26,27 +27,23 @@ public class OpenSemesterRequest extends Message {
 	}
 
 
-	public Date getsDate() {
+	public LocalDate getsDate() {
 		return sDate;
 	}
 
 
-	public void setsDate(Date sDate) {
+	public void setsDate(LocalDate sDate) {
 		this.sDate = sDate;
 	}
 
 
-	public Date geteDate() {
+	public LocalDate geteDate() {
 		return eDate;
 	}
 
 
-	public void seteDate(Date eDate) {
+	public void seteDate(LocalDate eDate) {
 		this.eDate = eDate;
 	}
-
-	
-	
-	
 	
 }

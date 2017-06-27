@@ -8,6 +8,7 @@ private static final long serialVersionUID = 1L;
 	private String requestId;	
 	private String errText;
 	private boolean isSucceeded;
+	private int SemesterID;
 	
 	public OpenSemesterResponse(boolean requestSaved, String requestId,
 			String errText) {
@@ -37,6 +38,9 @@ private static final long serialVersionUID = 1L;
 	}
 	public boolean actionSucceed() {
 		return isSucceeded;
+	}
+	public int semesterID() {
+		return SemesterID;
 	}
 
 }

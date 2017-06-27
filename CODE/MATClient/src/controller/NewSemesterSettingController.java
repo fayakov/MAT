@@ -34,8 +34,6 @@ public class NewSemesterSettingController {
     private ComboBox<String> secretaryCombox;
     
     
-
-    
     void AddStudentToClass() throws Exception {
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/AddStudentToClass.fxml"));
