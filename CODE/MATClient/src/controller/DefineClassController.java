@@ -7,6 +7,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class DefineClassController {
+	
+	int clid;
+	
+	@FXML
+    private TextField classId;
 
     @FXML
     private TextField className;
@@ -19,10 +24,16 @@ public class DefineClassController {
     	
     	String cName = className.getText().toString();
     	
-    	if(className.getText().isEmpty()) 
+    	if(className.getText().isEmpty() || classId.getText().isEmpty()) 
     		Prompt.alert(3,  "one or more of the fields is empty");    
     	
-    	else {  // define class in db
+    	else {  
+    		try {
+			    clid = Integer.parseInt(classId.getText());   	
+		    	} catch(NumberFormatException e){
+		    	Prompt.alert(3,"please enter numerical value");
+		    	return;
+		    	}  	
     		Prompt.alert(1, "class " + cName + " was added succesfully");
     		
     	}

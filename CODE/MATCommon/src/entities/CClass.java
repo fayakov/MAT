@@ -5,6 +5,9 @@ import java.util.ArrayList;
 public class CClass {
 	private int classNumber;
 	private String className;
+	private int teachingUnit;
+	private int teachingHours;
+	private ArrayList<Course> preCourses;
 	private ArrayList<Student> studentList;
     
     public CClass(int number, String name) {
@@ -18,7 +21,7 @@ public class CClass {
 	public void setClassNumber(int classNumber) {
 		this.classNumber = classNumber;
 	}
-	public String getClassNane() {
+	public String getClassName() {
 		return className;
 	}
 	public void setClassName(String className) {
@@ -35,5 +38,29 @@ public class CClass {
 	}
 	public void setStudentList(ArrayList<Student> studentList) {
 		this.studentList = studentList;
+	}
+
+	public int getTeachingUnit() {
+		return teachingUnit;
+	}
+
+	public void setTeachingUnit(int teachingUnit) {
+		this.teachingUnit = teachingUnit;
+	}
+
+	public int getTeachingHours() {
+		return teachingHours;
+	}
+
+	public void setTeachingHours(int teachingHours) {
+		this.teachingHours = teachingHours;
+	}
+
+	public ArrayList<Course> getPreCourses() {
+		return preCourses;
+	}
+
+	public void setPreCourses(ArrayList<Course> preCourses) {
+		this.preCourses = preCourses;
 	}
 }
