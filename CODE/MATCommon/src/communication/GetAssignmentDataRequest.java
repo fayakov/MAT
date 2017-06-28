@@ -1,31 +1,34 @@
 package communication;
 
-public class GetAssignmentDataRequest extends Message {
-	private static final long serialVersionUID = 1L;
+public class GetAssignmentDataRequest extends Message 
+{
 	
-	private String userId;
-	private String password;
+private static final long serialVersionUID = 1L;
 	
-	public GetAssignmentDataRequest(String userId, String password) {
-		this.userId = userId;
-		this.password = password;
-	}
+	private int assignmentNumber;
 	
-	public String getUserId() {
-		return userId;
+	public GetAssignmentDataRequest(int assignmentNumber) {
+		super();
+		this.assignmentNumber = assignmentNumber;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public int getAssignmentNumber() {
+		return assignmentNumber;
 	}
 
-	public String getPassword() {
-		return password;
+	public void setAssignmentNumber(int assignmentNumber) {
+		this.assignmentNumber = assignmentNumber;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
+
+	
+	
+	
+	
+
 	
 	
 	

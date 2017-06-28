@@ -22,7 +22,7 @@
       <Label fx:id="labelFNName" layoutX="32.0" layoutY="141.0" text="First Name:" />
       <Label fx:id="labelLName" layoutX="33.0" layoutY="186.0" text="Last Name:" />
       <Label fx:id="labelCllassID" layoutX="33.0" layoutY="225.0" prefHeight="27.0" prefWidth="77.0" text="Class ID:" />
-      <Label fx:id="labelCourses" layoutX="33.0" layoutY="264.0" text="Courses In Current Semester:" />
+      <Label fx:id="labelCourses" layoutX="32.0" layoutY="278.0" text="Courses In Current Semester:" />
       <TextField fx:id="textStudentID" layoutX="287.0" layoutY="85.0" />
       <TextField fx:id="textFName" layoutX="287.0" layoutY="130.0" />
       <TextField fx:id="textLName" layoutX="287.0" layoutY="174.0" />

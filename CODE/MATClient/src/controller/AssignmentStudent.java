@@ -33,7 +33,9 @@ import entities.Student;
 public class AssignmentStudent implements Initializable, Handler
 {
 	ObservableList<String> list ;
-	int choosenAss;
+	public static int choosenAss=88;
+	
+	
 	
 	public AssignmentStudent()
 	{
@@ -115,6 +117,16 @@ public class AssignmentStudent implements Initializable, Handler
 		
 		//GetAssignmentsOfStudentRequest GetAssignmentsOfStudentReq = new GetAssignmentsOfStudentRequest(userIdStr);//need id
     	//MATClientController.getInstance().sendRequestToServer(GetAssignmentsOfStudentReq);
+	}
+
+
+	public static int getChoosenAss() {
+		return choosenAss;
+	}
+
+
+	public void setChoosenAss(int choosenAss) {
+		this.choosenAss = choosenAss;
 	}
 
 }

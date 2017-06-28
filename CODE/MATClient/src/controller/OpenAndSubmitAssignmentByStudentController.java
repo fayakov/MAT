@@ -8,38 +8,85 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import communication.Dispatcher;
+import communication.GetAssignmentDataRequest;
+import communication.GetAssignmentDataResponse;
+import communication.GetAssignmentsOfStudentResponse;
+import communication.MATClientController;
+import communication.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import utils.Handler;
 
-public class OpenAndSubmitAssignmentByStudentController 
+public class OpenAndSubmitAssignmentByStudentController implements Initializable, Handler
 {
-	@FXML
-    private ResourceBundle resources;
+	
+	public OpenAndSubmitAssignmentByStudentController()
+	{
+		Dispatcher.addHandler(GetAssignmentDataResponse.class.getCanonicalName(), this);
+	}
+	
+	 @FXML
+	    private Label labelCourseName;
 
-    @FXML
-    private URL location;
+	    @FXML
+	    private TextField textFieldCourseName;
 
-    @FXML
-    private TextField textFieldAssNum;
+	    @FXML
+	    private Button buttonDownload;
 
-    @FXML
-    private Label labelUpload;
+	    @FXML
+	    private TextField textFieldLastDate;
 
-    @FXML
-    private Label labelAssNum;
+	    @FXML
+	    private Label labelLastDate;
 
-    @FXML
-    private Label labelDownload;
-    
-    @FXML
-    private Button buttonSendSub;
+	    @FXML
+	    private TextField textFieldTeacherName;
 
+	    @FXML
+	    private Label labelDownload;
+
+	    @FXML
+	    private Button buttonSendSub;
+
+	    @FXML
+	    private Label labelTeacherName;
+
+	    @FXML
+	    private TextField textFieldAssNum;
+
+	    @FXML
+	    private Label labelUpload;
+
+	    @FXML
+	    private Label labelAssNum;
+
+	    @FXML
+	    private Button buttonUpload;
+
+	    
+	    
+	    @FXML
+	    void pressDownload(ActionEvent event) 
+	    {
+
+	    }
+
+	    
+	    @FXML
+	    void pressUpload(ActionEvent event) 
+	    {
+
+	    }
     
     @FXML
     void sendSubmission(ActionEvent event) 
@@ -54,11 +101,29 @@ public class OpenAndSubmitAssignmentByStudentController
     
     @FXML
     void initialize() {
-        
-    
-    
-	    
+         
     }
+
+
+
+
+
+	public void handle(Message msg, Object obj) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
+	public void initialize(URL location, ResourceBundle resources) 
+	{
+		// TODO Auto-generated method stub
+		GetAssignmentDataRequest GetAssignmentsOfDataReq = new GetAssignmentDataRequest(AssignmentStudent.getChoosenAss());//need id
+    	MATClientController.getInstance().sendRequestToServer(GetAssignmentsOfDataReq);
+		
+	}
     
    
 }
