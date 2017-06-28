@@ -11,6 +11,7 @@ public class DefineClassRequest extends Message {
 		this.className = className;
 	}
 
+
 	public int getClassId() {
 		return classId;
 	}
