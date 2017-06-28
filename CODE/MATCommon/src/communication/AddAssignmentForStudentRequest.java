@@ -1,32 +1,31 @@
 package communication;
 
-public class AddAssignmentForStudentRequest extends Message {
-	private static final long serialVersionUID = 1L;
+public class AddAssignmentForStudentRequest extends Message 
+{
+private static final long serialVersionUID = 1L;
 	
-	private String userId;
-	private String password;
+	String file;
 	
-	public AddAssignmentForStudentRequest(String userId, String password) {
-		this.userId = userId;
-		this.password = password;
+	
+	public AddAssignmentForStudentRequest(String file) 
+	{
+		super();
+		this.file = file;
 	}
 	
-	public String getUserId() {
-		return userId;
+
+	public String getFile() {
+		return file;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setFile(String file) {
+		this.file = file;
 	}
 
-	public String getPassword() {
-		return password;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
 	
 	
 }

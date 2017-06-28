@@ -7,17 +7,20 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 
+import communication.AddAssignmentForResponse;
 import communication.Dispatcher;
 import communication.GetAssignmentDataRequest;
 import communication.GetAssignmentDataResponse;
 import communication.GetAssignmentsOfStudentResponse;
 import communication.MATClientController;
 import communication.Message;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,6 +38,7 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 	
 	public OpenAndSubmitAssignmentByStudentController()
 	{
+		Dispatcher.addHandler(AddAssignmentForResponse.class.getCanonicalName(), this);
 		Dispatcher.addHandler(GetAssignmentDataResponse.class.getCanonicalName(), this);
 	}
 	
@@ -89,8 +93,11 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 	    @FXML
 	    void pressUpload(ActionEvent event) 
 	    {
-	    
 			//chooseFile();
+	    	
+	    	//Request to add the file
+	    	//AddAssignmentForResponse addAssignmentForReq = new AddAssignmentForResponse(String file);
+	    	//MATClientController.getInstance().sendRequestToServer(addAssignmentForReq);
 	    }
     
 	    
@@ -107,8 +114,6 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
     
     
     
-
-    
     @FXML
     void initialize() {
          
@@ -118,7 +123,40 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 	public void handle(Message msg, Object obj) 
 	{
 		// TODO Auto-generated method stub
+		if (msg instanceof AddAssignmentForResponse) 
+		{
+			AddAssignmentForResponse res = (AddAssignmentForResponse)msg;
+			
+			if (res.isRequestSecceded()) 
+			{
+				System.out.println("Server response: Success");
+				
+			} else {
+				System.out.println("Server response:" + res.getErrText());
+			}
+		}
 		
+		
+		if (msg instanceof GetAssignmentDataResponse) 
+		{
+			GetAssignmentDataResponse res = (GetAssignmentDataResponse)msg;
+			
+			if (res.isRequestSecceded()) 
+			{
+				String strAssNum = Integer.toString(AssignmentStudent.getChoosenAss());
+				
+				textFieldAssNum.setText(strAssNum);
+				textFieldTeacherName.setText(res.getTeacherName());
+				textFieldCourseName.setText(res.getCourseName());
+				textFieldLastDate.setText(res.getLastDate());
+				//get file
+				
+				
+			} else {
+				System.out.println("Server response:" + res.getErrText());
+			}
+			
+		}
 		
 	}
 
