@@ -6,6 +6,7 @@ public class LoginResponseMsg extends Message {
 	
 	private boolean isValidUser;
 	private String errText;
+	private int entityNum;
 	
 	public LoginResponseMsg(boolean connectionSecceded, String errText) {
 		super();
@@ -27,5 +28,8 @@ public class LoginResponseMsg extends Message {
 	
 	public void setErrText(String errText) {
 		this.errText = errText;
+	}
+	public int instance() {
+		return entityNum;
 	}
 }

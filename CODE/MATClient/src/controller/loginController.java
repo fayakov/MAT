@@ -13,17 +13,13 @@ import javafx.fxml.Initializable;
 import test.clientTest;
 import utils.Handler;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.text.Text;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.Pane;
@@ -109,10 +105,28 @@ public class loginController implements Initializable, Handler {
 			LoginResponseMsg res = (LoginResponseMsg)msg;
 			if (res.isValidUser()) {
 				System.out.println("Server response: Success");
+				try {
+				switch(res.instance()) {
+				case 1: open("/gui/PrincipalMenu.fxml"); break;  // principle
+				case 2: open("/gui/TeacherMenu.fxml"); break;    // teacher
+				case 3: open("/gui/NewSemesterSettingSecretary.fxml"); break;    // secretary		
+				case 4: open("/gui/StudentMenu.fxml"); break;    // student
+				case 5: open("/gui/TeacherMenu.fxml"); break;    // parent
+				}
+				
+				} catch (Exception e) {	e.printStackTrace(); }
 			} else {
 				System.out.println("Server response:" + res.getErrText());
 			}
 			
 		}
+	}
+	
+	public void open(String path) throws Exception {
+		Pane root = FXMLLoader.load(getClass().getResource(path));
+		Scene scene = new Scene(root);
+		Stage primaryStage = new Stage();
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 }
