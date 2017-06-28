@@ -8,6 +8,11 @@ private static final long serialVersionUID = 1L;
 	String requestId;	
 	private String errText;
 	
+	public AddTeacherToCourseClassResponse(boolean isSucceeded, String eror) {
+		this.isSucceeded = isSucceeded;
+		this.errText = eror;
+	}
+	
 	
 	public Boolean actionSucceed(){	
 		return isSucceeded;

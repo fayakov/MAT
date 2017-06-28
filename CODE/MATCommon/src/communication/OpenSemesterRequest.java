@@ -1,52 +1,32 @@
 package communication;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class OpenSemesterRequest extends Message {
 	private static final long serialVersionUID = 1L;
 	
-	private String semName;
-	Date sDate, eDate;
+	Date startDate, endDate;
 
 	
-	public OpenSemesterRequest(String semName, Date sDate, Date eDate) {
-		this.semName = semName;
-		this.sDate = sDate;
-		this.eDate = eDate;
+	public OpenSemesterRequest(Date sDate, Date eDate) {
+		this.startDate = sDate;
+		this.endDate = eDate;
 	}
 
-
-	public String getSemName() {
-		return semName;
+	public Date getStartDate() {
+		return startDate;
 	}
 
-
-	public void setSemName(String semName) {
-		this.semName = semName;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
 
-
-	public Date getsDate() {
-		return sDate;
+	public Date getEndDate() {
+		return endDate;
 	}
 
-
-	public void setsDate(Date sDate) {
-		this.sDate = sDate;
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
-
-
-	public Date geteDate() {
-		return eDate;
-	}
-
-
-	public void seteDate(Date eDate) {
-		this.eDate = eDate;
-	}
-
-	
-	
-	
 	
 }

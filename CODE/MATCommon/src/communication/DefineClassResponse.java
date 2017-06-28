@@ -9,11 +9,9 @@ private static final long serialVersionUID = 1L;
 	private String errText;
 	private boolean isSucceeded;
 	
-	public DefineClassResponse(boolean requestSaved, String requestId,
-			String errText) {
+	public DefineClassResponse(boolean isSucceeded, String errText) {
 		super();
-		this.requestSaved = requestSaved;
-		this.requestId = requestId;
+		this.isSucceeded = isSucceeded;
 		this.errText = errText;
 	}
 	
