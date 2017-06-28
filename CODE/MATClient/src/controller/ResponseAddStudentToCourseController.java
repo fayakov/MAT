@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ResponseAddStudentToCourseController {
 
@@ -42,11 +43,25 @@ public class ResponseAddStudentToCourseController {
 
     @FXML
     private TableColumn<Table, Boolean> isHandled;
+    
+    @FXML
+    private TableColumn<Table, Boolean> isConfirmed;
 
+    
     final ObservableList<Table> data = FXCollections.observableArrayList();
     
     @FXML
     void initialize() {
+    	
+    	requestNunber.setCellValueFactory(new PropertyValueFactory<Table,Integer>("requestNunber"));
+    	studentId.setCellValueFactory(new PropertyValueFactory<Table,Integer>("studentId"));
+    	classNumber.setCellValueFactory(new PropertyValueFactory<Table,Integer>("classNumber"));
+    	courseId.setCellValueFactory(new PropertyValueFactory<Table,Integer>("courseId"));
+    	isHandled.setCellValueFactory(new PropertyValueFactory<Table,Boolean>("isHandled"));
+    	isConfirmed.setCellValueFactory(new PropertyValueFactory<Table,Boolean>("isConfirmed"));
+
+    	table.setItems(data);
+
 
     }
 }
