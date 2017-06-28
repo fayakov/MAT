@@ -22,7 +22,7 @@ public class CreateNewSemesterRequestHandler implements Handler {
 		
 		// TODO Check in database
 		CDALError error = new CDALError();
-		boolean isSucceeded = CDal.createNewSemester(addClassMsg.getStartDate(), addClassMsg.getEndDate());		
+		boolean isSucceeded = CDal.createNewSemester(addClassMsg.getName(), addClassMsg.getStartDate(), addClassMsg.getEndDate());		
 		
 		OpenSemesterResponse res = new OpenSemesterResponse(isSucceeded, error.getString());
 		try {

@@ -1,6 +1,8 @@
 package controller;
 
-import java.util.Date;
+
+
+import java.sql.Date;
 
 import communication.Dispatcher;
 import communication.MATClientController;
@@ -71,7 +73,7 @@ public class OpenSemesterController implements Handler {
 			// TODO Auto-generated method stub
 			if (msg instanceof OpenSemesterRequest) {
 				OpenSemesterResponse res = (OpenSemesterResponse)msg;
-				if (res.actionSucceed()) {
+				if (res.isSucceeded()) {
 					Prompt.alert(1, "semester " +  semName + " was added succesfully");
 				} else {
 					Prompt.alert(3, res.getErrText());	

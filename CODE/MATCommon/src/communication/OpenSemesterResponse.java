@@ -4,15 +4,23 @@ public class OpenSemesterResponse extends Message {
 	
 private static final long serialVersionUID = 1L;
 	
-	private boolean requestSaved;
-	private String requestId;	
 	private String errText;
+	private String name;
 	private boolean isSucceeded;
+		
 	
 	public OpenSemesterResponse(boolean isSucceeded, String errText) {
 		super();
 		this.isSucceeded = isSucceeded;
 		this.errText = errText;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getErrText() {

@@ -6,11 +6,20 @@ public class OpenSemesterRequest extends Message {
 	private static final long serialVersionUID = 1L;
 	
 	Date startDate, endDate;
-
+	String name;
 	
-	public OpenSemesterRequest(Date sDate, Date eDate) {
+	public OpenSemesterRequest(String name, Date sDate, Date eDate) {
+		this.name = name;
 		this.startDate = sDate;
 		this.endDate = eDate;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Date getStartDate() {
