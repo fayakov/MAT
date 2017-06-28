@@ -61,7 +61,7 @@ public class RequestAddStudentToCourseController implements Initializable, Handl
     	    	courseid = Integer.parseInt(courseTextField.getText());
     	    	isConfirmed = false;
     	    	isHandeled = false;
-    	    	requestType = requestType.addStudent;
+    	    	requestType = ERequestType.addStudent;
     	    	
     	    	AddStudentRequest addstureq= new AddStudentRequest(studentid, classid, courseid, requestType, isConfirmed, isHandeled);
     			MATClientController.getInstance().sendRequestToServer(addstureq);
