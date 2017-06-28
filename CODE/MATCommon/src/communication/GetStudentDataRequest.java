@@ -3,20 +3,20 @@ package communication;
 public class GetStudentDataRequest extends Message {
 	private static final long serialVersionUID = 1L;
 	
-	private String userId;
+	private int studentId;
 	
 	
-	public GetStudentDataRequest(String userId) {
-		this.userId = userId;
+	public GetStudentDataRequest(int studentId) {
+		this.studentId = studentId;
 		
 	}
 	
-	public String getUserId() {
-		return userId;
+	public int getUserId() {
+		return studentId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserId(int studentId) {
+		this.studentId = studentId;
 	}
 
 
