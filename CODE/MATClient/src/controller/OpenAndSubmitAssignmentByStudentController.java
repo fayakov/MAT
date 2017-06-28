@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -7,6 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileSystemView;
 
 import communication.Dispatcher;
 import communication.GetAssignmentDataRequest;
@@ -78,16 +82,22 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 	    @FXML
 	    void pressDownload(ActionEvent event) 
 	    {
-
+	    	//File file = new File("file.txt");
 	    }
 
 	    
 	    @FXML
 	    void pressUpload(ActionEvent event) 
 	    {
-
+	    
+			//chooseFile();
 	    }
     
+	    
+	    
+	    
+	    
+	    
     @FXML
     void sendSubmission(ActionEvent event) 
     {
@@ -105,22 +115,19 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
     }
 
 
-
-
-
-	public void handle(Message msg, Object obj) {
+	public void handle(Message msg, Object obj) 
+	{
 		// TODO Auto-generated method stub
 		
+		
 	}
-
-
 
 
 
 	public void initialize(URL location, ResourceBundle resources) 
 	{
 		// TODO Auto-generated method stub
-		GetAssignmentDataRequest GetAssignmentsOfDataReq = new GetAssignmentDataRequest(AssignmentStudent.getChoosenAss());//need id
+		GetAssignmentDataRequest GetAssignmentsOfDataReq = new GetAssignmentDataRequest(AssignmentStudent.getChoosenAss());
     	MATClientController.getInstance().sendRequestToServer(GetAssignmentsOfDataReq);
 		
 	}
