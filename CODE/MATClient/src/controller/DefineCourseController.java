@@ -1,5 +1,12 @@
 package controller;
 
+import java.util.ArrayList;
+
+import communication.DefineCourseRequest;
+import communication.DefineCourseResponse;
+import communication.Dispatcher;
+import communication.MATClientController;
+import communication.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,9 +14,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import utils.Handler;
 
-public class DefineCourseController {
+public class DefineCourseController implements Handler {
 	
+	public DefineCourseController() {
+		Dispatcher.addHandler(DefineCourseResponse.class.getCanonicalName(), this);
+	}
+	private int cid, tUnit;
+	ArrayList<Integer> pre;
+	private String courseName;
 
     @FXML
     private TextField cName;
@@ -17,14 +31,14 @@ public class DefineCourseController {
     @FXML
     void defineCourseSend(ActionEvent event) {
     	
-    	String courseName = cName.getText().toString();
+    	courseName = cName.getText().toString(); 	
     	
     	if(cName.getText().isEmpty()) 
     		Prompt.alert(3,  "one or more of the fields is empty");    
     	
-    	else {  // define class in db
-    		Prompt.alert(1, "course " + courseName + " was added succesfully");
-    		
+    	else {  
+    		DefineCourseRequest defineClassReq = new DefineCourseRequest(cid, courseName, tUnit, pre);
+	        MATClientController.getInstance().sendRequestToServer(defineClassReq);    		
     	}
 
     }
@@ -36,5 +50,19 @@ public void start(Stage primaryStage) throws Exception {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
+
+public void handle(Message msg, Object obj) {
+	// TODO Auto-generated method stub
+		if (msg instanceof DefineCourseRequest) {
+			DefineCourseResponse res = (DefineCourseResponse)msg;
+			if (res.actionSucceed()) {
+				Prompt.alert(1, "course " + courseName + " was added succesfully");
+			} else {
+				Prompt.alert(3, res.getErrText());	
+			}
+			
+		}
+	
+}
 
 }

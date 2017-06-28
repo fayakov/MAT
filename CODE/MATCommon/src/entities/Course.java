@@ -1,13 +1,20 @@
 package entities;
 
+import java.util.ArrayList;
 
 public class Course  {
 	
 	private int courseId;
 	private String courseName;
 	private int teachingUnit;
+	private ArrayList<Integer> preCourses;
 	
-	
+	public ArrayList<Integer> getPreCourses() {
+		return preCourses;
+	}
+	public void setPreCourses(ArrayList<Integer> preCourses) {
+		this.preCourses = preCourses;
+	}
 	public int getCourseId() {
 		return courseId;
 	}

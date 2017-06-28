@@ -1,32 +1,51 @@
 package communication;
 
+import java.util.ArrayList;
+
 public class DefineCourseRequest extends Message {
 	private static final long serialVersionUID = 1L;
 	
-	private String userId;
-	private String password;
+	private int courseId, tUnit;
+	private String courseName;
+	ArrayList<Integer> pre;
 	
-	public DefineCourseRequest(String userId, String password) {
-		this.userId = userId;
-		this.password = password;
-	}
-	
-	public String getUserId() {
-		return userId;
+	public DefineCourseRequest(int courseId, String courseName, int tUnit, ArrayList<Integer> pre) {
+		this.courseId = courseId;
+		this.courseName = courseName;
+		this.tUnit = tUnit;
+		this.pre = pre;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public int getCourseId() {
+		return courseId;
 	}
 
-	public String getPassword() {
-		return password;
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public int gettUnit() {
+		return tUnit;
 	}
-	
-	
+
+	public void settUnit(int tUnit) {
+		this.tUnit = tUnit;
+	}
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	public ArrayList<Integer> getPre() {
+		return pre;
+	}
+
+	public void setPre(ArrayList<Integer> pre) {
+		this.pre = pre;
+	}
 	
 }
