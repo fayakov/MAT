@@ -1910,6 +1910,11 @@ public class CDal {
 		}
 		return retVal;
 	}
+
+	public static boolean addStudentToCourse(int courseId, int studentID, CDALError error) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }
 
