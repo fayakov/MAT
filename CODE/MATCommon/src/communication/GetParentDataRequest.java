@@ -3,30 +3,25 @@ package communication;
 public class GetParentDataRequest extends Message {
 	private static final long serialVersionUID = 1L;
 	
-	private String userId;
-	private String password;
+	private int parentId;
+
+	public GetParentDataRequest(int parentId) {
+		super();
+		this.parentId = parentId;
+	}
+
+	public int getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
+	}
 	
-	public GetParentDataRequest(String userId, String password) {
-		this.userId = userId;
-		this.password = password;
-	}
 	
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	
 	
 	
 	
 }
+	
