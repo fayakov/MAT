@@ -33,7 +33,7 @@ import entities.Student;
 public class AssignmentStudent implements Initializable, Handler
 {
 	ObservableList<String> list ;
-	
+	int choosenAss;
 	
 	public AssignmentStudent()
 	{
@@ -60,6 +60,9 @@ public class AssignmentStudent implements Initializable, Handler
     @FXML
     void AssignmentNext(ActionEvent event) throws IOException 
     {
+    	String choosenAssStr = comboChooseAssignment.getValue().toString();
+    	choosenAss = Integer.parseInt(choosenAssStr);
+    	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/OpenAndSubmitAssigmentByStudent.fxml"));
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
@@ -71,39 +74,38 @@ public class AssignmentStudent implements Initializable, Handler
     @FXML 
     void initialize() 
     {
-    	//GetAssignmentsOfStudentRequest GetAssignmentsOfStudentReq = new GetAssignmentsOfStudentRequest(userIdStr);//need id
-    	//MATClientController.getInstance().sendRequestToServer(GetAssignmentsOfStudentReq);
-    
     }
 
 
 	public void handle(Message msg, Object obj) 
 	{
 		// TODO Auto-generated method stub
-	/*	if (msg instanceof GetStudentDataResponse) 
+		ArrayList<String> assignments = new ArrayList<String>();
+		
+		if (msg instanceof GetAssignmentsOfStudentResponse) 
 		{
-			GetStudentDataResponse res = (GetStudentDataResponse)msg;
+			GetAssignmentsOfStudentResponse res = (GetAssignmentsOfStudentResponse)msg;
+			
 			if (res.isRequestSecceded()) 
 			{
+				int len=res.getListOfStudentAssignment().size();
+				for(int i = 0 ; i < len ; i++)
+				{
+				Integer intAss =(Integer) res.getListOfStudentAssignment().get(i);
+				String strStudentID = Integer.toString(intAss);
+				assignments.add(strStudentID);
+				}
 				
-				String strStudentID = Integer.toString(res.getStudentData().getId());
-				textStudentID.setText(strStudentID);
-				
-		    	
-		    	
-		    	ArrayList<String> options = new ArrayList<String>();
-		    	options= res.getStudentData().getCourse();
-				list = FXCollections.observableArrayList(options);
+				list = FXCollections.observableArrayList(assignments);
 				comboChooseAssignment.setItems(list);
+				
 				
 				
 			} else {
 				System.out.println("Server response:" + res.getErrText());
 			}
 			
-		}  */
-		
-	
+		}
 		
 	}
 
@@ -111,6 +113,8 @@ public class AssignmentStudent implements Initializable, Handler
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
+		//GetAssignmentsOfStudentRequest GetAssignmentsOfStudentReq = new GetAssignmentsOfStudentRequest(userIdStr);//need id
+    	//MATClientController.getInstance().sendRequestToServer(GetAssignmentsOfStudentReq);
 	}
 
 }

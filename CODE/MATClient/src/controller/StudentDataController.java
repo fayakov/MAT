@@ -3,7 +3,6 @@ package controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import communication.Dispatcher;
 import communication.GetStudentDataResponse;
 import communication.LoginRequestMsg;
@@ -97,9 +96,9 @@ public class StudentDataController  implements Initializable, Handler
 		if (msg instanceof GetStudentDataResponse) 
 		{
 			GetStudentDataResponse res = (GetStudentDataResponse)msg;
+			
 			if (res.isRequestSecceded()) 
 			{
-				
 				String strStudentID = Integer.toString(res.getStudentData().getId());
 				textStudentID.setText(strStudentID);
 				

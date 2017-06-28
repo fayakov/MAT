@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import entities.Request;
 import entities.Student;
 
-public class GetStudentDataResponse extends Message {
+public class GetStudentDataResponse extends Message 
+{
 
 	private static final long serialVersionUID = 1L;
 	

@@ -4,14 +4,17 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import communication.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import utils.Handler;
 import javafx.scene.control.Button;
 
-public class DefineAssignment 
+public class DefineAssignment implements Initializable, Handler
 {
 	int clid, coid;  // class id, course id
 	
@@ -49,6 +52,8 @@ public class DefineAssignment
 	    	LocalDate date = datePickerDefineDate.getValue();
 	         //System.err.println("Selected date: " + date);
 	    	
+	    	
+	    	
 	    	 if(textFieldInsertClass.getText().isEmpty() || textFieldInsertCouse.getText().isEmpty()) 
 				 	Prompt.alert(3,"one or more of the fields is empty");		    	
 		     else {  	
@@ -71,6 +76,18 @@ public class DefineAssignment
     {
        
     }
+
+
+	public void handle(Message msg, Object obj) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
 
