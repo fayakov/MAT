@@ -14,8 +14,8 @@ launch(args);
 	@Override
 	public void start(Stage arg0) throws Exception {
 		
-		PrincipalController prinController = new PrincipalController();
-		//ParentController prinController = new ParentController();
+		//PrincipalController prinController = new PrincipalController();
+		ParentController prinController = new ParentController();
 		prinController.start(arg0);
 	}
 
