@@ -8,8 +8,8 @@ public class OpenSemesterRequest extends Message {
 	Date startDate, endDate;
 	String name;
 	
-	public OpenSemesterRequest(String name, Date sDate, Date eDate) {
-		this.name = name;
+	public OpenSemesterRequest(Date sDate, Date eDate) {
+	//	this.name = name;
 		this.startDate = sDate;
 		this.endDate = eDate;
 	}
