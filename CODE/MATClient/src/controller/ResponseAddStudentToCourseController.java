@@ -48,7 +48,8 @@ public class ResponseAddStudentToCourseController {
     private TableColumn<Table, Boolean> isConfirmed;
 
     
-    final ObservableList<Table> data = FXCollections.observableArrayList();
+    final ObservableList<Table> data = FXCollections.observableArrayList(
+    		new Table(1,123,22,333,true,true));
     
     @FXML
     void initialize() {
