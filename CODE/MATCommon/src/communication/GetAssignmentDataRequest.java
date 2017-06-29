@@ -2,8 +2,7 @@ package communication;
 
 public class GetAssignmentDataRequest extends Message 
 {
-	
-private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	
 	private int assignmentNumber;
 	
@@ -19,17 +18,4 @@ private static final long serialVersionUID = 1L;
 	public void setAssignmentNumber(int assignmentNumber) {
 		this.assignmentNumber = assignmentNumber;
 	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	
-	
-	
-	
-
-	
-	
-	
 }

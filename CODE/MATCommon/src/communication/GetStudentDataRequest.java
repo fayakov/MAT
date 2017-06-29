@@ -5,10 +5,8 @@ public class GetStudentDataRequest extends Message {
 	
 	private int studentId;
 	
-	
 	public GetStudentDataRequest(int studentId) {
 		this.studentId = studentId;
-		
 	}
 	
 	public int getUserId() {
@@ -18,9 +16,4 @@ public class GetStudentDataRequest extends Message {
 	public void setUserId(int studentId) {
 		this.studentId = studentId;
 	}
-
-
-	
-	
-	
 }

@@ -3,30 +3,18 @@ package communication;
 public class GetClassDataRequest extends Message {
 	private static final long serialVersionUID = 1L;
 	
-	private String userId;
-	private String password;
-	
-	public GetClassDataRequest(String userId, String password) {
-		this.userId = userId;
-		this.password = password;
-	}
-	
-	public String getUserId() {
-		return userId;
+	private String classNum;
+
+	public GetClassDataRequest(String classNum) {
+		super();
+		this.classNum = classNum;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public String getClassNum() {
+		return classNum;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	
-	
+	public void setClassNum(String classNum) {
+		this.classNum = classNum;
+	}	
 }

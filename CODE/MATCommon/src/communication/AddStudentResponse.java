@@ -9,8 +9,7 @@ public class AddStudentResponse extends Message {
 	private String errText;
 	
 	
-	public AddStudentResponse(boolean requestSaved, String requestId,
-			String errText) {
+	public AddStudentResponse(boolean requestSaved, String requestId, String errText) {
 		super();
 		this.requestSaved = requestSaved;
 		this.requestId = requestId;

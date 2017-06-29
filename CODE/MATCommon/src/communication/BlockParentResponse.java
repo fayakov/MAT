@@ -4,14 +4,16 @@ public class BlockParentResponse extends Message {
 
 	private static final long serialVersionUID = 1L;
 	
-	boolean requestSecceded;
+	private boolean requestSecceded;
 	private String errText;
+	private Integer blockReqNum;
 	
 	
-	public BlockParentResponse(boolean requestSecceded, String errText) {
+	public BlockParentResponse(boolean requestSecceded, String errText, Integer blockReqNum) {
 		super();
 		this.requestSecceded = requestSecceded;
 		this.errText = errText;
+		this.blockReqNum = blockReqNum;
 	}
 
 
@@ -30,7 +32,15 @@ public class BlockParentResponse extends Message {
 	public void setErrText(String errText) {
 		this.errText = errText;
 	}
-	
-	
+
+
+	public Integer getBlockReqNum() {
+		return blockReqNum;
+	}
+
+
+	public void setBlockReqNum(Integer blockReqNum) {
+		this.blockReqNum = blockReqNum;
+	}
 	
 }

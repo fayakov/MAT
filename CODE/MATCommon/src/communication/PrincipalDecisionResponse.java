@@ -4,32 +4,25 @@ public class PrincipalDecisionResponse extends Message {
 
 	private static final long serialVersionUID = 1L;
 	
-	boolean requestSaved;
-	String requestId;	
-	private String errText;
-	public PrincipalDecisionResponse(boolean requestSaved, String requestId,
-			String errText) {
+	private String pendingDecisionID;
+	private boolean principalDecision;
+	
+	public PrincipalDecisionResponse(String pendingDecisionID, boolean principalDecision) {
 		super();
-		this.requestSaved = requestSaved;
-		this.requestId = requestId;
-		this.errText = errText;
+		this.pendingDecisionID = pendingDecisionID;
+		this.principalDecision = principalDecision;
 	}
-	public boolean isRequestSaved() {
-		return requestSaved;
+	
+	public String getPendingDecisionID() {
+		return pendingDecisionID;
 	}
-	public void setRequestSaved(boolean requestSaved) {
-		this.requestSaved = requestSaved;
+	public void setPendingDecisionID(String pendingDecisionID) {
+		this.pendingDecisionID = pendingDecisionID;
 	}
-	public String getRequestId() {
-		return requestId;
+	public boolean isPrincipalDecision() {
+		return principalDecision;
 	}
-	public void setRequestId(String requestId) {
-		this.requestId = requestId;
-	}
-	public String getErrText() {
-		return errText;
-	}
-	public void setErrText(String errText) {
-		this.errText = errText;
+	public void setPrincipalDecision(boolean principalDecision) {
+		this.principalDecision = principalDecision;
 	}
 }

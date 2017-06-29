@@ -6,13 +6,10 @@ public class GetAssignmentsOfStudentRequest extends Message
 	
 	private int studentID;
 	
-	
-	public GetAssignmentsOfStudentRequest(int assignmentNumber) 
-	{
+	public GetAssignmentsOfStudentRequest(int assignmentNumber) {
 		super();
 		this.studentID = assignmentNumber;
 	}
-
 	
 	public int getAssignmentNumber() {
 		return studentID;
@@ -21,14 +18,4 @@ public class GetAssignmentsOfStudentRequest extends Message
 	public void setAssignmentNumber(int assignmentNumber) {
 		this.studentID = assignmentNumber;
 	}
-
-
-	
-	
-	
-	
-
-	
-	
-	
 }

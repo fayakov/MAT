@@ -30,10 +30,10 @@ public class GetTeacherDataResponse extends Message {
 	public void setErrText(String errText) {
 		this.errText = errText;
 	}
-	public Teacher getStudentData() {
+	public Teacher getTeacherData() {
 		return teacherData;
 	}
-	public void setStudentData(Teacher teacherData) {
+	public void setTeacherData(Teacher teacherData) {
 		this.teacherData = teacherData;
 	}
 }

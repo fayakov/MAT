@@ -1,31 +1,20 @@
 package communication;
 
-import entities.ERequestType;
-
 public class GetPendingRequestsRequest extends Message {
 	private static final long serialVersionUID = 1L;
+	
+	private String pendingRequestsType;
 
-	
-	private ERequestType requestType;
-	
-	
-	public GetPendingRequestsRequest(ERequestType requestType) 
-	{
+	public GetPendingRequestsRequest(String pendingRequestsType) {
 		super();
-		this.requestType = requestType;
+		this.pendingRequestsType = pendingRequestsType;
 	}
 
-
-	public ERequestType getRequestType() {
-		return requestType;
+	public String getPendingRequestsType() {
+		return pendingRequestsType;
 	}
 
-
-	public void setRequestType(ERequestType requestType) {
-		this.requestType = requestType;
-	}
-	
-	
-	
-	
+	public void setPendingRequestsType(String pendingRequestsType) {
+		this.pendingRequestsType = pendingRequestsType;
+	}	
 }
