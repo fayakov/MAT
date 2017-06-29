@@ -4,6 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/CDC-1.1%Foundation-1.1"/>
 	<classpathentry kind="src" path="/OCSF"/>
 	<classpathentry kind="src" path="/MATCommon"/>
-	<classpathentry kind="lib" path="C:/Users/ספיר/Documents/GitHub/MAT/CODE/mysql-connector-java-3.1.11-bin.jar"/>
+	<classpathentry kind="lib" path="mysql-connector-java-3.1.11-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
