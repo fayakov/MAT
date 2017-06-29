@@ -3,6 +3,7 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class HistogramTeacherAndClassesController {
 
@@ -12,6 +13,8 @@ public class HistogramTeacherAndClassesController {
     @FXML
     void Close(ActionEvent event) {
 
+	    Stage stage = (Stage) btnckose.getScene().getWindow();
+	    stage.close();
     }
 
 }
