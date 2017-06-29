@@ -30,6 +30,7 @@ public class DALTestMain {
 		//checkCreateTeachingUnit(dl);
 		//checkCreateAddTeachingUnitToCourse(dl);
 		//checkAddTeacherToCourseWithClass(dl);
+		checkRemoveTeacherFromCourseWithClass(dl);
 		//checkCreateTeacher(dl);
 		//checkAddTeacherToCourseWithClass(dl);
 		//checkAddPrevCourseToCourse(dl);
@@ -241,6 +242,13 @@ public class DALTestMain {
 		System.out.println(dl.addTeacherToCourseInClass(1, 1234, 123) == false);
 		System.out.println(dl.addTeacherToCourseInClass(1, 1, 123) == true);
 	}
+	
+	public static void checkRemoveTeacherFromCourseWithClass(CDal dl)
+	{
+		//addTeacherToCourseInClass(int classId, int courseId, int userID)
+		System.out.println(dl.removeTeacherFromCourseInClass(1, 1) == true);
+	}
+	
 	
 	public static void checkCreateTeachingUnit(CDal dl)
 	{
