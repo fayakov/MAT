@@ -1,5 +1,7 @@
 package communication;
 
+import java.io.IOException;
+
 import DAL.*;
 import logic.LoginRequestHandler;
 import ocsf.server.AbstractServer;
@@ -12,6 +14,8 @@ public class MATServerController extends AbstractServer
 	CDal matDAL;
 	
 	private static MATServerController instance = null;
+	private static int currentLoggedInUserId = 0;
+	private static String currentLoggedInUserPassword = "";
 	
 	private MATServerController(String db_password, int port) {
 		super(port);
@@ -52,5 +56,38 @@ public class MATServerController extends AbstractServer
 	protected void serverStopped()
 	{
 		System.out.println ("Server has stopped listening for connections.");
+	}
+
+	@Override
+	protected synchronized void clientDisconnected(ConnectionToClient client) {
+					
+		CDALError error = new CDALError();
+		boolean connectionSecceded = CDal.connectUser(false, getCurrentLoggedInUserId(), getCurrentLoggedInUserPassword(), error);		
+		
+		LoginResponseMsg res = new LoginResponseMsg(connectionSecceded, error.getString());
+		try {
+			client.sendToClient(res);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		super.clientDisconnected(client);
+	}
+
+	public static int getCurrentLoggedInUserId() {
+		return currentLoggedInUserId;
+	}
+
+	public static void setCurrentLoggedInUserId(int currentLoggedInUserId) {
+		MATServerController.currentLoggedInUserId = currentLoggedInUserId;
+	}
+
+	public static String getCurrentLoggedInUserPassword() {
+		return currentLoggedInUserPassword;
+	}
+
+	public static void setCurrentLoggedInUserPassword(String currentLoggedInUserPassword) {
+		MATServerController.currentLoggedInUserPassword = currentLoggedInUserPassword;
 	}
 }

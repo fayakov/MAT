@@ -1,24 +1,21 @@
-import controller.MATClientConsole;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
+import controller.loginController;
 
-public class MATClientMain {
+public class MATClientMain extends Application {
+			
+	public static void main( String args[] ) throws Exception
+	   { 
+        launch(args);		
+	  } // end main
+	
+	@Override
+	public void start(Stage arg0) throws Exception {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		String host = "";
-	    int port = 5555;  //The port number
-
-	    try
-	    {
-	      host = args[0];
-	    }
-	    catch(ArrayIndexOutOfBoundsException e)
-	    {
-	      host = "localhost";
-	    }
-	    
-	    MATClientConsole client = new MATClientConsole(host, 5555);
-	    client.accept();  //Wait for console data
+		loginController loginCont = new loginController();		
+		loginCont.start(arg0);
 	}
+	
 
 }

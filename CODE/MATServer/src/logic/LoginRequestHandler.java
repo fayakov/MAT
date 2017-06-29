@@ -6,6 +6,7 @@ import DAL.CDALError;
 import DAL.CDal;
 import communication.LoginRequestMsg;
 import communication.LoginResponseMsg;
+import communication.MATServerController;
 import communication.Message;
 import ocsf.server.ConnectionToClient;
 import utils.Handler;
@@ -22,8 +23,15 @@ public class LoginRequestHandler implements Handler {
 		// TODO Check in database
 		CDALError error = new CDALError();
 		boolean connectionSecceded = CDal.connectUser(loginMsg.isToConnect(), loginMsg.getUserId(), loginMsg.getPassword(), error);		
+				
+		if (connectionSecceded) {
+			MATServerController.getInstance();
+			MATServerController.setCurrentLoggedInUserId(loginMsg.isToConnect() ? loginMsg.getUserId() : 0);
+			MATServerController.setCurrentLoggedInUserPassword(loginMsg.isToConnect() ? loginMsg.getPassword() : "");
+		}
 		
 		LoginResponseMsg res = new LoginResponseMsg(connectionSecceded, error.getString());
+		
 		try {
 			client.sendToClient(res);
 		} catch (IOException e) {
