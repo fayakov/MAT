@@ -47,3 +47,11 @@ Temporary Items
 .apdisk
 bin/
 .metadata
+*.fdt
+*.fdx
+*.fnm
+*.frq
+.recommenders/
+*.class
+CODE/MATClient/bin/*
+bin/
