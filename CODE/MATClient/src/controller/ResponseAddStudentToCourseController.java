@@ -61,6 +61,7 @@ public class ResponseAddStudentToCourseController {
     	isHandled.setCellValueFactory(new PropertyValueFactory<Table,Boolean>("isHandled"));
     	isConfirmed.setCellValueFactory(new PropertyValueFactory<Table,Boolean>("isConfirmed"));
 
+    	new Table(1,123,22,333,true,true);
     	table.setItems(data);
 
 
