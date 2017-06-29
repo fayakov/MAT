@@ -69,8 +69,8 @@ public class EvaluationFormController implements Initializable, Handler
 	    	}
 	    	
 	    	
-	    	AddEvaluationFormRequest addReq = new AddEvaluationFormRequest(grade, textFieldGrade.getText());
-	    	MATClientController.getInstance().sendRequestToServer(addReq);
+	    	//AddEvaluationFormRequest addReq = new AddEvaluationFormRequest(grade, textFieldGrade.getText());
+	    	//MATClientController.getInstance().sendRequestToServer(addReq);
 	    }
 
 	    
