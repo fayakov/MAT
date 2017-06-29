@@ -21,7 +21,9 @@ public class DALTestMain {
 		//checkAddStudentToClass(dl);
 		//checkGetStudentId(dl);
 		//chekcIsStudentInCourse(dl);
-		//checkAddStudentToCourse(dl);
+			//checkAddStudentToCourse(dl);
+		//checkRemoveStudentFromCourse(dl);
+		//checkFinishStudentCourse(dl);
 		//checkCreateCourse(dl);
 		//checkGetStudentsInCourse(dl);
 		/*Teacher teacher = dl.getTeacher(id);*/
@@ -30,11 +32,11 @@ public class DALTestMain {
 		//checkCreateTeachingUnit(dl);
 		//checkCreateAddTeachingUnitToCourse(dl);
 		//checkAddTeacherToCourseWithClass(dl);
-		checkRemoveTeacherFromCourseWithClass(dl);
+		//checkRemoveTeacherFromCourseWithClass(dl);
 		//checkCreateTeacher(dl);
 		//checkAddTeacherToCourseWithClass(dl);
 		//checkAddPrevCourseToCourse(dl);
-		//checkFinishCourse(dl);
+		
 		//checkisFinishedPrevCourse(dl);
 		//checkFinishedGrade(dl);
 		//checkClassTecherStatistics(dl);
@@ -43,7 +45,12 @@ public class DALTestMain {
 		//checkCreateNewSemester(dl);
 		//checkCreateParant(dl);
 		//checkAddStudentToParent(dl);
-		checkBlockParent(dl);
+		//checkBlockParent(dl);
+		//checkChangeTeacher(dl);
+		//checkCreateStudent(dl);
+		//checkCreateReq(dl);
+		//checkGetRequests(dl);
+		checkConfirmRequest(dl);
 	}
 	public static void checkLogin(CDal dl )
 	{
@@ -192,9 +199,16 @@ public class DALTestMain {
 	public static void checkAddStudentToCourse(CDal dl)
 	{
 		//System.out.println(dl.addStudentToCourse("Algebra1", 124 ));
-		System.out.println(dl.addStudentToCourse("Algebra2", 124 ));
+		//System.out.println(dl.addStudentToCourseWithClass(dl.getCourseId("Algebra1"), 1, 124));
+		System.out.println(dl.addStudentToCourseWithClass(dl.getCourseId("Algebra2"), 1, 124));
 		//System.out.println(dl.addStudentToCourse("Algebra3", 124 ));
-	}	
+	}
+	
+	public static void checkRemoveStudentFromCourse(CDal dl)
+	{
+		System.out.println(dl.removeStudentFromCourseWithClass(dl.getCourseId("Algebra1"), 1, 124) == true);
+		//System.out.println(dl.removeStudentFromCourseWithClass(dl.getCourseId("Algebra2"), 1, 124) == true);
+	}
 	
 	public static void chekcIsStudentInCourse(CDal dl)
 	{
@@ -220,9 +234,9 @@ public class DALTestMain {
 	
 	public static void checkAddCourseToClass(CDal dl)
 	{
-		System.out.println(dl.addCourseToClass(1, 1) == false);
-		System.out.println(dl.addCourseToClass(1, 124 )==false);
-		System.out.println(dl.addCourseToClass(124, 1 )==false);
+		System.out.println(dl.addCourseToClass(1, 2) == true);
+		//System.out.println(dl.addCourseToClass(1, 124 )==false);
+		//System.out.println(dl.addCourseToClass(124, 1 )==false);
 	}	
 	
 	
@@ -237,18 +251,18 @@ public class DALTestMain {
 	public static void checkAddTeacherToCourseWithClass(CDal dl)
 	{
 		//addTeacherToCourseInClass(int classId, int courseId, int userID)
-		System.out.println(dl.addTeacherToCourseInClass(1, 1, 1) == false);
-		System.out.println(dl.addTeacherToCourseInClass(1233, 1, 123) == false);
-		System.out.println(dl.addTeacherToCourseInClass(1, 1234, 123) == false);
-		System.out.println(dl.addTeacherToCourseInClass(1, 1, 123) == true);
+		//System.out.println(dl.addTeacherToCourseInClass(1, 1, 1) == false);
+		//System.out.println(dl.addTeacherToCourseInClass(1233, 1, 123) == false);
+		//System.out.println(dl.addTeacherToCourseInClass(1, 1234, 123) == false);
+		System.out.println(dl.addTeacherToCourseInClass(1, 2, 123) == true);
 	}
 	
-	public static void checkRemoveTeacherFromCourseWithClass(CDal dl)
+	public static void checkChangeTeacher(CDal dl)
 	{
-		//addTeacherToCourseInClass(int classId, int courseId, int userID)
-		System.out.println(dl.removeTeacherFromCourseInClass(1, 1) == true);
+		//public static boolean addTeacherToCourseInClass(int classId, int courseId, int userID){
+		System.out.println(dl.changeTeacherToCourseInClass(1, 1, 128) == false);
 	}
-	
+
 	
 	public static void checkCreateTeachingUnit(CDal dl)
 	{
@@ -267,9 +281,10 @@ public class DALTestMain {
 	
 	public static void checkCreateTeacher(CDal dl)
 	{
-		System.out.println(dl.createTeacher(123, 20, 20) == false);
-		System.out.println(dl.createTeacher(124, 20, 1) == false);
-		System.out.println(dl.createTeacher(123, 20, 1) == false);
+		//System.out.println(dl.createTeacher(123, 20, 20) == false);
+		System.out.println(dl.createTeacher(128, 20, 1) == true);
+		//System.out.println(dl.createTeacher(124, 20, 1) == false);
+		//System.out.println(dl.createTeacher(123, 20, 1) == false);
 	}
 	
 	public static void checkAddPrevCourseToCourse(CDal dl)
@@ -278,16 +293,16 @@ public class DALTestMain {
 		System.out.println(dl.addPrevCourseToCourse(3, 2));
 	}
 	
-	public static void checkFinishCourse(CDal dl)
+	public static void checkFinishStudentCourse(CDal dl)
 	{
-		System.out.println(dl.finishCourse(1, 1, 100, 1));
+		System.out.println(dl.finishStudentCourse(1, 1, 100, dl.getCurrentSemester()));
 	}
 	
 	public static void checkisFinishedPrevCourse(CDal dl)
 	{
-		System.out.println(dl.isStudentFinishedPrevCourse(1,1) == true);
-		System.out.println(dl.isStudentFinishedPrevCourse(1,2) == true);
-		System.out.println(dl.isStudentFinishedPrevCourse(1,3) == false);
+		//System.out.println(dl.isStudentFinishedPrevCourse(1,1) == true);
+		//System.out.println(dl.isStudentFinishedPrevCourse(1,2) == true);
+		//System.out.println(dl.isStudentFinishedPrevCourse(1,3) == false);
 	}
 	
 	public static void checkFinishedGrade(CDal dl)
@@ -347,4 +362,31 @@ public class DALTestMain {
 	{
 		System.out.println(dl.blockParent(1, 1, false) == true);
 	}
+	
+	public static void checkCreateReq(CDal dl)
+	{
+		System.out.println(dl.createRequest(ERequestType.addStudent, 129, 1, 1) == true);
+	}
+	
+
+	public static void checkCreateStudent(CDal dl)
+	{
+		System.out.println(dl.createStudent(129) == true);
+	}
+	public static void checkGetRequests(CDal dl)
+	{
+		ArrayList<Request> reqArr = dl.getRequests(dl.getCurrentSemester());
+		for(Request req  : reqArr)
+		{
+			System.out.println("getClassNumber: "+ req.getClassNumber()+ " getCourseId: "+req.getCourseId() + " getRequestNumber: "+req.getRequestNumber()+ " getUserid: "+req.getUserid());
+		}
+	}
+	
+	public static void checkConfirmRequest(CDal dl)
+	{
+		System.out.println(dl.confirmRequest(1, true) == true);
+	}
+	
+	
+
 }
