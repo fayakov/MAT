@@ -4,6 +4,9 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import communication.AddAssignmentForResponse;
+import communication.Dispatcher;
+import communication.GetAssignmentDataResponse;
 import communication.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +19,11 @@ import javafx.scene.control.Button;
 
 public class DefineAssignment implements Initializable, Handler
 {
+	public OpenAndSubmitAssignmentByStudentController()
+	{
+		Dispatcher.addHandler(AddAssignmentForResponse.class.getCanonicalName(), this);
+	}
+	
 	int clid, coid;  // class id, course id
 	
 	 @FXML

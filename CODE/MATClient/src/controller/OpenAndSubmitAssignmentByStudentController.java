@@ -95,9 +95,6 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 	    {
 			//chooseFile();
 	    	
-	    	//Request to add the file
-	    	//AddAssignmentForResponse addAssignmentForReq = new AddAssignmentForResponse(String file);
-	    	//MATClientController.getInstance().sendRequestToServer(addAssignmentForReq);
 	    }
     
 	    
@@ -108,8 +105,11 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
     @FXML
     void sendSubmission(ActionEvent event) 
     {
-    	//need to check validation of format
-        	Prompt.alert(1,"Submission file was added successfully ");
+    	//AddAssignmentForResponse addAssignmentForReq = new AddAssignmentForResponse(String file, String teacher, String course, String date);
+    	//MATClientController.getInstance().sendRequestToServer(addAssignmentForReq);
+    	
+    	//need to check validation of format.....
+        	
     }
     
     
@@ -149,7 +149,7 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 				textFieldTeacherName.setText(res.getTeacherName());
 				textFieldCourseName.setText(res.getCourseName());
 				textFieldLastDate.setText(res.getLastDate());
-				//get file
+				//get file....
 				
 				
 			} else {
