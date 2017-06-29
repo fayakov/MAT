@@ -61,6 +61,10 @@ public class MATServerController extends AbstractServer
 	@Override
 	protected synchronized void clientDisconnected(ConnectionToClient client) {
 					
+		logoutUser(client);
+	}
+
+	private void logoutUser(ConnectionToClient client) {
 		CDALError error = new CDALError();
 		boolean connectionSecceded = CDal.connectUser(false, getCurrentLoggedInUserId(), getCurrentLoggedInUserPassword(), error);		
 		
@@ -73,6 +77,14 @@ public class MATServerController extends AbstractServer
 		}
 		
 		super.clientDisconnected(client);
+	}
+
+	@Override
+	protected synchronized void clientException(ConnectionToClient client, Throwable exception) {
+		// TODO Auto-generated method stub
+		logoutUser(client);
+
+		super.clientException(client, exception);
 	}
 
 	public static int getCurrentLoggedInUserId() {
