@@ -1,6 +1,7 @@
 package communication;
 
 import entities.ERequestType;
+import entities.Request;
 
 public class ChangeTeacherRequest extends Message {
 	private static final long serialVersionUID = 1L;
@@ -11,7 +12,7 @@ public class ChangeTeacherRequest extends Message {
 	private ERequestType requestType;
 	private boolean isConfirmed;
 	private boolean isHandeled;
-	
+	private Request request;
 	
 	public ChangeTeacherRequest(int teacherID, int classNumber, int courseId, ERequestType requestType,
 			boolean isConfirmed, boolean isHandeled) {
@@ -22,8 +23,10 @@ public class ChangeTeacherRequest extends Message {
 		this.requestType = requestType;
 		this.isConfirmed = isConfirmed;
 		this.isHandeled = isHandeled;
+		
+		this.request = new Request(teacherID, classNumber, courseId, requestType,
+				isConfirmed, isHandeled);
 	}
-
 
 	public boolean isConfirmed() {
 		return isConfirmed;
@@ -73,9 +76,11 @@ public class ChangeTeacherRequest extends Message {
 		this.requestType = requestType;
 	}
 
+	public Request getRequest() {
+		return request;
+	}
 
-	
-
-	
-	
+	public void setRequest(Request request) {
+		this.request = request;
+	}	
 }

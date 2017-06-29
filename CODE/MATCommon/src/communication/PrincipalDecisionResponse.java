@@ -5,13 +5,13 @@ public class PrincipalDecisionResponse extends Message {
 	private static final long serialVersionUID = 1L;
 	
 	boolean requestSaved;
-	String requestId;	
+	int requestId;	
 	private String errText;
-	public PrincipalDecisionResponse(boolean requestSaved, String requestId,
+	public PrincipalDecisionResponse(boolean requestSaved, int i,
 			String errText) {
 		super();
 		this.requestSaved = requestSaved;
-		this.requestId = requestId;
+		this.requestId = i;
 		this.errText = errText;
 	}
 	public boolean isRequestSaved() {
@@ -20,10 +20,10 @@ public class PrincipalDecisionResponse extends Message {
 	public void setRequestSaved(boolean requestSaved) {
 		this.requestSaved = requestSaved;
 	}
-	public String getRequestId() {
+	public int getRequestId() {
 		return requestId;
 	}
-	public void setRequestId(String requestId) {
+	public void setRequestId(int requestId) {
 		this.requestId = requestId;
 	}
 	public String getErrText() {

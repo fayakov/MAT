@@ -4,9 +4,10 @@ import java.io.IOException;
 
 import DAL.CDALError;
 import DAL.CDal;
-import communication.LoginRequestMsg;
-import communication.LoginResponseMsg;
+import communication.GetStudentDataRequest;
+import communication.GetStudentDataResponse;
 import communication.Message;
+import entities.Student;
 import ocsf.server.ConnectionToClient;
 import utils.Handler;
 
@@ -14,16 +15,15 @@ public class GetStudentDataRequestHandler implements Handler {
 
 	public void handle(Message msg, Object obj) {
 		ConnectionToClient client = (ConnectionToClient) obj;
-		LoginRequestMsg loginMsg = (LoginRequestMsg)msg;
-		
-		System.out.println("User ID:\t" + loginMsg.getUserId());
-		System.out.println("User Password:\t" + loginMsg.getPassword());
-		
+		GetStudentDataRequest getStudentData = (GetStudentDataRequest)msg;
+				
 		// TODO Check in database
 		CDALError error = new CDALError();
-		boolean connectionSecceded = CDal.connectUser(loginMsg.isToConnect(), loginMsg.getUserId(), loginMsg.getPassword(), error);		
+		Student studentData = new Student();
 		
-		LoginResponseMsg res = new LoginResponseMsg(connectionSecceded, error.getString());
+		boolean requestSecceded = CDal.getStudentData(getStudentData.getUserId(), studentData, error);		
+		
+		GetStudentDataResponse res = new GetStudentDataResponse(requestSecceded, error.getString(), studentData);
 		try {
 			client.sendToClient(res);
 		} catch (IOException e) {

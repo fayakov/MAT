@@ -1,32 +1,37 @@
 package communication;
 
+import entities.Request;
+
 public class PrincipalDecisionRequest extends Message {
+	
 	private static final long serialVersionUID = 1L;
 	
-	private String userId;
-	private String password;
-	
-	public PrincipalDecisionRequest(String userId, String password) {
-		this.userId = userId;
-		this.password = password;
-	}
-	
-	public String getUserId() {
-		return userId;
+	private Request request;
+	private boolean toApprove = false;
+		
+	public PrincipalDecisionRequest(Request request, boolean toApprove) {
+		super();
+		this.request = request;
+		this.toApprove = toApprove;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public Request getRequest() {
+		return request;
 	}
 
-	public String getPassword() {
-		return password;
+	public void setRequest(Request request) {
+		this.request = request;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public boolean isToApprove() {
+		return toApprove;
 	}
-	
-	
-	
+
+	public void setToApprove(boolean toApprove) {
+		this.toApprove = toApprove;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}	
 }

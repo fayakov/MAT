@@ -1,12 +1,14 @@
 package logic;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import DAL.CDALError;
 import DAL.CDal;
-import communication.LoginRequestMsg;
-import communication.LoginResponseMsg;
+import communication.GetPendingRequestsRequest;
+import communication.GetPendingRequestsResponse;
 import communication.Message;
+import entities.Request;
 import ocsf.server.ConnectionToClient;
 import utils.Handler;
 
@@ -14,16 +16,14 @@ public class GetPendingRequestsRequestHandler implements Handler {
 
 	public void handle(Message msg, Object obj) {
 		ConnectionToClient client = (ConnectionToClient) obj;
-		LoginRequestMsg loginMsg = (LoginRequestMsg)msg;
-		
-		System.out.println("User ID:\t" + loginMsg.getUserId());
-		System.out.println("User Password:\t" + loginMsg.getPassword());
-		
+		GetPendingRequestsRequest getPendingMsg = (GetPendingRequestsRequest)msg;
+			
 		// TODO Check in database
 		CDALError error = new CDALError();
-		boolean connectionSecceded = CDal.connectUser(loginMsg.isToConnect(), loginMsg.getUserId(), loginMsg.getPassword(), error);		
+		ArrayList<Request> requests = new ArrayList<Request>();
+		boolean requestSecceded = CDal.getPendingRequests(requests, error);		
 		
-		LoginResponseMsg res = new LoginResponseMsg(connectionSecceded, error.getString());
+		GetPendingRequestsResponse res = new GetPendingRequestsResponse(requestSecceded, error.getString(), requests);
 		try {
 			client.sendToClient(res);
 		} catch (IOException e) {

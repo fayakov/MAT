@@ -1990,6 +1990,32 @@ public class CDal {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	public static boolean addDeleteStudentFromCourseRequest(int courseId, int studentID, CDALError error) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public static boolean addChangeTeacherRequest(Request request, CDALError error) {
+		// TODO Auto-generated method stub
+		// Yinon: Add the request to db and return the request number to user
+		return false;
+	}
+
+	public static boolean setPrincipalDecision(Request request, CDALError error) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public static boolean getPendingRequests(ArrayList<Request> requests, CDALError error) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public static boolean getStudentData(int userId, Student studentData, CDALError error) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }
 
