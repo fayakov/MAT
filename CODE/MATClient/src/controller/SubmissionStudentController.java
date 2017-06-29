@@ -27,7 +27,13 @@ import utils.Handler;
 
 public class SubmissionStudentController implements Initializable, Handler
 {
+	public static String option;
 	ObservableList<String> list ;
+	
+	public static  String getOption()
+	{
+		return option;
+	}
 	
 	public SubmissionStudentController()
 	{
@@ -56,7 +62,7 @@ public class SubmissionStudentController implements Initializable, Handler
 	    @FXML
 	    void nextStudentSubmission(ActionEvent event) throws Exception 
 	    {
-	    	String option = comboChooseSub.getValue().toString();
+	    	option = comboChooseSub.getValue().toString();
 	    	//int assNum = Integer.parseInt(option); //save the option to next window
 	    	
 	    	Pane root = FXMLLoader.load(getClass().getResource("/gui/CheckAssinment.fxml"));
