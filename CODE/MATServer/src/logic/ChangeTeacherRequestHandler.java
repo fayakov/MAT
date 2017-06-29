@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import DAL.CDALError;
 import DAL.CDal;
-import communication.LoginRequestMsg;
-import communication.LoginResponseMsg;
+import communication.ChangeTeacherRequest;
+import communication.ChangeTeacherResponse;
 import communication.Message;
 import ocsf.server.ConnectionToClient;
 import utils.Handler;
@@ -14,16 +14,15 @@ public class ChangeTeacherRequestHandler implements Handler {
 
 	public void handle(Message msg, Object obj) {
 		ConnectionToClient client = (ConnectionToClient) obj;
-		LoginRequestMsg loginMsg = (LoginRequestMsg)msg;
-		
-		System.out.println("User ID:\t" + loginMsg.getUserId());
-		System.out.println("User Password:\t" + loginMsg.getPassword());
-		
-		// TODO Check in database
+		ChangeTeacherRequest changeTeacherMsg = (ChangeTeacherRequest)msg;
+					
 		CDALError error = new CDALError();
-		boolean connectionSecceded = CDal.connectUser(loginMsg.isToConnect(), loginMsg.getUserId(), loginMsg.getPassword(), error);		
+		boolean connectionSecceded = CDal.addChangeTeacherRequest(changeTeacherMsg.getRequest(), error);		
+
+		// TODO: get the requestId from DB
+		String requestId = "123";
 		
-		LoginResponseMsg res = new LoginResponseMsg(connectionSecceded, error.getString());
+		ChangeTeacherResponse res = new ChangeTeacherResponse(connectionSecceded, requestId, error.getString());
 		try {
 			client.sendToClient(res);
 		} catch (IOException e) {

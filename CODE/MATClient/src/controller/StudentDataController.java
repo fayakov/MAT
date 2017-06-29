@@ -115,7 +115,6 @@ public class StudentDataController  implements Initializable, Handler
 			} else {
 				System.out.println("Server response:" + res.getErrText());
 			}
-			
 		}
 	}
 

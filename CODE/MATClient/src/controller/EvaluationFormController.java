@@ -2,16 +2,30 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import communication.AddCheckAssignmentRequest;
+import communication.AddEvaluationFormRequest;
+import communication.Dispatcher;
+import communication.GetAssignmentDataRequest;
+import communication.MATClientController;
+import communication.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import utils.Handler;
 
-public class EvaluationFormController 
+public class EvaluationFormController implements Initializable, Handler
 {
 
+	public EvaluationFormController()
+	{
+		Dispatcher.addHandler(AddCheckAssignmentRequest.class.getCanonicalName(), this);
+	}
+	
 	 @FXML
 	    private ResourceBundle resources;
 
@@ -53,6 +67,10 @@ public class EvaluationFormController
 	    	    	}  		
 	        	Prompt.alert(1,"Checked file and evaluation form were added successfully ");
 	    	}
+	    	
+	    	
+	    	//AddEvaluationFormRequest addReq = new AddEvaluationFormRequest(grade, textFieldGrade.getText());
+	    	//MATClientController.getInstance().sendRequestToServer(addReq);
 	    }
 
 	    
@@ -61,6 +79,20 @@ public class EvaluationFormController
 	    {
 	    	
 	    }
+
+
+		public void handle(Message msg, Object obj) 
+		{
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		public void initialize(URL location, ResourceBundle resources) 
+		{
+			// TODO Auto-generated method stub
+			
+		}
 }
 
 

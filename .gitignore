@@ -50,4 +50,15 @@ Temporary Items
 .apdisk
 bin/
 .metadata
+<<<<<<< HEAD
 *.class
+=======
+*.fdt
+*.fdx
+*.fnm
+*.frq
+.recommenders/
+*.class
+CODE/MATClient/bin/*
+bin/
+>>>>>>> master

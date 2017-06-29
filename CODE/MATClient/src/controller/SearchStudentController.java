@@ -39,21 +39,29 @@ public class SearchStudentController implements Initializable, Handler {
     @FXML
     void send(ActionEvent event) throws Exception {
     	
+    	
+    	
+    	
     	if(studentId.getText().isEmpty()) 
-		 	Prompt.alert(3,"please enter class number");		    	
+		 	Prompt.alert(3,"please enter Student Id");		    	
     	else {  		    		
     		try {
 			    sid = Integer.parseInt(studentId.getText());
 		    	
 			    
-			    GetStudentDataRequest StudentData = new GetStudentDataRequest(sid);
-    			MATClientController.getInstance().sendRequestToServer(StudentData);
+			   // GetStudentDataRequest StudentData = new GetStudentDataRequest(sid);
+    			//MATClientController.getInstance().sendRequestToServer(StudentData);
     			
 		    	} catch(NumberFormatException e){
 		    	Prompt.alert(3,"please enter numerical value");
 		    	return;
 		    	}  	
-    		}	    	
+    		Pane root = FXMLLoader.load(getClass().getResource("/gui/StudentData.fxml"));
+			Scene scene = new Scene(root);
+			Stage primaryStage = new Stage();
+			primaryStage.setScene(scene);
+			primaryStage.show();
+			}		
 
     }
 

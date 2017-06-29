@@ -1,8 +1,17 @@
 package controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import communication.Dispatcher;
+import communication.GetStudentDataRequest;
+import communication.GetStudentDataResponse;
+import communication.MATClientController;
+import communication.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -11,9 +20,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import utils.Handler;
 
 
-public class ParentController {
+public class ParentController implements Initializable, Handler  {
+	
+	public ParentController(){
+		Dispatcher.addHandler(GetStudentDataResponse.class.getCanonicalName(), this);
+	}
+	
 	
 		private int sid;
 
@@ -40,6 +55,10 @@ public class ParentController {
 			else {
 				try {
 				    sid = Integer.parseInt(StudentID.getText());
+				    
+				 GetStudentDataRequest StudentData = new GetStudentDataRequest(sid);
+				 MATClientController.getInstance().sendRequestToServer(StudentData);
+	    			
 			    	
 			    	} catch(NumberFormatException e){
 			    	Prompt.alert(3,"please enter numerical value");
@@ -67,5 +86,15 @@ public class ParentController {
 		    Stage stage = (Stage) btnClose.getScene().getWindow();
 		    stage.close();
 	    }
+
+		public void handle(Message msg, Object obj) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void initialize(URL arg0, ResourceBundle arg1) {
+			// TODO Auto-generated method stub
+			
+		}
 	}
 

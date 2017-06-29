@@ -14,6 +14,7 @@ public class CDal {
 		try 
 		{
             Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
         } catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -928,6 +929,27 @@ public class CDal {
 		return retVal;
 	}
 	
+	public static int getTeacherInClassWithCourse(int classId, int courseId, int semester){
+		
+		int retVal = 0;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT class_has_course.teacher_teacherId FROM class_has_course "
+					+ "WHERE class_has_course.class_classId = " +classId + " "
+					+ "AND class_has_course.course_courseId = " +courseId+ " "
+					+ "AND class_has_course.semester_semesterId = " +semester+";");
+			if(resultSet.first()) {
+
+				retVal = resultSet.getInt(1);
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	
+	
 	
 	public static boolean addTeacherToCourseInClass(int classId, int courseId, int userID){
 		boolean retVal = true;
@@ -991,6 +1013,59 @@ public class CDal {
 							{
 								retVal = false;
 							}
+						}
+						else
+						{
+							retVal = false;
+						}
+					}
+					else
+					{
+						retVal = false;
+					}
+				}
+				else
+				{
+					retVal = false;
+				}	
+			}
+			else
+			{
+				retVal = false;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();			
+		}		
+		return retVal;
+	}
+	
+	
+	public static boolean removeTeacherFromCourseInClass(int classId, int courseId){
+		boolean retVal = true;
+		try 
+		{
+			int curSemester = getCurrentSemester();
+			if(curSemester != 0)
+			{
+				if(isClassExist(classId))
+				{
+					if(isCourseExist(courseId))
+					{
+						if(isCourseInClass(classId, courseId, curSemester))
+						{
+						
+								Statement stmt = connection.createStatement();
+								if(stmt.executeUpdate("UPDATE class_has_course SET "
+										+ "class_has_course.teacher_teacherId = "+0 +", "
+										+ "class_has_course.teacher_user_id  = "+ 0 +""
+										+ " WHERE class_has_course.class_classId = " +classId +" AND"
+										+ " class_has_course.course_courseId = "+ courseId + " AND "
+										+ " class_has_course.semester_semesterId = " +curSemester+";") == 0)
+								{
+									retVal = false;
+								}
+					
 						}
 						else
 						{
@@ -1912,6 +1987,32 @@ public class CDal {
 	}
 
 	public static boolean addStudentToCourse(int courseId, int studentID, CDALError error) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public static boolean addDeleteStudentFromCourseRequest(int courseId, int studentID, CDALError error) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public static boolean addChangeTeacherRequest(Request request, CDALError error) {
+		// TODO Auto-generated method stub
+		// Yinon: Add the request to db and return the request number to user
+		return false;
+	}
+
+	public static boolean setPrincipalDecision(Request request, CDALError error) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public static boolean getPendingRequests(ArrayList<Request> requests, CDALError error) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public static boolean getStudentData(int userId, Student studentData, CDALError error) {
 		// TODO Auto-generated method stub
 		return false;
 	}
