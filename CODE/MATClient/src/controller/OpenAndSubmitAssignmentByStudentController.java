@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -100,16 +102,20 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 	    
 	    
 	    
-	    
-	    
     @FXML
     void sendSubmission(ActionEvent event) 
     {
-    	//AddAssignmentForResponse addAssignmentForReq = new AddAssignmentForResponse(String file, String teacher, String course, String date);
+    	//get date of today:
+    	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		LocalDate localDate = LocalDate.now();
+		System.out.println(dtf.format(localDate)); //2017/06/29
+    	
+    	
+    	//AddAssignmentForResponse addAssignmentForReq = new AddAssignmentForResponse(file, teacher, course, localDate);
     	//MATClientController.getInstance().sendRequestToServer(addAssignmentForReq);
     	
     	//need to check validation of format.....
-        	
+
     }
     
     

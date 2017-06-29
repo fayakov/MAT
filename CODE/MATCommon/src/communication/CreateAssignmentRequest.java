@@ -1,31 +1,70 @@
 package communication;
 
-public class CreateAssignmentRequest extends Message {
-	private static final long serialVersionUID = 1L;
+import java.io.File;
+
+public class CreateAssignmentRequest extends Message 
+{
+private static final long serialVersionUID = 1L;
 	
-	private String userId;
-	private String password;
+	File selectedFile; 
+	String date;
+	int classNum;
+	int courseNum;
 	
-	public CreateAssignmentRequest(String userId, String password) {
-		this.userId = userId;
-		this.password = password;
-	}
 	
-	public String getUserId() {
-		return userId;
+	public CreateAssignmentRequest(File selectedFile, String date, int classNum, int courseNum) {
+		super();
+		this.selectedFile = selectedFile;
+		this.date = date;
+		this.classNum = classNum;
+		this.courseNum = courseNum;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+
+	public File getSelectedFile() {
+		return selectedFile;
 	}
 
-	public String getPassword() {
-		return password;
+
+	public void setSelectedFile(File selectedFile) {
+		this.selectedFile = selectedFile;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+
+	public String getDate() {
+		return date;
 	}
+
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+
+	public int getClassNum() {
+		return classNum;
+	}
+
+
+	public void setClassNum(int classNum) {
+		this.classNum = classNum;
+	}
+
+
+	public int getCourseNum() {
+		return courseNum;
+	}
+
+
+	public void setCourseNum(int courseNum) {
+		this.courseNum = courseNum;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 	
 	
 	
