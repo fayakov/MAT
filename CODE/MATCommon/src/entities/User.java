@@ -31,6 +31,15 @@ public class User implements Serializable
 		this.isLocked = isLocked;
 	}
 	
+	public void setAllUserData(User user){
+		this.id = user.getId();
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.password = user.getPassword();
+		setUserType(user.getUserType());
+		this.isLogged = user.getIsLogged();
+		this.isLocked = user.getIsLocked();
+	}
 
 	public int getId() {
 		return id;

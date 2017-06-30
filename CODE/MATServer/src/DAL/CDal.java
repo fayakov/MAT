@@ -1158,6 +1158,49 @@ public class CDal {
 		return courseIdList;
 	}
 	
+	public static ArrayList<Integer> getStudentCourses(int studentId)
+	{
+		ArrayList<Integer> courseIdList = new ArrayList<Integer>();
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery(
+					"SELECT student_has_course.course_courseId "
+					+ "FROM student_has_course "
+					+ "RIGHT JOIN finished_course_detailes "
+					+ "ON student_has_course.finished_course_detailes_finished_course_id  = finished_course_detailes.finished_course_id  "
+					+ "WHERE student_has_course.student_idstudent = "+studentId+";");
+			while(resultSet.next())
+	 		{				
+				courseIdList.add(resultSet.getInt(1));
+	 		} 
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return courseIdList;
+	}
+	
+	public static ArrayList<Integer> getStudentClasses(int studentId)
+	{
+		ArrayList<Integer> classIdList = new ArrayList<Integer>();
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery(
+					"SELECT student_has_course.class_classId "
+					+ "FROM student_has_course  "
+					+ "WHERE student_has_course.student_idstudent = "+studentId+";");
+			while(resultSet.next())
+	 		{				
+				classIdList.add(resultSet.getInt(1));
+	 		} 
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return classIdList;
+	}
+	
+	
+	
+	
 	public static ArrayList<Integer> getPrevCourses(int courseId)
 	{
 		ArrayList<Integer> courseIdList = new ArrayList<Integer>();
@@ -1886,6 +1929,25 @@ public class CDal {
 		return myList;
 	}
 	
+	public static ArrayList<Integer> getChildrenParents(int studentId)
+	{
+		ArrayList<Integer> myList = new ArrayList<Integer>();
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT parent_parentId FROM parent_has_student "
+					+ "WHERE parent_has_student.student_idstudent = " +studentId +";");
+			
+			
+			while(resultSet.next())
+	 		{				
+				myList.add(resultSet.getInt(1));
+	 		} 
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return myList;
+	}
+	
 	public static boolean isParentHasStudentBlocked(int parentId, int studentId)
 	{
 		boolean retVal = false;
@@ -2406,8 +2468,40 @@ public class CDal {
 	}
 
 	public static boolean getStudentData(int userId, Student studentData, CDALError error) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean retVal = true;
+		Student student = new Student();
+		try{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT * FROM student "
+					+ "WHERE student.user_id = " + userId + ";");
+			if(resultSet.first()) {
+				User user = new User();
+				if(getUserData(userId, user))
+				{
+					int studentId = getStudentId(userId);
+					if(studentId != 0)
+					{
+						student.setAllUserData(user);	
+						student.setCourse(getStudentCourses(userId));
+						student.setClassID(getStudentClasses(userId));
+						student.setParentID(getChildrenParents(studentId));
+					}
+					else
+					{
+						retVal = false;
+					}
+	
+				}
+				else
+				{
+					retVal = false;
+				}				
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	
+		}	
+		return retVal;
 	}
 	
 	
