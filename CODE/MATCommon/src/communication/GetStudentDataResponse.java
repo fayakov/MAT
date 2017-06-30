@@ -1,8 +1,5 @@
 package communication;
 
-import java.util.ArrayList;
-
-import entities.Request;
 import entities.Student;
 
 public class GetStudentDataResponse extends Message 
