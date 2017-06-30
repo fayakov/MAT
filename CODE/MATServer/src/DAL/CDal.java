@@ -1857,6 +1857,7 @@ public class CDal {
 	
 	public static boolean blockParent(int parentId, int studentId ,boolean toBlock)
 	{
+		// Yinon: block parent by parent id only
 		boolean retVal = true;
 		if(isParentHasStudent(parentId, studentId))
 		{		
@@ -2543,6 +2544,11 @@ public class CDal {
 		}	
 		return parentData;
 	
+	}
+
+	public static CClass getClassData(int classNumber, CDALError error) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
