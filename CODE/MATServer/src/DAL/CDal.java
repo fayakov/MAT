@@ -32,7 +32,7 @@ public class CDal {
 		}
 	}
 	
-	public static Teacher getTeacher( int id)
+	public static Teacher getTeacherData( int id)
 	{
 		Teacher teacherData = new Teacher();
 		try 
