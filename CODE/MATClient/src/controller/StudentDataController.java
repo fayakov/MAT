@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import communication.Dispatcher;
+import communication.GetStudentDataRequest;
 import communication.GetStudentDataResponse;
 import communication.LoginRequestMsg;
 import communication.LoginResponseMsg;
@@ -25,6 +26,7 @@ import entities.Student;
 
 public class StudentDataController  implements Initializable, Handler
 {
+	
 	ObservableList<String> list ;
 	
 	public StudentDataController()
@@ -79,8 +81,8 @@ public class StudentDataController  implements Initializable, Handler
     @FXML
     void StudentInfo(ActionEvent event) 
     {
-    	//GetStudentDataRequest GetStudentDataReq = new GetStudentDataRequest(userIdStr);//מאיפה ת.ז?
-		//MATClientController.getInstance().sendRequestToServer(GetStudentDataRequest);
+    	//GetStudentDataRequest GetStudentDataReq = new GetStudentDataRequest(loginController.getUserId());//מאיפה ת.ז?
+		//MATClientController.getInstance().sendRequestToServer(GetStudentDataReq);
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

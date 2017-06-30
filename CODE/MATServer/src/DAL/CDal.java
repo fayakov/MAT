@@ -2449,7 +2449,7 @@ public class CDal {
 		return retVal;
 	}
 		
-
+	/*
 	public static boolean addStudentToCourse(int courseId, int studentID, CDALError error) {
 		// TODO Auto-generated method stub
 		return false;
@@ -2474,7 +2474,7 @@ public class CDal {
 	public static boolean getPendingRequests(ArrayList<Request> requests, CDALError error) {
 		// TODO Auto-generated method stub
 		return false;
-	}
+	}*/
 
 	public static Student getStudentData(int userId, CDALError error) {
 		boolean retVal = true;
@@ -2551,6 +2551,25 @@ public class CDal {
 		return null;
 	}
 	
+	public static boolean createAssignment(int userId)
+	{
+		boolean retVal = true;
+		if(isParentExist(userId))
+		{
+			retVal = false;
+		}
+		else
+		{
+			try{ 
+				Statement stmt = connection.createStatement();
+				stmt.executeUpdate("INSERT INTO assignment (Date) VALUES ('" +userId+"')");
+			}
+			catch (SQLException e) {
+				e.printStackTrace();			
+			}
+		}
+		return retVal;
+	}
 	
 }
 
