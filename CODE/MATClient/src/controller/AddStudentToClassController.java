@@ -79,15 +79,7 @@ public class AddStudentToClassController implements Handler {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			/*
-			if (res.actionSucceed()) {
-				 Prompt.alert(1, "student " + sid + " added successfully to class " + cid);
-			} else {
-				Prompt.alert(3, res.getErrText());	
-			}
-			*/
-			
+			}		
 		}
 		
 	}

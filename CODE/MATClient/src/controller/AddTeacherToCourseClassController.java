@@ -5,6 +5,7 @@ import communication.AddTeacherToCourseClassResponse;
 import communication.Dispatcher;
 import communication.MATClientController;
 import communication.Message;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -63,16 +64,41 @@ public class AddTeacherToCourseClassController implements Handler {
 
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
-		if (msg instanceof AddTeacherToCourseClassRequest) {
+		if (msg instanceof AddTeacherToCourseClassResponse) {
 			AddTeacherToCourseClassResponse res = (AddTeacherToCourseClassResponse)msg;
+			
+			try {
+				localPrompt(tid, coid,  res.getErrText(), res.actionSucceed());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			/*
 			if (res.actionSucceed()) {
 				Prompt.alert(1, "teacher " + tid + " added successfully to course " + coid);
 			} else {
 				Prompt.alert(3, res.getErrText());	
 			}
-			
+			*/
 		}
 		
+	}
+	
+public void localPrompt(final int tid, final int coid, final String eror, final boolean succ)  throws Exception {
+		
+		Platform.runLater(new Runnable() {
+			int teacherId = tid;
+			int courseId = coid;		
+			String erorText = eror;
+			boolean success = succ;
+			
+			public void run() {
+				if(success)
+					Prompt.alert(1, "teacher " + teacherId + " added successfully to course " + courseId);	
+				else
+					Prompt.alert(3, erorText);
+			}
+		} );
 	}
 
 }

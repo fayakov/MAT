@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utils.Handler;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -70,16 +71,34 @@ public class AddClassToCourseController implements Handler {
 
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
-		if (msg instanceof AddClassToCourseRequest) {
+		if (msg instanceof AddClassToCourseResponse) {
 			AddClassToCourseResponse res = (AddClassToCourseResponse)msg;
-			if (res.actionSucceed()) {
-				 Prompt.alert(1, "class " + clid + " added successfully to course " + coid);
-			} else {
-				Prompt.alert(3, res.getErrText());	
-			}
+			try {
+				localPrompt(clid, coid,  res.getErrText(), res.actionSucceed());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
 			
 		}
 		
+	}
+	
+public void localPrompt(final int clid, final int coid, final String eror, final boolean succ)  throws Exception {
+		
+		Platform.runLater(new Runnable() {
+			int classId = clid;
+			int courseId = coid;		
+			String erorText = eror;
+			boolean success = succ;
+			
+			public void run() {
+				if(success)
+					Prompt.alert(1, "class " + classId + " added successfully to course " + courseId);	
+				else
+					Prompt.alert(3, erorText);
+			}
+		} );
 	}
 	 
 }

@@ -3,6 +3,7 @@ package controller;
 
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import communication.Dispatcher;
 import communication.MATClientController;
@@ -26,12 +27,7 @@ public class OpenSemesterController implements Handler {
 	
 		//ArrayList<Semester> semester = new ArrayList<Semester>();
 		ObservableList<String> list;
-		private int sid;
-		private String semName;
 		private Date sDate, eDate;
-		
-		@FXML
-	    private TextField semesterName;
 	    
 		@FXML
 		private DatePicker endDate;
@@ -45,21 +41,19 @@ public class OpenSemesterController implements Handler {
 	    @FXML
 	    void createSemester(ActionEvent event)	{
 	    	
-	    	semName = semesterName.getText().toString();
-	    	
-	    	if(semName == "") // + date check
+	    	if(false)
+	    	 // + date check empty
 	    		Prompt.alert(3, "one or more of the fields is empty");    	    	
-	    	else { 
-	    		try {
+	    	else { 		
+	    			sDate = Date.valueOf(startDate.getValue());
+	    			eDate = Date.valueOf(endDate.getValue());
+	    			System.out.println(sDate + "\n" + eDate);
 	    		 }
-	    		catch(NumberFormatException e){
-	    			Prompt.alert(3,"please enter numerical value");
-			    	return;
-	    			}
+		 			
 	    		OpenSemesterRequest openSemesterReq = new OpenSemesterRequest(sDate, eDate);
 		        MATClientController.getInstance().sendRequestToServer(openSemesterReq);
-	    		}    	
-	    }	    		    		
+	    		   	
+	    	}	    		    		
 	    		    
 	  	    
 	    @FXML
@@ -71,10 +65,10 @@ public class OpenSemesterController implements Handler {
 
 		public void handle(Message msg, Object obj) {
 			// TODO Auto-generated method stub
-			if (msg instanceof OpenSemesterRequest) {
+			if (msg instanceof OpenSemesterResponse) {
 				OpenSemesterResponse res = (OpenSemesterResponse)msg;
 				if (res.isSucceeded()) {
-					Prompt.alert(1, "semester " +  semName + " was added succesfully");
+					Prompt.alert(1, "the semester added succesfully");
 				} else {
 					Prompt.alert(3, res.getErrText());	
 				}
