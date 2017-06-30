@@ -1,14 +1,20 @@
 package controller;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import communication.Dispatcher;
 import communication.GetClassDataRequest;
 import communication.GetClassDataResponse;
+import communication.GetClassTeachersStatsRequest;
+import communication.GetClassTeachersStatsResponse;
+import communication.LoginResponseMsg;
 import communication.MATClientController;
 import communication.Message;
+import entities.TeacherWithGrade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +32,7 @@ import utils.Handler;
 public class StatisticClassAndTeachersController implements Initializable, Handler {
 	
 	public StatisticClassAndTeachersController(){
-		Dispatcher.addHandler(GetClassDataResponse.class.getCanonicalName(), this);
+		Dispatcher.addHandler(GetClassTeachersStatsResponse.class.getCanonicalName(), this);
 	}
 	
 		private int clid;
@@ -47,7 +53,7 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 		    	 try {
 					    clid = Integer.parseInt(ClassNumber.getText());
 					    
-					    GetClassDataRequest ClassData = new GetClassDataRequest(clid);
+					    GetClassTeachersStatsRequest ClassData = new GetClassTeachersStatsRequest(clid);
 						 MATClientController.getInstance().sendRequestToServer(ClassData);
 				    	
 				    	} catch(NumberFormatException e){
@@ -72,6 +78,13 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 
 		public void handle(Message msg, Object obj) {
 			// TODO Auto-generated method stub
+			
+			if (msg instanceof GetClassTeachersStatsResponse) {
+				GetClassTeachersStatsResponse res = (GetClassTeachersStatsResponse)msg;
+				ArrayList<TeacherWithGrade> arr = res.getStats();
+				
+				con.setDisplayArr(arr);
+			}
 			
 		}
 
