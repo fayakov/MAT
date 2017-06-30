@@ -56,8 +56,8 @@ public class ParentController implements Initializable, Handler  {
 				try {
 				    sid = Integer.parseInt(StudentID.getText());
 				    
-				 GetStudentDataRequest StudentData = new GetStudentDataRequest(sid);
-				 MATClientController.getInstance().sendRequestToServer(StudentData);
+			//	 GetStudentDataRequest StudentData = new GetStudentDataRequest(sid);
+		//		 MATClientController.getInstance().sendRequestToServer(StudentData);
 	    			
 			    	
 			    	} catch(NumberFormatException e){
