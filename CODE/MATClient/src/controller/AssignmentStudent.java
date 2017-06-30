@@ -33,7 +33,7 @@ import entities.Student;
 public class AssignmentStudent implements Initializable, Handler
 {
 	ObservableList<String> list ;
-	public static int choosenAss=88;
+	//public static int choosenAss=88;
 	
 	
 	

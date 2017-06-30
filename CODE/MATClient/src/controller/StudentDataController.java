@@ -89,10 +89,10 @@ public class StudentDataController  implements Initializable, Handler
     
     
     //test
-    User user= new User (1, "tal", "chen", "1234", EUserStudent, true, false);
+     //User user= new User (1, "tal", "chen", "1234", EUserStudent, true, false);
     
-    final ObservableList<StudentCourse> data= FXCollections.observableArrayList(new StudentCourse(1,2,5));
-
+    //final ObservableList<StudentCourse> data= FXCollections.observableArrayList(new StudentCourse(1,2,5));
+    final ObservableList<StudentCourse> data= FXCollections.observableArrayList(new StudentCourse(1,2,5),new StudentCourse(4,5,6));
     
     @FXML
     void StudentInfo(ActionEvent event) 
@@ -128,6 +128,13 @@ public class StudentDataController  implements Initializable, Handler
 		    	textClasses.setText(strClass); 
 		    	
 		    	
+		    	for(int i=0;i<res.getClassCourseData().size();i++)
+				{
+					data.add(res.getClassCourseData().get(i).getCourseID(),res.getClassCourseData().get(i).getGrade());
+					tableViewID.setItems(data);
+				}
+		    	
+		    	
 		    	
 		    	//ArrayList<String> options = new ArrayList<String>();
 		    	//options= res.getStudentData().getCourse();
@@ -142,20 +149,17 @@ public class StudentDataController  implements Initializable, Handler
 	}
 
 	
+	
 	public void initialize(URL location, ResourceBundle resources) 
 	{
 		// TODO Auto-generated method stub
 		colCourse.setCellValueFactory(new PropertyValueFactory<StudentCourse, Integer>("courseID"));
 		colGrade.setCellValueFactory(new PropertyValueFactory<StudentCourse, Integer>("grade"));
     	
-
-
 		tableViewID.setItems(data);
 		
 	}
-
-	
-				
+			
 }
 
 

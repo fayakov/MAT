@@ -31,6 +31,27 @@ public class StudentController
 		primaryStage.show();
     }
     
+    
+    
+    /*
+    ((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+	Stage primaryStage = new Stage();
+	FXMLLoader loader = new FXMLLoader();
+	Pane root = loader.load(getClass().getResource("/gui/StudentForm.fxml").openStream());
+	
+	StudentFormController studentFormController = loader.getController();		
+	studentFormController.loadStudent(Test.students.get(itemIndex));
+	
+	Scene scene = new Scene(root);			
+	scene.getStylesheets().add(getClass().getResource("/gui/StudentForm.css").toExternalForm());
+	
+	primaryStage.setScene(scene);		
+	primaryStage.show();
+    */
+    
+    
+    
+    
     public void assignment() throws Exception 
     {
     	
