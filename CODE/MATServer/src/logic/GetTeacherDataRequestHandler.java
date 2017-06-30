@@ -18,11 +18,9 @@ public class GetTeacherDataRequestHandler  implements Handler {
 				
 		// TODO Check in database
 		CDALError error = new CDALError();
-		Teacher teacherData = new Teacher();
+		Teacher teacherData = CDal.getTeacherData(getTeacherData.getTeacherId());		
 		
-		boolean requestSecceded = CDal.getTeacherData(getTeacherData.getTeacherId(), teacherData, error);		
-		
-		GetTeacherDataResponse res = new GetTeacherDataResponse(requestSecceded, error.getString(), teacherData);
+		GetTeacherDataResponse res = new GetTeacherDataResponse(true, error.getString(), teacherData);
 		
 		try {
 			client.sendToClient(res);
