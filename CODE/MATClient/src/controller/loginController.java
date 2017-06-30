@@ -11,6 +11,7 @@ import communication.Message;
 import javafx.fxml.Initializable;
 import test.clientTest;
 import utils.Handler;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -112,11 +113,12 @@ public class loginController implements Initializable, Handler
 				System.out.println("Server response: Success");
 				try {
 				switch(res.getUserType()) {
-				case EUserPrincipal: open("/gui/PrincipalMenu.fxml"); break;  // principle
-				case EUserTeacher: open("/gui/TeacherMenu.fxml"); break;    // teacher
-				case EUserSecretary: open("/gui/NewSemesterSettingSecretary.fxml"); break;    // secretary		
-				case EUserStudent: open("/gui/StudentMenu.fxml"); break;    // student
-				case EUserParent: open("/gui/TeacherMenu.fxml"); break;    // parent
+				
+				case EUserPrincipal: open("/gui/PrincipalMenu.fxml"); break;  
+				case EUserTeacher: open("/gui/TeacherMenu.fxml"); break;    
+				case EUserSecretary: open("/gui/SecretaryMenu.fxml"); break;    		
+				case EUserStudent: open("/gui/StudentMenu.fxml"); break;    
+				case EUserParent: open("/gui/TeacherMenu.fxml"); break;    
 				}
 				
 				} catch (Exception e) {	e.printStackTrace(); }
@@ -127,14 +129,25 @@ public class loginController implements Initializable, Handler
 		}
 	}
 	
-	public void open(String path) throws Exception {
-		Pane root = FXMLLoader.load(getClass().getResource(path));
-		Scene scene = new Scene(root);
-		Stage primaryStage = new Stage();
-		primaryStage.setScene(scene);
-		primaryStage.show();
+	
+	public void open(final String path1) throws Exception {
+		Platform.runLater(new Runnable() {
+			String path = path1;
+			public void run() {
+				// TODO Auto-generated method stub
+				try {
+					Pane root = FXMLLoader.load(getClass().getResource(path));
+					Scene scene = new Scene(root);
+					Stage primaryStage = new Stage();
+					primaryStage.setScene(scene);
+					primaryStage.show();
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} );
 	}
-
-
 
 }
