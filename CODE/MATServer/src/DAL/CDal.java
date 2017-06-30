@@ -2506,13 +2506,15 @@ public class CDal {
 	
 	public static boolean getParentData(int userId, Parent parentData, CDALError error) {
 	
-	boolean retVal = true;
+	boolean retVal = true;/*
 	parentData  = new Parent();
+	/*
 	try{
 	catch (SQLException e) {
 		e.printStackTrace();	
-	}	
+	}	}*/
 	return retVal;
+	
 	}
 	
 	
