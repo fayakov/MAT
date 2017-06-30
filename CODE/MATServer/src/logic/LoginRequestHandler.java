@@ -22,7 +22,8 @@ public class LoginRequestHandler implements Handler {
 		
 		// TODO Check in database
 		CDALError error = new CDALError();
-		boolean connectionSecceded = CDal.connectUser(loginMsg.isToConnect(), loginMsg.getUserId(), loginMsg.getPassword(), error);		
+		int userType = 0;
+		boolean connectionSecceded = CDal.connectUser(loginMsg.isToConnect(), loginMsg.getUserId(), loginMsg.getPassword(),userType, error);		
 				
 		if (connectionSecceded) {
 			MATServerController.getInstance();
@@ -30,7 +31,7 @@ public class LoginRequestHandler implements Handler {
 			MATServerController.setCurrentLoggedInUserPassword(loginMsg.isToConnect() ? loginMsg.getPassword() : "");
 		}
 		
-		LoginResponseMsg res = new LoginResponseMsg(connectionSecceded, error.getString());
+		LoginResponseMsg res = new LoginResponseMsg(connectionSecceded, CDal.getUserType(loginMsg.getUserId()), error.getString());
 		
 		try {
 			client.sendToClient(res);
