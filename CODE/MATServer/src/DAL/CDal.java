@@ -2506,14 +2506,40 @@ public class CDal {
 	
 	public static boolean getParentData(int userId, Parent parentData, CDALError error) {
 	
-	boolean retVal = true;/*
-	parentData  = new Parent();
-	/*
-	try{
-	catch (SQLException e) {
-		e.printStackTrace();	
-	}	}*/
-	return retVal;
+		boolean retVal = true;/*
+		parentData = new Parent();
+		try{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT * FROM parent "
+					+ "WHERE parent.user_id = " + userId + ";");
+			if(resultSet.first()) {
+				User user = new User();
+				if(getUserData(userId, user))
+				{
+					int studentId = getStudentId(userId);
+					if(studentId != 0)
+					{
+						student.setAllUserData(user);	
+						student.setCourse(getStudentCourses(userId));
+						student.setClassID(getStudentClasses(userId));
+						student.setParentID(getChildrenParents(studentId));
+					}
+					else
+					{
+						retVal = false;
+					}
+	
+				}
+				else
+				{
+					retVal = false;
+				}				
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	
+		}	*/
+		return retVal;
 	
 	}
 	

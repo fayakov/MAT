@@ -7,6 +7,9 @@ public class Parent extends User{
  private Boolean isblocked;
  private ArrayList <String> studentList;
  
+ public Parent(){
+ }
+ 
  public Parent(Boolean isblocked, ArrayList<String> studentList) {
 	super();
 	this.isblocked = isblocked;
