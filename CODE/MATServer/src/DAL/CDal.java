@@ -2226,16 +2226,16 @@ public class CDal {
 		return retVal;
 	}
 	
-	public static boolean getRequest(int reqNumber, Request req)
+	public static Request getRequest(int reqNumber )
 	{
-		boolean retVal = true;
+		Request req = new Request();
 		try{
 			Statement stmt = connection.createStatement();
 			ResultSet resultSet  = stmt.executeQuery("SELECT * FROM request "
 					+ "WHERE request.requestId = " + reqNumber + ";");
 			if(resultSet.first()) {	
 				ERequestType reqType = ERequestType.addStudent;
-				switch(resultSet.getInt(2))
+				switch(resultSet.getInt("requestType"))
 				{
 					case 1:
 						reqType = ERequestType.addStudent;
@@ -2247,18 +2247,20 @@ public class CDal {
 						reqType = ERequestType.changeTeacher;
 						break;
 				}
-				req = new Request(resultSet.getInt(1), resultSet.getInt(3) , resultSet.getInt(4), resultSet.getInt(5), resultSet.getBoolean(7),resultSet.getBoolean(6), reqType);
-			}
-			else
-			{
-				retVal = false;
+				
+				req.setUserid(resultSet.getInt("userId"));
+				req.setClassNumber(resultSet.getInt("classId"));
+				req.setCourseId(resultSet.getInt("courseId"));
+				req.setRequestType(reqType);
+				req.setRequestNumber(resultSet.getInt("requestId"));
+				req.setConfirmed(resultSet.getBoolean("isConfimed"));
+				req.setHandeled(resultSet.getBoolean("isHandeled"));
 			}
 		}
 		catch (SQLException e) {
-			retVal = false;
 			e.printStackTrace();	
 		}	
-		return retVal;
+		return req;
 	}
 	
 	
@@ -2473,7 +2475,7 @@ public class CDal {
 		return false;
 	}
 
-	public static boolean getStudentData(int userId, Student studentData, CDALError error) {
+	public static Student getStudentData(int userId, CDALError error) {
 		boolean retVal = true;
 		Student student = new Student();
 		try{
@@ -2492,28 +2494,20 @@ public class CDal {
 						student.setClassID(getStudentClasses(userId));
 						student.setParentID(getChildrenParents(studentId));
 					}
-					else
-					{
-						retVal = false;
-					}
 	
-				}
-				else
-				{
-					retVal = false;
 				}				
 			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();	
 		}	
-		return retVal;
+		return student;
 	}
 	
-	public static boolean getParentData(int userId, Parent parentData, CDALError error) {
+	public static Parent getParentData(int userId, CDALError error) {
 	
 		boolean retVal = true;
-		parentData = new Parent();
+		Parent parentData = new Parent();
 		try{
 			Statement stmt = connection.createStatement();
 			ResultSet resultSet  = stmt.executeQuery("SELECT * FROM parent "
@@ -2547,7 +2541,7 @@ public class CDal {
 		catch (SQLException e) {
 			e.printStackTrace();	
 		}	
-		return retVal;
+		return parentData;
 	
 	}
 	

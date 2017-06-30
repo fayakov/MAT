@@ -49,8 +49,8 @@ public class DALTestMain {
 		//checkChangeTeacher(dl);
 		//checkCreateStudent(dl);
 		//checkCreateReq(dl);
-		//checkGetRequests(dl);
-		checkConfirmRequest(dl);
+		checkGetRequests(dl);
+		//checkConfirmRequest(dl);
 	}
 	public static void checkLogin(CDal dl )
 	{

@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Request implements Serializable
 {
 
+	
 	private int requestNumber;
 	private int userId;
 	private int classNumber;
@@ -13,7 +14,10 @@ public class Request implements Serializable
 	private boolean isHandeled;
 	private ERequestType requestType;
 	
-	
+	public Request()
+	{
+		
+	}
 	public Request(int userId, int classNumber, int courseId, ERequestType requestType, boolean isConfirmed, boolean isHandeled) 
 	{
 		super();
