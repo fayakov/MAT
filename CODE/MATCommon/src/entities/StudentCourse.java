@@ -4,22 +4,29 @@ import java.io.Serializable;
 
 public class StudentCourse implements Serializable {
 
-	private String studentID;
-	private String courseID;
+	private int studentID;
+	private int courseID;
 	private int grade;
 	
+
+	public StudentCourse(int studentID, int courseID, int grade) {
+		super();
+		this.studentID = studentID;
+		this.courseID = courseID;
+		this.grade = grade;
+	}
 	
 	
-	public String getStudentID() {
+	public int getStudentID() {
 		return studentID;
 	}
-	public void setStudentID(String studentID) {
+	public void setStudentID(int studentID) {
 		this.studentID = studentID;
 	}
-	public String getCourseID() {
+	public int getCourseID() {
 		return courseID;
 	}
-	public void setCourseID(String courseID) {
+	public void setCourseID(int courseID) {
 		this.courseID = courseID;
 	}
 	public int getGrade() {
