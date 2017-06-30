@@ -219,7 +219,7 @@ public class DALTestMain {
 	
 	public static void checkGetStudentsInCourse(CDal dl)
 	{
-		ArrayList<Integer> users = dl.getStudensInCourse(1,dl.getCurrentSemester());
+		ArrayList<Integer> users = dl.getStudensInCourseBySemesterID(1,dl.getCurrentSemester());
 		for (Integer id : users) {
 			System.out.println(id);
 		}
@@ -228,8 +228,8 @@ public class DALTestMain {
 	public static void checkAddStudentToClass(CDal dl)
 	{
 		System.out.println(dl.addStudentToClass(1, 124) == false);
-		System.out.println(dl.addStudentToClass(5, 124 )==false);
-		System.out.println(dl.addStudentToClass(1, 129)==false);
+		System.out.println(dl.addStudentToClass(5, 124) ==false);
+		System.out.println(dl.addStudentToClass(1, 129) ==false);
 	}	
 	
 	public static void checkAddCourseToClass(CDal dl)

@@ -1,6 +1,10 @@
 package entities;
 
-public class TeacherWithGrade {
+import java.io.Serializable;
+
+public class TeacherWithGrade implements Serializable {
+	
+	private static final long serialVersionUID = -2991536140659722413L;
 	private float m_grade;
 	private String m_teacherName;
     
