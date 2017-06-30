@@ -6,11 +6,8 @@ import DAL.CDALError;
 import DAL.CDal;
 import communication.GetParentDataRequest;
 import communication.GetParentDataResponse;
-import communication.GetTeacherDataRequest;
-import communication.GetTeacherDataResponse;
 import communication.Message;
 import entities.Parent;
-import entities.Teacher;
 import ocsf.server.ConnectionToClient;
 import utils.Handler;
 
