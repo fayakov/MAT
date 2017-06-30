@@ -4,8 +4,8 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import communication.AddStudentRequest;
-import communication.AddStudentResponse;
+import communication.AddStudentToCourseRequest;
+import communication.AddStudentToCourseResponse;
 import communication.ChangeTeacherRequest;
 import communication.ChangeTeacherResponse;
 import communication.Dispatcher;

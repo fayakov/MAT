@@ -2,7 +2,7 @@ package communication;
 
 import entities.ERequestType;
 
-public class DeleteStudentRequest extends Message {
+public class AddStudentToCourseRequest extends Message {
 	private static final long serialVersionUID = 1L;
 	
 	private int studentID;
@@ -13,7 +13,8 @@ public class DeleteStudentRequest extends Message {
 	private boolean isHandeled;
 	
 
-	public DeleteStudentRequest(int studentID, int classNumber, int courseId, ERequestType requestType,
+
+	public AddStudentToCourseRequest(int studentID, int classNumber, int courseId, ERequestType requestType,
 			boolean isConfirmed, boolean isHandeled) {
 		super();
 		this.studentID = studentID;
@@ -76,6 +77,7 @@ public class DeleteStudentRequest extends Message {
 
 	
 
+	
 	
 	
 }

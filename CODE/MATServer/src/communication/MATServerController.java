@@ -3,7 +3,7 @@ package communication;
 import java.io.IOException;
 
 import DAL.*;
-import logic.LoginRequestHandler;
+import logic.*;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 
@@ -36,7 +36,34 @@ public class MATServerController extends AbstractServer
 	private void bindHandlersToMessages() {
 		
 		Dispatcher.addHandler(LoginRequestMsg.class.getCanonicalName(), new LoginRequestHandler());
-				
+		Dispatcher.addHandler(AddAssignmentForStudentRequest.class.getCanonicalName(), new AddAssignmentForStudentRequestHandler());
+		Dispatcher.addHandler(AddCheckAssignmentRequest.class.getCanonicalName(), new AddCheckAssignmentRequestHandler());				
+		Dispatcher.addHandler(AddClassToCourseRequest.class.getCanonicalName(), new AddClassToCourseRequestHandler());
+		Dispatcher.addHandler(AddEvaluationFormRequest.class.getCanonicalName(), new AddEvaluationFormRequestHandler());
+		Dispatcher.addHandler(AddStudentToClassRequest.class.getCanonicalName(), new AddStudentToClassRequestHandler());
+		Dispatcher.addHandler(AddStudentToCourseRequest.class.getCanonicalName(), new AddStudentToCourseRequestHandler());
+		Dispatcher.addHandler(AddTeacherToCourseClassRequest.class.getCanonicalName(), new AddTeacherToCourseClassRequestHandler());		
+		Dispatcher.addHandler(BlockParentRequest.class.getCanonicalName(), new BlockParentRequestHandler());
+		Dispatcher.addHandler(ChangeTeacherRequest.class.getCanonicalName(), new ChangeTeacherRequestHandler());
+		Dispatcher.addHandler(CreateAssignmentRequest.class.getCanonicalName(), new CreateAssignmentRequestHandler());
+		Dispatcher.addHandler(OpenSemesterRequest.class.getCanonicalName(), new CreateNewSemesterRequestHandler());
+		Dispatcher.addHandler(DefineClassRequest.class.getCanonicalName(), new DefineClassRequestHandler());
+		Dispatcher.addHandler(DeleteStudentFromCourseRequest.class.getCanonicalName(), new DeleteStudentFromCourseRequestHandler());
+		Dispatcher.addHandler(GetAssignmentDataRequest.class.getCanonicalName(), new GetAssignmentDataRequestHandler());
+		Dispatcher.addHandler(GetAssignmentOfStudentRequest.class.getCanonicalName(), new GetAssignmentOfStudentRequestHandler());
+		Dispatcher.addHandler(GetAssignmentsOfStudentRequest.class.getCanonicalName(), new GetAssignmentsOfStudentRequestHandler());
+		Dispatcher.addHandler(GetAssignmentsOfTeacherRequest.class.getCanonicalName(), new GetAssignmentsOfTeacherRequestHandler());		
+		Dispatcher.addHandler(GetClassDataRequest.class.getCanonicalName(), new GetClassDataRequestHandler());
+		Dispatcher.addHandler(GetClassToCoursesStatsRequest.class.getCanonicalName(), new GetClassToCoursesStatsRequestHandler());
+		Dispatcher.addHandler(GetClassToTeachersStatsRequest.class.getCanonicalName(), new GetClassToTeachersStatsRequestHandler());
+		Dispatcher.addHandler(GetParentDataRequest.class.getCanonicalName(), new GetParentDataRequestHandler());
+		Dispatcher.addHandler(GetPendingRequestsRequest.class.getCanonicalName(), new GetPendingRequestsRequestHandler());
+		Dispatcher.addHandler(GetStudentDataRequest.class.getCanonicalName(), new GetStudentDataRequestHandler());
+		Dispatcher.addHandler(GetTeacherDataRequest.class.getCanonicalName(), new GetTeacherDataRequestHandler());
+		Dispatcher.addHandler(GetTeacherStatsRequest.class.getCanonicalName(), new GetTeacherStatsRequestHandler());
+		Dispatcher.addHandler(GetTeacherToClassesStatsRequest.class.getCanonicalName(), new GetTeacherToClassesStatsRequestHandler());
+		Dispatcher.addHandler(OpenSemesterRequest.class.getCanonicalName(), new OpenSemesterRequestHandler());
+		Dispatcher.addHandler(PrincipalDecisionRequest.class.getCanonicalName(), new PrincipalDecisionRequestHandler());		
 	}
 	
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) 

@@ -3,10 +3,10 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import communication.AddStudentRequest;
-import communication.AddStudentResponse;
-import communication.DeleteStudentRequest;
-import communication.DeleteStudentResponse;
+import communication.AddStudentToCourseRequest;
+import communication.AddStudentToCourseResponse;
+import communication.DeleteStudentFromCourseRequest;
+import communication.DeleteStudentFromCourseResponse;
 import communication.Dispatcher;
 import communication.MATClientController;
 import communication.Message;
@@ -27,7 +27,7 @@ public class RequestRemoveStudentFromCourseController implements Initializable, 
 	
 	
 	public RequestRemoveStudentFromCourseController(){
-		Dispatcher.addHandler(DeleteStudentResponse.class.getCanonicalName(), this);
+		Dispatcher.addHandler(DeleteStudentFromCourseResponse.class.getCanonicalName(), this);
 	}
 	
     @FXML
@@ -62,7 +62,7 @@ public class RequestRemoveStudentFromCourseController implements Initializable, 
     	    	isHandeled = false;
     	    	requestType = requestType.removeStudent;
     	    	
-    	    	DeleteStudentRequest delstureq= new DeleteStudentRequest(studentid, classid, courseid, requestType, isConfirmed, isHandeled);
+    	    	DeleteStudentFromCourseRequest delstureq= new DeleteStudentFromCourseRequest(studentid, classid, courseid, requestType, isConfirmed, isHandeled);
     			MATClientController.getInstance().sendRequestToServer(delstureq); 
     			
     	    	} catch(NumberFormatException e){
@@ -84,8 +84,8 @@ public class RequestRemoveStudentFromCourseController implements Initializable, 
 
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
-		if (msg instanceof DeleteStudentResponse) {
-			DeleteStudentResponse res = (DeleteStudentResponse)msg;
+		if (msg instanceof DeleteStudentFromCourseResponse) {
+			DeleteStudentFromCourseResponse res = (DeleteStudentFromCourseResponse)msg;
 			if (res.isRequestSaved()) {
 				System.out.println("Server response: Success");
 			} else {

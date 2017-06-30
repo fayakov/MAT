@@ -21,9 +21,9 @@ public class GetPendingRequestsRequestHandler implements Handler {
 		// TODO Check in database
 		CDALError error = new CDALError();
 		ArrayList<Request> requests = new ArrayList<Request>();
-		boolean requestSecceded = CDal.getPendingRequests(requests, error);		
+		requests = CDal.getRequests(CDal.getCurrentSemester());
 		
-		GetPendingRequestsResponse res = new GetPendingRequestsResponse(requestSecceded, error.getString(), requests);
+		GetPendingRequestsResponse res = new GetPendingRequestsResponse(requests);
 		try {
 			client.sendToClient(res);
 		} catch (IOException e) {
