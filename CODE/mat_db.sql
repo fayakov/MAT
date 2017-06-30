@@ -71,7 +71,7 @@ CREATE TABLE `class_has_course` (
 
 LOCK TABLES `class_has_course` WRITE;
 /*!40000 ALTER TABLE `class_has_course` DISABLE KEYS */;
-INSERT INTO `class_has_course` VALUES (1,1,1,123,7);
+INSERT INTO `class_has_course` VALUES (1,1,2,128,7),(1,2,1,123,7);
 /*!40000 ALTER TABLE `class_has_course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,7 +149,7 @@ CREATE TABLE `finished_course_detailes` (
   `semester` int(11) DEFAULT '0',
   `isNew` int(11) DEFAULT '0',
   PRIMARY KEY (`finished_course_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +158,7 @@ CREATE TABLE `finished_course_detailes` (
 
 LOCK TABLES `finished_course_detailes` WRITE;
 /*!40000 ALTER TABLE `finished_course_detailes` DISABLE KEYS */;
-INSERT INTO `finished_course_detailes` VALUES (18,0,0,0,0),(19,0,0,0,0),(20,1,100,1,0),(21,0,0,0,0),(22,0,0,0,0),(23,0,0,0,0),(24,0,0,0,0),(25,0,0,0,0),(26,0,0,0,0),(27,0,0,0,0);
+INSERT INTO `finished_course_detailes` VALUES (32,1,100,7,0),(33,0,0,7,0);
 /*!40000 ALTER TABLE `finished_course_detailes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -256,10 +256,18 @@ DROP TABLE IF EXISTS `request`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `request` (
-  `idrequest` int(11) NOT NULL,
-  `description` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idrequest`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `requestId` int(11) NOT NULL AUTO_INCREMENT,
+  `requestType` int(11) DEFAULT NULL,
+  `userId` int(11) DEFAULT NULL,
+  `classId` int(11) DEFAULT NULL,
+  `courseId` int(11) DEFAULT NULL,
+  `isHandled` tinyint(4) DEFAULT '0',
+  `isConfirmed` tinyint(4) DEFAULT '0',
+  `semester_semesterId` int(11) NOT NULL,
+  PRIMARY KEY (`requestId`),
+  KEY `fk_request_semester1_idx` (`semester_semesterId`),
+  CONSTRAINT `fk_request_semester1` FOREIGN KEY (`semester_semesterId`) REFERENCES `semester` (`semesterId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,6 +276,7 @@ CREATE TABLE `request` (
 
 LOCK TABLES `request` WRITE;
 /*!40000 ALTER TABLE `request` DISABLE KEYS */;
+INSERT INTO `request` VALUES (1,1,129,1,1,1,1,7);
 /*!40000 ALTER TABLE `request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -311,7 +320,7 @@ CREATE TABLE `student` (
   UNIQUE KEY `idstudent_UNIQUE` (`idstudent`),
   KEY `fk_student_user1_idx` (`user_id`),
   CONSTRAINT `fk_student_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -320,7 +329,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,124);
+INSERT INTO `student` VALUES (1,124),(2,129);
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -338,16 +347,19 @@ CREATE TABLE `student_has_course` (
   `course_courseId` int(11) NOT NULL,
   `finished_course_detailes_finished_course_id` int(11) NOT NULL,
   `semester_semesterId` int(11) NOT NULL,
+  `class_classId` int(11) NOT NULL,
   PRIMARY KEY (`student_has_courseId`,`student_idstudent`,`student_user_id`,`course_courseId`),
   KEY `fk_student_has_course_course1_idx` (`course_courseId`),
   KEY `fk_student_has_course_student1_idx` (`student_idstudent`,`student_user_id`),
   KEY `fk_student_has_course_finished_course_detailes1_idx` (`finished_course_detailes_finished_course_id`),
   KEY `fk_student_has_course_semester1_idx` (`semester_semesterId`),
+  KEY `fk_student_has_course_class1_idx` (`class_classId`),
+  CONSTRAINT `fk_student_has_course_class1` FOREIGN KEY (`class_classId`) REFERENCES `class` (`classId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_student_has_course_course1` FOREIGN KEY (`course_courseId`) REFERENCES `course` (`courseId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_student_has_course_finished_course_detailes1` FOREIGN KEY (`finished_course_detailes_finished_course_id`) REFERENCES `finished_course_detailes` (`finished_course_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_student_has_course_semester1` FOREIGN KEY (`semester_semesterId`) REFERENCES `semester` (`semesterId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_student_has_course_student1` FOREIGN KEY (`student_idstudent`, `student_user_id`) REFERENCES `student` (`idstudent`, `user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -356,7 +368,7 @@ CREATE TABLE `student_has_course` (
 
 LOCK TABLES `student_has_course` WRITE;
 /*!40000 ALTER TABLE `student_has_course` DISABLE KEYS */;
-INSERT INTO `student_has_course` VALUES (20,1,124,1,26,7),(21,1,124,2,27,7);
+INSERT INTO `student_has_course` VALUES (26,1,124,1,32,7,1),(27,1,124,2,33,7,1);
 /*!40000 ALTER TABLE `student_has_course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -378,7 +390,7 @@ CREATE TABLE `teacher` (
   KEY `fk_teacher_teachingUnit1_idx` (`teachingUnit_teachingUnitId`),
   CONSTRAINT `fk_teacher_teachingUnit1` FOREIGN KEY (`teachingUnit_teachingUnitId`) REFERENCES `teachingunit` (`teachingUnitId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_teacher_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -387,7 +399,7 @@ CREATE TABLE `teacher` (
 
 LOCK TABLES `teacher` WRITE;
 /*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-INSERT INTO `teacher` VALUES (1,20,123,1);
+INSERT INTO `teacher` VALUES (1,20,123,1),(2,20,128,1);
 /*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -442,7 +454,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (123,'yakov','faitsvaig','321',0,1,1),(124,'irit','yatskevich','421',0,2,0),(125,'tal','chen','521',0,3,0),(126,'sapir','sapir','621',0,4,0),(127,'tom','tim','721',0,5,0);
+INSERT INTO `user` VALUES (123,'yakov','faitsvaig','321',0,1,1),(124,'irit','yatskevich','421',0,2,0),(125,'tal','chen','521',0,3,0),(126,'sapir','sapir','621',0,4,0),(127,'tom','tim','721',0,5,0),(128,'yosi','cohen','821',0,1,0),(129,'kobi','shukrun','921',0,2,0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -455,4 +467,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-29 20:12:28
+-- Dump completed on 2017-06-30 12:45:41
