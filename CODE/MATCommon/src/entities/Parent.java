@@ -3,10 +3,10 @@ package entities;
 import java.util.ArrayList;
 
 public class Parent extends User{
-	
+
  private Boolean isblocked;
  private ArrayList <String> studentList;
-
+ 
  public Parent(Boolean isblocked, ArrayList<String> studentList) {
 	super();
 	this.isblocked = isblocked;
@@ -28,8 +28,4 @@ public ArrayList<String> getStudentList() {
 public void setStudentList(ArrayList<String> studentList) {
 	this.studentList = studentList;
 }
- 
- 
-
-
 }

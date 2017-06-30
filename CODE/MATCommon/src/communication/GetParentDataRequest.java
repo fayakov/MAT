@@ -17,11 +17,5 @@ public class GetParentDataRequest extends Message {
 	public void setParentId(int parentId) {
 		this.parentId = parentId;
 	}
-	
-	
-	
-	
-	
-	
 }
 	
