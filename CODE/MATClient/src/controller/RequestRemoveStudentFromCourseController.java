@@ -9,6 +9,7 @@ import communication.Dispatcher;
 import communication.MATClientController;
 import communication.Message;
 import entities.ERequestType;
+import entities.Request;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,10 +20,7 @@ import utils.Handler;
 
 public class RequestRemoveStudentFromCourseController implements Initializable, Handler{
 
-	int studentid, classid, courseid;
-	ERequestType requestType;
-	boolean isConfirmed, isHandeled;
-	
+	public Request request;
 	
 	public RequestRemoveStudentFromCourseController(){
 		Dispatcher.addHandler(DeleteStudentFromCourseResponse.class.getCanonicalName(), this);
@@ -53,14 +51,14 @@ public class RequestRemoveStudentFromCourseController implements Initializable, 
     	
     	else { // add request to db
     		try {
-    			studentid = Integer.parseInt(studentIdTextField.getText());
-    			classid = Integer.parseInt(classTextFiled.getText());
-    	    	courseid = Integer.parseInt(courseTextField.getText());
-    	    	isConfirmed = false;
-    	    	isHandeled = false;
-    	    	requestType = ERequestType.removeStudent;
+    			request.setUserId(Integer.parseInt(studentIdTextField.getText()));
+    			request.setClassNumber(Integer.parseInt(classTextFiled.getText()));
+    			request.setCourseId(Integer.parseInt(courseTextField.getText()));
+    			request.setHandeled(false);
+    			request.setConfirmed(false);
+    			request.setRequestType(ERequestType.removeStudent);
     	    	
-    	    	DeleteStudentFromCourseRequest delstureq= new DeleteStudentFromCourseRequest(studentid, classid, courseid, requestType, isConfirmed, isHandeled);
+    	    	DeleteStudentFromCourseRequest delstureq= new DeleteStudentFromCourseRequest(request);
     			MATClientController.getInstance().sendRequestToServer(delstureq); 
     			
     	    	} catch(NumberFormatException e){

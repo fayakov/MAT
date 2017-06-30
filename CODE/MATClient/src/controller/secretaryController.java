@@ -3,6 +3,8 @@ package controller;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import entities.Request;
+
 import java.net.URL;
 
 import javafx.collections.FXCollections;
@@ -10,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,6 +23,8 @@ import javafx.stage.Stage;
 public class secretaryController {
 
 	ObservableList<String> list ;
+	
+	public Request request;
 
     @FXML
     private ResourceBundle resources;
@@ -87,6 +92,7 @@ public class secretaryController {
     @FXML
     public void send(ActionEvent event) throws Exception {
     	
+    	((Node)event.getSource()).getScene().getWindow().hide(); 
     	String option = secretaryMenuCombox.getValue().toString();
     	if(option.equalsIgnoreCase("Add student to course"))
     		AddStudentToCourse();	

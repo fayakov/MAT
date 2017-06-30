@@ -3,7 +3,10 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import communication.DeleteStudentFromCourseRequest;
+import communication.DeleteStudentFromCourseResponse;
 import communication.Dispatcher;
+import communication.GetPendingRequestsRequest;
 import communication.GetPendingRequestsResponse;
 import entities.Request;
 import javafx.collections.FXCollections;
@@ -24,6 +27,11 @@ import utils.Handler;
 
 public class ResponseAddStudentToCourseController implements Initializable, Handler{
 	
+	
+	
+	public ResponseAddStudentToCourseController(){
+		Dispatcher.addHandler(GetPendingRequestsResponse.class.getCanonicalName(), this);
+	}
 
 	
     @FXML
@@ -66,6 +74,10 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		
+		GetPendingRequestsRequest delstureq= new GetPendingRequestsRequest(studentid, classid, courseid, requestType, isConfirmed, isHandeled);
+		MATClientController.getInstance().sendRequestToServer(delstureq); 
+		
     	requestNunber.setCellValueFactory(new PropertyValueFactory<Request, Integer>("requestNumber"));
     	userId.setCellValueFactory(new PropertyValueFactory<Request, Integer>("userId"));
     	classNumber.setCellValueFactory(new PropertyValueFactory<Request, Integer>("classNumber"));
@@ -75,6 +87,16 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
         
 
     	table.setItems(data);
+		
+	}
+
+
+
+
+
+	@Override
+	public void handle(Message msg, Object obj) {
+		// TODO Auto-generated method stub
 		
 	}
 

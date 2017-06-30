@@ -18,7 +18,7 @@ public class DeleteStudentFromCourseRequestHandler implements Handler {
 		DeleteStudentFromCourseRequest deleteStudentFromCourseRequestMsg = (DeleteStudentFromCourseRequest)msg;
 				
 		CDALError error = new CDALError();
-		boolean connectionSecceded = CDal.createRequest(ERequestType.removeStudent, deleteStudentFromCourseRequestMsg.getCourseId(), deleteStudentFromCourseRequestMsg.getClassNumber(),deleteStudentFromCourseRequestMsg.getCourseId());
+		boolean connectionSecceded = CDal.createRequest(ERequestType.removeStudent, deleteStudentFromCourseRequestMsg.getRequest().getCourseId(), deleteStudentFromCourseRequestMsg.getRequest().getClassNumber(),deleteStudentFromCourseRequestMsg.getRequest().getCourseId());
 		
 		DeleteStudentFromCourseResponse res = new DeleteStudentFromCourseResponse(connectionSecceded, error.getString());
 		try {

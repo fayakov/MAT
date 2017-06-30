@@ -24,15 +24,15 @@ public class PrincipalDecisionRequestHandler implements Handler {
 		
 		if (request.getRequestType() == ERequestType.addStudent)
 		{
-			requestSecceded = CDal.addStudentToCourseWithClass(principalDecisionMsg.getRequest().getCourseId(), principalDecisionMsg.getRequest().getClassNumber(), principalDecisionMsg.getRequest().getUserid());
+			requestSecceded = CDal.addStudentToCourseWithClass(principalDecisionMsg.getRequest().getCourseId(), principalDecisionMsg.getRequest().getClassNumber(), principalDecisionMsg.getRequest().getUserId());
 		}
 		else if (request.getRequestType() == ERequestType.changeTeacher)
 		{
-			requestSecceded = CDal.changeTeacherToCourseInClass(principalDecisionMsg.getRequest().getClassNumber(), principalDecisionMsg.getRequest().getCourseId(), principalDecisionMsg.getRequest().getUserid());
+			requestSecceded = CDal.changeTeacherToCourseInClass(principalDecisionMsg.getRequest().getClassNumber(), principalDecisionMsg.getRequest().getCourseId(), principalDecisionMsg.getRequest().getUserId());
 		}
 		else if (request.getRequestType() == ERequestType.removeStudent)
 		{
-			requestSecceded = CDal.removeStudentFromCourseWithClass(principalDecisionMsg.getRequest().getCourseId(), principalDecisionMsg.getRequest().getClassNumber(), principalDecisionMsg.getRequest().getUserid());
+			requestSecceded = CDal.removeStudentFromCourseWithClass(principalDecisionMsg.getRequest().getCourseId(), principalDecisionMsg.getRequest().getClassNumber(), principalDecisionMsg.getRequest().getUserId());
 		}		
 		
 		if (requestSecceded)
