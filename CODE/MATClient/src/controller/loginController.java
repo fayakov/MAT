@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import communication.Dispatcher;
 import communication.LoginRequestMsg;
 import communication.LoginResponseMsg;
@@ -25,12 +24,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import entities.EUserType;
+import entities.Student;
 
 
 public class loginController implements Initializable, Handler 
 {
-	//public int userId;
-	
+	public static Student st= new Student();
 
 	public loginController()
 	{
@@ -67,6 +66,7 @@ public class loginController implements Initializable, Handler
     	else{
     		try{
     			int userId = Integer.parseInt(userIdStr);
+    			st.setId(3);//tal
     			LoginRequestMsg loginReqMsg = new LoginRequestMsg(userId, userPassword,true);
     			MATClientController.getInstance().sendRequestToServer(loginReqMsg);
     			
@@ -137,13 +137,4 @@ public class loginController implements Initializable, Handler
 
 
 
-	/*public int getUserId() {
-		return userId;
-	}
-
-
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}  */
 }

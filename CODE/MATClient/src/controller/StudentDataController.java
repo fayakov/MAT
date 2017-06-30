@@ -1,6 +1,8 @@
 package controller;
 
 import java.net.URL;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import communication.Dispatcher;
@@ -19,14 +21,23 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import utils.Handler;
 import entities.User;
+import entities.EUserType;
+import entities.Request;
 import entities.Student;
+import entities.StudentCourse;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextField;
 
 public class StudentDataController  implements Initializable, Handler
 {
 	
+	private static final EUserType EUserStudent = null;
+
 	ObservableList<String> list ;
 	
 	public StudentDataController()
@@ -41,48 +52,52 @@ public class StudentDataController  implements Initializable, Handler
     @FXML // URL location of the FXML file that was given to the FXMLLoader
     private URL location;
 
-    @FXML // fx:id="textStudentID"
-    private TextField textStudentID; // Value injected by FXMLLoader
-
-    @FXML // fx:id="textLName"
-    private TextField textLName; // Value injected by FXMLLoader
-
-    @FXML // fx:id="labelLName"
-    private Label labelLName; // Value injected by FXMLLoader
-
-    @FXML // fx:id="textFName"
-    private TextField textFName; // Value injected by FXMLLoader
-
-    @FXML // fx:id="labelCourses"
-    private Label labelCourses; // Value injected by FXMLLoader
+    @FXML
+    private TextField textStudentID;
 
     @FXML
-    private ComboBox<String> comboxListCourses;
+    private TextField textLName;
 
-    @FXML // fx:id="labelStudentID"
-    private Label labelStudentID; // Value injected by FXMLLoader
+    @FXML
+    private Label labelLName;
 
-    @FXML // fx:id="textClasses"
-    private TextField textClasses; // Value injected by FXMLLoader
+    @FXML
+    private TextField textFName;
 
-    @FXML // fx:id="labelFNName"
-    private Label labelFNName; // Value injected by FXMLLoader
+    @FXML
+    private Label labelStudentID;
 
-    @FXML // fx:id="buttenExit"
-    private Button buttenExit; // Value injected by FXMLLoader
+    @FXML
+    private TableColumn<StudentCourse, Integer> colGrade;
 
-    @FXML // fx:id="labelCllassID"
-    private Label labelCllassID; // Value injected by FXMLLoader
+    @FXML
+    private TextField textClasses;
 
-    @FXML // fx:id="labelStudentData"
-    private Label labelStudentData; // Value injected by FXMLLoader
+    @FXML
+    private TableColumn<StudentCourse, Integer> colCourse;
+
+    @FXML
+    private Label labelFNName;
+
+    @FXML
+    private Label labelCllassID;
+
+    @FXML
+    private Label labelStudentData;
+    
+    @FXML
+    private TableView<StudentCourse> tableViewID;
+    
+    
+    User user= new User (1, "tal", "chen", "1234", EUserStudent, true, false);
+    final ObservableList<StudentCourse> data= FXCollections.observableArrayList(new StudentCourse(1,2,5));
 
     
     @FXML
     void StudentInfo(ActionEvent event) 
     {
-    	//GetStudentDataRequest GetStudentDataReq = new GetStudentDataRequest(loginController.getUserId());//מאיפה ת.ז?
-		//MATClientController.getInstance().sendRequestToServer(GetStudentDataReq);
+    	GetStudentDataRequest GetStudentDataReq = new GetStudentDataRequest(loginController.st.getId());//מאיפה ת.ז?
+		MATClientController.getInstance().sendRequestToServer(GetStudentDataReq);
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -91,8 +106,10 @@ public class StudentDataController  implements Initializable, Handler
     	
     	
     }
-
-	public void handle(Message msg, Object obj) 
+    
+    
+// צריך טבלה לסמסטר קורס ציון
+	/*public void handle(Message msg, Object obj) 
 	{
 		// TODO Auto-generated method stub
 		if (msg instanceof GetStudentDataResponse) 
@@ -101,17 +118,21 @@ public class StudentDataController  implements Initializable, Handler
 			
 			if (res.isRequestSecceded()) 
 			{
-				String strStudentID = Integer.toString(res.getStudentData().getId());
+				/*String strStudentID = Integer.toString(res.getStudentData().getId());
 				textStudentID.setText(strStudentID);
 				
 		    	textFName.setText(res.getStudentData().getFirstName());
 		    	textLName.setText(res.getStudentData().getLastName());
-		    	textClasses.setText(res.getStudentData().getClassID());
+		    	textClasses.setText(res.getStudentData().getClassID()); 
 		    	
-		    	ArrayList<String> options = new ArrayList<String>();
-		    	options= res.getStudentData().getCourse();
-				list = FXCollections.observableArrayList(options);
-				comboxListCourses.setItems(list);
+		    	
+		    	
+		    	
+		    	
+		    	//ArrayList<String> options = new ArrayList<String>();
+		    	//options= res.getStudentData().getCourse();
+				//list = FXCollections.observableArrayList(options);
+				//comboxListCourses.setItems(list);
 				
 				
 			} else {
@@ -120,10 +141,39 @@ public class StudentDataController  implements Initializable, Handler
 		}
 	}
 
+	*/
 	public void initialize(URL location, ResourceBundle resources) 
 	{
 		// TODO Auto-generated method stub
+		colCourse.setCellValueFactory(new PropertyValueFactory<StudentCourse, Integer>("courseID"));
+		colGrade.setCellValueFactory(new PropertyValueFactory<StudentCourse, Integer>("grade"));
+    	
+
+
+		tableViewID.setItems(data);
 		
+	}
+
+	@Override
+	public void handle(Message msg, Object obj) {
+		// TODO Auto-generated method stub
 		
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+

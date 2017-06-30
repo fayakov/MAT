@@ -12,6 +12,7 @@ import communication.Dispatcher;
 import communication.MATClientController;
 import communication.Message;
 import entities.ERequestType;
+import entities.Request;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,11 +23,7 @@ import utils.Handler;
 
 public class RequestChangeTeacherController implements Initializable, Handler
 {
-
-	int teacherid, classid, courseid;
-	ERequestType requestType;
-	
-	boolean isConfirmed, isHandeled;
+	public Request request;
 	
 	
 	public RequestChangeTeacherController(){
@@ -58,14 +55,14 @@ public class RequestChangeTeacherController implements Initializable, Handler
     	
     	else { // add request to db
     		try {
-    			teacherid = Integer.parseInt(studentIdTextFiled.getText());
-    			classid = Integer.parseInt(classNumberTextFiled.getText());
-    	    	courseid = Integer.parseInt(courseIdTextFiled.getText());
-    	    	isConfirmed = false;
-    	    	isHandeled = false;
-    	    	requestType = requestType.changeTeacher;
+    			request.setUserId(Integer.parseInt(studentIdTextFiled.getText()));
+    			request.setClassNumber(Integer.parseInt(classNumberTextFiled.getText()));
+    			request.setCourseId(Integer.parseInt(courseIdTextFiled.getText()));
+    			request.setHandeled(false);
+    			request.setConfirmed(false);
+    			request.setRequestType(ERequestType.changeTeacher);
     	    	
-    	    	ChangeTeacherRequest changeTeachreq= new ChangeTeacherRequest(teacherid, classid, courseid, requestType, isConfirmed, isHandeled);
+    	    	ChangeTeacherRequest changeTeachreq= new ChangeTeacherRequest(request);
     			MATClientController.getInstance().sendRequestToServer(changeTeachreq);
     	    	
     	    	
