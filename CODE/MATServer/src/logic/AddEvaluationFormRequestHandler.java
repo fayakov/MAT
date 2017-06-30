@@ -15,7 +15,6 @@ public class AddEvaluationFormRequestHandler implements Handler {
 		ConnectionToClient client = (ConnectionToClient) obj;
 		AddEvaluationFormRequest AddAssignmentForStudentMsg = (AddEvaluationFormRequest)msg;
 				
-		// TODO Check in database
 		CDALError error = new CDALError();
 		/*boolean connectionSecceded = false; //CDal.connectUser(AddAssignmentForStudentMsg.isToConnect(), AddAssignmentForStudentMsg.getUserId(), AddAssignmentForStudentMsg.getPassword(), error);		
 		
