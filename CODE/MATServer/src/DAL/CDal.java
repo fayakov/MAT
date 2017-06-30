@@ -2187,7 +2187,7 @@ public class CDal {
 		return retVal;
 	}
 	
-	public boolean isRequestHandled(int reqNumber)
+	public static boolean isRequestHandled(int reqNumber)
 	{
 		boolean retVal = true;
 		try{
@@ -2204,7 +2204,7 @@ public class CDal {
 		return retVal;
 	}
 	
-	public boolean confirmRequest(int reqNumber, boolean toConfirm)
+	public static boolean confirmRequest(int reqNumber, boolean toConfirm)
 	{		
 		boolean retVal = true;
 		if(!isRequestHandled(reqNumber))
@@ -2226,7 +2226,7 @@ public class CDal {
 		return retVal;
 	}
 	
-	public Request getRequest(int reqNumber, Request req)
+	public static Request getRequest(int reqNumber, Request req)
 	{
 		try{
 			Statement stmt = connection.createStatement();
@@ -2257,7 +2257,7 @@ public class CDal {
 	
 	
 	
-	public ArrayList<Request> getRequests(int semester)
+	public static ArrayList<Request> getRequests(int semester)
 	{
 		ArrayList<Request> reqArr = new ArrayList<Request>(); 
 		try{
@@ -2502,6 +2502,17 @@ public class CDal {
 			e.printStackTrace();	
 		}	
 		return retVal;
+	}
+	
+	public static boolean getParentData(int userId, Parent parentData, CDALError error) {
+	
+	boolean retVal = true;
+	parentData  = new Parent();
+	try{
+	catch (SQLException e) {
+		e.printStackTrace();	
+	}	
+	return retVal;
 	}
 	
 	
