@@ -69,7 +69,7 @@ public class MATServerController extends AbstractServer
 		
 		boolean connectionSecceded = CDal.connectUser(false, getCurrentLoggedInUserId(), getCurrentLoggedInUserPassword(), error);		
 		
-		LoginResponseMsg res = new LoginResponseMsg(connectionSecceded, userType, error.getString());
+		LoginResponseMsg res = new LoginResponseMsg(connectionSecceded, CDal.getUserType(getCurrentLoggedInUserId()), error.getString());
 		try {
 			client.sendToClient(res);
 		} catch (IOException e) {

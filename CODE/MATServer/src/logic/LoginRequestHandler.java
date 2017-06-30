@@ -22,8 +22,7 @@ public class LoginRequestHandler implements Handler {
 		
 		// TODO Check in database
 		CDALError error = new CDALError();
-		int userType = 0;
-		boolean connectionSecceded = CDal.connectUser(loginMsg.isToConnect(), loginMsg.getUserId(), loginMsg.getPassword(),userType, error);		
+		boolean connectionSecceded = CDal.connectUser(loginMsg.isToConnect(), loginMsg.getUserId(), loginMsg.getPassword(), error);		
 				
 		if (connectionSecceded) {
 			MATServerController.getInstance();
