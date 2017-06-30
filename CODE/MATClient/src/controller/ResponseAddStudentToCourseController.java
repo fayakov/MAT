@@ -1,8 +1,10 @@
 package controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import communication.AddStudentToCourseResponse;
 import communication.DeleteStudentFromCourseRequest;
 import communication.DeleteStudentFromCourseResponse;
 import communication.Dispatcher;
@@ -29,10 +31,12 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
 	
 	
 	
-	public ResponseAddStudentToCourseController(){
+	public ResponseAddStudentToCourseController()
+	{
 		Dispatcher.addHandler(GetPendingRequestsResponse.class.getCanonicalName(), this);
 	}
 
+	//public ERequestType requestType;
 	
     @FXML
     private ResourceBundle resources;
@@ -47,7 +51,7 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
     private TableColumn<Request, Boolean> isConfirmed;
 
     @FXML
-    private TableColumn<Request, Integer> requestNunber;
+    private TableColumn<Request, Integer> requestNumber;
 
     @FXML
     private TableColumn<Request, Integer> classNumber;
@@ -67,18 +71,27 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
     		new Request(1,22,333,3333,true,true),
     		new Request(2,222,555,66666,true,true));
 
-    
+    ArrayList<Request> data1 = new ArrayList<Request>();
  
+    @FXML
+    void confirm(ActionEvent event) {
+
+    }
+
+    @FXML
+    void decline(ActionEvent event) {
+
+    }
     
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
-		GetPendingRequestsRequest delstureq= new GetPendingRequestsRequest(studentid, classid, courseid, requestType, isConfirmed, isHandeled);
-		MATClientController.getInstance().sendRequestToServer(delstureq); 
+		GetPendingRequestsRequest pendigreq= new GetPendingRequestsRequest(ERequestType.addStudent);
+		MATClientController.getInstance().sendRequestToServer(pendigreq); 
 		
-    	requestNunber.setCellValueFactory(new PropertyValueFactory<Request, Integer>("requestNumber"));
+    	requestNumber.setCellValueFactory(new PropertyValueFactory<Request, Integer>("requestNumber"));
     	userId.setCellValueFactory(new PropertyValueFactory<Request, Integer>("userId"));
     	classNumber.setCellValueFactory(new PropertyValueFactory<Request, Integer>("classNumber"));
     	courseId.setCellValueFactory(new PropertyValueFactory<Request, Integer>("courseId"));
@@ -98,7 +111,22 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
 		
-	}
 
+		/// להמשיך את הפונקציה 
+		if (msg instanceof GetPendingRequestsResponse) {
+			GetPendingRequestsResponse res = (GetPendingRequestsResponse)msg;
+			
+			int len =res.getPendingRequests().size();
+			for (int i = 0; i< len; i++)
+			{
+				data1= res.getPendingRequests();
+				
+			}
+			
+		
+		}
+	}
+		
+	
 
 }

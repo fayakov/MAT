@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -94,7 +95,8 @@ public class PrincipalController {
     public void send(ActionEvent event) throws Exception {
     	
     	try{
-    	option = principalComboBox.getValue().toString(); }
+    	
+    		option = principalComboBox.getValue().toString(); }
     	catch(Exception e){
     		Prompt.alert(3, "please choose option");
     	}
