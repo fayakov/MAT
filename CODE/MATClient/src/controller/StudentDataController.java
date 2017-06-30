@@ -37,7 +37,6 @@ public class StudentDataController  implements Initializable, Handler
 {
 	
 	private static final EUserType EUserStudent = null;
-
 	ObservableList<String> list ;
 	
 	public StudentDataController()
@@ -89,7 +88,9 @@ public class StudentDataController  implements Initializable, Handler
     private TableView<StudentCourse> tableViewID;
     
     
+    //test
     User user= new User (1, "tal", "chen", "1234", EUserStudent, true, false);
+    
     final ObservableList<StudentCourse> data= FXCollections.observableArrayList(new StudentCourse(1,2,5));
 
     
@@ -108,24 +109,23 @@ public class StudentDataController  implements Initializable, Handler
     }
     
     
-// צריך טבלה לסמסטר קורס ציון
-	/*public void handle(Message msg, Object obj) 
+	public void handle(Message msg, Object obj) 
 	{
 		// TODO Auto-generated method stub
 		if (msg instanceof GetStudentDataResponse) 
 		{
 			GetStudentDataResponse res = (GetStudentDataResponse)msg;
 			
-			if (res.isRequestSecceded()) 
+			if (res.isSucceed()) 
 			{
-				/*String strStudentID = Integer.toString(res.getStudentData().getId());
+				String strStudentID = Integer.toString(res.getStudentData().getId());
 				textStudentID.setText(strStudentID);
 				
 		    	textFName.setText(res.getStudentData().getFirstName());
 		    	textLName.setText(res.getStudentData().getLastName());
-		    	textClasses.setText(res.getStudentData().getClassID()); 
 		    	
-		    	
+		    	String strClass = Integer.toString(res.getStudentData().getId());
+		    	textClasses.setText(strClass); 
 		    	
 		    	
 		    	
@@ -141,7 +141,7 @@ public class StudentDataController  implements Initializable, Handler
 		}
 	}
 
-	*/
+	
 	public void initialize(URL location, ResourceBundle resources) 
 	{
 		// TODO Auto-generated method stub
@@ -154,11 +154,8 @@ public class StudentDataController  implements Initializable, Handler
 		
 	}
 
-	@Override
-	public void handle(Message msg, Object obj) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+				
 }
 
 

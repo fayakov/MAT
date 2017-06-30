@@ -3,15 +3,14 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Student  extends User {
+public class Student  extends User 
+{
 	 
 	public ArrayList<Integer> parentID = new ArrayList<Integer>();
 	 //public ArrayList<Integer> classID = new  ArrayList<Integer>(); 
 	public int classID;
 	 public  ArrayList<Integer> course = new ArrayList<Integer>(); 
 
-	 
-	 
 	 
 	 public Student(Integer classID, User user  ) 
 	 {
@@ -30,10 +29,10 @@ public class Student  extends User {
 	public void setParentID(ArrayList<Integer> parentID) {
 		this.parentID = parentID;
 	}
-	public ArrayList<Integer>  getClassID() {
+	public int  getClassID() {
 		return classID;
 	}
-	public void setClassID(ArrayList<Integer>  classID) {
+	public void setClassID(int  classID) {
 		this.classID = classID;
 	}
 
