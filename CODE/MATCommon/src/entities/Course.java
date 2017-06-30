@@ -8,7 +8,25 @@ public class Course  {
 	private String courseName;
 	private int teachingUnit;
 	private ArrayList<Integer> preCourses;
+	private int duration;
 	
+	public Course(int courseId, String courseName, int teachingUnit, ArrayList<Integer> preCourses, int duration) {
+		super();
+		this.courseId = courseId;
+		this.courseName = courseName;
+		this.teachingUnit = teachingUnit;
+		this.preCourses = preCourses;
+		this.duration = duration;
+	}
+	
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
 	public ArrayList<Integer> getPreCourses() {
 		return preCourses;
 	}

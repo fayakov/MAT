@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import entities.*;
+import logic.Course;
 public class CDal {
 	private static String userName = "root";
 	private static String password = "Braude";//"mysql_native_password";//"admin";
@@ -1567,7 +1568,7 @@ public class CDal {
 	}
 	
 	
-	public ArrayList<Integer> getTeacherCourses(int teahcerId, int semesterId)
+	public static ArrayList<Integer> getTeacherCourses(int teahcerId, int semesterId)
 	{
 		ArrayList<Integer> courseList = new ArrayList<Integer>();
 		try 
@@ -2569,6 +2570,11 @@ public class CDal {
 			}
 		}
 		return retVal;
+	}
+
+	public static Course getCourseData(int courseId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

@@ -24,7 +24,17 @@ public class CDALError {
 	public String getString() {
 		// TODO Auto-generated method stub
 		// Yinon: Convert error code to string...
-		return "";
+		String returnString = "";
+		
+		if (this.error == EDALError.ETeacherExceedMaxHours)
+		{
+			returnString = "Teacher Exceeded Max Hours";
+		}
+		else if (this.error == EDALError.EUserAllreadyConnectedDisconnected)
+		{
+			returnString = "User allready loogged in to system";
+		}
+		return returnString;
 	}
 
 }
