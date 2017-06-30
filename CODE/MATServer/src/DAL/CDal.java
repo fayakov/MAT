@@ -2226,8 +2226,9 @@ public class CDal {
 		return retVal;
 	}
 	
-	public static Request getRequest(int reqNumber, Request req)
+	public static boolean getRequest(int reqNumber, Request req)
 	{
+		boolean retVal = true;
 		try{
 			Statement stmt = connection.createStatement();
 			ResultSet resultSet  = stmt.executeQuery("SELECT * FROM request "
@@ -2248,11 +2249,16 @@ public class CDal {
 				}
 				req = new Request(resultSet.getInt(1), resultSet.getInt(3) , resultSet.getInt(4), resultSet.getInt(5), resultSet.getBoolean(7),resultSet.getBoolean(6), reqType);
 			}
+			else
+			{
+				retVal = false;
+			}
 		}
 		catch (SQLException e) {
+			retVal = false;
 			e.printStackTrace();	
 		}	
-		return req;
+		return retVal;
 	}
 	
 	
@@ -2506,7 +2512,7 @@ public class CDal {
 	
 	public static boolean getParentData(int userId, Parent parentData, CDALError error) {
 	
-		boolean retVal = true;/*
+		boolean retVal = true;
 		parentData = new Parent();
 		try{
 			Statement stmt = connection.createStatement();
@@ -2516,13 +2522,15 @@ public class CDal {
 				User user = new User();
 				if(getUserData(userId, user))
 				{
-					int studentId = getStudentId(userId);
-					if(studentId != 0)
+					int parentId = getParentId(userId);
+					
+					if(parentId != 0)
 					{
-						student.setAllUserData(user);	
-						student.setCourse(getStudentCourses(userId));
-						student.setClassID(getStudentClasses(userId));
-						student.setParentID(getChildrenParents(studentId));
+						parentData.setAllUserData(user);
+						ArrayList<Integer> children = getParentsChildrens(parentId);
+						parentData.setStudentList(children);
+						parentData.setIsblocked(isParentHasStudentBlocked(parentId, getParentsChildrens(parentId).get(0)));
+						
 					}
 					else
 					{
@@ -2538,7 +2546,7 @@ public class CDal {
 		}
 		catch (SQLException e) {
 			e.printStackTrace();	
-		}	*/
+		}	
 		return retVal;
 	
 	}
