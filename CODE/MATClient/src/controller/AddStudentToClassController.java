@@ -8,6 +8,7 @@ import communication.AddStudentToClassResponse;
 import communication.Dispatcher;
 import communication.MATClientController;
 import communication.Message;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -70,15 +71,41 @@ public class AddStudentToClassController implements Handler {
 
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
-		if (msg instanceof AddStudentToClassRequest) {
+		if (msg instanceof AddStudentToClassResponse) {
 			AddStudentToClassResponse res = (AddStudentToClassResponse)msg;
+			
+			try {
+				localPrompt(sid, cid,  res.getErrText(), res.actionSucceed());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			/*
 			if (res.actionSucceed()) {
 				 Prompt.alert(1, "student " + sid + " added successfully to class " + cid);
 			} else {
 				Prompt.alert(3, res.getErrText());	
 			}
+			*/
 			
 		}
 		
+	}
+	
+public void localPrompt(final int sid, final int cid, final String eror, final boolean succ)  throws Exception {
+		
+		Platform.runLater(new Runnable() {
+			int studentId = sid;
+			int classId = cid;		
+			String erorText = eror;
+			boolean success = succ;
+			
+			public void run() {
+				if(success)
+					Prompt.alert(1, "student " + studentId + " added successfully to class " + classId);	
+				else
+					Prompt.alert(3, erorText);
+			}
+		} );
 	}
 }
