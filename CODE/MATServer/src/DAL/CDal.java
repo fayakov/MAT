@@ -32,7 +32,7 @@ public class CDal {
 		}
 	}
 	
-	public static Teacher getTeacher( int id)
+	public static Teacher getTeacherData( int id)
 	{
 		Teacher teacherData = new Teacher();
 		try 
@@ -363,8 +363,7 @@ public class CDal {
 				}
 				else
 				{
-					Statement stmt = connection.createStatement();
-					stmt.executeUpdate("INSERT INTO student (user_id) VALUES ('" +userId+"')");
+					retVal = false;
 				}
 			}
 		}
@@ -466,14 +465,14 @@ public class CDal {
 		return retVal;
 	}
 	
-	private static int createNewCourseDetailesToStudentWithCourseId()
+	private static int createNewCourseDetailesToStudentWithCourseId(int semester)
 	{
 		int retVal = 0;
 			try {
 			Statement stmt = connection.createStatement();
 			if(stmt.executeUpdate("INSERT INTO finished_course_detailes  "
-								+ "(isNew) "
-								+ "values (true);") != 0)
+								+ "(isNew, semester) "
+								+ "values (true, "+semester+");") != 0)
 			
 				{
 					ResultSet resultSet  = stmt.executeQuery("SELECT finished_course_id  "
@@ -497,87 +496,6 @@ public class CDal {
 
 		return retVal;
 	}
-	
-	public static boolean addStudentToCourse(String courseName, int userId){
-		boolean retVal = true;
-		
-		if(getUserType(userId) == EUserType.EUserStudent)
-		{
-
-			try 
-			{
-				int courseId = getCourseId(courseName);
-				if(courseId == 0)
-				{
-					retVal = false;
-				}
-				else
-				{
-					int studentId = getStudentId(userId);
-					if(studentId != 0)
-					{
-						if(isStudentFinishedPrevCourse(studentId,courseId))
-						{
-							int curSemester = getCurrentSemester();
-							if(curSemester != 0)
-							{
-								int studentCourseId = getStudentInCourseId(courseId, studentId, curSemester);
-								if(studentCourseId == 0)
-								{
-									int newCourseDetailesId = createNewCourseDetailesToStudentWithCourseId();
-									if(newCourseDetailesId == 0)
-									{
-										retVal = false;
-									}
-									else
-									{
-										
-											Statement stmt = connection.createStatement();
-											if(stmt.executeUpdate("INSERT INTO student_has_course  "
-																+ "(student_has_course.student_idstudent, "
-																+ "student_has_course.student_user_id, "
-																+ "student_has_course.course_courseId,"
-																+ "student_has_course.finished_course_detailes_finished_course_id, "
-																+ "semester_semesterId) "
-																+ "values ("+studentId+ "," + userId +","+ courseId +","+newCourseDetailesId+ "," +curSemester+");") == 0)
-											
-											{
-												retVal = false;
-											}
-										
-
-									}
-								}
-								else
-								{
-									retVal = false;
-								}
-							}
-							else
-							{
-							}
-						}
-						else
-						{
-							retVal = false;
-						}
-						
-					}
-
-				}
-			}
-			catch (SQLException e) {
-				e.printStackTrace();			
-			}		
-		}
-		else
-		{
-			retVal = false;
-		}
-		
-		return retVal;
-	}
-	
 	
 	public static boolean isCourseExist(int courseId){
 		
@@ -626,10 +544,27 @@ public class CDal {
 		catch (SQLException e) {e.printStackTrace();}
 		return retVal;
 	}
+
+	private static int getStudentCourseDetailesId(int courseId, int studentId, int semesterId){
+		
+		int	 retVal = 0;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT finished_course_detailes_finished_course_id FROM student_has_course "
+					+ "WHERE student_has_course.student_idstudent = " +studentId + " "
+					+ "AND student_has_course.course_courseId = " +courseId+ " "
+					+ "AND student_has_course.semester_semesterId = " + semesterId + ";");
+			if(resultSet.first()) {
+
+				retVal = resultSet.getInt(1);
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
 	
-	
-	
-	public static int getStudentInCourseId(int courseId, int studentId, int semesterId){
+	private static int getStudentInCourseId(int courseId, int studentId, int semesterId){
 		
 		int	 retVal = 0;
 		try 
@@ -1040,8 +975,7 @@ public class CDal {
 		return retVal;
 	}
 	
-	
-	public static boolean removeTeacherFromCourseInClass(int classId, int courseId){
+	public static boolean changeTeacherToCourseInClass(int classId, int courseId, int userID){
 		boolean retVal = true;
 		try 
 		{
@@ -1054,18 +988,47 @@ public class CDal {
 					{
 						if(isCourseInClass(classId, courseId, curSemester))
 						{
-						
-								Statement stmt = connection.createStatement();
-								if(stmt.executeUpdate("UPDATE class_has_course SET "
-										+ "class_has_course.teacher_teacherId = "+0 +", "
-										+ "class_has_course.teacher_user_id  = "+ 0 +""
-										+ " WHERE class_has_course.class_classId = " +classId +" AND"
-										+ " class_has_course.course_courseId = "+ courseId + " AND "
-										+ " class_has_course.semester_semesterId = " +curSemester+";") == 0)
+							int teacherId = getTeacherId(userID);
+							if(teacherId != 0)
+							{
+								int teachingUnit = getTeacherUnitId(teacherId);
+								if(teachingUnit != 0)
+								{
+									int courseTeachingUnit = getCourseTeachingUnitId(classId);
+									if(courseTeachingUnit != 0)
+									{
+										if(courseTeachingUnit == teachingUnit)
+										{	
+											Statement stmt = connection.createStatement();
+											if(stmt.executeUpdate("UPDATE class_has_course SET "
+													+ "class_has_course.teacher_teacherId = "+teacherId +", "
+													+ "class_has_course.teacher_user_id  = "+ userID +""
+													+ " WHERE class_has_course.class_classId = " +classId +" AND"
+													+ " class_has_course.course_courseId = "+ courseId + " AND "
+													+ " class_has_course.semester_semesterId = " +curSemester+";") == 0)
+											{
+												retVal = false;
+											}
+										}
+										else
+										{
+											retVal = false;
+										}
+									}
+									else
+									{
+										retVal = false;
+									}
+								}
+								else
 								{
 									retVal = false;
 								}
-					
+							}
+							else
+							{
+								retVal = false;
+							}
 						}
 						else
 						{
@@ -1092,7 +1055,6 @@ public class CDal {
 		}		
 		return retVal;
 	}
-	
 	
 	public static boolean isTeachingUnitExist(String unitName){
 		
@@ -1184,7 +1146,7 @@ public class CDal {
 					"SELECT student_has_course.course_courseId "
 					+ "FROM student_has_course "
 					+ "RIGHT JOIN finished_course_detailes "
-					+ "ON student_has_course.student_has_courseId = finished_course_detailes.finished_course_id  "
+					+ "ON student_has_course.finished_course_detailes_finished_course_id  = finished_course_detailes.finished_course_id  "
 					+ "WHERE finished_course_detailes.isFinished = 1 "
 					+ "AND student_has_course.student_idstudent = "+studentId+";");
 			while(resultSet.next())
@@ -1195,6 +1157,49 @@ public class CDal {
 		catch (SQLException e) {e.printStackTrace();}
 		return courseIdList;
 	}
+	
+	public static ArrayList<Integer> getStudentCourses(int studentId)
+	{
+		ArrayList<Integer> courseIdList = new ArrayList<Integer>();
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery(
+					"SELECT student_has_course.course_courseId "
+					+ "FROM student_has_course "
+					+ "RIGHT JOIN finished_course_detailes "
+					+ "ON student_has_course.finished_course_detailes_finished_course_id  = finished_course_detailes.finished_course_id  "
+					+ "WHERE student_has_course.student_idstudent = "+studentId+";");
+			while(resultSet.next())
+	 		{				
+				courseIdList.add(resultSet.getInt(1));
+	 		} 
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return courseIdList;
+	}
+	
+	public static ArrayList<Integer> getStudentClasses(int studentId)
+	{
+		ArrayList<Integer> classIdList = new ArrayList<Integer>();
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery(
+					"SELECT student_has_course.class_classId "
+					+ "FROM student_has_course  "
+					+ "WHERE student_has_course.student_idstudent = "+studentId+";");
+			while(resultSet.next())
+	 		{				
+				classIdList.add(resultSet.getInt(1));
+	 		} 
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return classIdList;
+	}
+	
+	
+	
 	
 	public static ArrayList<Integer> getPrevCourses(int courseId)
 	{
@@ -1406,12 +1411,12 @@ public class CDal {
 		return retVal;
 	}
 	
-	public static boolean finishCourse(int courseId, int studentId, int grade, int semester){
+	public static boolean finishStudentCourse(int courseId, int studentId, int grade, int semester){
 		boolean retVal = true;
-		int studentCourseId = getStudentInCourseId(courseId, studentId, semester);
-		if(studentCourseId != 0)
+		int studentCourseDetailesId = getStudentCourseDetailesId(courseId, studentId, semester);
+		if(studentCourseDetailesId != 0)
 		{
-			updateFinishedCourseDetailes(studentCourseId, grade, semester);
+			retVal = updateFinishedCourseDetailes(studentCourseDetailesId, grade, semester);
 		}
 		else
 		{
@@ -1924,6 +1929,25 @@ public class CDal {
 		return myList;
 	}
 	
+	public static ArrayList<Integer> getChildrenParents(int studentId)
+	{
+		ArrayList<Integer> myList = new ArrayList<Integer>();
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT parent_parentId FROM parent_has_student "
+					+ "WHERE parent_has_student.student_idstudent = " +studentId +";");
+			
+			
+			while(resultSet.next())
+	 		{				
+				myList.add(resultSet.getInt(1));
+	 		} 
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return myList;
+	}
+	
 	public static boolean isParentHasStudentBlocked(int parentId, int studentId)
 	{
 		boolean retVal = false;
@@ -1985,7 +2009,446 @@ public class CDal {
 		}
 		return retVal;
 	}
+	
+	public static boolean addStudentToCourseWithClass(int courseId, int ClassId, int userId){
+		boolean retVal = true;
+		
+		if(getUserType(userId) == EUserType.EUserStudent)
+		{
 
+			try 
+			{
+				int studentId = getStudentId(userId);
+				if(studentId != 0)
+				{
+					if(isStudentFinishedPrevCourse(studentId,courseId))
+					{
+						int curSemester = getCurrentSemester();
+						if(curSemester != 0)
+						{
+							int studentCourseId = getStudentInCourseId(courseId, studentId, curSemester);
+							if(studentCourseId == 0)
+							{
+								if(isCourseInClass(ClassId, courseId , curSemester))
+								{
+									int newCourseDetailesId = createNewCourseDetailesToStudentWithCourseId(curSemester);
+									if(newCourseDetailesId == 0)
+									{
+										retVal = false;
+									}
+									else
+									{
+										
+											Statement stmt = connection.createStatement();
+											if(stmt.executeUpdate("INSERT INTO student_has_course  "
+																+ "(student_has_course.student_idstudent, "
+																+ "student_has_course.student_user_id, "
+																+ "student_has_course.course_courseId,"
+																+ "student_has_course.finished_course_detailes_finished_course_id, "
+																+ "student_has_course.class_classId, "
+																+ "semester_semesterId) "
+																+ "values ("+studentId+ "," + userId +","+ courseId +","+newCourseDetailesId+ "," + ClassId +","+ +curSemester+");") == 0)
+											
+											{
+												retVal = false;
+											}
+										
+
+									}
+								}
+								else
+								{
+									retVal = false;
+								}
+								
+							}
+							else
+							{
+								retVal = false;
+							}
+						}
+						else
+						{
+						}
+					}
+					else
+					{
+						retVal = false;
+					}
+					
+				}
+
+				
+			}
+			catch (SQLException e) {
+				e.printStackTrace();			
+			}		
+		}
+		else
+		{
+			retVal = false;
+		}
+		
+		return retVal;
+	}
+	
+	private static boolean removeStudentCourseDetails(int studentCourseId)
+	{
+		boolean retVal = true;
+		try{
+			Statement stmt = connection.createStatement();
+			if(stmt.executeUpdate("DELETE from finished_course_detailes "
+					+ "WHERE finished_course_detailes.finished_course_id = "+studentCourseId +" ")== 0)
+			{
+				retVal = false;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();			
+		}	
+		return retVal;
+	}
+	
+	public static boolean removeStudentFromCourseWithClass(int courseId, int classId, int userId){
+		boolean retVal = true;
+	
+		try{
+			int curSemester = getCurrentSemester();
+			if(curSemester != 0)
+			{
+				int studentId = getStudentId(userId);
+				if(studentId != 0)
+				{
+					int StudentCourseDetailesId = getStudentCourseDetailesId(courseId, studentId, curSemester);
+					if(StudentCourseDetailesId != 0)
+					{
+						Statement stmt = connection.createStatement();
+						if(stmt.executeUpdate("DELETE from student_has_course "
+								+ "WHERE student_has_course.student_user_id = "+userId +" "
+								+ "AND student_has_course.class_classId = "+ classId+" "
+								+ "AND student_has_course.course_courseId ="+  courseId+";")== 0)
+						{
+							retVal = false;
+						}
+						else
+						{
+							if(removeStudentCourseDetails(StudentCourseDetailesId))
+							{
+								
+							}
+							else
+							{
+								retVal = false;
+							}
+						}
+					}
+					else
+					{
+						retVal = false;
+					}	
+				}
+				else
+				{
+					retVal = false;
+				}
+			}
+			else
+			{
+				retVal = false;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();			
+		}		
+		return retVal;
+	}
+	
+	private static boolean isRequestExist( int type, int userId, int classId, int courseId, int semester)
+	{
+		boolean retVal = false;
+		try{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT requestId FROM request "
+					+ "WHERE request.classId = " +classId + " "
+					+ "AND request.courseId = " +courseId + " "
+					+ "AND request.requestType = " +type + " "
+					+ "AND request.semester_semesterId = " +semester + " "
+					+ "AND request.userId = " +userId + " "
+					+ "AND request.isHandled = 0;");
+			if(resultSet.first()) {
+				retVal = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	
+		}	
+
+		
+		return retVal;
+	}
+	
+	public static boolean isRequestHandled(int reqNumber)
+	{
+		boolean retVal = true;
+		try{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT isHandled FROM request "
+					+ "WHERE request.requestId = " +reqNumber + ";");
+			if(resultSet.first()) {
+				retVal = resultSet.getBoolean(1);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	
+	}
+		return retVal;
+	}
+	
+	public static boolean confirmRequest(int reqNumber, boolean toConfirm)
+	{		
+		boolean retVal = true;
+		if(!isRequestHandled(reqNumber))
+		{
+			try{
+				Statement stmt = connection.createStatement();
+				retVal = (stmt.executeUpdate("UPDATE request SET isConfirmed = " + toConfirm + ", isHandled = 1 "
+						+ "WHERE request.requestId = " + reqNumber +";") > 0);
+			}
+			catch (SQLException e) {
+				e.printStackTrace();	
+			}	
+		}
+		else
+		{
+			
+		}
+
+		return retVal;
+	}
+	
+	public static Request getRequest(int reqNumber )
+	{
+		Request req = new Request();
+		try{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT * FROM request "
+					+ "WHERE request.requestId = " + reqNumber + ";");
+			if(resultSet.first()) {	
+				ERequestType reqType = ERequestType.addStudent;
+				switch(resultSet.getInt("requestType"))
+				{
+					case 1:
+						reqType = ERequestType.addStudent;
+						break;
+					case 2:
+						reqType = ERequestType.removeStudent;
+						break;
+					case 3:
+						reqType = ERequestType.changeTeacher;
+						break;
+				}
+				
+				req.setUserid(resultSet.getInt("userId"));
+				req.setClassNumber(resultSet.getInt("classId"));
+				req.setCourseId(resultSet.getInt("courseId"));
+				req.setRequestType(reqType);
+				req.setRequestNumber(resultSet.getInt("requestId"));
+				req.setConfirmed(resultSet.getBoolean("isConfimed"));
+				req.setHandeled(resultSet.getBoolean("isHandeled"));
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	
+		}	
+		return req;
+	}
+	
+	
+	
+	public static ArrayList<Request> getRequests(int semester)
+	{
+		ArrayList<Request> reqArr = new ArrayList<Request>(); 
+		try{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT * FROM request "
+					+ "WHERE request.isHandled = 0;");
+			while(resultSet.next())
+	 		{				
+				ERequestType reqType = ERequestType.addStudent;
+				switch(resultSet.getInt(2))
+				{
+				case 1:
+					reqType = ERequestType.addStudent;
+					break;
+				case 2:
+					reqType = ERequestType.removeStudent;
+					break;
+				case 3:
+					reqType = ERequestType.changeTeacher;
+					break;
+				}
+				Request req = new Request(resultSet.getInt(1), resultSet.getInt(3) , resultSet.getInt(4), resultSet.getInt(5), resultSet.getBoolean(7),resultSet.getBoolean(6), reqType);
+				reqArr.add(req);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	
+		}	
+
+		
+		return reqArr;
+	}
+	
+	private static void printMetaData(ResultSet resultSet)
+	{
+		try{
+			ResultSetMetaData rsmd = resultSet.getMetaData();
+			int columnCount = rsmd.getColumnCount();
+			for (int i = 1; i <= columnCount; i++ ) {
+			  String name = rsmd.getColumnName(i);
+			  System.out.println(name);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	
+		}	
+	}
+	
+	public static boolean isRequestInputValid( ERequestType type, int userId, int classId, int courseId, int semesterId)
+	{
+		boolean retVal = true;
+		switch(type)
+		{
+			case addStudent:
+			{
+				int studentId = getStudentId(userId);
+				if(studentId != 0)
+				{
+					if(isCourseInClass(classId, courseId, semesterId))
+					{
+						if(getStudentHasCourseId(studentId, courseId, semesterId) != 0)
+						{
+							retVal = false;
+						}
+					}
+					else
+					{
+						retVal = false;
+					}
+				}
+				else
+				{
+					retVal = false;
+				}
+				break;
+			}
+			case removeStudent:
+			{
+				int studentId = getStudentId(userId);
+				if(studentId != 0)
+				{
+					if(isCourseInClass(classId, courseId, semesterId))
+					{
+						if(getStudentHasCourseId(studentId, courseId, semesterId) == 0)
+						{
+							retVal = false;
+						}
+					}
+					else
+					{
+						retVal = false;
+					}
+				}
+				else
+				{
+					retVal = false;
+				}
+				break;
+			}
+			case changeTeacher:
+			{
+				int teacherId = getTeacherId(userId);
+				if(teacherId != 0)
+				{
+					if(isCourseInClass(classId, courseId, semesterId))
+					{
+						if(isTeacherInClassWithCourse(teacherId, classId, courseId, semesterId))
+						{
+							retVal = false;
+						}
+					}
+					else
+					{
+						retVal = false;
+					}
+				}
+				else
+				{
+					retVal = false;
+				}
+				break;
+			}
+			default:
+				retVal = false;
+				break;
+		}
+		return retVal;
+	}
+	
+	
+	
+	public static boolean createRequest( ERequestType type, int userId, int classId, int courseId)
+	{
+		boolean retVal = true;
+		int curSemester = getCurrentSemester();
+		if(curSemester != 0)
+		{
+			if(isRequestInputValid(type, userId, classId, courseId, curSemester))
+			{
+				boolean errorType = false;
+				int reqType = 0;
+				switch(type)
+				{
+				case addStudent:
+					reqType = 1;
+					break;
+				case removeStudent:
+					reqType = 2;
+					break;
+				case changeTeacher:
+					reqType = 3;
+					break;
+				default:
+					errorType = true;
+					break;
+				}
+				if(!errorType)
+				{
+					if(!isRequestExist(reqType, userId, classId, courseId, curSemester))
+					{
+						try{ 
+							Statement stmt = connection.createStatement();
+							stmt.executeUpdate("INSERT INTO request "
+									+ "(classId, courseId, requestType, semester_semesterId, userId) "
+									+ "VALUES ("+classId+","+courseId+","+reqType+","+curSemester+","+userId+")");
+						}
+						catch (SQLException e) {
+							e.printStackTrace();	
+						}	
+					}
+					else
+					{
+						retVal = false;
+					}
+						
+				}
+			}
+		}
+		
+		return retVal;
+	}
+		
+	/*
 	public static boolean addStudentToCourse(int courseId, int studentID, CDALError error) {
 		// TODO Auto-generated method stub
 		return false;
@@ -2010,13 +2473,99 @@ public class CDal {
 	public static boolean getPendingRequests(ArrayList<Request> requests, CDALError error) {
 		// TODO Auto-generated method stub
 		return false;
-	}
+	}*/
 
-	public static boolean getStudentData(int userId, Student studentData, CDALError error) {
-		// TODO Auto-generated method stub
-		return false;
+	public static Student getStudentData(int userId, CDALError error) {
+		boolean retVal = true;
+		Student student = new Student();
+		try{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT * FROM student "
+					+ "WHERE student.user_id = " + userId + ";");
+			if(resultSet.first()) {
+				User user = new User();
+				if(getUserData(userId, user))
+				{
+					int studentId = getStudentId(userId);
+					if(studentId != 0)
+					{
+						student.setAllUserData(user);	
+						student.setCourse(getStudentCourses(userId));
+						student.setClassID(getStudentClasses(userId));
+						student.setParentID(getChildrenParents(studentId));
+					}
+	
+				}				
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	
+		}	
+		return student;
+	}
+	
+	public static Parent getParentData(int userId, CDALError error) {
+	
+		boolean retVal = true;
+		Parent parentData = new Parent();
+		try{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT * FROM parent "
+					+ "WHERE parent.user_id = " + userId + ";");
+			if(resultSet.first()) {
+				User user = new User();
+				if(getUserData(userId, user))
+				{
+					int parentId = getParentId(userId);
+					
+					if(parentId != 0)
+					{
+						parentData.setAllUserData(user);
+						ArrayList<Integer> children = getParentsChildrens(parentId);
+						parentData.setStudentList(children);
+						parentData.setIsblocked(isParentHasStudentBlocked(parentId, getParentsChildrens(parentId).get(0)));
+						
+					}
+					else
+					{
+						retVal = false;
+					}
+	
+				}
+				else
+				{
+					retVal = false;
+				}				
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	
+		}	
+		return parentData;
+	
+	}
+	
+	public static boolean createAssignment(int userId)
+	{
+		boolean retVal = true;
+		if(isParentExist(userId))
+		{
+			retVal = false;
+		}
+		else
+		{
+			try{ 
+				Statement stmt = connection.createStatement();
+				stmt.executeUpdate("INSERT INTO assignment (Date) VALUES ('" +userId+"')");
+			}
+			catch (SQLException e) {
+				e.printStackTrace();			
+			}
+		}
+		return retVal;
 	}
 	
 }
+
 
 

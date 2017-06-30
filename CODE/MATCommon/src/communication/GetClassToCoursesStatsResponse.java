@@ -1,22 +1,21 @@
 package communication;
 
-import entities.Student;
+import entities.CClass;
 
-public class GetStudentDataResponse extends Message 
-{
+public class GetClassToCoursesStatsResponse extends Message {
 
 	private static final long serialVersionUID = 1L;
 	
 	boolean requestSecceded;
 	private String errText;
-	Student studentData;
+	CClass classData;
 	
-	public GetStudentDataResponse(boolean requestSecceded, String errText,
-			Student studentData) {
+	public GetClassToCoursesStatsResponse(boolean requestSecceded, String errText,
+			CClass classData) {
 		super();
 		this.requestSecceded = requestSecceded;
 		this.errText = errText;
-		this.studentData = studentData;
+		this.classData = classData;
 	}
 	
 	public boolean isRequestSecceded() {
@@ -31,11 +30,11 @@ public class GetStudentDataResponse extends Message
 	public void setErrText(String errText) {
 		this.errText = errText;
 	}
-	public Student getStudentData() {
-		return studentData;
+	public CClass getclassData() {
+		return classData;
 	}
-	public void setStudentData(Student studentData) {
-		this.studentData = studentData;
+	public void setclassData(CClass classData) {
+		this.classData = classData;
 	}
 }
 

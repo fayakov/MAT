@@ -4,20 +4,20 @@ import java.io.IOException;
 
 import DAL.CDALError;
 import DAL.CDal;
-import communication.AddAssignmentForStudentRequest;
+import communication.GetClassDataRequest;
 import communication.Message;
 import ocsf.server.ConnectionToClient;
 import utils.Handler;
 
-public class AddAssignmentForStudentRequestHandler implements Handler {
+public class GetClassDataRequestHandler implements Handler {
 
 	public void handle(Message msg, Object obj) {
 		ConnectionToClient client = (ConnectionToClient) obj;
-		AddAssignmentForStudentRequest AddAssignmentForStudentMsg = (AddAssignmentForStudentRequest)msg;
+		GetClassDataRequest getClassDataRequestMsg = (GetClassDataRequest)msg;
 				
 		// TODO Check in database
 		CDALError error = new CDALError();
-		/*boolean connectionSecceded = false; //CDal.connectUser(AddAssignmentForStudentMsg.isToConnect(), AddAssignmentForStudentMsg.getUserId(), AddAssignmentForStudentMsg.getPassword(), error);		
+		boolean connectionSecceded = false; //CDal.connectUser(AddAssignmentForStudentMsg.isToConnect(), AddAssignmentForStudentMsg.getUserId(), AddAssignmentForStudentMsg.getPassword(), error);		
 		
 		AddAssignmentForStudentResponseMsg res = new AddAssignmentForStudentResponse(connectionSecceded, error.getString());
 		try {

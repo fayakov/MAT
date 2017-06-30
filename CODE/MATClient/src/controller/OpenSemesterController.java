@@ -56,7 +56,7 @@ public class OpenSemesterController implements Handler {
 	    			Prompt.alert(3,"please enter numerical value");
 			    	return;
 	    			}
-	    		OpenSemesterRequest openSemesterReq = new OpenSemesterRequest(semName, sDate, eDate);
+	    		OpenSemesterRequest openSemesterReq = new OpenSemesterRequest(sDate, eDate);
 		        MATClientController.getInstance().sendRequestToServer(openSemesterReq);
 	    		}    	
 	    }	    		    		

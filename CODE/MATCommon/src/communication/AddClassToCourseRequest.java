@@ -1,12 +1,12 @@
 package communication;
 
-public class AddClassToCourseRequesr extends Message {
+public class AddClassToCourseRequest extends Message {
 	private static final long serialVersionUID = 1L;
 	
 	private int classId;
 	private int courseId;
 	
-	public AddClassToCourseRequesr(int classId, int courseId) {
+	public AddClassToCourseRequest(int classId, int courseId) {
 		this.classId = classId;
 		this.courseId = courseId;
 	}

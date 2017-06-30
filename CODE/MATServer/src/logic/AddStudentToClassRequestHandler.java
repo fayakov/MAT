@@ -13,14 +13,10 @@ import utils.Handler;
 public class AddStudentToClassRequestHandler implements Handler {
 
 	public void handle(Message msg, Object obj) {
-		// TODO Auto-generated method stub
+
 		ConnectionToClient client = (ConnectionToClient) obj;
 		AddStudentToClassRequest addClassMsg = (AddStudentToClassRequest)msg;
 		
-		//System.out.println("User ID:\t" + loginMsg.getUserId());
-		//System.out.println("User Password:\t" + loginMsg.getPassword());
-		
-		// TODO Check in database
 		CDALError error = new CDALError();
 		boolean isSucceeded = CDal.addStudentToClass(addClassMsg.getStudentId(), addClassMsg.getClassId());		
 		

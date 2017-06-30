@@ -4,25 +4,24 @@ import java.io.IOException;
 
 import DAL.CDALError;
 import DAL.CDal;
+import communication.GetTeacherDataRequest;
+import communication.GetTeacherDataResponse;
 import communication.Message;
-import communication.OpenSemesterRequest;
-import communication.OpenSemesterResponse;
+import entities.Teacher;
 import ocsf.server.ConnectionToClient;
 import utils.Handler;
 
-public class CreateNewSemesterRequestHandler implements Handler {
-
+public class GetTeacherDataRequestHandler  implements Handler {
 	public void handle(Message msg, Object obj) {
-		// TODO Auto-generated method stub
 		ConnectionToClient client = (ConnectionToClient) obj;
-		OpenSemesterRequest addClassMsg = (OpenSemesterRequest)msg;
-		
-		
+		GetTeacherDataRequest getTeacherData = (GetTeacherDataRequest)msg;
+				
 		// TODO Check in database
 		CDALError error = new CDALError();
-		boolean isSucceeded = CDal.createNewSemester(addClassMsg.getStartDate(), addClassMsg.getEndDate());		
+		Teacher teacherData = CDal.getTeacherData(getTeacherData.getTeacherId());		
 		
-		OpenSemesterResponse res = new OpenSemesterResponse(isSucceeded, error.getString());
+		GetTeacherDataResponse res = new GetTeacherDataResponse(true, error.getString(), teacherData);
+		
 		try {
 			client.sendToClient(res);
 		} catch (IOException e) {
@@ -30,5 +29,4 @@ public class CreateNewSemesterRequestHandler implements Handler {
 			e.printStackTrace();
 		}
 	}
-
 }

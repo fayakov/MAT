@@ -67,7 +67,6 @@ public class loginController implements Initializable, Handler
     	else{
     		try{
     			int userId = Integer.parseInt(userIdStr);
-//    			clientTest.staticController.sendReq(userId, userPassword);
     			LoginRequestMsg loginReqMsg = new LoginRequestMsg(userId, userPassword,true);
     			MATClientController.getInstance().sendRequestToServer(loginReqMsg);
     			
@@ -112,12 +111,12 @@ public class loginController implements Initializable, Handler
 			if (res.isValidUser()) {
 				System.out.println("Server response: Success");
 				try {
-				switch(res.instance()) {
-				case 1: open("/gui/PrincipalMenu.fxml"); break;  // principle
-				case 2: open("/gui/TeacherMenu.fxml"); break;    // teacher
-				case 3: open("/gui/NewSemesterSettingSecretary.fxml"); break;    // secretary		
-				case 4: open("/gui/StudentMenu.fxml"); break;    // student
-				case 5: open("/gui/TeacherMenu.fxml"); break;    // parent
+				switch(res.getUserType()) {
+				case EUserPrincipal: open("/gui/PrincipalMenu.fxml"); break;  // principle
+				case EUserTeacher: open("/gui/TeacherMenu.fxml"); break;    // teacher
+				case EUserSecretary: open("/gui/NewSemesterSettingSecretary.fxml"); break;    // secretary		
+				case EUserStudent: open("/gui/StudentMenu.fxml"); break;    // student
+				case EUserParent: open("/gui/TeacherMenu.fxml"); break;    // parent
 				}
 				
 				} catch (Exception e) {	e.printStackTrace(); }

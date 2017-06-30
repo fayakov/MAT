@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="CODE/MATClient/src"/>
+	<classpathentry kind="src" path="CODE/MATCommon/src"/>
+	<classpathentry kind="src" path="CODE/MATServer/src"/>
+	<classpathentry kind="src" path="CODE/OCSF/src"/>
+	<classpathentry kind="lib" path="CODE/MATServer/mysql-connector-java-3.1.11-bin.jar"/>
+	<classpathentry kind="lib" path="CODE/mysql-connector-java-3.1.11-bin.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="CODE/MATClient/bin"/>
+</classpath>

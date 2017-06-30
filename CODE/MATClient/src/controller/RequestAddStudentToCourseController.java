@@ -3,8 +3,8 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import communication.AddStudentRequest;
-import communication.AddStudentResponse;
+import communication.AddStudentToCourseRequest;
+import communication.AddStudentToCourseResponse;
 import communication.Dispatcher;
 import communication.MATClientController;
 import communication.Message;
@@ -27,7 +27,7 @@ public class RequestAddStudentToCourseController implements Initializable, Handl
 	
 	
 	public RequestAddStudentToCourseController(){
-		Dispatcher.addHandler(AddStudentResponse.class.getCanonicalName(), this);
+		Dispatcher.addHandler(AddStudentToCourseResponse.class.getCanonicalName(), this);
 	}
 
     @FXML
@@ -63,7 +63,7 @@ public class RequestAddStudentToCourseController implements Initializable, Handl
     	    	isHandeled = false;
     	    	requestType = ERequestType.addStudent;
     	    	
-    	    	AddStudentRequest addstureq= new AddStudentRequest(studentid, classid, courseid, requestType, isConfirmed, isHandeled);
+    	    	AddStudentToCourseRequest addstureq= new AddStudentToCourseRequest(studentid, classid, courseid, requestType, isConfirmed, isHandeled);
     			MATClientController.getInstance().sendRequestToServer(addstureq);
     	    	
     	    	
@@ -84,8 +84,8 @@ public class RequestAddStudentToCourseController implements Initializable, Handl
 
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
-		if (msg instanceof AddStudentResponse) {
-			AddStudentResponse res = (AddStudentResponse)msg;
+		if (msg instanceof AddStudentToCourseResponse) {
+			AddStudentToCourseResponse res = (AddStudentToCourseResponse)msg;
 			if (res.isRequestSaved()) {
 				System.out.println("Server response: Success");
 			} else {

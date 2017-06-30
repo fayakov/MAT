@@ -4,16 +4,16 @@ import java.io.IOException;
 
 import DAL.CDALError;
 import DAL.CDal;
-import communication.AddAssignmentForStudentRequest;
+import communication.AddCheckAssignmentRequest;
 import communication.Message;
 import ocsf.server.ConnectionToClient;
 import utils.Handler;
 
-public class AddAssignmentForStudentRequestHandler implements Handler {
+public class AddCheckAssignmentRequestHandler implements Handler {
 
 	public void handle(Message msg, Object obj) {
 		ConnectionToClient client = (ConnectionToClient) obj;
-		AddAssignmentForStudentRequest AddAssignmentForStudentMsg = (AddAssignmentForStudentRequest)msg;
+		AddCheckAssignmentRequest AddAssignmentForStudentMsg = (AddCheckAssignmentRequest)msg;
 				
 		// TODO Check in database
 		CDALError error = new CDALError();

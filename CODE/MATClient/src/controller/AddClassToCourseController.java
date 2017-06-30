@@ -4,7 +4,7 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import communication.AddClassToCourseRequesr;
+import communication.AddClassToCourseRequest;
 import communication.AddClassToCourseResponse;
 import communication.Dispatcher;
 import communication.LoginResponseMsg;
@@ -55,7 +55,7 @@ public class AddClassToCourseController implements Handler {
 			    	Prompt.alert(3,"please enter numerical value");
 			    	return;
 			    	} 
-	    	  AddClassToCourseRequesr addClassReq = new AddClassToCourseRequesr(clid, coid);
+	    	  AddClassToCourseRequest addClassReq = new AddClassToCourseRequest(clid, coid);
 	    	  MATClientController.getInstance().sendRequestToServer(addClassReq);
 	          
 	    	 		    			 
@@ -70,7 +70,7 @@ public class AddClassToCourseController implements Handler {
 
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
-		if (msg instanceof AddClassToCourseRequesr) {
+		if (msg instanceof AddClassToCourseRequest) {
 			AddClassToCourseResponse res = (AddClassToCourseResponse)msg;
 			if (res.actionSucceed()) {
 				 Prompt.alert(1, "class " + clid + " added successfully to course " + coid);

@@ -4,25 +4,27 @@ import java.io.IOException;
 
 import DAL.CDALError;
 import DAL.CDal;
+import communication.GetParentDataRequest;
+import communication.GetParentDataResponse;
 import communication.Message;
-import communication.OpenSemesterRequest;
-import communication.OpenSemesterResponse;
+import entities.Parent;
 import ocsf.server.ConnectionToClient;
 import utils.Handler;
 
-public class CreateNewSemesterRequestHandler implements Handler {
+public class GetParentDataRequestHandler implements Handler {
 
 	public void handle(Message msg, Object obj) {
-		// TODO Auto-generated method stub
 		ConnectionToClient client = (ConnectionToClient) obj;
-		OpenSemesterRequest addClassMsg = (OpenSemesterRequest)msg;
-		
-		
+		GetParentDataRequest getParentData = (GetParentDataRequest)msg;
+				
 		// TODO Check in database
 		CDALError error = new CDALError();
-		boolean isSucceeded = CDal.createNewSemester(addClassMsg.getStartDate(), addClassMsg.getEndDate());		
+		Parent parentData = null;
 		
-		OpenSemesterResponse res = new OpenSemesterResponse(isSucceeded, error.getString());
+		boolean requestSecceded = CDal.getParentData(getParentData.getParentId(), parentData, error);		
+		
+		GetParentDataResponse res = new GetParentDataResponse(requestSecceded, error.getString(), parentData);
+		
 		try {
 			client.sendToClient(res);
 		} catch (IOException e) {
@@ -30,5 +32,4 @@ public class CreateNewSemesterRequestHandler implements Handler {
 			e.printStackTrace();
 		}
 	}
-
 }
