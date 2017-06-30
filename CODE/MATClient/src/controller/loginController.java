@@ -27,11 +27,17 @@ import javafx.stage.Stage;
 import entities.EUserType;
 
 
-public class loginController implements Initializable, Handler {
+public class loginController implements Initializable, Handler 
+{
+	//public int userId;
+	
 
-	public loginController(){
+	public loginController()
+	{
 		Dispatcher.addHandler(LoginResponseMsg.class.getCanonicalName(), this);
 	}
+	
+	
 	
 	public void setClient(clientTest clientTst){
 	}
@@ -129,4 +135,16 @@ public class loginController implements Initializable, Handler {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
+
+
+
+	/*public int getUserId() {
+		return userId;
+	}
+
+
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}  */
 }

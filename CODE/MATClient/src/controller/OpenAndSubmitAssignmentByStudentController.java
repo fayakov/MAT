@@ -96,7 +96,6 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 	    void pressUpload(ActionEvent event) 
 	    {
 			//chooseFile();
-	    	
 	    }
     
 	    
@@ -109,6 +108,8 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
     	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 		LocalDate localDate = LocalDate.now();
 		System.out.println(dtf.format(localDate)); //2017/06/29
+		
+		
     	
     	
     	//AddAssignmentForResponse addAssignmentForReq = new AddAssignmentForResponse(file, teacher, course, localDate);

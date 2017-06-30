@@ -141,11 +141,18 @@ public class CheckAssignmentController implements Initializable, Handler
 		{
 			// TODO Auto-generated method stub
 			
+			
 			//GetAssignmentOfStudentRequest getAssignmentOfStuReq = new GetAssignmentOfStudentRequest(SubmissionStudentController.getOption());
 	    	//MATClientController.getInstance().sendRequestToServer(getAssignmentOfStuReq);
 			
 		}
 
+		
+		/*public void func(int option)
+		{
+			int a=option;
+		}
+		*/
 }
 
 
