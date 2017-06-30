@@ -42,7 +42,7 @@ public class BlockParentController implements Initializable, Handler {
 	    		try {
 				    pid = Integer.parseInt(ParentID.getText());
 			    	
-					BlockParentRequest ParentData = new BlockParentRequest(pid);
+					BlockParentRequest ParentData = new BlockParentRequest(pid, true);
 	    			MATClientController.getInstance().sendRequestToServer(ParentData);
 			    	} catch(NumberFormatException e){
 			    	Prompt.alert(3,"please enter numerical value");
@@ -56,9 +56,6 @@ public class BlockParentController implements Initializable, Handler {
 	    void closeBlockParent(ActionEvent event) {	
 		    Stage stage = (Stage) btnClose.getScene().getWindow();
 		    stage.close();
-		    
-		    
-		    
 	    }
 
 		public void handle(Message msg, Object obj) {

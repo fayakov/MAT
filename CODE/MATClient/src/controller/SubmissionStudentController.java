@@ -64,6 +64,8 @@ public class SubmissionStudentController implements Initializable, Handler
 	    {
 	    	option = comboChooseSub.getValue().toString();
 	    	//int assNum = Integer.parseInt(option); //save the option to next window
+	    	//CheckAssignmentController check= new CheckAssignmentController();
+	    	//check.func(option);
 	    	
 	    	Pane root = FXMLLoader.load(getClass().getResource("/gui/CheckAssinment.fxml"));
 			Scene scene = new Scene(root);

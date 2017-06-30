@@ -19,11 +19,9 @@ public class GetStudentDataRequestHandler implements Handler {
 				
 		// TODO Check in database
 		CDALError error = new CDALError();
-		Student studentData = new Student();
+		Student studentData = CDal.getStudentData(getStudentData.getUserId(), error);		
 		
-		boolean requestSecceded = CDal.getStudentData(getStudentData.getUserId(), studentData, error);		
-		
-		GetStudentDataResponse res = new GetStudentDataResponse(requestSecceded, error.getString(), studentData);
+		GetStudentDataResponse res = new GetStudentDataResponse(studentData, error.getString());
 		try {
 			client.sendToClient(res);
 		} catch (IOException e) {

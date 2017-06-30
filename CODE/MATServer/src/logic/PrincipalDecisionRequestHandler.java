@@ -18,9 +18,9 @@ public class PrincipalDecisionRequestHandler implements Handler {
 		ConnectionToClient client = (ConnectionToClient) obj;
 		PrincipalDecisionRequest principalDecisionMsg = (PrincipalDecisionRequest)msg;
 					
-		CDALError error = new CDALError();
-		Request request = null;
-		boolean requestSecceded = CDal.getRequest(principalDecisionMsg.getRequest().getRequestNumber(), request);		
+		//CDALError error = new CDALError();
+		Request request = CDal.getRequest(principalDecisionMsg.getRequest().getRequestNumber());
+		boolean requestSecceded = false;		
 		
 		if (request.getRequestType() == ERequestType.addStudent)
 		{
@@ -40,7 +40,7 @@ public class PrincipalDecisionRequestHandler implements Handler {
 			requestSecceded = CDal.confirmRequest(principalDecisionMsg.getRequest().getRequestNumber(), true);
 		}
 		
-		PrincipalDecisionResponse res = new PrincipalDecisionResponse(requestSecceded, principalDecisionMsg.getRequest().getRequestNumber(), error.getString());
+		PrincipalDecisionResponse res = new PrincipalDecisionResponse(requestSecceded, principalDecisionMsg.getRequest().getRequestNumber(), "");//error.getString());
 		try {
 			client.sendToClient(res);
 		} catch (IOException e) {

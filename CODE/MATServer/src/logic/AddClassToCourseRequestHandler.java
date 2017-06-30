@@ -1,11 +1,13 @@
 package logic;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import DAL.CDALError;
 import DAL.CDal;
-import communication.AddClassToCourseRequest;
-import communication.Message;
+import communication.*;
+import entities.CClass;
+import entities.Student;
 import ocsf.server.ConnectionToClient;
 import utils.Handler;
 
@@ -13,18 +15,31 @@ public class AddClassToCourseRequestHandler implements Handler {
 
 	public void handle(Message msg, Object obj) {
 		ConnectionToClient client = (ConnectionToClient) obj;
-		AddClassToCourseRequest AddAssignmentForStudentMsg = (AddClassToCourseRequest)msg;
+		AddClassToCourseRequest addClassToCourseMsg = (AddClassToCourseRequest)msg;
 				
-		// TODO Check in database
 		CDALError error = new CDALError();
-		/*boolean connectionSecceded = false; //CDal.connectUser(AddAssignmentForStudentMsg.isToConnect(), AddAssignmentForStudentMsg.getUserId(), AddAssignmentForStudentMsg.getPassword(), error);		
+		boolean requestSecceded = CDal.addCourseToClass(addClassToCourseMsg.getClassId(), addClassToCourseMsg.getCourseId());
+
+		// TODO check the pre conditions of all student in class
+		ArrayList<Integer> prevCourses = CDal.getPrevCourses(addClassToCourseMsg.getCourseId());
+		CClass classData = CDal.getClassData(addClassToCourseMsg.getClassId(), error);
+		ArrayList<Student> studentsInClass = classData.getStudentList();		
+		ArrayList<Student> excludedStudents = new ArrayList<Student>();
 		
-		AddAssignmentForStudentResponseMsg res = new AddAssignmentForStudentResponse(connectionSecceded, error.getString());
+		for (Student student : studentsInClass) {
+			if (!CDal.isStudentFinishedPrevCourse(student.getId(), addClassToCourseMsg.getCourseId()))
+			{
+				excludedStudents.add(student);
+				requestSecceded = CDal.removeStudentFromCourseWithClass(addClassToCourseMsg.getCourseId(), addClassToCourseMsg.getClassId(), student.getId());
+			}			
+		}
+						
+		AddClassToCourseResponse res = new AddClassToCourseResponse(requestSecceded, excludedStudents, error.getString());
 		try {
 			client.sendToClient(res);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 	}
 }

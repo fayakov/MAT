@@ -16,14 +16,11 @@ public class GetParentDataRequestHandler implements Handler {
 	public void handle(Message msg, Object obj) {
 		ConnectionToClient client = (ConnectionToClient) obj;
 		GetParentDataRequest getParentData = (GetParentDataRequest)msg;
-				
-		// TODO Check in database
+		
 		CDALError error = new CDALError();
-		Parent parentData = null;
+		Parent parentData = CDal.getParentData(getParentData.getParentId(), error);		
 		
-		boolean requestSecceded = CDal.getParentData(getParentData.getParentId(), parentData, error);		
-		
-		GetParentDataResponse res = new GetParentDataResponse(requestSecceded, error.getString(), parentData);
+		GetParentDataResponse res = new GetParentDataResponse(parentData, error.getString());
 		
 		try {
 			client.sendToClient(res);

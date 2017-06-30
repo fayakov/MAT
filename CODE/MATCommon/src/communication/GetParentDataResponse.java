@@ -6,31 +6,14 @@ public class GetParentDataResponse extends Message {
 
 	private static final long serialVersionUID = 1L;
 	
-	private boolean requestSecceded;
-	private String errText;
 	private Parent parent;
+	private String error;
 	
-	public GetParentDataResponse(boolean requestSecceded, String errText, Parent parent) {
+	public GetParentDataResponse(Parent parent, String error) {
 		super();
-		this.requestSecceded = requestSecceded;
-		this.errText = errText;
+
 		this.parent = parent;
-	}
-
-	public boolean isRequestSecceded() {
-		return requestSecceded;
-	}
-
-	public void setRequestSecceded(boolean requestSecceded) {
-		this.requestSecceded = requestSecceded;
-	}
-
-	public String getErrText() {
-		return errText;
-	}
-
-	public void setErrText(String errText) {
-		this.errText = errText;
+		this.setError(error);
 	}
 
 	public Parent getParent() {
@@ -39,6 +22,14 @@ public class GetParentDataResponse extends Message {
 
 	public void setParent(Parent parent) {
 		this.parent = parent;
+	}
+
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
 	}
 }
 

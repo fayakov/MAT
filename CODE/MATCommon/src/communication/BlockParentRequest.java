@@ -11,22 +11,12 @@ public class BlockParentRequest extends Message {
 		this.toBlock = toBlock;
 	}
 
-	public int getChildId() {
-		return childId;
-	}
-
-	public void setChildId(int childId) {
-		this.childId = childId;
-	}
-
 	private int pid;
 	private boolean toBlock;
-	private int childId;
 	
-	public BlockParentRequest(int pid, int childId, boolean toBlock) {
+	public BlockParentRequest(int pid, boolean toBlock) {
 		// TODO Auto-generated constructor stub
 		this.pid = pid;
-		this.childId = childId;
 		this.toBlock = toBlock;
 	}
 
@@ -36,6 +26,5 @@ public class BlockParentRequest extends Message {
 
 	public void setPid(int pid) {
 		this.pid = pid;
-	}	
-	
+	}		
 }

@@ -15,12 +15,9 @@ import utils.Handler;
 public class AddTeacherToCourseClassRequestHandler implements Handler {
 
 	public void handle(Message msg, Object obj) {
-		// TODO Auto-generated method stub
 		ConnectionToClient client = (ConnectionToClient) obj;
 		AddTeacherToCourseClassRequest addClassMsg = (AddTeacherToCourseClassRequest)msg;
 		
-		
-		// TODO Check in database
 		CDALError error = new CDALError();
 		boolean isSucceeded = CDal.addTeacherToCourseInClass(addClassMsg.getClassId(), addClassMsg.getCourseId(), addClassMsg.getTeacherId());		
 		

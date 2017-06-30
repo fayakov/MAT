@@ -6,24 +6,15 @@ public class GetClassDataResponse extends Message {
 
 	private static final long serialVersionUID = 1L;
 	
-	boolean requestSecceded;
 	private String errText;
 	CClass classData;
 	
-	public GetClassDataResponse(boolean requestSecceded, String errText,
-			CClass classData) {
+	public GetClassDataResponse(CClass classData, String errText) {
 		super();
-		this.requestSecceded = requestSecceded;
 		this.errText = errText;
 		this.classData = classData;
 	}
 	
-	public boolean isRequestSecceded() {
-		return requestSecceded;
-	}
-	public void setRequestSecceded(boolean requestSecceded) {
-		this.requestSecceded = requestSecceded;
-	}
 	public String getErrText() {
 		return errText;
 	}
