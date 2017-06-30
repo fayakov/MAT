@@ -19,7 +19,7 @@ public class BlockParentRequestHandler implements Handler {
 		BlockParentRequest blockParentRequest = (BlockParentRequest)msg;
 		
 		
-		boolean requestSecceded = CDal.blockParent(blockParentRequest.getPid(), true);
+		boolean requestSecceded = CDal.blockParent(blockParentRequest.getPid(),blockParentRequest.getChildId(),blockParentRequest.toBlock());
 		
 		BlockParentResponse res = new BlockParentResponse(requestSecceded, "");
 		
