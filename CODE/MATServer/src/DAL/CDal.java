@@ -2526,12 +2526,11 @@ public class CDal {
 					
 					if(parentId != 0)
 					{
-						/*
-						parentData.set
-						student.setAllUserData(user);	
-						student.setCourse(getStudentCourses(userId));
-						student.setClassID(getStudentClasses(userId));
-						student.setParentID(getChildrenParents(studentId));*/
+						parentData.setAllUserData(user);
+						ArrayList<Integer> children = getParentsChildrens(parentId);
+						parentData.setStudentList(children);
+						parentData.setIsblocked(isParentHasStudentBlocked(parentId, getParentsChildrens(parentId).get(0)));
+						
 					}
 					else
 					{
