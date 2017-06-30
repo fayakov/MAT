@@ -16,16 +16,12 @@ import utils.Handler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import entities.ERequestType;
+import entities.Request;
 
 public class RequestAddStudentToCourseController implements Initializable, Handler {
 	
-	int studentid, classid, courseid;
-	ERequestType requestType;
-	
-	boolean isConfirmed, isHandeled;
-	
-	
-	
+	public Request request;
+
 	public RequestAddStudentToCourseController(){
 		Dispatcher.addHandler(AddStudentToCourseResponse.class.getCanonicalName(), this);
 	}
@@ -56,14 +52,14 @@ public class RequestAddStudentToCourseController implements Initializable, Handl
     	
     	else { // add request to db
     		try {
-    			studentid = Integer.parseInt(studentIdTextField.getText());
-    			classid = Integer.parseInt(classTextField.getText());
-    	    	courseid = Integer.parseInt(courseTextField.getText());
-    	    	isConfirmed = false;
-    	    	isHandeled = false;
-    	    	requestType = ERequestType.addStudent;
-    	    	
-    	    	AddStudentToCourseRequest addstureq= new AddStudentToCourseRequest(studentid, classid, courseid, requestType, isConfirmed, isHandeled);
+    			request.setUserId(Integer.parseInt(studentIdTextField.getText()));
+    			request.setClassNumber(Integer.parseInt(classTextField.getText()));
+    			request.setCourseId(Integer.parseInt(courseTextField.getText()));
+    			request.setHandeled(false);
+    			request.setConfirmed(false);
+    			request.setRequestType(ERequestType.addStudent);
+    		
+    	    	AddStudentToCourseRequest addstureq= new AddStudentToCourseRequest(request);
     			MATClientController.getInstance().sendRequestToServer(addstureq);
     	    	
     	    	

@@ -3,9 +3,9 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import entities.ERequestType;
+import communication.Dispatcher;
+import communication.GetPendingRequestsResponse;
 import entities.Request;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,10 +13,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import communication.MATClientController;
+import communication.Message;
+import entities.ERequestType;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import utils.Handler;
 
-public class ResponseAddStudentToCourseController implements Initializable
-{
+public class ResponseAddStudentToCourseController implements Initializable, Handler{
+	
 
+	
     @FXML
     private ResourceBundle resources;
 
@@ -50,6 +59,9 @@ public class ResponseAddStudentToCourseController implements Initializable
     		new Request(1,22,333,3333,true,true),
     		new Request(2,222,555,66666,true,true));
 
+    
+ 
+    
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -60,9 +72,11 @@ public class ResponseAddStudentToCourseController implements Initializable
     	courseId.setCellValueFactory(new PropertyValueFactory<Request, Integer>("courseId"));
     	isConfirmed.setCellValueFactory(new PropertyValueFactory<Request, Boolean>("isConfirmed"));
     	isHandled.setCellValueFactory(new PropertyValueFactory<Request, Boolean>("isHandled"));
-
+        
 
     	table.setItems(data);
 		
 	}
+
+
 }

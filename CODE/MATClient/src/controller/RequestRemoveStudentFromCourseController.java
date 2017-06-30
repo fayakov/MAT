@@ -3,8 +3,6 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import communication.AddStudentToCourseRequest;
-import communication.AddStudentToCourseResponse;
 import communication.DeleteStudentFromCourseRequest;
 import communication.DeleteStudentFromCourseResponse;
 import communication.Dispatcher;
@@ -60,7 +58,7 @@ public class RequestRemoveStudentFromCourseController implements Initializable, 
     	    	courseid = Integer.parseInt(courseTextField.getText());
     	    	isConfirmed = false;
     	    	isHandeled = false;
-    	    	requestType = requestType.removeStudent;
+    	    	requestType = ERequestType.removeStudent;
     	    	
     	    	DeleteStudentFromCourseRequest delstureq= new DeleteStudentFromCourseRequest(studentid, classid, courseid, requestType, isConfirmed, isHandeled);
     			MATClientController.getInstance().sendRequestToServer(delstureq); 
