@@ -3,10 +3,10 @@ package entities;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class Table {
+public class Requests {
 
-	private final SimpleIntegerProperty requestNunber ;
-	private final SimpleIntegerProperty studentId ;
+	private final SimpleIntegerProperty requestNumber ;
+	private final SimpleIntegerProperty userId ;
 	private final SimpleIntegerProperty classNumber ;
 	private final SimpleIntegerProperty courseId ;
 	private final SimpleBooleanProperty isHandled ;
@@ -14,10 +14,10 @@ public class Table {
 
 
 
-	public Table(int requestNunber, int studentId, int classNumber, int courseId, boolean isHandled, boolean isConfirmed) {
+	public Requests(int requestNunber, int userId, int classNumber, int courseId, boolean isHandled, boolean isConfirmed) {
 		
-		this.requestNunber = new SimpleIntegerProperty(requestNunber);
-		this.studentId = new SimpleIntegerProperty(studentId);
+		this.requestNumber = new SimpleIntegerProperty(requestNunber);
+		this.userId = new SimpleIntegerProperty(userId);
 		this.classNumber = new SimpleIntegerProperty(classNumber);
 		this.courseId = new SimpleIntegerProperty(courseId);
 		this.isHandled = new SimpleBooleanProperty(isHandled);
@@ -27,19 +27,19 @@ public class Table {
 
 
  public Integer getrequestNunber(){
-	 return requestNunber.get();
+	 return requestNumber.get();
  }
  
  public void setrequestNunber(Integer v){
-	 requestNunber.set(v);
+	 requestNumber.set(v);
  }
 	
- public Integer getstudentId(){
-	 return studentId.get();
+ public Integer getuserId(){
+	 return userId.get();
  }
  
- public void setstudentId(Integer v){
-	 studentId.set(v);
+ public void setuserId(Integer v){
+	 userId.set(v);
  }
  
  public Integer getclassNumber(){

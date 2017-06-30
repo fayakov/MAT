@@ -4,5 +4,5 @@ public enum EDALError {
 	ENoError,
 	EUserAllreadyConnectedDisconnected,
 	EWrongPasswordOrId,
-	EUpdateNotSucced
+	EUpdateNotSucced, ETeacherExceedMaxHours
 }

@@ -18,25 +18,25 @@ public class Request implements Serializable
 	{
 		
 	}
-	public Request(int userId, int classNumber, int courseId, ERequestType requestType, boolean isConfirmed, boolean isHandeled) 
+	public Request(int requestNumber,int userId, int classNumber, int courseId, boolean isConfirmed, boolean isHandeled) 
 	{
 		super();
 		
+		this.requestNumber = requestNumber;
 		this.userId = userId;
 		this.classNumber = classNumber;
 		this.courseId = courseId;
-		this.requestType = requestType;
 		this.isConfirmed = isConfirmed;
 		this.isHandeled = isHandeled;		
 	}  
 	
 
 	
-	public Request(int requestNumber, int userid, int classNumber, int courseId, boolean isConfirmed,
+	public Request(int requestNumber, int userId, int classNumber, int courseId, boolean isConfirmed,
 			boolean isHandeled, ERequestType requestType) {
 		super();
 		this.requestNumber = requestNumber;
-		this.userId = userid;
+		this.userId = userId;
 		this.classNumber = classNumber;
 		this.courseId = courseId;
 		this.isConfirmed = isConfirmed;
@@ -47,13 +47,13 @@ public class Request implements Serializable
 
 
 
-	public int getUserid() {
+	public int getUserId() {
 		return userId;
 	}
 
 
-	public void setUserid(int userid) {
-		this.userId = userid;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 
