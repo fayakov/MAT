@@ -19,8 +19,10 @@ public class AddClassToCourseRequestHandler implements Handler {
 				
 		CDALError error = new CDALError();
 		boolean requestSecceded = CDal.addCourseToClass(addClassToCourseMsg.getClassId(), addClassToCourseMsg.getCourseId());
-
+		ArrayList<Student> excludedStudents = null;
 		// TODO check the pre conditions of all student in class
+		
+		/*
 		ArrayList<Integer> prevCourses = CDal.getPrevCourses(addClassToCourseMsg.getCourseId());
 		CClass classData = CDal.getClassData(addClassToCourseMsg.getClassId(), error);
 		ArrayList<Student> studentsInClass = classData.getStudentList();		
@@ -33,7 +35,8 @@ public class AddClassToCourseRequestHandler implements Handler {
 				requestSecceded = CDal.removeStudentFromCourseWithClass(addClassToCourseMsg.getCourseId(), addClassToCourseMsg.getClassId(), student.getId());
 			}			
 		}
-						
+		*/
+		
 		AddClassToCourseResponse res = new AddClassToCourseResponse(requestSecceded, excludedStudents, error.getString());
 		try {
 			client.sendToClient(res);
