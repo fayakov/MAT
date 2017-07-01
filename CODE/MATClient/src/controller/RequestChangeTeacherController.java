@@ -13,6 +13,7 @@ import communication.MATClientController;
 import communication.Message;
 import entities.ERequestType;
 import entities.Request;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -83,14 +84,30 @@ public class RequestChangeTeacherController implements Initializable, Handler
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
 		if (msg instanceof ChangeTeacherResponse) {
-			ChangeTeacherResponse res = (ChangeTeacherResponse)msg;
-			if (res.isRequestSaved()) {
-				System.out.println("teacher has been added to class");
-			} else {
-				System.out.println("cannot add teacher, check details");
+			ChangeTeacherResponse res = (ChangeTeacherResponse)msg;		
+			try {
+				localPrompt(res.isRequestSaved());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			
 		}
 		
+	}
+	
+public void localPrompt(final boolean succ)  throws Exception {
+		
+		Platform.runLater(new Runnable() {
+			boolean success = succ;
+			
+			public void run() {
+				if(success)
+					Prompt.alert(1, "the request has been sent");	
+				else
+					Prompt.alert(3, "cannot add teacher, check the details again");
+			}
+		} );
 	}
 
 	public void initialize(URL location, ResourceBundle resources) {
