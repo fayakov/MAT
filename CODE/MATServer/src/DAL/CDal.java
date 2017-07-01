@@ -2681,11 +2681,14 @@ public class CDal {
 						}	
 					}
 					else
-					{
 						retVal = false;
-					}
+				
 				}
+				else
+					retVal = false;
 			}
+			else
+				retVal = false;
 		}
 		
 		return retVal;
