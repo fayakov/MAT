@@ -2718,7 +2718,7 @@ public class CDal {
 		return false;
 	}*/
 
-	public static Student getStudentData(int userId, CDALError error) {
+	public static Student getStudentData(int userId) {
 		boolean retVal = true;
 		Student student = new Student();
 		try{
@@ -2733,11 +2733,10 @@ public class CDal {
 					if(studentId != 0)
 					{
 						student.setAllUserData(user);	
-						student.setCourse(getStudentCourses(userId));
-						student.setClassID(getStudentClass(userId));
+						student.setCourse(getStudentCourses(studentId));
+						student.setClassID(getStudentClass(studentId));
 						student.setParentID(getChildrenParents(studentId));
 					}
-	
 				}				
 			}
 		}

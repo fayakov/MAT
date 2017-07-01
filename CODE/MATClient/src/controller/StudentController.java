@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import communication.Dispatcher;
 import communication.GetPendingRequestsRequest;
 import communication.GetPendingRequestsResponse;
 import communication.GetStudentDataRequest;
@@ -27,20 +28,24 @@ import utils.Handler;
 public class StudentController implements Handler
 {
 	ObservableList<String> list ;
-	private int studentNum = 123;
+	private int userID = 124;
 
     @FXML
     private ComboBox<String> optionCombo;
     
     
-    public void studentData1() throws Exception 
-    {
-    	GetStudentDataRequest getStudentDataRequest = new GetStudentDataRequest(studentNum);
-		MATClientController.getInstance().sendRequestToServer(getStudentDataRequest);   
-    	
-    	
-    	
+    
+    public StudentController() {
+		super();
+		Dispatcher.addHandler(GetStudentDataResponse.class.getCanonicalName(), this);
+	}
 
+
+
+	public void studentData1() throws Exception 
+    {
+    	GetStudentDataRequest getStudentDataRequest = new GetStudentDataRequest(userID);
+		MATClientController.getInstance().sendRequestToServer(getStudentDataRequest);   
     }
     
 
@@ -98,12 +103,8 @@ public class StudentController implements Handler
 			Student student = res.getStudentData();
 			
 			runStudentDataForm(student);
-			
 		}
-		
 	}
-
-
 
 	private void runStudentDataForm(final Student student) {
 		Platform.runLater(new Runnable() {

@@ -4,24 +4,18 @@ public class GetStudentDataRequest extends Message
 {
 	private static final long serialVersionUID = 1L;
 	
-	private int studentId;
+	private int userId;
 	
-	
-	public GetStudentDataRequest(int studentId) {
-		this.studentId = studentId;
+	public GetStudentDataRequest(int userId) {
+		this.userId = userId;
 		
 	}
 	
 	public int getUserId() {
-		return studentId;
+		return userId;
 	}
 
-	public void setUserId(int studentId) {
-		this.studentId = studentId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-
-
-	
-	
-	
 }
