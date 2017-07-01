@@ -70,8 +70,18 @@ public class StudentDataController  implements Initializable
     @FXML
     private TableView<StudentCourse> tableViewID;
     
-    void initData(Student student) {
+    void initData(Student student) 
+    {
     	this.student = student;
+<<<<<<< HEAD
+    }
+    
+    @FXML
+    void StudentInfo(ActionEvent event) 
+    {
+    	GetStudentDataRequest GetStudentDataReq = new GetStudentDataRequest(student.getId());
+		MATClientController.getInstance().sendRequestToServer(GetStudentDataReq);
+=======
     	if (student != null) {
     		String strStudentID = Integer.toString(student.getId());
     		String strClass = Integer.toString(student.getId());
@@ -81,6 +91,7 @@ public class StudentDataController  implements Initializable
 	    	textLName.setText(student.getLastName());
 	    	textClasses.setText(strClass); 
     	}
+>>>>>>> bf91243622cc993605f71f536eba1afa78b2e6f7
     }
     
     //בלי טבלה

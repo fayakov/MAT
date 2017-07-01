@@ -19,7 +19,7 @@ public class ChangeTeacherRequestHandler implements Handler {
 					
 		CDALError error = new CDALError();
 		int userId = CDal.getTeacherUserId(changeTeacherMsg.getTeacherId());
-		boolean connectionSecceded = CDal.createRequest(ERequestType.changeTeacher, changeTeacherMsg.getTeacherId(), changeTeacherMsg.getClassId(), changeTeacherMsg.getCourseId());		
+		boolean connectionSecceded = CDal.createRequest(ERequestType.changeTeacher, userId, changeTeacherMsg.getClassId(), changeTeacherMsg.getCourseId());		
 			
 		ChangeTeacherResponse res = new ChangeTeacherResponse(connectionSecceded, error.getString());
 		try {
