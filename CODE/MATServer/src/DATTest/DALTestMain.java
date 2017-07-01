@@ -229,7 +229,7 @@ public class DALTestMain {
 	
 	public static void checkGetStudentsInCourse(CDal dl)
 	{
-		ArrayList<Integer> users = dl.getStudensInCourse(1,dl.getCurrentSemester());
+		ArrayList<Integer> users = dl.getStudensInCourse(1);
 		for (Integer id : users) {
 			System.out.println(id);
 		}
@@ -324,7 +324,7 @@ public class DALTestMain {
 	
 	public static void checkClassTecherStatistics(CDal dl)
 	{
-		ArrayList<TeacherWithGrade> mylist =dl.getClassTeacherStatistics(1,dl.getCurrentSemester());
+		ArrayList<TeacherWithGrade> mylist =dl.getClassTeacherStatistics(1);
 		for(TeacherWithGrade teacher  : mylist)
 		{
 			System.out.println("teacher: "+ teacher.getName()+ " grade: "+teacher.getGrade());
@@ -439,6 +439,5 @@ public class DALTestMain {
 		catch (IOException ex) {
             ex.printStackTrace();
         }
-
 	}
 }

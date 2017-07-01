@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import entities.*;
-import logic.Course;
+
 public class CDal {
 	private static String userName = "root";
 	private static String password = "Braude";//"mysql_native_password";//"admin";
@@ -1201,23 +1201,24 @@ public class CDal {
 		return courseIdList;
 	}
 	
-	public static ArrayList<Integer> getStudentClasses(int studentId)
+	public static Integer getStudentClass(int studentId)
 	{
-		ArrayList<Integer> classIdList = new ArrayList<Integer>();
+		Integer classId = 0;
 		try 
 		{
 			Statement stmt = connection.createStatement();
 			ResultSet resultSet  = stmt.executeQuery(
 					"SELECT student_has_course.class_classId "
 					+ "FROM student_has_course  "
-					+ "WHERE student_has_course.student_idstudent = "+studentId+";");
+					+ "WHERE student_has_course.student_idstudent = "+studentId+" "
+					+ "AND student_has_course.semester_semesterId = "+ getCurrentSemester()+";");
 			while(resultSet.next())
 	 		{				
-				classIdList.add(resultSet.getInt(1));
+				classId = resultSet.getInt(1);
 	 		} 
 		}
 		catch (SQLException e) {e.printStackTrace();}
-		return classIdList;
+		return classId;
 	}
 	
 	
@@ -2305,7 +2306,7 @@ public class CDal {
 						break;
 				}
 				
-				req.setUserid(resultSet.getInt("userId"));
+				req.setUserId(resultSet.getInt("userId"));
 				req.setClassNumber(resultSet.getInt("classId"));
 				req.setCourseId(resultSet.getInt("courseId"));
 				req.setRequestType(reqType);
@@ -2548,7 +2549,7 @@ public class CDal {
 					{
 						student.setAllUserData(user);	
 						student.setCourse(getStudentCourses(userId));
-						student.setClassID(getStudentClasses(userId));
+						student.setClassID(getStudentClass(userId));
 						student.setParentID(getChildrenParents(studentId));
 					}
 	
@@ -2607,26 +2608,66 @@ public class CDal {
 		return null;
 	}
 	
-	public static boolean createAssignment(int userId)
+	public static Assignment getAssignment(int assignmentId)
 	{
-		boolean retVal = true;
-		if(isParentExist(userId))
-		{
-			retVal = false;
-		}
-		else
-		{
-			try{ 
-				Statement stmt = connection.createStatement();
-				stmt.executeUpdate("INSERT INTO assignment (Date) VALUES ('" +userId+"')");
-			}
-			catch (SQLException e) {
-				e.printStackTrace();			
-			}
-		}
-		return retVal;
-	}
+		Assignment assignment = new Assignment();
+		try{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT * FROM assignment "
+					+ "WHERE assignment.assignmentId = " + assignmentId + ";");
+			if(resultSet.first()) {
+				assignment.setAssignmentNumber(assignmentId);
+				
+				
+				Blob blob = resultSet.getBlob("assignmentFile");
 
+				int blobLength = (int) blob.length();  
+				byte[] blobAsBytes = blob.getBytes(1, blobLength);
+				assignment.setFile(blobAsBytes);
+				blob.free();
+				
+				
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	
+		}	
+		return assignment;
+		
+	}
+	
+	public static int createAssignment(Date dueDate, InputStream inputStream, long fileSize, String fileName)
+	{
+		int retVal = 0;
+		try{ 
+			String[] returnId = { "assignmentId" };
+            String sql = "INSERT INTO assignment (date, assignmentFile, fileName) values (?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql,returnId);
+            
+            statement.setString(1, " " +dueDate.getYear()+"-"+(dueDate.getMonth() + 1)+"-"+(dueDate.getDate()+1) +" ");
+            statement.setBlob(2, inputStream, fileSize);
+            statement.setString(3, fileName);
+ 
+		    int affectedRows = statement.executeUpdate();
+		    
+		    if (affectedRows > 0) {
+		    	 try (ResultSet rs = statement.getGeneratedKeys()) {
+				        if (rs.next()) {
+				        	retVal = rs.getInt(1);
+				        }
+				    }
+		    }
+		}
+		catch (SQLException e) {
+			e.printStackTrace();			
+		}
+		
+		return retVal;
+		
+	}
+	
+	
+	
 	public static Course getCourseData(int courseId) {
 		// TODO Auto-generated method stub
 		return null;
