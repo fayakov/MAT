@@ -3,13 +3,6 @@ package controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import communication.AddStudentToCourseResponse;
-import communication.DeleteStudentFromCourseRequest;
-import communication.DeleteStudentFromCourseResponse;
-import communication.Dispatcher;
-import communication.GetPendingRequestsRequest;
-import communication.GetPendingRequestsResponse;
 import entities.Request;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,19 +17,24 @@ import entities.ERequestType;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import utils.Handler;
 
-public class ResponseAddStudentToCourseController implements Initializable, Handler{
+public class ResponseAddStudentToCourseController implements Initializable//, Handler
+{
 	
 	
 	
-	public ResponseAddStudentToCourseController()
+	/*
+	 * public ResponseAddStudentToCourseController()
+	 
 	{
 		Dispatcher.addHandler(GetPendingRequestsResponse.class.getCanonicalName(), this);
 	}
-
-	//public ERequestType requestType;
+*/
+	
 	
     @FXML
     private ResourceBundle resources;
@@ -47,8 +45,6 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
     @FXML
     private TableColumn<Request, Integer> userId;
 
-    @FXML
-    private TableColumn<Request, Boolean> isConfirmed;
 
     @FXML
     private TableColumn<Request, Integer> requestNumber;
@@ -62,40 +58,56 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
     @FXML
     private TableView<Request> table;
 
+
+    
+    
     @FXML
-    private TableColumn<Request, Boolean> isHandled;
+    private Button btnDecline;
 
-    @FXML 
-    ObservableList<Request> data= FXCollections.observableArrayList(
-    		new Request(1,22,333,3333,true,true),
-    		new Request(2,222,555,66666,true,true));
 
-    ArrayList<Request> data1 = new ArrayList<Request>();
- 
+    @FXML
+    private Button btnConfirm;
+
+    
     @FXML
     void confirm(ActionEvent event) {
+    	
+    	Prompt.alert(1,"This request is confirmed");
+        table.requestFocus();
+        table.getSelectionModel().select(0);
+        table.getFocusModel().focus(0);
 
     }
 
     @FXML
     void decline(ActionEvent event) {
+    	
+    	Prompt.alert(1,"This request is declined");
+        table.requestFocus();
+        table.getSelectionModel().select(0);
+        table.getFocusModel().focus(0);
 
     }
-    
+    @FXML 
+    ObservableList<Request> data= FXCollections.observableArrayList(
+    		new Request(1,22,333,5555,true,true),
+    		new Request(1,22,333,6666,true,true),
+    		new Request(1,22,333,4444,true,true));
+
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
-		GetPendingRequestsRequest pendigreq= new GetPendingRequestsRequest(ERequestType.addStudent);
-		MATClientController.getInstance().sendRequestToServer(pendigreq); 
+		//GetPendingRequestsRequest pendigreq= new GetPendingRequestsRequest(ERequestType.addStudent);
+		//MATClientController.getInstance().sendRequestToServer(pendigreq); 
 		
     	requestNumber.setCellValueFactory(new PropertyValueFactory<Request, Integer>("requestNumber"));
     	userId.setCellValueFactory(new PropertyValueFactory<Request, Integer>("userId"));
     	classNumber.setCellValueFactory(new PropertyValueFactory<Request, Integer>("classNumber"));
     	courseId.setCellValueFactory(new PropertyValueFactory<Request, Integer>("courseId"));
-    	isConfirmed.setCellValueFactory(new PropertyValueFactory<Request, Boolean>("isConfirmed"));
-    	isHandled.setCellValueFactory(new PropertyValueFactory<Request, Boolean>("isHandled"));
+
         
 
     	table.setItems(data);
@@ -103,31 +115,23 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
 	}
 
 
-
-
-
-	@SuppressWarnings("unchecked")
-	@Override
+/*	@Override
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
 		
-
-		/// להמשיך את הפונקציה 
 		if (msg instanceof GetPendingRequestsResponse) {
 			GetPendingRequestsResponse res = (GetPendingRequestsResponse)msg;
-			
-			int len =res.getPendingRequests().size();
-			for (int i = 0; i< len; i++)
+	
+			ArrayList<Request> requests = res.getPendingRequests();
+			for( Request req : requests)
 			{
-				data1 = (res.getPendingRequests().get(i).getRequestNumber(),res.getPendingRequests().get(i).getUserId(),res.getPendingRequests().get(i).getClassNumber(),
-						res.getPendingRequests().get(i).getCourseId(),res.getPendingRequests().get(i).isConfirmed(),res.getPendingRequests().get(i).isHandeled(),data.set(i, ERequestType.addStudent));
-				
-			}
+				data =FXCollections.observableArrayList(req);
 			
+			}	
 		
 		}
 	}
-		
+	*/	
 	
 
 }
