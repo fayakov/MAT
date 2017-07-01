@@ -64,11 +64,11 @@ public class StatisticClassAndCoursesController implements Initializable, Handle
 				    	Prompt.alert(3,"please enter numerical value");
 				    	return;
 				    	}  	
-		    	 	Pane root = FXMLLoader.load(getClass().getResource("/gui/HistogranClassAndCourses.fxml"));
-					Scene scene = new Scene(root);
-					Stage primaryStage = new Stage();
-					primaryStage.setScene(scene);
-					primaryStage.show();
+		    	// 	Pane root = FXMLLoader.load(getClass().getResource("/gui/HistogranClassAndCourses.fxml"));
+				//	Scene scene = new Scene(root);
+				//	Stage primaryStage = new Stage();
+				//	primaryStage.setScene(scene);
+				//	primaryStage.show();
 					}		
 		          		    			 
 		    	  }
@@ -84,6 +84,9 @@ public class StatisticClassAndCoursesController implements Initializable, Handle
 
 
 
+	    
+	    
+	    
 
 		public void handle(Message msg, Object obj) {
 			// TODO Auto-generated method stub
@@ -108,7 +111,8 @@ public class StatisticClassAndCoursesController implements Initializable, Handle
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					StatisticClassAndCoursesController StatisticClassAndCourses = loader.getController();		
+					StatisticClassAndCoursesController StatisticClassAndCourses = loader.getController();
+					
 					//StatisticClassAndTeachersController.loadStudent(Test.students.get(itemIndex));
 					
 		

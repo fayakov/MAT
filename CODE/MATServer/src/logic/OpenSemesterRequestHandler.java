@@ -5,6 +5,7 @@ import java.io.IOException;
 import DAL.CDALError;
 import DAL.CDal;
 import communication.OpenSemesterRequest;
+import communication.OpenSemesterResponse;
 import communication.Message;
 import ocsf.server.ConnectionToClient;
 import utils.Handler;
@@ -17,14 +18,15 @@ public class OpenSemesterRequestHandler implements Handler {
 				
 		// TODO Check in database
 		CDALError error = new CDALError();
-		/*boolean connectionSecceded = false; //CDal.connectUser(AddAssignmentForStudentMsg.isToConnect(), AddAssignmentForStudentMsg.getUserId(), AddAssignmentForStudentMsg.getPassword(), error);		
+		boolean isSecceded = CDal.createNewSemester(openSemesterRequestMsg.getStartDate(), openSemesterRequestMsg.getEndDate());		
 		
-		AddAssignmentForStudentResponseMsg res = new AddAssignmentForStudentResponse(connectionSecceded, error.getString());
+		OpenSemesterResponse res = new OpenSemesterResponse(isSecceded, error.getString());
+		
 		try {
 			client.sendToClient(res);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 	}
 }
