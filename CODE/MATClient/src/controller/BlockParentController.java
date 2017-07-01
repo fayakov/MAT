@@ -9,6 +9,7 @@ import communication.BlockParentResponse;
 import communication.Dispatcher;
 import communication.MATClientController;
 import communication.Message;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -63,15 +64,40 @@ public class BlockParentController implements Initializable, Handler {
 			
 			if (msg instanceof BlockParentResponse) {
 				BlockParentResponse res = (BlockParentResponse)msg;
+				
+				try {
+					localPrompt(pid, res.getErrText(), res.isRequestSecceded());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				/*
 				if (res.isRequestSecceded())  {
 					 Prompt.alert(1, "Parent " + pid + " has been blocked ");
 					 System.out.println("Parent " + pid + " has been blocked ");
 				} else {
 					Prompt.alert(3, res.getErrText());	
 				}
+				*/
 			}
 			
 			
+		}
+		
+		public void localPrompt(final int pid, final String eror, final boolean succ)  throws Exception {
+			
+			Platform.runLater(new Runnable() {
+				int parentId = pid;		
+				String erorText = eror;
+				boolean success = succ;
+				
+				public void run() {
+					if(success)
+						Prompt.alert(1, "Parent " + parentId + " has been blocked ");
+					else
+						Prompt.alert(3, erorText);
+				}
+			} );
 		}
 
 		public void initialize(URL arg0, ResourceBundle arg1) {
