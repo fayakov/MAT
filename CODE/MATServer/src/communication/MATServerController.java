@@ -49,8 +49,6 @@ public class MATServerController extends AbstractServer
 		Dispatcher.addHandler(OpenSemesterRequest.class.getCanonicalName(), new CreateNewSemesterRequestHandler());
 		Dispatcher.addHandler(DefineClassRequest.class.getCanonicalName(), new DefineClassRequestHandler());
 		Dispatcher.addHandler(DeleteStudentFromCourseRequest.class.getCanonicalName(), new DeleteStudentFromCourseRequestHandler());
-		Dispatcher.addHandler(GetAssignmentDataRequest.class.getCanonicalName(), new GetAssignmentDataRequestHandler());
-		Dispatcher.addHandler(GetAssignmentOfStudentRequest.class.getCanonicalName(), new GetAssignmentOfStudentRequestHandler());
 		Dispatcher.addHandler(GetAssignmentsOfStudentRequest.class.getCanonicalName(), new GetAssignmentsOfStudentRequestHandler());
 		Dispatcher.addHandler(GetAssignmentsOfTeacherRequest.class.getCanonicalName(), new GetAssignmentsOfTeacherRequestHandler());		
 		Dispatcher.addHandler(GetClassDataRequest.class.getCanonicalName(), new GetClassDataRequestHandler());
