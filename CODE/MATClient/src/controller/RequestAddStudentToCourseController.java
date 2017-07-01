@@ -19,8 +19,6 @@ import entities.ERequestType;
 import entities.Request;
 
 public class RequestAddStudentToCourseController implements Initializable, Handler {
-	
-	public Request request;
 
 	public RequestAddStudentToCourseController(){
 		Dispatcher.addHandler(AddStudentToCourseResponse.class.getCanonicalName(), this);
@@ -52,22 +50,18 @@ public class RequestAddStudentToCourseController implements Initializable, Handl
     	
     	else { // add request to db
     		try {
-    			request.setUserId(Integer.parseInt(studentIdTextField.getText()));
-    			request.setClassNumber(Integer.parseInt(classTextField.getText()));
-    			request.setCourseId(Integer.parseInt(courseTextField.getText()));
-    			request.setHandeled(false);
-    			request.setConfirmed(false);
-    			request.setRequestType(ERequestType.addStudent);
+    			int studentId = Integer.parseInt(studentIdTextField.getText());
+    			int classId = Integer.parseInt(classTextField.getText());
+    			int coursId = Integer.parseInt(courseTextField.getText());
     		
-    	    	AddStudentToCourseRequest addstureq= new AddStudentToCourseRequest(request);
-    			MATClientController.getInstance().sendRequestToServer(addstureq);
-    	    	
+    	    	AddStudentToCourseRequest addstureq= new AddStudentToCourseRequest(studentId, classId, coursId);
+    			MATClientController.getInstance().sendRequestToServer(addstureq);  	    	
     	    	
     	    	} catch(NumberFormatException e){
     	    	Prompt.alert(3,"please enter numerical value");
     	    	return;
     	    	}  		
-        	Prompt.alert(1,"The request added successfully ");
+        	//Prompt.alert(1,"The request added successfully ");
     	}
     }
     
@@ -83,7 +77,7 @@ public class RequestAddStudentToCourseController implements Initializable, Handl
 		if (msg instanceof AddStudentToCourseResponse) {
 			AddStudentToCourseResponse res = (AddStudentToCourseResponse)msg;
 			if (res.isRequestSaved()) {
-				System.out.println("Server response: Success");
+				System.out.println("The request added successfully");
 			} else {
 				System.out.println("Server response:" + res.getErrText());
 			}

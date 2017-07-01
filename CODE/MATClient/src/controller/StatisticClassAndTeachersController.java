@@ -50,12 +50,13 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 	    	 if(ClassNumber.getText().isEmpty()) 
 				 	Prompt.alert(3,"please enter class number");		    	
 		     else {  	
-		    		
+		    	
+		    	 
 		    	 try {
 					    clid = Integer.parseInt(ClassNumber.getText());
 					    
-					    GetClassTeachersStatsRequest ClassData = new GetClassTeachersStatsRequest(clid);
-					    MATClientController.getInstance().sendRequestToServer(ClassData);
+					   GetClassTeachersStatsRequest ClassData = new GetClassTeachersStatsRequest(clid);
+					   MATClientController.getInstance().sendRequestToServer(ClassData);
 				    	
 				    	} catch(NumberFormatException e){
 				    	Prompt.alert(3,"please enter numerical value");
@@ -83,11 +84,18 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 					@Override
 					public void run() {
 
-				    	Pane root = FXMLLoader.load(getClass().getResource("/gui/HistogramClassAndTeachers.fxml"));
-						Scene scene = new Scene(root);
-						Stage primaryStage = new Stage();
-						primaryStage.setScene(scene);
-						primaryStage.show();		
+				    	Pane root;
+						try {
+							root = FXMLLoader.load(getClass().getResource("/gui/HistogramClassAndTeachers.fxml"));
+							Scene scene = new Scene(root);
+							Stage primaryStage = new Stage();
+							primaryStage.setScene(scene);
+							primaryStage.show();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+								
 					}
 				});
 				
@@ -127,7 +135,7 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 				//con.setDisplayArr(arr);
 			}
 			
-		}
+		
 
 
 		public void initialize(URL location, ResourceBundle resources) {

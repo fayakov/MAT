@@ -25,6 +25,7 @@ public class AddTeacherToCourseClassRequestHandler implements Handler {
 		boolean isSucceeded = false;
 		
 		// Check if max working hours is valid
+		/*
 		int currentWorkingHours = 0;
 		
 		ArrayList<Integer> teacherCourses = CDal.getTeacherCourses(addTeacherToCourseClassMsg.getTeacherId(), CDal.getCurrentSemester());
@@ -44,6 +45,9 @@ public class AddTeacherToCourseClassRequestHandler implements Handler {
 		{
 			isSucceeded = CDal.addTeacherToCourseInClass(addTeacherToCourseClassMsg.getClassId(), addTeacherToCourseClassMsg.getCourseId(), addTeacherToCourseClassMsg.getTeacherId());		
 		}
+		*/
+		int userId = CDal.getTeacherUserId(addTeacherToCourseClassMsg.getTeacherId());
+		isSucceeded = CDal.addTeacherToCourseInClass(addTeacherToCourseClassMsg.getClassId(), addTeacherToCourseClassMsg.getCourseId(), userId);	
 		
 		AddTeacherToCourseClassResponse res = new AddTeacherToCourseClassResponse(isSucceeded, error.getString());
 		try {

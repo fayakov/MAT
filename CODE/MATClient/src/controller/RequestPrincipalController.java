@@ -76,8 +76,8 @@ public class RequestPrincipalController implements Handler {
 				e.printStackTrace();
 			}
 
-    		  ResponseAddStudentToCourseController controller = 
-    		    loader.<ResponseAddStudentToCourseController>getController();
+    		  ResponseChangeTeacherController controller = 
+    		    loader.<ResponseChangeTeacherController>getController();
     		  
     		  controller.initData(requests);
 
@@ -109,8 +109,8 @@ public class RequestPrincipalController implements Handler {
 				e.printStackTrace();
 			}
 
-    		  ResponseAddStudentToCourseController controller = 
-    		    loader.<ResponseAddStudentToCourseController>getController();
+    		  ResponseRemoveStudentFromCourseController controller = 
+    		    loader.<ResponseRemoveStudentFromCourseController>getController();
     		  
     		  controller.initData(requests);
 
