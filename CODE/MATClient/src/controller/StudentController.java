@@ -23,7 +23,6 @@ public class StudentController
     
     public void studentData1() throws Exception 
     {
-    	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/StudentData.fxml"));
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
@@ -31,8 +30,7 @@ public class StudentController
 		primaryStage.show();
     }
     
-    
-    
+
     /*
     ((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 	Stage primaryStage = new Stage();

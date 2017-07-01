@@ -6,6 +6,11 @@ import java.util.ArrayList;
 public class StudentCourseAssignment implements Serializable 
 {
 
+	public StudentCourseAssignment(ArrayList<Assignment> assignmentList) {
+		super();
+		this.assignmentList = assignmentList;
+	}
+
 	private ArrayList<Assignment> assignmentList;
 	
 	
