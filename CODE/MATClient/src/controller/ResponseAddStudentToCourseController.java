@@ -25,7 +25,7 @@ import utils.Handler;
 public class ResponseAddStudentToCourseController implements Initializable//, Handler
 {
 	
-	
+	private ArrayList<Request> allRequests;
 	
 	/*
 	 * public ResponseAddStudentToCourseController()
@@ -36,10 +36,18 @@ public class ResponseAddStudentToCourseController implements Initializable//, Ha
 */
 	
 	
+	
     @FXML
     private ResourceBundle resources;
 
-    @FXML
+    public void setAllRequests(ArrayList<Request> allRequests) {
+    	data.clear();
+		
+		for (Request request : allRequests) {
+			data.add(request);
+		}
+	}
+	@FXML
     private URL location;
 
     @FXML
@@ -103,12 +111,12 @@ public class ResponseAddStudentToCourseController implements Initializable//, Ha
 		//GetPendingRequestsRequest pendigreq= new GetPendingRequestsRequest(ERequestType.addStudent);
 		//MATClientController.getInstance().sendRequestToServer(pendigreq); 
 		
+		
+		
     	requestNumber.setCellValueFactory(new PropertyValueFactory<Request, Integer>("requestNumber"));
     	userId.setCellValueFactory(new PropertyValueFactory<Request, Integer>("userId"));
     	classNumber.setCellValueFactory(new PropertyValueFactory<Request, Integer>("classNumber"));
     	courseId.setCellValueFactory(new PropertyValueFactory<Request, Integer>("courseId"));
-
-        
 
     	table.setItems(data);
 		

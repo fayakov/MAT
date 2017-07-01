@@ -18,12 +18,8 @@ public class GetPendingRequestsRequestHandler implements Handler {
 		ConnectionToClient client = (ConnectionToClient) obj;
 		GetPendingRequestsRequest getPendingMsg = (GetPendingRequestsRequest)msg;
 			
-		// TODO Check in database
-		CDALError error = new CDALError();
-		ArrayList<Request> requests = new ArrayList<Request>();
-		requests = CDal.getRequests(CDal.getCurrentSemester());
+		GetPendingRequestsResponse res = new GetPendingRequestsResponse(CDal.getRequests());
 		
-		GetPendingRequestsResponse res = new GetPendingRequestsResponse(requests);
 		try {
 			client.sendToClient(res);
 		} catch (IOException e) {

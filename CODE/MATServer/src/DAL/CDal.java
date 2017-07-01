@@ -2397,7 +2397,7 @@ public class CDal {
 	
 	
 	
-	public static ArrayList<Request> getRequests(int semester)
+	public static ArrayList<Request> getRequests()
 	{
 		ArrayList<Request> reqArr = new ArrayList<Request>(); 
 		try{
