@@ -2783,6 +2783,27 @@ public class CDal {
 			return studentCoursAssignment;
 	}
 	
+	
+	public static boolean updateHndledAssignment(int assignmentId)
+	{
+		boolean retVal = true;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			if(stmt.executeUpdate("UPDATE student_has_assignment "
+					+ "set isHandled = 1 "
+					+ "WHERE assignmentId = "+assignmentId+";") == 0)
+			{
+				retVal = false;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			retVal = false;
+		}
+		return retVal;
+	}
+	
 	public static ArrayList<Assignment> getAssignmentByTeacherAndCourse(int courseId, int teacherId)
 	{
 		ArrayList<Assignment> assignmentsArray = new ArrayList<Assignment> ();
@@ -3056,7 +3077,7 @@ public class CDal {
 									+ "set submission_responseId = "+submissionResponseId +", "
 									+ "grade = "+grade+", "
 									+ "isHandled = 1, "
-									+ "teacherComment = "+teacherComments+";") == 0)
+									+ "teacherComment = '"+teacherComments+"';") == 0)
 							{
 								retVal = false;
 							}
@@ -3110,6 +3131,7 @@ public class CDal {
 								int submissionId = createSubmission(subDate, fileData, fileName, assignmentId);
 								if(submissionId != 0)
 								{
+									
 									Statement stmt = connection.createStatement();
 									if(stmt.executeUpdate("INSERT INTO student_has_course_has_submission  "
 														+ "(student_has_course_course_courseId, "
@@ -3122,6 +3144,10 @@ public class CDal {
 														+ "values ("+courseId+ "," + studentCourseId +","+ studentId +","+getStudentUserId(studentId)+ "," + curSemester +","+ isSubmissionLate(subDate, assignmentId) +"," +submissionId+");") == 0)
 									{
 										retVal = false;
+									}
+									else
+									{
+										updateHndledAssignment(assignmentId);
 									}
 								}
 								else
@@ -3341,10 +3367,10 @@ public class CDal {
 	}
 	
 	
-	public static ArrayList<Integer> getSubmissionsToCheck(int courseId)
+	public static SubmissionsForTeacherCheck getSubmissionsToCheck(int courseId)
 	{
-		
-		ArrayList<Integer> myList = new  ArrayList<Integer>();
+
+		ArrayList<Submission> myList = new  ArrayList<Submission>();
 		try 
 		{
 			Statement stmt = connection.createStatement();
@@ -3353,11 +3379,13 @@ public class CDal {
 					+ "AND isHandled = 0;");
 			while(resultSet.next())
 	 		{				
-				myList.add(resultSet.getInt(1));
+				myList.add(getSubmission(resultSet.getInt(1)));
 	 		} 
 		}
 		catch (SQLException e) {e.printStackTrace();}
-		return myList;
+		SubmissionsForTeacherCheck sub = new SubmissionsForTeacherCheck();
+		sub.setAssignments(myList);
+		return sub;
 	}
 	
 	public static boolean addAssignmentToClassWithCourse(int classId, int courseId, int assignmentId){

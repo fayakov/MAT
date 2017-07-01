@@ -500,7 +500,8 @@ public class DALTestMain {
 			}
 			bos.flush();
 			byte[] result = bos.toByteArray();
-			System.out.println(dl.createSubmissionResponse(result, "tmp.docx", 14, 100, "very good" , date ) == true);
+			String comment = "very good";
+			System.out.println(dl.createSubmissionResponse(result, "tmp.docx", 14, 100, comment , date ) == true);
 		}
 		catch (IOException ex) {
             ex.printStackTrace();
@@ -510,10 +511,11 @@ public class DALTestMain {
 	
 	public static void getSubmissionToCheck(CDal dl)
 	{
-		ArrayList<Integer> arr = dl.getSubmissionsToCheck(1);
-		for(int i : arr)
+		SubmissionsForTeacherCheck sub = dl.getSubmissionsToCheck(1);
+		 ArrayList<Submission> sun = sub.getAssignments();
+		for(Submission i : sun)
 		{
-			System.out.println("submission :" +i);
+			System.out.println("submission :" +i.getAssignmentNumber());
 		}
 	}
 	
