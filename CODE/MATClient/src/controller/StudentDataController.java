@@ -101,12 +101,7 @@ public class StudentDataController  implements Initializable, Handler
 		MATClientController.getInstance().sendRequestToServer(GetStudentDataReq);
     }
 
-    @FXML // This method is called by the FXMLLoader when initialization is complete
-    void initialize() 
-    {
-    	
-    	
-    }
+   
     
     
 	public void handle(Message msg, Object obj) 
@@ -159,7 +154,13 @@ public class StudentDataController  implements Initializable, Handler
 		tableViewID.setItems(data);
 		
 	}
-			
+
+	 @FXML // This method is called by the FXMLLoader when initialization is complete
+    void initialize() 
+    {
+    	
+    	
+    }
 }
 
 

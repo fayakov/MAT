@@ -1,8 +1,6 @@
 package communication;
 
 import java.util.ArrayList;
-
-import entities.ClassCourse;
 import entities.Student;
 import entities.StudentCourse;
 
@@ -13,16 +11,16 @@ private static final long serialVersionUID = 1L;
 	private boolean isSucceed;
 	private String errText;
 	Student studentData;
-	public  ArrayList<StudentCourse> classCourseData = new ArrayList<StudentCourse>();
+	public  ArrayList<StudentCourse> stuCourseData = new ArrayList<StudentCourse>();
 	
 	
 public GetStudentDataResponse(boolean isSucceed, String errText, Student studentData,
-			ArrayList<StudentCourse> classCourseData) {
+			ArrayList<StudentCourse> stuCourseData) {
 		super();
 		this.isSucceed = isSucceed;
 		this.errText = errText;
 		this.studentData = studentData;
-		this.classCourseData = classCourseData;
+		this.stuCourseData = stuCourseData;
 	}
 
 	public boolean isSucceed() {
@@ -43,27 +41,18 @@ public GetStudentDataResponse(boolean isSucceed, String errText, Student student
 	public void setStudentData(Student studentData) {
 		this.studentData = studentData;
 	}
-	public ArrayList<StudentCourse> getClassCourseData() {
-		return classCourseData;
+	public ArrayList<StudentCourse> getStuCourseData() {
+		return stuCourseData;
 	}
-	public void setClassCourseData(ArrayList<StudentCourse> classCourseData) {
-		this.classCourseData = classCourseData;
+	public void setStuCourseData(ArrayList<StudentCourse> stuCourseData) {
+		this.stuCourseData = stuCourseData;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 	
 	
-
-	
 	
 
-	
-	
-	
-	
-	
-	
-	
 }
 
