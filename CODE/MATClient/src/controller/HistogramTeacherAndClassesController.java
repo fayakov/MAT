@@ -30,7 +30,7 @@ public class HistogramTeacherAndClassesController implements  Initializable, Han
 	
 	
 	 @FXML
-	 private BarChart<?, ?> ClassChart;
+	 private BarChart<String, Number> ClassChart;
 	
 	@FXML
     private CategoryAxis x;
@@ -85,26 +85,17 @@ public class HistogramTeacherAndClassesController implements  Initializable, Han
 		arrToDisplay.add(c3);
 		arrToDisplay.add(c4);
 		
-		Series<Object, Object> set1 = new XYChart.Series<>();
+		XYChart.Series<String, Number> set1 = new XYChart.Series<>();
 		
-		set1.getData().add(new XYChart.Data(c1));
-		set1.getData().add(new XYChart.Data(c2));
-		set1.getData().add(new XYChart.Data(c3));
-		set1.getData().add(new XYChart.Data(c4));
-		//set1.getData().add(new XYChart.Data(arrToDisplay.get(58),arrToDisplay.getClass()));
+		
+		for (ClassWithGrade classWithGrade : arrToDisplay) {
+			set1.getData().add(new XYChart.Data(classWithGrade.getName(), classWithGrade.getGrade()));
+		}
+		
+	//set1.getData().add(new XYChart.Data(arrToDisplay.get(58),arrToDisplay.getClass()));
 	//	set1.getData().add(new XYChart.Data(arrToDisplay.get(28),arrToDisplay.getClass()));
 		
 		
-		ClassChart.getData().addAll(set1);
-		
-		
-		
+		ClassChart.getData().add(set1);
 	}
-	
-	
-	
-	
-	
-	
-	
 }
