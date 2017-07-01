@@ -10,6 +10,7 @@ import communication.MATClientController;
 import communication.Message;
 import communication.OpenSemesterRequest;
 import communication.OpenSemesterResponse;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -67,13 +68,22 @@ public class OpenSemesterController implements Handler {
 			// TODO Auto-generated method stub
 			if (msg instanceof OpenSemesterResponse) {
 				OpenSemesterResponse res = (OpenSemesterResponse)msg;
-				if (res.isSucceeded()) {
-					Prompt.alert(1, "the semester added succesfully");
-				} else {
-					Prompt.alert(3, res.getErrText());	
-				}
 				
+				localPrompt(res.isSucceeded());
 			}
 			
-		}    
+		}
+		
+		public void localPrompt(final boolean succ)  {
+			
+			Platform.runLater(new Runnable() {
+				boolean success = succ;
+				public void run() {
+					if(success)
+						Prompt.alert(1, "the semester added succesfully");	
+					else
+						Prompt.alert(3, "cannot create semester, check the details again");
+				}
+			} );
+		}
 }

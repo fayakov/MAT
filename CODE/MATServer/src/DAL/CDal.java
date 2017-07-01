@@ -1861,7 +1861,7 @@ public class CDal {
 		try{
 			Statement stmt = connection.createStatement();
 			if(stmt.executeUpdate("INSERT INTO semester (startDate, endDate) VALUES "
-					+ "('" +start.getYear()+"-"+(start.getMonth() + 1)+"-"+(start.getDate()+1) +"','"+end.getYear()+"-"+(end.getMonth()+1)+"-"+(end.getDate()+1) +"')") != 0)
+					+ "('" +start.getYear()+"-"+(start.getMonth() + 1)+"-"+(start.getDate()+1) +"','"+end.getYear()+"-"+(end.getMonth()+1)+"-"+(end.getDate()+1) +"')") == 0)
 			{
 				retVal = false;
 			}
