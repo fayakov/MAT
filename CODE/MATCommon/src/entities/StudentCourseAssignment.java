@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 public class StudentCourseAssignment implements Serializable 
 {
+	private ArrayList<Assignment> assignmentList;
 
 	public StudentCourseAssignment(ArrayList<Assignment> assignmentList) {
 		super();
 		this.assignmentList = assignmentList;
 	}
 
-	private ArrayList<Assignment> assignmentList;
 	
 	
 	public void setAssignments(ArrayList<Assignment> assignment)

@@ -38,7 +38,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class AssignmentStudent implements Initializable, Handler
 {
 	ObservableList<String> list ;
-	final ObservableList<StudentCourseAssignment> data= FXCollections.observableArrayList(new StudentCourseAssignment("1",1,2,"5"));
+	final ObservableList<StudentCourseAssignment> data;
 	
 	
 	public AssignmentStudent()
