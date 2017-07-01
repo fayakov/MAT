@@ -20,28 +20,41 @@ public class ResponseRemoveStudentFromCourseController {
 			data.add(request);
 		}
 	}
-    
-    @FXML
-    private ResourceBundle resources;
 
-    @FXML
-    private URL location;
 
-    @FXML
-    private Button btnClose;
+        @FXML
+        private ResourceBundle resources;
 
-    @FXML
-    void send(ActionEvent event) {
+        @FXML
+        private URL location;
 
+        @FXML
+        private TableColumn<?, ?> requestNumber;
+
+        @FXML
+        private TableColumn<?, ?> userId;
+
+        @FXML
+        private TableColumn<?, ?> classNumber;
+
+        @FXML
+        private TableColumn<?, ?> courseId;
+
+        @FXML
+        private TableView<?> table;
+
+        @FXML
+        void confirm(ActionEvent event) {
+
+        }
+
+        @FXML
+        void decline(ActionEvent event) {
+
+        }
+
+        @FXML
+        void initialize() {
+ 
+        }
     }
-
-    @FXML
-    void close(ActionEvent event) {
-
-    }
-
-    @FXML
-    void initialize() {
-    
-    }
-}
