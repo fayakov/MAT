@@ -7,6 +7,8 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import communication.Dispatcher;
+import communication.GetClassTeachersStatsResponse;
 import communication.Message;
 import entities.TeacherWithGrade;
 import javafx.event.ActionEvent;
@@ -17,6 +19,11 @@ import javafx.stage.Stage;
 import utils.Handler;
 
 public class HistogramClassAndCoursesController implements Initializable, Handler {
+	
+	public HistogramClassAndCoursesController(){
+		//Dispatcher.addHandler(GetClassTeachersStatsResponse.class.getCanonicalName(), this);
+	}
+	
 	
 	private ArrayList<CourseWithGrade> arrToDisplay;
 

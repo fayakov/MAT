@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import communication.Dispatcher;
+import communication.GetClassTeachersStatsResponse;
 import communication.Message;
 import entities.ClassWithGrade;
 import javafx.event.ActionEvent;
@@ -18,6 +20,11 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 
 public class HistogramTeacherAndClassesController implements  Initializable, Handler{
+	
+	public HistogramTeacherAndClassesController(){
+	//	Dispatcher.addHandler(GetClassTeachersStatsResponse.class.getCanonicalName(), this);
+	}
+	
 	
 	
 	 @FXML
