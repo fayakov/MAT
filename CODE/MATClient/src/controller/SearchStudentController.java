@@ -62,11 +62,11 @@ public class SearchStudentController implements Initializable, Handler {
 		    	Prompt.alert(3,"please enter numerical value");
 		    	return;
 		    	}  	
-    		Pane root = FXMLLoader.load(getClass().getResource("/gui/StudentData.fxml"));
-			Scene scene = new Scene(root);
-			Stage primaryStage = new Stage();
-			primaryStage.setScene(scene);
-			primaryStage.show();
+    //		Pane root = FXMLLoader.load(getClass().getResource("/gui/StudentData.fxml"));
+		//	Scene scene = new Scene(root);
+			//Stage primaryStage = new Stage();
+		//	primaryStage.setScene(scene);
+	//		primaryStage.show();
 			}		
 
     }
