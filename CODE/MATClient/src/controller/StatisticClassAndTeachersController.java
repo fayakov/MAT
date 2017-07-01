@@ -15,6 +15,7 @@ import communication.LoginResponseMsg;
 import communication.MATClientController;
 import communication.Message;
 import entities.TeacherWithGrade;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -77,36 +78,47 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 				GetClassTeachersStatsResponse res = (GetClassTeachersStatsResponse)msg;
 				ArrayList<TeacherWithGrade> arr = res.getStats();
 				
-				
-				
-				
-				
-				
-				
-				if( arr.size() == 0) {
-					// PopUp
-					;
-				}
-				else{
-//					((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-					Stage primaryStage = new Stage();
-					FXMLLoader loader = new FXMLLoader();
-					Pane root;
-					try {
-						root = loader.load(getClass().getResource("/gui/HistogramClassAndTeachers.fxml").openStream());
-						Scene scene = new Scene(root);			
-						scene.getStylesheets().add(getClass().getResource("/gui/HistogramClassAndTeachers.fxml").toExternalForm());
-						
-						primaryStage.setScene(scene);		
-						primaryStage.show();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					StatisticClassAndTeachersController StatisticClassAndTeachers = loader.getController();		
-					//StatisticClassAndTeachersController.loadStudent(Test.students.get(itemIndex));
+				Platform.runLater(new Runnable() {
 					
-					 
+					@Override
+					public void run() {
+
+				    	Pane root = FXMLLoader.load(getClass().getResource("/gui/HistogramClassAndTeachers.fxml"));
+						Scene scene = new Scene(root);
+						Stage primaryStage = new Stage();
+						primaryStage.setScene(scene);
+						primaryStage.show();		
+					}
+				});
+				
+
+				
+				
+				
+//				if( arr.size() == 0) {
+//					// PopUp
+//					;
+//				}
+//				else{
+////					((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+//					Stage primaryStage = new Stage();
+//					FXMLLoader loader = new FXMLLoader();
+//					Pane root;
+//					try {
+//						root = loader.load(getClass().getResource("/gui/HistogramClassAndTeachers.fxml").openStream());
+//						Scene scene = new Scene(root);			
+//						scene.getStylesheets().add(getClass().getResource("/gui/HistogramClassAndTeachers.fxml").toExternalForm());
+//						
+//						primaryStage.setScene(scene);		
+//						primaryStage.show();
+//					} catch (IOException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//					StatisticClassAndTeachersController StatisticClassAndTeachers = loader.getController();		
+//					//StatisticClassAndTeachersController.loadStudent(Test.students.get(itemIndex));
+//					
+//					 
 					
 					
 				}

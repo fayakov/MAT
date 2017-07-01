@@ -1,5 +1,4 @@
 package controller;
-
 import java.net.URL;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -33,61 +32,46 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 
+//נשאר להעביר ת.ז ולהוסיף ציונים
 public class StudentDataController  implements Initializable, Handler
 {
-	
 	ObservableList<String> list ;
+	final ObservableList<StudentCourse> data= FXCollections.observableArrayList(new StudentCourse(1,2,5));
 	
 	public StudentDataController()
 	{
 		Dispatcher.addHandler(GetStudentDataResponse.class.getCanonicalName(), this);
 	}
 	
-	
-    @FXML // ResourceBundle that was given to the FXMLLoader
+    @FXML 
     private ResourceBundle resources;
-
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
+    @FXML 
     private URL location;
-
     @FXML
     private TextField textStudentID;
-
     @FXML
     private TextField textLName;
-
     @FXML
     private Label labelLName;
-
     @FXML
     private TextField textFName;
-
     @FXML
     private Label labelStudentID;
-
     @FXML
     private TableColumn<StudentCourse, Integer> colGrade;
-
     @FXML
     private TextField textClasses;
-
     @FXML
     private TableColumn<StudentCourse, Integer> colCourse;
-
     @FXML
     private Label labelFNName;
-
     @FXML
     private Label labelCllassID;
-
     @FXML
     private Label labelStudentData;
-    
     @FXML
     private TableView<StudentCourse> tableViewID;
     
-    
-    final ObservableList<StudentCourse> data= FXCollections.observableArrayList(new StudentCourse(1,2,5),new StudentCourse(4,5,6));
     
     @FXML
     void StudentInfo(ActionEvent event) 
@@ -95,8 +79,17 @@ public class StudentDataController  implements Initializable, Handler
     	GetStudentDataRequest GetStudentDataReq = new GetStudentDataRequest(loginController.st.getId());//מאיפה ת.ז?
 		MATClientController.getInstance().sendRequestToServer(GetStudentDataReq);
     }
-
-   
+    
+    //בלי טבלה
+    public void initialize(URL location, ResourceBundle resources) 
+	{
+		// TODO Auto-generated method stub
+		//colCourse.setCellValueFactory(new PropertyValueFactory<StudentCourse, Integer>("courseID"));
+		//colGrade.setCellValueFactory(new PropertyValueFactory<StudentCourse, Integer>("grade"));
+    	
+		//tableViewID.setItems(data);
+	}
+    
     
     
 	public void handle(Message msg, Object obj) 
@@ -119,44 +112,26 @@ public class StudentDataController  implements Initializable, Handler
 		    	
 		    	
 		    	
-		    	
+		    	/*
 		    	for(int i=0;i<res.getClassCourseData().size();i++)
 				{
 					data.add(res.getClassCourseData().get(i).getCourseID(),res.getClassCourseData().get(i).getGrade());
 					tableViewID.setItems(data);
 				}
 		    	
-		    	
-		   
-				
-				
 			} else {
 				System.out.println("Server response:" + res.getErrText());
 			}
 		}
+		*/
 	}
 
 	
 	
-	public void initialize(URL location, ResourceBundle resources) 
-	{
-		// TODO Auto-generated method stub
-		colCourse.setCellValueFactory(new PropertyValueFactory<StudentCourse, Integer>("courseID"));
-		colGrade.setCellValueFactory(new PropertyValueFactory<StudentCourse, Integer>("grade"));
-    	
-		tableViewID.setItems(data);
-		
-	}
+	
+		}}
 
-	 @FXML // This method is called by the FXMLLoader when initialization is complete
-    void initialize() 
-    {
-    	
-    	
-    }
 }
-
-
 
 
 
