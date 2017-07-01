@@ -26,7 +26,7 @@
             <TableColumn fx:id="courseId" prefWidth="67.0" text="course id" />
          </columns>
       </TableView>
-      <Button layoutX="359.0" layoutY="341.0" mnemonicParsing="false" onAction="#confirm" text="confirm" />
-      <Button layoutX="206.0" layoutY="341.0" mnemonicParsing="false" onAction="#decline" text="decline" />
+      <Button fx:id="btnConfirm" layoutX="359.0" layoutY="341.0" mnemonicParsing="false" onAction="#confirm" text="confirm" />
+      <Button fx:id="btjDecline" layoutX="206.0" layoutY="341.0" mnemonicParsing="false" onAction="#decline" text="decline" />
    </children>
 </AnchorPane>
