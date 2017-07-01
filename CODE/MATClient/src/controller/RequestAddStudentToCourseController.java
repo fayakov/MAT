@@ -8,6 +8,7 @@ import communication.AddStudentToCourseResponse;
 import communication.Dispatcher;
 import communication.MATClientController;
 import communication.Message;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -76,12 +77,29 @@ public class RequestAddStudentToCourseController implements Initializable, Handl
 		// TODO Auto-generated method stub
 		if (msg instanceof AddStudentToCourseResponse) {
 			AddStudentToCourseResponse res = (AddStudentToCourseResponse)msg;
-			if (res.isRequestSaved()) {
-				System.out.println("The request added successfully");
-			} else {
-				System.out.println("Server response:" + res.getErrText());
+			try {
+				localPrompt(res.getErrText(), res.isRequestSaved());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			
 		}
+	}
+	
+public void localPrompt(final String eror, final boolean succ)  throws Exception {
+		
+		Platform.runLater(new Runnable() {		
+			String erorText = eror;
+			boolean success = succ;
+			
+			public void run() {
+				if(success)
+					Prompt.alert(1, "The request sent successfully");	
+				else
+					Prompt.alert(3, "cannot send request, check details again");
+			}
+		} );
 	}
 
 	public void initialize(URL location, ResourceBundle resources) {

@@ -43,8 +43,8 @@ public class DALTestMain {
 		//checkAddTeacherToCourseWithClass(dl);
 		//checkRemoveTeacherFromCourseWithClass(dl);
 		//checkCreateTeacher(dl);
-			checkAddCourseToClass(dl);
-			checkAddTeacherToCourseWithClass(dl);
+			//checkAddCourseToClass(dl);
+			//checkAddTeacherToCourseWithClass(dl);
 		//checkAddPrevCourseToCourse(dl);
 		
 		//checkisFinishedPrevCourse(dl);
@@ -68,6 +68,7 @@ public class DALTestMain {
 		//getSubmissionToCheck(dl);
 		//checkAddSubmissionResponse(dl);
 		//getAssignments(dl);
+		checkGetCourseData(dl);
 	}
 	public static void checkLogin(CDal dl )
 	{
@@ -529,6 +530,11 @@ public class DALTestMain {
 		}
 	}
 	
-	
+	public static void checkGetCourseData(CDal dl)
+	{
+		Course courseData = dl.getCourseData(1);
+		System.out.println(courseData.getCourseName());
+		
+	}
 	
 }

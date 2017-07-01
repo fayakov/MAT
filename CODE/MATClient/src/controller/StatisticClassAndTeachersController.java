@@ -27,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import utils.Handler;
 
 
@@ -77,8 +78,13 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 			// TODO Auto-generated method stub
 			if (msg instanceof GetClassTeachersStatsResponse) {
 				GetClassTeachersStatsResponse res = (GetClassTeachersStatsResponse)msg;
+				if(res.getStats() == null)
+					Prompt.alert(3, "class is not exist");
+				else{
+					
 				ArrayList<TeacherWithGrade> arr = res.getStats();
-				
+				statisticsTeacher(arr);
+				}
 				Platform.runLater(new Runnable() {
 					
 					@Override
@@ -134,6 +140,45 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 			
 				//con.setDisplayArr(arr);
 			}
+			
+		
+
+
+		private void statisticsTeacher(ArrayList<TeacherWithGrade> arr) {
+			// TODO Auto-generated method stub
+			
+
+	    	Platform.runLater(new Runnable() {
+				
+	    		public void run() {
+	    		FXMLLoader loader = new FXMLLoader(
+	        		    getClass().getResource(
+	        		      "/gui/HistogramClassAndTeachers.fxml"
+	        		    )
+	        		  );
+
+	        		  Stage stage = new Stage(StageStyle.DECORATED);
+	        		  try {
+						stage.setScene(
+						    new Scene(
+						      (Pane) loader.load()
+						    )
+						  );
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+	        		  HistogramClassAndTeachersController controller = 
+	        		    loader.< HistogramClassAndTeachersController>getController();
+	        		  
+	        		  controller.initData(arr);
+
+	        		  stage.show();
+	    		}
+	    	});
+	    }
+			
 			
 		
 

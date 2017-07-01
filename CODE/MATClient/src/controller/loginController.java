@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import entities.EUserType;
 import entities.Student;
 
@@ -67,7 +68,6 @@ public class loginController implements Initializable, Handler
     	else{
     		try{
     			int userId = Integer.parseInt(userIdStr);
-    			st.setId(3);//tal
     			LoginRequestMsg loginReqMsg = new LoginRequestMsg(userId, userPassword,true);
     			MATClientController.getInstance().sendRequestToServer(loginReqMsg);
     			
@@ -104,50 +104,102 @@ public class loginController implements Initializable, Handler
 		primaryStage.show();
 	}
 
-	// handle response from server
+
+
+	@Override
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
 		if (msg instanceof LoginResponseMsg) {
 			LoginResponseMsg res = (LoginResponseMsg)msg;
 			if (res.isValidUser()) {
-				System.out.println("Server response: Success");
 				try {
-				switch(res.getUserType()) {
-				
-				case EUserPrincipal: open("/gui/PrincipalMenu.fxml"); break;  
-				case EUserTeacher: open("/gui/TeacherMenu.fxml"); break;    
-				case EUserSecretary: open("/gui/SecretaryMenu.fxml"); break;    		
-				case EUserStudent: open("/gui/StudentMenu.fxml"); break;    
-				case EUserParent: open("/gui/TeacherMenu.fxml"); break;    
-				}
-				
-				} catch (Exception e) {	e.printStackTrace(); }
-			} else {
-				System.out.println("Server response:" + res.getErrText());
-			}
-			
-		}
-	}
-	
-	
-	public void open(final String path1) throws Exception {
-		Platform.runLater(new Runnable() {
-			String path = path1;
-			public void run() {
-				// TODO Auto-generated method stub
-				try {
-					Pane root = FXMLLoader.load(getClass().getResource(path));
-					Scene scene = new Scene(root);
-					Stage primaryStage = new Stage();
-					primaryStage.setScene(scene);
-					primaryStage.show();
-					
-				} catch (IOException e) {
+					open(res, userIdTextField.getText());
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-		} );
+		}
+	}
+
+	// handle response from server
+//	public void handle(Message msg, Object obj) {
+//		// TODO Auto-generated method stub
+//		if (msg instanceof LoginResponseMsg) {
+//			LoginResponseMsg res = (LoginResponseMsg)msg;
+//			if (res.isValidUser()) {
+//				System.out.println("Server response: Success");
+//				try {
+//				switch(res.getUserType()) {
+//				
+//				case EUserPrincipal: open("/gui/PrincipalMenu.fxml"); break;  
+//				case EUserTeacher: open("/gui/TeacherMenu.fxml"); break;    
+//				case EUserSecretary: open("/gui/SecretaryMenu.fxml"); break;    		
+//				case EUserStudent: open("/gui/StudentMenu.fxml"); break;    
+//				case EUserParent: open("/gui/TeacherMenu.fxml"); break;    
+//				}
+//				
+//				} catch (Exception e) {	e.printStackTrace(); }
+//			} else {
+//				System.out.println("Server response:" + res.getErrText());
+//			}
+//			
+//		}
+//	}
+//	
+//	
+	public void open(final LoginResponseMsg res, final String userId) throws Exception {
+			Platform.runLater(new Runnable() {
+			
+			public void run() {
+				
+				String path = "/gui/StudentMenu.fxml";
+				
+				switch(res.getUserType()) {
+				
+				case EUserPrincipal: path = "/gui/PrincipalMenu.fxml"; break;  
+				case EUserTeacher: path = "/gui/TeacherMenu.fxml"; break;    
+				case EUserSecretary: path = "/gui/SecretaryMenu.fxml"; break;    		
+				case EUserStudent: path = "/gui/StudentMenu.fxml"; break;    
+				case EUserParent: path = "/gui/TeacherMenu.fxml"; break;    
+				}
+				
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+
+				  Stage stage = new Stage(StageStyle.DECORATED);
+				  try {
+					stage.setScene(
+					    new Scene(
+					      (Pane) loader.load()
+					    )
+					  );
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				  switch(res.getUserType()) {
+					
+					case EUserPrincipal: 
+						break;  
+					case EUserTeacher: 
+						break;    
+					case EUserSecretary: 
+						break;    		
+					case EUserStudent:
+						StudentController controller = 
+					    loader.<StudentController>getController();
+					  
+						int userIdInt = Integer.parseInt(userId);
+						controller.initData(userIdInt);
+						break;    
+					case EUserParent: 
+						break;    
+					}
+				  
+				  stage.show();
+			}
+		});
 	}
 
 }

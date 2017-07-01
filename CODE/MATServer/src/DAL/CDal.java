@@ -940,6 +940,24 @@ public class CDal {
 		return retVal;
 	}
 	
+	
+	private static int getCourseTeachingUnit(int courseId)
+	{
+		int retVal = 0;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT course.teachingunit_teachingUnitId FROM course "
+					+ "WHERE courseId = " +courseId + ";");
+			if(resultSet.first()) {
+
+				retVal = resultSet.getInt(1);
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
 	private static int getTeacherFreeHours(int teacherId)
 	{
 		int retVal = 0;
@@ -2663,11 +2681,14 @@ public class CDal {
 						}	
 					}
 					else
-					{
 						retVal = false;
-					}
+				
 				}
+				else
+					retVal = false;
 			}
+			else
+				retVal = false;
 		}
 		
 		return retVal;
@@ -2700,7 +2721,7 @@ public class CDal {
 		return false;
 	}*/
 
-	public static Student getStudentData(int userId, CDALError error) {
+	public static Student getStudentData(int userId) {
 		boolean retVal = true;
 		Student student = new Student();
 		try{
@@ -2715,11 +2736,10 @@ public class CDal {
 					if(studentId != 0)
 					{
 						student.setAllUserData(user);	
-						student.setCourse(getStudentCourses(userId));
-						student.setClassID(getStudentClass(userId));
+						student.setCourse(getStudentCourses(studentId));
+						student.setClassID(getStudentClass(studentId));
 						student.setParentID(getChildrenParents(studentId));
 					}
-	
 				}				
 			}
 		}
@@ -3267,8 +3287,13 @@ public class CDal {
 	
 	
 	public static Course getCourseData(int courseId) {
-		// TODO Auto-generated method stub
-		return null;
+		Course courseData = new Course();
+		courseData.setCourseId(courseId);
+		courseData.setCourseName(getCourseName(courseId));
+		courseData.setDuration(getCourseHours(courseId));
+		courseData.setTeachingUnit(getCourseTeachingUnit(courseId));
+		courseData.setPreCourses(getPrevCourses(courseId));
+		return courseData;
 	}
 	
 	private static boolean isAssignmentExist(int assignmentId)

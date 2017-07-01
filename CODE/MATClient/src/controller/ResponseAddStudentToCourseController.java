@@ -8,6 +8,7 @@ import communication.GetPendingRequestsResponse;
 import communication.MATClientController;
 import communication.Message;
 import communication.PrincipalDecisionRequest;
+import entities.ERequestType;
 import entities.Request;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,7 +32,8 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
     	data.clear();
 		
 		for (Request request : allRequests) {
-			data.add(request);
+			if(request.getRequestType() == ERequestType.addStudent)
+				data.add(request);
 		}
 	}
 	

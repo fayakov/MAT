@@ -33,18 +33,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 
 //נשאר להעביר ת.ז ולהוסיף ציונים
-public class StudentDataController  implements Initializable, Handler
+public class StudentDataController  implements Initializable
 {
 	
 	private Student student;
 	
 	ObservableList<String> list ;
 	final ObservableList<StudentCourse> data= FXCollections.observableArrayList(new StudentCourse(1,2,5));
-	
-	public StudentDataController()
-	{
-		Dispatcher.addHandler(GetStudentDataResponse.class.getCanonicalName(), this);
-	}
 	
     @FXML 
     private ResourceBundle resources;
@@ -78,6 +73,7 @@ public class StudentDataController  implements Initializable, Handler
     void initData(Student student) 
     {
     	this.student = student;
+<<<<<<< HEAD
     }
     
     @FXML
@@ -85,59 +81,43 @@ public class StudentDataController  implements Initializable, Handler
     {
     	GetStudentDataRequest GetStudentDataReq = new GetStudentDataRequest(student.getId());
 		MATClientController.getInstance().sendRequestToServer(GetStudentDataReq);
+=======
+    	if (student != null) {
+    		String strStudentID = Integer.toString(student.getId());
+    		String strClass = Integer.toString(student.getId());
+	    	
+    		textStudentID.setText(strStudentID);
+	    	textFName.setText(student.getFirstName());
+	    	textLName.setText(student.getLastName());
+	    	textClasses.setText(strClass); 
+    	}
+>>>>>>> bf91243622cc993605f71f536eba1afa78b2e6f7
     }
     
     //בלי טבלה
     public void initialize(URL location, ResourceBundle resources) 
 	{
+//    	if (student != null) {
+//    		String strStudentID = Integer.toString(student.getId());
+//    		String strClass = Integer.toString(student.getId());
+//	    	
+//    		textStudentID.setText(strStudentID);
+//	    	textFName.setText(student.getFirstName());
+//	    	textLName.setText(student.getLastName());
+//	    	textClasses.setText(strClass); 
+//    	}
+//    	
+//    	else {
+//    		System.out.println(arg0);
+//    	}
+    	
+    	
 		// TODO Auto-generated method stub
 		//colCourse.setCellValueFactory(new PropertyValueFactory<StudentCourse, Integer>("courseID"));
 		//colGrade.setCellValueFactory(new PropertyValueFactory<StudentCourse, Integer>("grade"));
     	
 		//tableViewID.setItems(data);
 	}
-    
-    
-    
-	public void handle(Message msg, Object obj) 
-	{
-		// TODO Auto-generated method stub
-		if (msg instanceof GetStudentDataResponse) 
-		{
-			GetStudentDataResponse res = (GetStudentDataResponse)msg;
-			
-			if (res.isSucceed()) 
-			{
-				String strStudentID = Integer.toString(res.getStudentData().getId());
-				textStudentID.setText(strStudentID);
-				
-		    	textFName.setText(res.getStudentData().getFirstName());
-		    	textLName.setText(res.getStudentData().getLastName());
-		    	
-		    	String strClass = Integer.toString(res.getStudentData().getId());
-		    	textClasses.setText(strClass); 
-		    	
-		    	
-		    	
-		    	/*
-		    	for(int i=0;i<res.getClassCourseData().size();i++)
-				{
-					data.add(res.getClassCourseData().get(i).getCourseID(),res.getClassCourseData().get(i).getGrade());
-					tableViewID.setItems(data);
-				}
-		    	
-			} else {
-				System.out.println("Server response:" + res.getErrText());
-			}
-		}
-		*/
-	}
-
-	
-	
-	
-		}}
-
 }
 
 

@@ -8,6 +8,7 @@ import communication.GetPendingRequestsResponse;
 import communication.MATClientController;
 import communication.Message;
 import communication.PrincipalDecisionRequest;
+import entities.ERequestType;
 import entities.Request;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,7 +30,8 @@ public class ResponseRemoveStudentFromCourseController implements Initializable,
     	data.clear();
 		
 		for (Request request : allRequests) {
-			data.add(request);
+			if(request.getRequestType() == ERequestType.removeStudent)
+				data.add(request);
 		}
 	}
 

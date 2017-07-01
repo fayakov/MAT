@@ -10,6 +10,8 @@ import communication.GetClassTeachersStatsResponse;
 import communication.GetStudentDataResponse;
 import communication.LoginResponseMsg;
 import communication.Message;
+import entities.ClassWithGrade;
+import entities.Request;
 import entities.TeacherWithGrade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,7 +32,7 @@ public class HistogramClassAndTeachersController implements  Initializable, Hand
 		Dispatcher.addHandler(GetClassTeachersStatsResponse.class.getCanonicalName(), this);
 	}
 	
-	private ArrayList<TeacherWithGrade> arrToDisplay;
+	private static ArrayList<TeacherWithGrade> arrToDisplay;
 	static int count = arrToDisplay.size();
 	private int i = 0;
 	
@@ -74,4 +76,15 @@ public class HistogramClassAndTeachersController implements  Initializable, Hand
 		
 	}
 
-}
+	public void initData(ArrayList<ClassWithGrade> arr) {
+		// TODO Auto-generated method stub
+	  
+		
+			for (TeacherWithGrade temp : arr) {
+				arrToDisplay.add(temp);
+			}
+		}
+		
+	}
+
+
