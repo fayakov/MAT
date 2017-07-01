@@ -26,10 +26,12 @@ import communication.MATClientController;
 import communication.Message;
 import entities.Assignment;
 import entities.Student;
+import entities.StudentCourse;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 
 public class AssignmentStudent implements Initializable, Handler
@@ -68,12 +70,14 @@ public class AssignmentStudent implements Initializable, Handler
     @FXML
     private TableColumn<?, ?> colTea;
 
+    //final ObservableList<StudentCourse> data= FXCollections.observableArrayList(new StudentCourse(1,2,5));
+    
     
     @FXML
     void AssignmentNext(ActionEvent event) throws IOException 
     {
-    	String choosenAssStr = comboChooseAssignment.getValue().toString();
-    	choosenAss = Integer.parseInt(choosenAssStr);
+    	//String choosenAssStr = comboChooseAssignment.getValue().toString();
+    	//choosenAss = Integer.parseInt(choosenAssStr);
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/OpenAndSubmitAssigmentByStudent.fxml"));
 		Scene scene = new Scene(root);
@@ -122,8 +126,16 @@ public class AssignmentStudent implements Initializable, Handler
 	}
 
 
-	public void initialize(URL location, ResourceBundle resources) {
+	public void initialize(URL location, ResourceBundle resources) 
+	{
 		// TODO Auto-generated method stub
+		
+		colCourse.setCellValueFactory(new PropertyValueFactory<StudentCourse, Integer>("courseID"));
+		colGrade.setCellValueFactory(new PropertyValueFactory<StudentCourse, Integer>("grade"));
+    	
+		tableViewID.setItems(data);
+		
+		
 		
 		//GetAssignmentsOfStudentRequest GetAssignmentsOfStudentReq = new GetAssignmentsOfStudentRequest(userIdStr);//need id
     	//MATClientController.getInstance().sendRequestToServer(GetAssignmentsOfStudentReq);
