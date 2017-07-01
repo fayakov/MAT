@@ -39,8 +39,10 @@ public class StudentController implements Handler
 		super();
 		Dispatcher.addHandler(GetStudentDataResponse.class.getCanonicalName(), this);
 	}
-
-
+    
+    public void initData(int userId) {
+    	this.userID = userId;
+    }
 
 	public void studentData1() throws Exception 
     {
