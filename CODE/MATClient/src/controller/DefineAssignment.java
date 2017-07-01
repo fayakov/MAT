@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -36,6 +37,8 @@ public class DefineAssignment implements Initializable, Handler
 	{
 		Dispatcher.addHandler(CreateAssignmentResponse.class.getCanonicalName(), this);
 	}
+	
+	
 	
 	int clid, coid;  // class id, course id
 	
@@ -91,7 +94,7 @@ public class DefineAssignment implements Initializable, Handler
 	    {
 	    	
 	    	LocalDate date = datePickerDefineDate.getValue();
-	         //System.err.println("Selected date: " + date);
+	         //System.err.println("Selected date: " + date); //2017-07-04
 	    	
 	    	//check if date is in semester
 	    	
@@ -121,16 +124,12 @@ public class DefineAssignment implements Initializable, Handler
 	    		    else if (Objects.equals(format, new String("Excel")))  formatFile= "Excel";
 	    		        else  Prompt.alert(3,"please upload a file with valid format"); */
 	    	 
-	    	 //CreateAssignmentRequest createAssignmentReq = new CreateAssignmentRequest(selectedFile, date, clid, coid );
+	    	 
+	    	 //CreateAssignmentRequest createAssignmentReq = new CreateAssignmentRequest(selectedFile, filename, date, clid, coid );
 	 		//MATClientController.getInstance().sendRequestToServer(createAssignmentReq);
 	    }
 
-    
-    @FXML
-    void initialize() 
-    {
-       
-    }
+   
 
 
 	public void handle(Message msg, Object obj) 
@@ -157,6 +156,13 @@ public class DefineAssignment implements Initializable, Handler
 		// TODO Auto-generated method stub
 		
 	}
+	
+	 
+    @FXML
+    void initialize() 
+    {
+       
+    }
 	
 }
 

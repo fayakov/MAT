@@ -15,10 +15,10 @@
       </Label>
       <TableView fx:id="tableView" layoutX="24.0" layoutY="134.0" prefHeight="340.0" prefWidth="832.0">
         <columns>
-          <TableColumn fx:id="colAssNum" prefWidth="237.0" text="Assignment Number" />
-          <TableColumn fx:id="colCourse" prefWidth="181.0" text="Course Name" />
-            <TableColumn fx:id="colTea" prefWidth="181.0" text="Teacher Name" />
-            <TableColumn fx:id="colDate" prefWidth="232.0" text="Last Date Of Submission" />
+          <TableColumn fx:id="colDate" prefWidth="228.0" text="Last Date Of Submission" />
+            <TableColumn fx:id="colAssNum" prefWidth="224.0" text="Assignment Number" />
+            <TableColumn fx:id="colTeaID" prefWidth="190.0" text="Teacher ID" />
+            <TableColumn fx:id="colCourse" prefWidth="189.0" text="Course Name" />
         </columns>
       </TableView>
    </children>

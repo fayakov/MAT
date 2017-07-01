@@ -3,6 +3,7 @@ package communication;
 import java.util.ArrayList;
 
 import entities.Assignment;
+import entities.StudentCourseAssignment;
 
 
 public class GetAssignmentsOfStudentResponse extends Message 
@@ -11,48 +12,30 @@ public class GetAssignmentsOfStudentResponse extends Message
 	
 	boolean requestSecceded;
 	private String errText;
-	ArrayList<Integer> ListOfStudentAssignment = new ArrayList<Integer>();
+	private StudentCourseAssignment stuCourseAss;
 	
-	public GetAssignmentsOfStudentResponse(boolean requestSecceded, String errText,
-			ArrayList<Integer> listOfStudentAssignment) {
-		super();
-		this.requestSecceded = requestSecceded;
-		this.errText = errText;
-		ListOfStudentAssignment = listOfStudentAssignment;
-	}
-
 	
 	public boolean isRequestSecceded() {
 		return requestSecceded;
 	}
-
 	public void setRequestSecceded(boolean requestSecceded) {
 		this.requestSecceded = requestSecceded;
 	}
-
 	public String getErrText() {
 		return errText;
 	}
-
 	public void setErrText(String errText) {
 		this.errText = errText;
 	}
-
-	public ArrayList<Integer> getListOfStudentAssignment() {
-		return ListOfStudentAssignment;
+	public StudentCourseAssignment getStuCourseAss() {
+		return stuCourseAss;
 	}
-
-	public void setListOfStudentAssignment(ArrayList<Integer> listOfStudentAssignment) {
-		ListOfStudentAssignment = listOfStudentAssignment;
+	public void setStuCourseAss(StudentCourseAssignment stuCourseAss) {
+		this.stuCourseAss = stuCourseAss;
 	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 	
-	
-	
-	
-	
-	
+
 }

@@ -1,12 +1,15 @@
 package controller;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -41,38 +44,13 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 	public OpenAndSubmitAssignmentByStudentController()
 	{
 		Dispatcher.addHandler(AddAssignmentForResponse.class.getCanonicalName(), this);
-		Dispatcher.addHandler(GetAssignmentDataResponse.class.getCanonicalName(), this);
 	}
 	
 	 @FXML
-	    private Label labelCourseName;
-
-	    @FXML
-	    private TextField textFieldCourseName;
+	    private TextField textFieldAssNum;
 
 	    @FXML
 	    private Button buttonDownload;
-
-	    @FXML
-	    private TextField textFieldLastDate;
-
-	    @FXML
-	    private Label labelLastDate;
-
-	    @FXML
-	    private TextField textFieldTeacherName;
-
-	    @FXML
-	    private Label labelDownload;
-
-	    @FXML
-	    private Button buttonSendSub;
-
-	    @FXML
-	    private Label labelTeacherName;
-
-	    @FXML
-	    private TextField textFieldAssNum;
 
 	    @FXML
 	    private Label labelUpload;
@@ -83,48 +61,66 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 	    @FXML
 	    private Button buttonUpload;
 
-	    
+	    @FXML
+	    private Label labelDownload;
+
+	    @FXML
+	    private Button buttonSendSub;
+
+
 	    
 	    @FXML
-	    void pressDownload(ActionEvent event) 
+	    void pressDownload(ActionEvent event) throws Exception 
 	    {
-	    	//File file = new File("file.txt");
+	    	 String line;
+	         BufferedReader in;
+
+	         in = new BufferedReader(new FileReader("testFile"));
+	         line = in.readLine();
+
+	         while(line != null)
+	         {
+	                System.out.println(line);
+	                line = in.readLine();
+	         }
+
+	         System.out.println(line);
+	    	
+	    	
 	    }
 
 	    
 	    @FXML
 	    void pressUpload(ActionEvent event) 
 	    {
-			//chooseFile();
+	    	JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+			int returnValue = jfc.showOpenDialog(null);
+			// int returnValue = jfc.showSaveDialog(null);
+
+			if (returnValue == JFileChooser.APPROVE_OPTION) {
+				File selectedFile = jfc.getSelectedFile();
+				System.out.println(selectedFile.getAbsolutePath());
+				
+			}
+	    	//need to check validation of format.....
 	    }
     
-	    
-	    
+
 	    
     @FXML
     void sendSubmission(ActionEvent event) 
     {
     	//get date of today:
     	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-		LocalDate localDate = LocalDate.now();
-		System.out.println(dtf.format(localDate)); //2017/06/29
+		LocalDate todayDate = LocalDate.now();
+		System.out.println(dtf.format(todayDate)); //2017/06/29
 		
 		
-    	
-    	
-    	//AddAssignmentForResponse addAssignmentForReq = new AddAssignmentForResponse(file, teacher, course, localDate);
-    	//MATClientController.getInstance().sendRequestToServer(addAssignmentForReq);
-    	
-    	//need to check validation of format.....
-
+    	AddAssignmentForResponse addAssignmentForReq = new AddAssignmentForResponse(fileName, file, teacher, course, todayDate,assignmentNumber, studentId);
+    	MATClientController.getInstance().sendRequestToServer(addAssignmentForReq);
     }
-    
-    
-    
-    @FXML
-    void initialize() {
-         
-    }
+   
 
 
 	public void handle(Message msg, Object obj) 
@@ -143,39 +139,23 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 			}
 		}
 		
-		
-		if (msg instanceof GetAssignmentDataResponse) 
-		{
-			GetAssignmentDataResponse res = (GetAssignmentDataResponse)msg;
-			
-			if (res.isRequestSecceded()) 
-			{
-				String strAssNum = Integer.toString(AssignmentStudent.getChoosenAss());
-				
-				textFieldAssNum.setText(strAssNum);
-				textFieldTeacherName.setText(res.getTeacherName());
-				textFieldCourseName.setText(res.getCourseName());
-				textFieldLastDate.setText(res.getLastDate());
-				//get file....
-				
-				
-			} else {
-				System.out.println("Server response:" + res.getErrText());
-			}
-			
 		}
-		
-	}
+
 
 
 
 	public void initialize(URL location, ResourceBundle resources) 
 	{
 		// TODO Auto-generated method stub
-		GetAssignmentDataRequest GetAssignmentsOfDataReq = new GetAssignmentDataRequest(AssignmentStudent.getChoosenAss());
-    	MATClientController.getInstance().sendRequestToServer(GetAssignmentsOfDataReq);
+		textFieldAssNum.setText(assignmentNumber);
 		
 	}
+	
+ 
+    @FXML
+    void initialize() {
+         
+    }
     
    
 }

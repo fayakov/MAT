@@ -7,6 +7,8 @@ public class StudentCourseAssignment implements Serializable
 {
 
 	private ArrayList<Assignment> assignmentList;
+	
+	
 	public void setAssignments(ArrayList<Assignment> assignment)
 	{
 		this.assignmentList = assignment;

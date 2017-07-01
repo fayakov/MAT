@@ -27,6 +27,7 @@ import communication.Message;
 import entities.Assignment;
 import entities.Student;
 import entities.StudentCourse;
+import entities.StudentCourseAssignment;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -37,7 +38,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class AssignmentStudent implements Initializable, Handler
 {
 	ObservableList<String> list ;
-	public static int choosenAss;
 	
 	
 	public AssignmentStudent()
@@ -56,28 +56,28 @@ public class AssignmentStudent implements Initializable, Handler
     private Label labelMyAssignment;
 
     @FXML
-    private TableView<?> tableView;
+    private TableView<StudentCourseAssignment> tableView;
 
     @FXML
-    private TableColumn<?, ?> colCourse;
+    private TableColumn<StudentCourseAssignment,Integer > colTeaID;
 
     @FXML
-    private TableColumn<?, ?> colAssNum;
+    private TableColumn<StudentCourseAssignment, String> colCourse;
 
     @FXML
-    private TableColumn<?, ?> colDate;
+    private TableColumn<StudentCourseAssignment,Integer> colAssNum;
 
     @FXML
-    private TableColumn<?, ?> colTea;
+    private TableColumn<StudentCourseAssignment, String> colDate;
 
-    //final ObservableList<StudentCourse> data= FXCollections.observableArrayList(new StudentCourse(1,2,5));
+
+    final ObservableList<StudentCourseAssignment> data;
     
     
     @FXML
     void AssignmentNext(ActionEvent event) throws IOException 
     {
-    	//String choosenAssStr = comboChooseAssignment.getValue().toString();
-    	//choosenAss = Integer.parseInt(choosenAssStr);
+    	
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/OpenAndSubmitAssigmentByStudent.fxml"));
 		Scene scene = new Scene(root);
@@ -96,24 +96,17 @@ public class AssignmentStudent implements Initializable, Handler
 	public void handle(Message msg, Object obj) 
 	{
 		// TODO Auto-generated method stub
-		ArrayList<String> assignments = new ArrayList<String>();
-		
 		if (msg instanceof GetAssignmentsOfStudentResponse) 
 		{
 			GetAssignmentsOfStudentResponse res = (GetAssignmentsOfStudentResponse)msg;
 			
 			if (res.isRequestSecceded()) 
 			{
-				int len=res.getListOfStudentAssignment().size();
-				for(int i = 0 ; i < len ; i++)
+				ArrayList<Assignment> temp=res.getStuCourseAss().getAssignments();
+				for(Assignment t: temp )
 				{
-				Integer intAss =(Integer) res.getListOfStudentAssignment().get(i);
-				String strStudentID = Integer.toString(intAss);
-				assignments.add(strStudentID);
+					data =FXCollections.observableArrayList(t);
 				}
-				
-				list = FXCollections.observableArrayList(assignments);
-				comboChooseAssignment.setItems(list);
 				
 				
 				
@@ -130,15 +123,20 @@ public class AssignmentStudent implements Initializable, Handler
 	{
 		// TODO Auto-generated method stub
 		
-		colCourse.setCellValueFactory(new PropertyValueFactory<StudentCourse, Integer>("courseID"));
-		colGrade.setCellValueFactory(new PropertyValueFactory<StudentCourse, Integer>("grade"));
+		//GetAssignmentsOfStudentRequest GetAssignmentsOfStudentReq = new GetAssignmentsOfStudentRequest(userIdStr);//need id
+    	//MATClientController.getInstance().sendRequestToServer(GetAssignmentsOfStudentReq);
+		
+		colDate.setCellValueFactory(new PropertyValueFactory<StudentCourseAssignment, String>("date"));
+		colAssNum.setCellValueFactory(new PropertyValueFactory<StudentCourseAssignment, Integer>("assignmentList"));
+		colTeaID.setCellValueFactory(new PropertyValueFactory<StudentCourseAssignment, Integer>("assignmentList"));
+		colCourse.setCellValueFactory(new PropertyValueFactory<StudentCourseAssignment,String>("assignmentList"));
     	
+		
 		tableViewID.setItems(data);
 		
 		
 		
-		//GetAssignmentsOfStudentRequest GetAssignmentsOfStudentReq = new GetAssignmentsOfStudentRequest(userIdStr);//need id
-    	//MATClientController.getInstance().sendRequestToServer(GetAssignmentsOfStudentReq);
+		
 	}
 
 

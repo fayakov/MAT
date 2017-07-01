@@ -36,7 +36,6 @@ import javafx.scene.control.TextField;
 public class StudentDataController  implements Initializable, Handler
 {
 	
-	private static final EUserType EUserStudent = null;
 	ObservableList<String> list ;
 	
 	public StudentDataController()
@@ -88,10 +87,6 @@ public class StudentDataController  implements Initializable, Handler
     private TableView<StudentCourse> tableViewID;
     
     
-    //test
-     //User user= new User (1, "tal", "chen", "1234", EUserStudent, true, false);
-    
-    //final ObservableList<StudentCourse> data= FXCollections.observableArrayList(new StudentCourse(1,2,5));
     final ObservableList<StudentCourse> data= FXCollections.observableArrayList(new StudentCourse(1,2,5),new StudentCourse(4,5,6));
     
     @FXML
@@ -123,6 +118,8 @@ public class StudentDataController  implements Initializable, Handler
 		    	textClasses.setText(strClass); 
 		    	
 		    	
+		    	
+		    	
 		    	for(int i=0;i<res.getClassCourseData().size();i++)
 				{
 					data.add(res.getClassCourseData().get(i).getCourseID(),res.getClassCourseData().get(i).getGrade());
@@ -130,11 +127,7 @@ public class StudentDataController  implements Initializable, Handler
 				}
 		    	
 		    	
-		    	
-		    	//ArrayList<String> options = new ArrayList<String>();
-		    	//options= res.getStudentData().getCourse();
-				//list = FXCollections.observableArrayList(options);
-				//comboxListCourses.setItems(list);
+		   
 				
 				
 			} else {
