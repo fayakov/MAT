@@ -75,14 +75,15 @@ public class StudentDataController  implements Initializable, Handler
     @FXML
     private TableView<StudentCourse> tableViewID;
     
-    void initData(Student student) {
+    void initData(Student student) 
+    {
     	this.student = student;
     }
     
     @FXML
     void StudentInfo(ActionEvent event) 
     {
-    	GetStudentDataRequest GetStudentDataReq = new GetStudentDataRequest(loginController.st.getId());//מאיפה ת.ז?
+    	GetStudentDataRequest GetStudentDataReq = new GetStudentDataRequest(student.getId());
 		MATClientController.getInstance().sendRequestToServer(GetStudentDataReq);
     }
     
