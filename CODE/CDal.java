@@ -1525,26 +1525,6 @@ public class CDal {
 		return courseList;
 	}
 	
-	
-	public static ArrayList<Integer> getClassInCourse(int courseId)
-	{
-		ArrayList<Integer> courseList = new ArrayList<Integer>();
-		try 
-		{
-			Statement stmt = connection.createStatement();
-			ResultSet resultSet  = stmt.executeQuery("SELECT class_classId "
-					+ "FROM class_has_course WHERE class_has_course.course_courseId= " + courseId +";");
-			while(resultSet.next()){
-
-				courseList.add(resultSet.getInt(1));
-			}
-			
-		}
-		catch (SQLException e) {e.printStackTrace();}
-		return courseList;
-	}
-	
-	
 	public static ArrayList<Integer> getCourseInClass(int ClassId)
 	{
 		ArrayList<Integer> courseList = new ArrayList<Integer>();
@@ -2417,7 +2397,7 @@ public class CDal {
 	
 	
 	
-	public static ArrayList<Request> getRequests()
+	public static ArrayList<Request> getRequests(int semester)
 	{
 		ArrayList<Request> reqArr = new ArrayList<Request>(); 
 		try{
@@ -2553,7 +2533,7 @@ public class CDal {
 	{
 		boolean retVal = true;
 		int curSemester = getCurrentSemester();
-		int userId = getTeacherUserId(teacherId);
+		int userId = getTeacherUserId(teacherId); 
 		if(curSemester != 0)
 		{
 			if(isRequestInputValid(type, userId, classId, courseId, curSemester))
@@ -2728,114 +2708,6 @@ public class CDal {
 		return submission;
 	}
 	
-	public static ArrayList<Integer> getStudentAssignmentsId(int studentId)
-	{
-		ArrayList<Integer> assignmentsArray = new ArrayList<Integer> ();
-		
-		
-		try{
-			Statement stmt = connection.createStatement();
-			ResultSet resultSet  = stmt.executeQuery("SELECT assignmentId "
-					+ "FROM student_has_assignment "
-					+ "WHERE studentId = " + studentId + " "
-					+ "AND isHandled = 0;");
-			while(resultSet.next())
-			{
-				assignmentsArray.add(resultSet.getInt(1));
-			}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();	
-		}	
-		
-		return assignmentsArray;
-	}
-	
-	public static StudentCourseAssignment getStudentAssignments(int studentId)
-	{
-		
-			ArrayList<Assignment> assignmentsArray = new ArrayList<Assignment> ();
-			ArrayList<Integer> assignmentsId = getStudentAssignmentsId(studentId);
-			for(int assignmentIdx : assignmentsId)
-			try{
-				Statement stmt = connection.createStatement();
-				ResultSet resultSet  = stmt.executeQuery("SELECT * FROM assignment "
-						+ "WHERE assignment.assignmentId = " + assignmentIdx +";");
-				while(resultSet.next())
-		 		{		
-					Assignment assignment = new Assignment();
-					Blob blob = resultSet.getBlob("assignmentFile");
-					int blobLength = (int) blob.length();  
-					byte[] blobAsBytes = blob.getBytes(1, blobLength);
-					assignment.setFile(blobAsBytes);
-					blob.free();
-					assignment.setTeacherId(resultSet.getInt("teacherId"));
-					assignment.setCourseName(getCourseName(resultSet.getInt("courseId")));
-					assignment.setDate(resultSet.getDate("date"));
-					assignment.setAssignmentNumber(resultSet.getInt("assignmentId"));	
-					assignmentsArray.add(assignment);
-				}
-			}
-			catch (SQLException e) {
-				e.printStackTrace();	
-			}	
-			StudentCourseAssignment studentCoursAssignment = new StudentCourseAssignment();
-			studentCoursAssignment.setAssignments(assignmentsArray);
-			return studentCoursAssignment;
-	}
-	
-	
-	public static boolean updateHndledAssignment(int assignmentId)
-	{
-		boolean retVal = true;
-		try 
-		{
-			Statement stmt = connection.createStatement();
-			if(stmt.executeUpdate("UPDATE student_has_assignment "
-					+ "set isHandled = 1 "
-					+ "WHERE assignmentId = "+assignmentId+";") == 0)
-			{
-				retVal = false;
-			}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-			retVal = false;
-		}
-		return retVal;
-	}
-	
-	public static ArrayList<Assignment> getAssignmentByTeacherAndCourse(int courseId, int teacherId)
-	{
-		ArrayList<Assignment> assignmentsArray = new ArrayList<Assignment> ();
-		
-		try{
-			Statement stmt = connection.createStatement();
-			ResultSet resultSet  = stmt.executeQuery("SELECT * FROM assignment "
-					+ "WHERE assignment.teacherId = " + teacherId + " "
-					+ "AND assignment.teacherId = "+teacherId+" ");
-			while(resultSet.next())
-	 		{		
-				Assignment assignment = new Assignment();
-				assignment.setAssignmentNumber(resultSet.getInt("assignmentId"));
-				Blob blob = resultSet.getBlob("assignmentFile");
-				int blobLength = (int) blob.length();  
-				byte[] blobAsBytes = blob.getBytes(1, blobLength);
-				assignment.setFile(blobAsBytes);
-				blob.free();
-				assignment.setTeacherId(teacherId);
-				assignment.setCourseName(getCourseName(courseId));
-				assignment.setDate(resultSet.getDate("date"));
-				assignment.setAssignmentNumber(resultSet.getInt("assignmentId"));	
-				assignmentsArray.add(assignment);
-			}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();	
-		}	
-		return assignmentsArray;
-		
-	}
 	
 	
 	public static Assignment getAssignment(int assignmentId)
@@ -2899,24 +2771,9 @@ public class CDal {
 				e.printStackTrace();			
 			}
 		}
+
+	
 		
-		if(retVal != 0)
-		{
-			int semester = getCurrentSemester();
-			ArrayList<Integer> classes = getTeacherClasses(teacherId);
-			for(Integer classIndex : classes)
-			{
-				if(isTeacherInClassWithCourse(teacherId, classIndex, courseId, semester))
-				{
-					addAssignmentToClassWithCourse(classIndex, courseId,  retVal);
-					ArrayList<Integer> studentsArr = getStudensInCourse(courseId);
-					for(int studentIdx : studentsArr)
-					{
-						addAssignmentToStudentClassWithCourse(studentIdx, classIndex, courseId, retVal);
-					}
-				}
-			}
-		}
 		return retVal;
 		
 	}
@@ -2974,8 +2831,7 @@ public class CDal {
 			Statement stmt = connection.createStatement();
 			ResultSet resultSet  = stmt.executeQuery("SELECT isHandled FROM student_has_course_has_submission "
 					+ "WHERE student_has_course_course_courseId  = " +courseId + " "
-					+ "AND student_has_course_student_idstudent = " + studentId + " "
-					+ "AND assignmentId = "+assignmentId+";");
+					+ "AND student_has_course_student_idstudent = " + studentId + ";");
 			if(resultSet.first()) {
 
 				retVal = true;
@@ -2984,27 +2840,6 @@ public class CDal {
 		catch (SQLException e) {e.printStackTrace();}
 		return retVal;
 	}
-	
-	
-	
-	private static boolean isStudentHasAssignment(int studentId, int assignmentId)
-	{
-		boolean retVal = false;
-		try 
-		{
-			Statement stmt = connection.createStatement();
-			ResultSet resultSet  = stmt.executeQuery("SELECT assignmentId FROM student_has_assignment "
-					+ "WHERE assignmentId  = " +assignmentId + " "
-					+ "AND studentId = " + studentId + ";");
-			if(resultSet.first()) {
-
-				retVal = true;
-			}
-		}
-		catch (SQLException e) {e.printStackTrace();}
-		return retVal;
-	}
-	
 	
 	private static boolean isStudentHasSubmissionResponse(int submissionId)
 	{
@@ -3078,7 +2913,7 @@ public class CDal {
 									+ "set submission_responseId = "+submissionResponseId +", "
 									+ "grade = "+grade+", "
 									+ "isHandled = 1, "
-									+ "teacherComment = '"+teacherComments+"';") == 0)
+									+ "teacherComment = "+teacherComments+";") == 0)
 							{
 								retVal = false;
 							}
@@ -3124,49 +2959,35 @@ public class CDal {
 					int classId = getStudentClass(studentId);
 					if(isClassWithCourseHasAssignmenet( classId, courseId, assignmentId))
 					{
-						if(isStudentHasAssignment(studentId, assignmentId))
+						if(!isStudentHasSubmission(courseId, studentId,assignmentId))
 						{
-
-							if(!isStudentHasSubmission(courseId, studentId,assignmentId))
+							int submissionId = createSubmission(subDate, fileData, fileName, assignmentId);
+							if(submissionId != 0)
 							{
-								int submissionId = createSubmission(subDate, fileData, fileName, assignmentId);
-								if(submissionId != 0)
-								{
-									
-									Statement stmt = connection.createStatement();
-									if(stmt.executeUpdate("INSERT INTO student_has_course_has_submission  "
-														+ "(student_has_course_course_courseId, "
-														+ "student_has_course_student_has_courseId, "
-														+ "student_has_course_student_idstudent,"
-														+ "student_has_course_student_user_id, "
-														+ "semester_semesterId, "
-														+ "isLate, "
-														+ "submission_submissionId) "
-														+ "values ("+courseId+ "," + studentCourseId +","+ studentId +","+getStudentUserId(studentId)+ "," + curSemester +","+ isSubmissionLate(subDate, assignmentId) +"," +submissionId+");") == 0)
-									{
-										retVal = false;
-									}
-									else
-									{
-										updateHndledAssignment(assignmentId);
-									}
-								}
-								else
+								Statement stmt = connection.createStatement();
+								if(stmt.executeUpdate("INSERT INTO student_has_course_has_submission  "
+													+ "(student_has_course_course_courseId, "
+													+ "student_has_course_student_has_courseId, "
+													+ "student_has_course_student_idstudent,"
+													+ "student_has_course_student_user_id, "
+													+ "semester_semesterId, "
+													+ "isLate, "
+													+ "submission_submissionId) "
+													+ "values ("+courseId+ "," + studentCourseId +","+ studentId +","+getStudentUserId(studentId)+ "," + curSemester +","+ isSubmissionLate(subDate, assignmentId) +"," +submissionId+");") == 0)
 								{
 									retVal = false;
 								}
 							}
 							else
 							{
-								//can add re add submission
 								retVal = false;
 							}
 						}
 						else
 						{
+							//can add re add submission
 							retVal = false;
 						}
-
 	
 					
 					}
@@ -3215,31 +3036,9 @@ public class CDal {
 		return retVal;
 	}
 	
-	private static boolean isAssignmentExist(int courseId, int classId, int teacher)
-	{
-		boolean retVal = false;
-		try 
-		{
-			Statement stmt = connection.createStatement();
-			ResultSet resultSet  = stmt.executeQuery("SELECT assignmentId FROM assignment "
-					+ "WHERE courseId = " +courseId + " "
-					+ "and teacherId = "+teacher+";");
-			if(resultSet.first()) {
-
-				retVal = true;
-			}
-		}
-		catch (SQLException e) {e.printStackTrace();}
-		return retVal;
-	}
-	
-
-
-	
-	
 	private static boolean isClassWithCourseHasAssignmenet(int classId, int courseId, int assignmentId)
 	{
-		boolean retVal = false;
+		boolean retVal = true;
 		try 
 		{
 			Statement stmt = connection.createStatement();
@@ -3368,10 +3167,10 @@ public class CDal {
 	}
 	
 	
-	public static SubmissionsForTeacherCheck getSubmissionsToCheck(int courseId)
+	public static ArrayList<Integer> getSubmissionsToCheck(int courseId)
 	{
-
-		ArrayList<Submission> myList = new  ArrayList<Submission>();
+		
+		ArrayList<Integer> myList = new  ArrayList<Integer>();
 		try 
 		{
 			Statement stmt = connection.createStatement();
@@ -3380,13 +3179,11 @@ public class CDal {
 					+ "AND isHandled = 0;");
 			while(resultSet.next())
 	 		{				
-				myList.add(getSubmission(resultSet.getInt(1)));
+				myList.add(resultSet.getInt(1));
 	 		} 
 		}
 		catch (SQLException e) {e.printStackTrace();}
-		SubmissionsForTeacherCheck sub = new SubmissionsForTeacherCheck();
-		sub.setAssignments(myList);
-		return sub;
+		return myList;
 	}
 	
 	public static boolean addAssignmentToClassWithCourse(int classId, int courseId, int assignmentId){
@@ -3457,64 +3254,10 @@ public class CDal {
 		return retVal;
 	}
 	
-	public static boolean isStudentInCourseWithClass(int studentId ,int classId, int courseId)
-	{
-		boolean retVal = false; 
-		try 
-		{
-			Statement stmt = connection.createStatement();
-			ResultSet resultSet  = stmt.executeQuery("SELECT student_idstudent "
-					+ "FROM student_has_course "
-					+ "WHERE student_idstudent = " +studentId + " "
-					+ "AND class_classId = " + classId + " "
-					+ "AND course_courseId = " + courseId + ";");
-			if(resultSet.first()) {
-
-				retVal = true;
-			}
-		}
-		catch (SQLException e) {e.printStackTrace();}
-		return retVal;
-	}
-
-	public static boolean addAssignmentToStudentClassWithCourse(int studentId ,int classId, int courseId, int assignmentId){
-		boolean retVal = true;
-		try 
-		{
-			if(isStudentInCourseWithClass(studentId, classId, courseId))
-			{	
-				if(isAssignmentExist(assignmentId))
-				{	
-						Statement stmt = connection.createStatement();
-						if(stmt.executeUpdate("INSERT INTO student_has_assignment  "
-											+ "(assignmentId, "
-											+ "courseId, "
-											+ "studentHasCourseId, "
-											+ "studentId, "
-											+ "studentUserID ) "
-											+ "values ("+assignmentId+","+courseId+","+ getStudentHasCourseId(studentId, courseId) +","+  studentId +","+getStudentUserId(studentId)+");") == 0)
-						
-						{
-							retVal = false;
-						}
-					
-				}
-				else
-				{
-					retVal = false;
-				}
-			}
-			else
-			{
-				retVal = false;
-			}
-
-		}
-		catch (SQLException e) {
-			e.printStackTrace();			
-		}		
-		return retVal;
-	}
+	
+	
+	//add course hours
+	
 }
 
 
