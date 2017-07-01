@@ -84,18 +84,25 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 				if( arr.size() == 0)
 					res.setErrText("teacher is not exist");
 				else{
-					((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+//					((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 					Stage primaryStage = new Stage();
 					FXMLLoader loader = new FXMLLoader();
-					Pane root = loader.load(getClass().getResource("/gui/HistogramClassAndTeachers.fxml").openStream());
+					Pane root;
+					try {
+						root = loader.load(getClass().getResource("/gui/HistogramClassAndTeachers.fxml").openStream());
+						Scene scene = new Scene(root);			
+						scene.getStylesheets().add(getClass().getResource("/gui/HistogramClassAndTeachers.fxml").toExternalForm());
+						
+						primaryStage.setScene(scene);		
+						primaryStage.show();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					StatisticClassAndTeachersController StatisticClassAndTeachers = loader.getController();		
 					//StatisticClassAndTeachersController.loadStudent(Test.students.get(itemIndex));
 					
-					Scene scene = new Scene(root);			
-					scene.getStylesheets().add(getClass().getResource("/gui/HistogramClassAndTeachers.css").toExternalForm());
-					
-					primaryStage.setScene(scene);		
-					primaryStage.show(); 
+					 
 					
 					
 				}

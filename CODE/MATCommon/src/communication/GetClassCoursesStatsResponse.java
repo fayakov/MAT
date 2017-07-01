@@ -9,10 +9,12 @@ public class GetClassCoursesStatsResponse extends Message {
 	private static final long serialVersionUID = 1L;
 
 	private ArrayList<CourseWithGrade> stats;
-
-	public GetClassCoursesStatsResponse(ArrayList<CourseWithGrade> stats) {
+	private String errText;
+	
+	public GetClassCoursesStatsResponse(ArrayList<CourseWithGrade> stats, String errText) {
 		super();
 		this.stats = stats;
+		this.errText = errText;
 	}
 
 	public ArrayList<CourseWithGrade> getStats() {
@@ -23,4 +25,14 @@ public class GetClassCoursesStatsResponse extends Message {
 		this.stats = stats;
 	}
 
+	public String getErrText() {
+		return errText;
+	}
+
+	public void setErrText(String errText) {
+		this.errText = errText;
+	}
+
+
+		
 }

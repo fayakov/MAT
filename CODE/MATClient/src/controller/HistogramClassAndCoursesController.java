@@ -7,7 +7,10 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import communication.Dispatcher;
+import communication.GetClassTeachersStatsResponse;
 import communication.Message;
+import entities.CourseWithGrade;
 import entities.TeacherWithGrade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +20,11 @@ import javafx.stage.Stage;
 import utils.Handler;
 
 public class HistogramClassAndCoursesController implements Initializable, Handler {
+	
+	public HistogramClassAndCoursesController(){
+		//Dispatcher.addHandler(GetClassTeachersStatsResponse.class.getCanonicalName(), this);
+	}
+	
 	
 	private ArrayList<CourseWithGrade> arrToDisplay;
 
@@ -47,7 +55,8 @@ public class HistogramClassAndCoursesController implements Initializable, Handle
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
 		
-		XYChart<x,y>.Series set1 = new XYChart.Series<>();
+		//XYChart<x,y>.Series1 set1 = new XYChart.Series<>();
+		XYChart.Series<x, y> set1 = new XYChart.Series<>();
 		for(int i=0; i<count;i++){
 		set1.getData().add(new XYChart.Data)();
 		}

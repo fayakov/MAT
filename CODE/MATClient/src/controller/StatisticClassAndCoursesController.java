@@ -3,15 +3,21 @@ package controller;
 
 	import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import communication.Dispatcher;
+import communication.GetClassCoursesStatsRequest;
+import communication.GetClassCoursesStatsResponse;
 import communication.GetClassDataRequest;
 import communication.GetClassDataResponse;
+import communication.GetClassTeachersStatsResponse;
 import communication.GetStudentDataRequest;
 import communication.GetStudentDataResponse;
 import communication.MATClientController;
 import communication.Message;
+import entities.CourseWithGrade;
+import entities.TeacherWithGrade;
 import javafx.event.ActionEvent;
 	import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +35,7 @@ public class StatisticClassAndCoursesController implements Initializable, Handle
 	
 
 	public StatisticClassAndCoursesController(){
-		Dispatcher.addHandler(GetClassDataResponse.class.getCanonicalName(), this);
+		Dispatcher.addHandler(GetClassCoursesStatsResponse.class.getCanonicalName(), this);
 	}
 	
 		private int clid;
@@ -51,7 +57,7 @@ public class StatisticClassAndCoursesController implements Initializable, Handle
 					    clid = Integer.parseInt(classNumber.getText());
 					    
 
-						 GetClassDataRequest ClassData = new GetClassDataRequest(clid);
+					    GetClassCoursesStatsRequest ClassData = new GetClassCoursesStatsRequest(clid);
 						 MATClientController.getInstance().sendRequestToServer(ClassData);
 				    	
 				    	} catch(NumberFormatException e){
@@ -81,6 +87,31 @@ public class StatisticClassAndCoursesController implements Initializable, Handle
 
 		public void handle(Message msg, Object obj) {
 			// TODO Auto-generated method stub
+			if (msg instanceof GetClassCoursesStatsResponse) {
+				GetClassCoursesStatsResponse res = (GetClassCoursesStatsResponse)msg;
+				ArrayList<CourseWithGrade> arr = res.getStats();
+				if( arr.size() == 0)
+					res.setErrText("teacher is not exist");
+				else{
+//					((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+					Stage primaryStage = new Stage();
+					FXMLLoader loader = new FXMLLoader();
+					Pane root;
+					try {
+						root = loader.load(getClass().getResource("/gui/HistogranClassAndCourses.fxml").openStream());
+						Scene scene = new Scene(root);			
+						scene.getStylesheets().add(getClass().getResource("/gui/HistogranClassAndCourses.fxml").toExternalForm());
+						
+						primaryStage.setScene(scene);		
+						primaryStage.show();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					StatisticClassAndCoursesController StatisticClassAndCourses = loader.getController();		
+					//StatisticClassAndTeachersController.loadStudent(Test.students.get(itemIndex));
+					
+		
 			
 		}
 

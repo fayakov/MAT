@@ -3,8 +3,6 @@ package entities;
 import java.io.InputStream;
 import java.sql.Date;
 
-
-//TAL
 public class Assignment 
 {
 
@@ -12,7 +10,8 @@ public class Assignment
 	private int assignmentNumber;
 	private String fileName;
 	private byte[] assingmentFile;
-	private String fileType;
+	private int teacherId;
+	private String courseName;
 	
 	public Assignment(){
 	}
@@ -25,7 +24,6 @@ public class Assignment
 		this.assingmentFile = assingmentFile;
 		this.fileName = fileName;
 	}
-	
 	
 	public Date getDate() {
 		return date;
@@ -43,20 +41,28 @@ public class Assignment
 		this.assignmentNumber = assignmentNumber;
 	}
 	
-	public String getFormatName() {
+	public int getTeacherId() {
+		return teacherId;
+	}
+	
+	public void setTeacherId(int teacherId) {
+		this.teacherId = assignmentNumber;
+	}
+	
+	public String getFileName() {
 		return fileName;
 	}
 	
-	public void setFormatName(String fileName) {
+	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
 	
-	public String getFormatType() {
-		return fileType;
+	public String getCourseName() {
+		return courseName;
 	}
 	
-	public void setFormatType(String fileType) {
-		this.fileType = fileName;
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
 	
 	public  byte[]  getFile() {
