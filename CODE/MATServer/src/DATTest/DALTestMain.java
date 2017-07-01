@@ -1,6 +1,7 @@
 package DATTest;
 import entities.*;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -60,7 +61,11 @@ public class DALTestMain {
 		//checkGetRequests(dl);
 		//checkConfirmRequest(dl);
 		//checkCreateAssignment(dl);
-		checkGetAssignment(dl);
+		//checkGetAssignment(dl);
+		//checkAddAssignmentToClassWithCourse(dl);
+		//checkAddSubmission(dl);
+		//getSubmissionToCheck(dl);
+		checkAddSubmissionResponse(dl);
 	}
 	public static void checkLogin(CDal dl )
 	{
@@ -402,11 +407,19 @@ public class DALTestMain {
 	public static void checkCreateAssignment(CDal dl)
 	{
 		Date dueDate = new Date(2017,10,9);
-		String filePath = "C:\\Users\\fayakov\\Desktop\\tmp.xlsx";
+		String filePath = "C:\\Users\\fayakov\\Desktop\\tmp2.pdf";
 		try{
 			File file = new File(filePath);
 			InputStream inputStream = new FileInputStream(file);
-			System.out.println(dl.createAssignment(dueDate, inputStream, file.length() ,"tmp.xlsx"));
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			int next = inputStream.read();
+			while (next > -1) {
+			    bos.write(next);
+			    next = inputStream.read();
+			}
+			bos.flush();
+			byte[] result = bos.toByteArray();
+			System.out.println(dl.createAssignment(dueDate, result ,"tmp2.pdf"));
 		}
 		catch (IOException ex) {
             ex.printStackTrace();
@@ -417,9 +430,9 @@ public class DALTestMain {
 	public static void checkGetAssignment(CDal dl)
 	{
 		Date dueDate = new Date(2017,10,9);
-		String filePath = "C:\\Users\\fayakov\\Desktop\\tmpRet.xlsx";
+		String filePath = "C:\\Users\\fayakov\\Desktop\\tmp2ret.pdf";
 		try{
-			Assignment assignment = dl.getAssignment(11);
+			Assignment assignment = dl.getAssignment(12);
 			byte[] retFile = assignment.getFile();
 		   
 		      File file = new File(filePath);
@@ -440,4 +453,66 @@ public class DALTestMain {
             ex.printStackTrace();
         }
 	}
+	
+	public static void checkAddAssignmentToClassWithCourse(CDal dl)
+	{
+		System.out.println(dl.addAssignmentToClassWithCourse(1, 1, 9) == true);
+	}
+	
+	public static void checkAddSubmission(CDal dl)
+	{
+		Date date = new Date(2017,10,8);
+		String filePath = "C:\\Users\\fayakov\\Desktop\\tmp.docx";
+		try{
+			File file = new File(filePath);
+			InputStream inputStream = new FileInputStream(file);
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			int next = inputStream.read();
+			while (next > -1) {
+			    bos.write(next);
+			    next = inputStream.read();
+			}
+			bos.flush();
+			byte[] result = bos.toByteArray();
+			System.out.println(dl.createSubmissionToStudentWithCourse(1 , 1,date  ,result, "tmp.docx", 9 ) == true);
+		}
+		catch (IOException ex) {
+            ex.printStackTrace();
+        }
+	}
+	
+	
+	public static void checkAddSubmissionResponse(CDal dl)
+	{
+		Date date = new Date(2017,10,8);
+		String filePath = "C:\\Users\\fayakov\\Desktop\\tmp.docx";
+		try{
+			File file = new File(filePath);
+			InputStream inputStream = new FileInputStream(file);
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			int next = inputStream.read();
+			while (next > -1) {
+			    bos.write(next);
+			    next = inputStream.read();
+			}
+			bos.flush();
+			byte[] result = bos.toByteArray();
+			System.out.println(dl.createSubmissionResponse(result, "tmp.docx", 11, 100, date ) == true);
+		}
+		catch (IOException ex) {
+            ex.printStackTrace();
+        }
+	}
+	
+	
+	public static void getSubmissionToCheck(CDal dl)
+	{
+		ArrayList<Integer> arr = dl.getSubmissionsToCheck(1);
+		for(int i : arr)
+		{
+			System.out.println("submission :" +i);
+		}
+	}
+	
+	
 }
