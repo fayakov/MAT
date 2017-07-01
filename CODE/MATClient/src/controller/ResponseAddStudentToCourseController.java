@@ -11,16 +11,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import communication.MATClientController;
-import communication.Message;
-import entities.ERequestType;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.stage.Stage;
-import javafx.util.Callback;
-import utils.Handler;
+
 
 public class ResponseAddStudentToCourseController implements Initializable//, Handler
 {
@@ -40,7 +33,7 @@ public class ResponseAddStudentToCourseController implements Initializable//, Ha
     @FXML
     private ResourceBundle resources;
 
-    public void setAllRequests(ArrayList<Request> allRequests) {
+    public void initData(ArrayList<Request> allRequests) {
     	data.clear();
 		
 		for (Request request : allRequests) {
