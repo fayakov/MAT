@@ -54,17 +54,12 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 					    clid = Integer.parseInt(ClassNumber.getText());
 					    
 					    GetClassTeachersStatsRequest ClassData = new GetClassTeachersStatsRequest(clid);
-						 MATClientController.getInstance().sendRequestToServer(ClassData);
+					    MATClientController.getInstance().sendRequestToServer(ClassData);
 				    	
 				    	} catch(NumberFormatException e){
 				    	Prompt.alert(3,"please enter numerical value");
 				    	return;
 				    	}
-		    	 	Pane root = FXMLLoader.load(getClass().getResource("/gui/HistogramClassAndTeachers.fxml"));
-					Scene scene = new Scene(root);
-					Stage primaryStage = new Stage();
-					primaryStage.setScene(scene);
-					primaryStage.show();
 					}		
 		     }	    			 
 	    
@@ -81,8 +76,17 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 			if (msg instanceof GetClassTeachersStatsResponse) {
 				GetClassTeachersStatsResponse res = (GetClassTeachersStatsResponse)msg;
 				ArrayList<TeacherWithGrade> arr = res.getStats();
-				if( arr.size() == 0)
-					res.setErrText("teacher is not exist");
+				
+				
+				
+				
+				
+				
+				
+				if( arr.size() == 0) {
+					// PopUp
+					;
+				}
 				else{
 //					((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 					Stage primaryStage = new Stage();

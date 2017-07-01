@@ -54,8 +54,6 @@ public class MATServerController extends AbstractServer
 		Dispatcher.addHandler(GetAssignmentsOfStudentRequest.class.getCanonicalName(), new GetAssignmentsOfStudentRequestHandler());
 		Dispatcher.addHandler(GetAssignmentsOfTeacherRequest.class.getCanonicalName(), new GetAssignmentsOfTeacherRequestHandler());		
 		Dispatcher.addHandler(GetClassDataRequest.class.getCanonicalName(), new GetClassDataRequestHandler());
-		Dispatcher.addHandler(GetClassToCoursesStatsRequest.class.getCanonicalName(), new GetClassToCoursesStatsRequestHandler());
-		Dispatcher.addHandler(GetClassToTeachersStatsRequest.class.getCanonicalName(), new GetClassToTeachersStatsRequestHandler());
 		Dispatcher.addHandler(GetParentDataRequest.class.getCanonicalName(), new GetParentDataRequestHandler());
 		Dispatcher.addHandler(GetPendingRequestsRequest.class.getCanonicalName(), new GetPendingRequestsRequestHandler());
 		Dispatcher.addHandler(GetStudentDataRequest.class.getCanonicalName(), new GetStudentDataRequestHandler());
@@ -63,7 +61,8 @@ public class MATServerController extends AbstractServer
 		Dispatcher.addHandler(GetTeacherStatsRequest.class.getCanonicalName(), new GetTeacherStatsRequestHandler());
 		Dispatcher.addHandler(GetTeacherToClassesStatsRequest.class.getCanonicalName(), new GetTeacherToClassesStatsRequestHandler());
 		Dispatcher.addHandler(OpenSemesterRequest.class.getCanonicalName(), new OpenSemesterRequestHandler());
-		Dispatcher.addHandler(PrincipalDecisionRequest.class.getCanonicalName(), new PrincipalDecisionRequestHandler());		
+		Dispatcher.addHandler(PrincipalDecisionRequest.class.getCanonicalName(), new PrincipalDecisionRequestHandler());
+		Dispatcher.addHandler(GetClassTeachersStatsRequest.class.getCanonicalName(), new GetClassTeachersStatsRequestHandler());
 	}
 	
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) 
