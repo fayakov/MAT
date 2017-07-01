@@ -13,12 +13,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import utils.Handler;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import communication.Dispatcher;
 import communication.GetAssignmentsOfStudentRequest;
 import communication.GetAssignmentsOfStudentResponse;
@@ -28,13 +26,16 @@ import communication.MATClientController;
 import communication.Message;
 import entities.Assignment;
 import entities.Student;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 
 public class AssignmentStudent implements Initializable, Handler
 {
 	ObservableList<String> list ;
-	//public static int choosenAss=88;
-	
+	public static int choosenAss;
 	
 	
 	public AssignmentStudent()
@@ -49,14 +50,23 @@ public class AssignmentStudent implements Initializable, Handler
     @FXML // URL location of the FXML file that was given to the FXMLLoader
     private URL location;
 	
-	@FXML
+    @FXML
     private Label labelMyAssignment;
 
     @FXML
-    private ComboBox<String> comboChooseAssignment;
+    private TableView<?> tableView;
 
     @FXML
-    private Button ButtonAssignmentNext;
+    private TableColumn<?, ?> colCourse;
+
+    @FXML
+    private TableColumn<?, ?> colAssNum;
+
+    @FXML
+    private TableColumn<?, ?> colDate;
+
+    @FXML
+    private TableColumn<?, ?> colTea;
 
     
     @FXML
@@ -120,14 +130,7 @@ public class AssignmentStudent implements Initializable, Handler
 	}
 
 
-	public static int getChoosenAss() {
-		return choosenAss;
-	}
-
-
-	public void setChoosenAss(int choosenAss) {
-		this.choosenAss = choosenAss;
-	}
+	
 
 }
 

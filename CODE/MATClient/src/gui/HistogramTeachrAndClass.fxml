@@ -7,22 +7,15 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HistogramTeacherAndClassesController">
    <children>
-      <Text layoutX="41.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Histogram Between Teacher And Classes">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Text>
-      <BarChart layoutX="76.0" layoutY="46.0" prefHeight="308.0" prefWidth="448.0">
+      <BarChart fx:id="ClassChart" layoutX="50.0" title="Statistics Between Teacher And Classes">
         <xAxis>
-          <CategoryAxis side="BOTTOM" />
+          <CategoryAxis label="Class" side="BOTTOM" fx:id="x" />
         </xAxis>
         <yAxis>
-          <NumberAxis side="LEFT" />
+          <NumberAxis fx:id="y" label="Grade" side="LEFT" />
         </yAxis>
       </BarChart>
-      <Button fx:id="btnckose" layoutX="100.0" layoutY="354.0" mnemonicParsing="false" onAction="#Close" text="Close" />
    </children>
 </AnchorPane>

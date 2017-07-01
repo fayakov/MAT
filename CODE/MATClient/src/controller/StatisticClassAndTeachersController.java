@@ -78,12 +78,30 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 
 		public void handle(Message msg, Object obj) {
 			// TODO Auto-generated method stub
-			
 			if (msg instanceof GetClassTeachersStatsResponse) {
 				GetClassTeachersStatsResponse res = (GetClassTeachersStatsResponse)msg;
 				ArrayList<TeacherWithGrade> arr = res.getStats();
-				
-				con.setDisplayArr(arr);
+				if( arr.size() == 0)
+					res.setErrText("teacher is not exist");
+				else{
+					((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+					Stage primaryStage = new Stage();
+					FXMLLoader loader = new FXMLLoader();
+					Pane root = loader.load(getClass().getResource("/gui/HistogramClassAndTeachers.fxml").openStream());
+					StatisticClassAndTeachersController StatisticClassAndTeachers = loader.getController();		
+					//StatisticClassAndTeachersController.loadStudent(Test.students.get(itemIndex));
+					
+					Scene scene = new Scene(root);			
+					scene.getStylesheets().add(getClass().getResource("/gui/HistogramClassAndTeachers.css").toExternalForm());
+					
+					primaryStage.setScene(scene);		
+					primaryStage.show(); 
+					
+					
+				}
+					
+			
+				//con.setDisplayArr(arr);
 			}
 			
 		}

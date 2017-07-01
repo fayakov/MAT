@@ -1,7 +1,9 @@
 package DAL;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,12 +13,11 @@ import entities.*;
 public class CDal {
 	private static String userName = "root";
 	private static String password = "Braude";//"mysql_native_password";//"admin";
-	private static String connectionString = "jdbc:mysql://localhost/mat_db";
+	private static String connectionString = "jdbc:mysql://localhost/mat_db?autoReconnect=true&useSSL=false";
 	private static Connection connection;
 	public static void connect(String db_password){
 		try 
 		{
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
             Class.forName("com.mysql.jdbc.Driver").newInstance();
         } catch (Exception ex) {
 			ex.printStackTrace();
@@ -308,6 +309,21 @@ public class CDal {
 		{
 			Statement stmt = connection.createStatement();
 			ResultSet resultSet  = stmt.executeQuery("SELECT  user_id FROM teacher WHERE teacher.teacherId = '" + teacherId + "';");
+			if(resultSet.first()) {
+
+				retVal = resultSet.getInt(1);
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	public static int getStudentUserId(int studentId){
+		int retVal = 0;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT  user_id FROM student WHERE student.idstudent = " + studentId + ";");
 			if(resultSet.first()) {
 
 				retVal = resultSet.getInt(1);
@@ -2516,7 +2532,6 @@ public class CDal {
 					{
 						retVal = false;
 					}
-						
 				}
 			}
 		}
@@ -2626,6 +2641,34 @@ public class CDal {
 		return null;
 	}
 	
+	
+	public static Submission getSubmission(int submissionId)
+	{
+		Submission submission = new Submission();
+		try{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT * FROM submission "
+					+ "WHERE submissionId = " + submissionId + ";");
+			if(resultSet.first()) {
+				submission.setAssignmentNumber(submissionId);
+				Blob blob = resultSet.getBlob("file");
+				int blobLength = (int) blob.length();  
+				byte[] blobAsBytes = blob.getBytes(1, blobLength);
+				submission.setFile(blobAsBytes);
+				blob.free();
+				submission.setFileName(resultSet.getString("fileName"));
+				submission.setDate(resultSet.getDate("date"));
+				submission.setAssignmentNumber(resultSet.getInt("submissionId"));	
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	
+		}	
+		return submission;
+	}
+	
+	
+	
 	public static Assignment getAssignment(int assignmentId)
 	{
 		Assignment assignment = new Assignment();
@@ -2635,16 +2678,14 @@ public class CDal {
 					+ "WHERE assignment.assignmentId = " + assignmentId + ";");
 			if(resultSet.first()) {
 				assignment.setAssignmentNumber(assignmentId);
-				
-				
 				Blob blob = resultSet.getBlob("assignmentFile");
-
 				int blobLength = (int) blob.length();  
 				byte[] blobAsBytes = blob.getBytes(1, blobLength);
 				assignment.setFile(blobAsBytes);
 				blob.free();
 				
-				
+				assignment.setDate(resultSet.getDate("date"));
+				assignment.setAssignmentNumber(resultSet.getInt("assignmentId"));	
 			}
 		}
 		catch (SQLException e) {
@@ -2654,7 +2695,7 @@ public class CDal {
 		
 	}
 	
-	public static int createAssignment(Date dueDate, InputStream inputStream, long fileSize, String fileName)
+	public static int createAssignment(Date dueDate, byte[] fileData, String fileName)
 	{
 		int retVal = 0;
 		try{ 
@@ -2663,7 +2704,11 @@ public class CDal {
             PreparedStatement statement = connection.prepareStatement(sql,returnId);
             
             statement.setString(1, " " +dueDate.getYear()+"-"+(dueDate.getMonth() + 1)+"-"+(dueDate.getDate()+1) +" ");
-            statement.setBlob(2, inputStream, fileSize);
+            
+     
+            ByteArrayInputStream bis = new ByteArrayInputStream(fileData);
+            
+            statement.setBlob(2, bis);
             statement.setString(3, fileName);
  
 		    int affectedRows = statement.executeUpdate();
@@ -2684,12 +2729,457 @@ public class CDal {
 		
 	}
 	
+	private static int createSubmission(Date subDate, byte[] fileData, String fileName, int assignmentId)
+	{
+		int retVal = 0;
+		if(isAssignmentExist(assignmentId))
+		{
+			try{ 
+				String[] returnId = { "submissionId" };
+	            String sql = "INSERT INTO submission (date, file, fileName, assignment_assignmentId) values (?, ?, ?, ?)";
+	            PreparedStatement statement = connection.prepareStatement(sql,returnId);
+	            
+	            statement.setString(1, " " +subDate.getYear()+"-"+(subDate.getMonth() + 1)+"-"+(subDate.getDate()+1) +" ");
+	            
+	     
+	            ByteArrayInputStream bis = new ByteArrayInputStream(fileData);
+	            
+	            statement.setBlob(2, bis);
+	            statement.setString(3, fileName);
+	            statement.setInt(4, assignmentId);
+	 
+			    int affectedRows = statement.executeUpdate();
+			    
+			    if (affectedRows > 0) {
+			    	 try (ResultSet rs = statement.getGeneratedKeys()) {
+					        if (rs.next()) {
+					        	retVal = rs.getInt(1);
+					        }
+					    }
+			    }
+			}
+			catch (SQLException e) {
+				e.printStackTrace();			
+			}
+				
+		}
+		
+		return retVal;
+		
+	}
+
+	private static boolean isSubmissionLate(Date subDate, int assignmentId)
+	{
+		Assignment assignment =  getAssignment(assignmentId);
+		return assignment.getDate().after(subDate);
+	}
+	
+	private static boolean isStudentHasSubmission(int courseId, int studentId, int assignmentId)
+	{
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT isHandled FROM student_has_course_has_submission "
+					+ "WHERE student_has_course_course_courseId  = " +courseId + " "
+					+ "AND student_has_course_student_idstudent = " + studentId + ";");
+			if(resultSet.first()) {
+
+				retVal = true;
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	private static boolean isStudentHasSubmissionResponse(int submissionId)
+	{
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT submission_responseId FROM student_has_course_has_submission "
+					+ "WHERE submission_responseId  = " +submissionId + ";");
+			if(resultSet.first()) {
+
+				retVal = true;
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	private static boolean isStudentHasSubmission(int submissionId)
+	{
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT submission_submissionId FROM student_has_course_has_submission "
+					+ "WHERE submission_submissionId  = " +submissionId + ";");
+			if(resultSet.first()) {
+
+				retVal = true;
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	
+	public static int getSubmissionAssignmenId(int submissionId)
+	{
+		int retVal = 0;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT assignment_assignmentId FROM submission "
+					+ "WHERE submissionId  = " +submissionId + ";");
+			if(resultSet.first()) {
+
+				retVal = resultSet.getInt(1);
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	public static boolean createSubmissionResponse(byte[] fileData, String fileName, int submissionId, int grade, Date responseDate)
+	{
+		boolean retVal = true;
+		if(isStudentHasSubmission(submissionId))
+		{
+			if(!isStudentHasSubmissionResponse(submissionId))
+			{
+				int assignmentId = getSubmissionAssignmenId(submissionId);
+				if(assignmentId != 0)
+				{
+					int submissionResponseId = createSubmission(responseDate, fileData, fileName, assignmentId);
+					if(submissionId != 0)
+					{
+						try 
+						{
+							Statement stmt = connection.createStatement();
+							if(stmt.executeUpdate("UPDATE student_has_course_has_submission "
+									+ "set submission_responseId = "+submissionResponseId +", "
+									+ "grade = "+grade+", "
+									+ "isHandled = 1") == 0)
+							{
+								retVal = false;
+							}
+						}
+						catch (SQLException e) {
+							e.printStackTrace();
+							retVal = false;
+						}
+					}
+					else
+					{
+						retVal = false;
+					}
+				}
+				else
+				{
+					retVal = false;
+				}
+			}
+			else
+			{
+				retVal = false;
+			}
+		}
+		else
+		{
+			retVal = false;
+		}
+		return retVal;
+	}
+	
+	public static boolean createSubmissionToStudentWithCourse(int studentId,int courseId, Date subDate, byte[] fileData, String fileName, int assignmentId )
+	{
+		boolean retVal = true;
+		try 
+		{
+			int curSemester = getCurrentSemester();
+			if(curSemester != 0)
+			{
+				int studentCourseId = getStudentInCourseId(courseId, studentId, curSemester);
+				if(studentCourseId != 0)
+				{			
+					int classId = getStudentClass(studentId);
+					if(isClassWithCourseHasAssignmenet( classId, courseId, assignmentId))
+					{
+						if(!isStudentHasSubmission(courseId, studentId,assignmentId))
+						{
+							int submissionId = createSubmission(subDate, fileData, fileName, assignmentId);
+							if(submissionId != 0)
+							{
+								Statement stmt = connection.createStatement();
+								if(stmt.executeUpdate("INSERT INTO student_has_course_has_submission  "
+													+ "(student_has_course_course_courseId, "
+													+ "student_has_course_student_has_courseId, "
+													+ "student_has_course_student_idstudent,"
+													+ "student_has_course_student_user_id, "
+													+ "semester_semesterId, "
+													+ "isLate, "
+													+ "submission_submissionId) "
+													+ "values ("+courseId+ "," + studentCourseId +","+ studentId +","+getStudentUserId(studentId)+ "," + curSemester +","+ isSubmissionLate(subDate, assignmentId) +"," +submissionId+");") == 0)
+								{
+									retVal = false;
+								}
+							}
+							else
+							{
+								retVal = false;
+							}
+						}
+						else
+						{
+							//can add re add submission
+							retVal = false;
+						}
+	
+					
+					}
+					else
+					{
+						retVal = false;
+					}
+					
+				}
+				else
+				{
+					retVal = false;
+				}
+			}
+			else
+			{
+				retVal = false;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();			
+		}		
+		return retVal;
+	}
 	
 	
 	public static Course getCourseData(int courseId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	private static boolean isAssignmentExist(int assignmentId)
+	{
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT assignmentId FROM assignment "
+					+ "WHERE assignment.assignmentId = " +assignmentId + ";");
+			if(resultSet.first()) {
+
+				retVal = true;
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	private static boolean isClassWithCourseHasAssignmenet(int classId, int courseId, int assignmentId)
+	{
+		boolean retVal = true;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT assignment_assignmentId FROM class_has_course_has_assignment "
+					+ "WHERE class_has_course_has_assignment.assignment_assignmentId = " +assignmentId + " "
+					+ "AND class_has_course_has_assignment.class_has_course_class_classId = " + classId + " "
+					+ "AND class_has_course_has_assignment.class_has_course_course_courseId = " + courseId + ";");
+			if(resultSet.first()) {
+
+				retVal = true;
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
+	public static ArrayList<Integer> getStudentFinishedSubmissionResponseNumbers(int studentId)
+	{
+		 ArrayList<Integer> myList = new  ArrayList<Integer>();
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT submission_responseId FROM student_has_course_has_submission "
+					+ "WHERE student_has_course_student_idstudent  = " +studentId + " "
+					+ "AND isHandled = 1;");
+			while(resultSet.next())
+	 		{				
+				myList.add(resultSet.getInt(1));
+	 		} 
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return myList;
+	}
+	public static ArrayList<Integer> getStudentSubmissionNumbers(int studentId)
+	{
+		 ArrayList<Integer> myList = new  ArrayList<Integer>();
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT submission_submissionId FROM student_has_course_has_submission "
+					+ "WHERE student_has_course_student_idstudent  = " +studentId + ";");
+			while(resultSet.next())
+	 		{				
+				myList.add(resultSet.getInt(1));
+	 		} 
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return myList;
+	}
+	
+	private static SubmissionResponse getSubmssionResponse(int submissionNumber)
+	{
+		SubmissionResponse submission = new SubmissionResponse();
+		try{
+			
+			
+			
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT * FROM submission "
+					+ "WHERE submissionId = " + submissionNumber + ";");
+			if(resultSet.first()) {
+				submission.setAssignmentNumber(submissionNumber);
+				Blob blob = resultSet.getBlob("file");
+				int blobLength = (int) blob.length();  
+				byte[] blobAsBytes = blob.getBytes(1, blobLength);
+				submission.setFile(blobAsBytes);
+				blob.free();
+				submission.setFileName(resultSet.getString("fileName"));
+				submission.setDate(resultSet.getDate("date"));
+				submission.setAssignmentNumber(resultSet.getInt("assignmentId"));	
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();	
+		}	
+		return submission;
+	}
+	
+	public static ArrayList<SubmissionResponse> getStudentSubmissionResponse(int studentId)
+	{
+		ArrayList<SubmissionResponse> responseList = new ArrayList<SubmissionResponse>();
+		ArrayList<Integer> submisionIdList = getStudentFinishedSubmissionResponseNumbers(studentId);
+		for (int submissionNum : submisionIdList)
+		{
+			responseList.add(getSubmssionResponse(submissionNum));
+		}
+		return responseList;
+	}
+	
+	public static ArrayList<SubmissionResponse> getStudentSubmission(int studentId)
+	{
+		ArrayList<SubmissionResponse> responseList = new ArrayList<SubmissionResponse>();
+		ArrayList<Integer> submisionIdList = getStudentSubmissionNumbers(studentId);
+		for (int submissionNum : submisionIdList)
+		{
+			responseList.add(getSubmssionResponse(submissionNum));
+		}
+		return responseList;
+	}
+	
+	
+	public static ArrayList<Integer> getSubmissionsToCheck(int courseId)
+	{
+		
+		ArrayList<Integer> myList = new  ArrayList<Integer>();
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT submission_submissionId FROM student_has_course_has_submission "
+					+ "WHERE student_has_course_course_courseId  = " +courseId + " "
+					+ "AND isHandled = 0;");
+			while(resultSet.next())
+	 		{				
+				myList.add(resultSet.getInt(1));
+	 		} 
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return myList;
+	}
+	
+	public static boolean addAssignmentToClassWithCourse(int classId, int courseId, int assignmentId){
+		boolean retVal = true;
+		try 
+		{
+			int curSemester = getCurrentSemester();
+			if(curSemester != 0)
+			{
+				if(isClassExist(classId))
+				{
+					if(isCourseExist(courseId))
+					{
+						if(isCourseInClass(classId, courseId, curSemester))
+						{	
+							if(isAssignmentExist(assignmentId))
+							{
+								if(!isClassWithCourseHasAssignmenet(classId, courseId, assignmentId))
+								{
+									Statement stmt = connection.createStatement();
+									if(stmt.executeUpdate("INSERT INTO class_has_course_has_assignment  "
+														+ "(class_has_course_has_assignment.class_has_course_class_classId, "
+														+ "class_has_course_has_assignment.class_has_course_course_courseId, "
+														+ "class_has_course_has_assignment.assignment_assignmentId, "
+														+ "class_has_course_has_assignment.semester_semesterId) "
+														+ "values ("+classId+","+ courseId +","+  assignmentId +","+curSemester+");") == 0)
+									
+									{
+										retVal = false;
+									}
+								}
+								else
+								{
+									retVal = false;
+								}
+
+							}
+							else
+							{
+								retVal = false;
+							}
+			
+							
+						}
+						else
+						{
+							retVal = false;
+						}
+					}
+					else
+					{
+						retVal = false;
+					}
+				}
+				else
+				{
+					retVal = false;
+				}	
+			}
+			else
+			{
+				retVal = false;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();			
+		}		
+		return retVal;
+	}
+	
+	
+	
+	//add course hours
 	
 }
 
