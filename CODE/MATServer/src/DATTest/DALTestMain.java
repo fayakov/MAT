@@ -1,6 +1,14 @@
 package DATTest;
 import entities.*;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -49,8 +57,10 @@ public class DALTestMain {
 		//checkChangeTeacher(dl);
 		//checkCreateStudent(dl);
 		//checkCreateReq(dl);
-		checkGetRequests(dl);
+		//checkGetRequests(dl);
 		//checkConfirmRequest(dl);
+		//checkCreateAssignment(dl);
+		checkGetAssignment(dl);
 	}
 	public static void checkLogin(CDal dl )
 	{
@@ -219,7 +229,7 @@ public class DALTestMain {
 	
 	public static void checkGetStudentsInCourse(CDal dl)
 	{
-		ArrayList<Integer> users = dl.getStudensInCourseBySemesterID(1,dl.getCurrentSemester());
+		ArrayList<Integer> users = dl.getStudensInCourse(1,dl.getCurrentSemester());
 		for (Integer id : users) {
 			System.out.println(id);
 		}
@@ -228,8 +238,8 @@ public class DALTestMain {
 	public static void checkAddStudentToClass(CDal dl)
 	{
 		System.out.println(dl.addStudentToClass(1, 124) == false);
-		System.out.println(dl.addStudentToClass(5, 124) ==false);
-		System.out.println(dl.addStudentToClass(1, 129) ==false);
+		System.out.println(dl.addStudentToClass(5, 124 )==false);
+		System.out.println(dl.addStudentToClass(1, 129)==false);
 	}	
 	
 	public static void checkAddCourseToClass(CDal dl)
@@ -375,11 +385,12 @@ public class DALTestMain {
 	}
 	public static void checkGetRequests(CDal dl)
 	{
+		/*
 		ArrayList<Request> reqArr = dl.getRequests(dl.getCurrentSemester());
 		for(Request req  : reqArr)
 		{
 			System.out.println("getClassNumber: "+ req.getClassNumber()+ " getCourseId: "+req.getCourseId() + " getRequestNumber: "+req.getRequestNumber()+ " getUserid: "+req.getUserid());
-		}
+		}*/
 	}
 	
 	public static void checkConfirmRequest(CDal dl)
@@ -388,5 +399,46 @@ public class DALTestMain {
 	}
 	
 	
+	public static void checkCreateAssignment(CDal dl)
+	{
+		Date dueDate = new Date(2017,10,9);
+		String filePath = "C:\\Users\\fayakov\\Desktop\\tmp.xlsx";
+		try{
+			File file = new File(filePath);
+			InputStream inputStream = new FileInputStream(file);
+			System.out.println(dl.createAssignment(dueDate, inputStream, file.length() ,"tmp.xlsx"));
+		}
+		catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
+	}
+	
+	public static void checkGetAssignment(CDal dl)
+	{
+		Date dueDate = new Date(2017,10,9);
+		String filePath = "C:\\Users\\fayakov\\Desktop\\tmpRet.xlsx";
+		try{
+			Assignment assignment = dl.getAssignment(11);
+			byte[] retFile = assignment.getFile();
+		   
+		      File file = new File(filePath);
+		      if (file.createNewFile()){
+			        System.out.println("File is created!");
+			      }else{
+			        System.out.println("File already exists.");
+			      }
+		     
+		      FileOutputStream stream = new FileOutputStream(filePath);
+		      try {
+		          stream.write(retFile);
+		      } finally {
+		          stream.close();
+		      }
+		}
+		catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+	}
 }
