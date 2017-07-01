@@ -602,7 +602,7 @@ public class CDal {
 		return retVal;
 	}
 	
-	public static boolean createCourse( String courseName){
+	public static boolean createCourse( String courseName, int teachingHours, int teachingUnit){
 			
 		boolean retVal = true;
 		try 
@@ -614,7 +614,9 @@ public class CDal {
 			else
 			{
 				Statement stmt = connection.createStatement();
-				stmt.executeUpdate("INSERT INTO course (name) VALUES ('" +courseName+"')");
+				stmt.executeUpdate("INSERT INTO course (name, teachingHours,teachingUnit_teachingUnitId) VALUES ('" +courseName+"',"+ teachingHours +","+teachingUnit+")");
+				
+				//addTeachingUnitToCourse(teachingUnit, getCourseId(courseName));
 			}
 		}
 		catch (SQLException e) {
@@ -921,8 +923,65 @@ public class CDal {
 		return retVal;
 	}
 	
+	private static int getCourseHours(int courseId)
+	{
+		int retVal = 0;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT course.teachingHours FROM course "
+					+ "WHERE courseId = " +courseId + ";");
+			if(resultSet.first()) {
+
+				retVal = resultSet.getInt(1);
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
 	
+	private static int getTeacherFreeHours(int teacherId)
+	{
+		int retVal = 0;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT freeHours FROM teacher "
+					+ "WHERE teacherId = " +teacherId + ";");
+			if(resultSet.first()) {
+
+				retVal = resultSet.getInt(1);
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
 	
+	private static boolean addTimeToTeacher(int teacherId, int courseId)
+	{
+		boolean retVal = true;
+		int timeToAdd = getCourseHours(courseId);
+		Statement stmt;
+		try {
+			int newTime = getTeacherFreeHours(teacherId) - timeToAdd;
+			stmt = connection.createStatement();
+			if(0 == stmt.executeUpdate("UPDATE teacher SET "
+					+ "freeHours = "+newTime+" "
+					+ "WHERE teacherId = "+ teacherId+ ";"))
+			{
+				retVal = false;
+			}
+		} catch (SQLException e) {
+			retVal = false;
+			e.printStackTrace();
+		}
+		return retVal;
+	}
+	
+	private static boolean isTeacherHaveTimeForCourse(int teacherId, int courseId)
+	{
+		return getCourseHours(courseId) <= getTeacherFreeHours(teacherId);
+	}
 	
 	public static boolean addTeacherToCourseInClass(int classId, int courseId, int userID){
 		boolean retVal = true;
@@ -943,20 +1002,35 @@ public class CDal {
 								int teachingUnit = getTeacherUnitId(teacherId);
 								if(teachingUnit != 0)
 								{
-									int courseTeachingUnit = getCourseTeachingUnitId(classId);
+									int courseTeachingUnit = getCourseTeachingUnitId(courseId);
 									if(courseTeachingUnit != 0)
 									{
 										if(courseTeachingUnit == teachingUnit)
 										{
 											if(!isTeacherInClassWithCourse(teacherId, classId, courseId, curSemester))
 											{
-												Statement stmt = connection.createStatement();
-												if(stmt.executeUpdate("UPDATE class_has_course SET "
-														+ "class_has_course.teacher_teacherId = "+teacherId +", "
-														+ "class_has_course.teacher_user_id  = "+ userID +""
-														+ " WHERE class_has_course.class_classId = " +classId +" AND"
-														+ " class_has_course.course_courseId = "+ courseId + " AND "
-														+ " class_has_course.semester_semesterId = " +curSemester+";") == 0)
+												if(isTeacherHaveTimeForCourse(courseId,teacherId))
+												{
+													Statement stmt = connection.createStatement();
+													if(stmt.executeUpdate("UPDATE class_has_course SET "
+															+ "class_has_course.teacher_teacherId = "+teacherId +", "
+															+ "class_has_course.teacher_user_id  = "+ userID +""
+															+ " WHERE class_has_course.class_classId = " +classId +" AND"
+															+ " class_has_course.course_courseId = "+ courseId + " AND "
+															+ " class_has_course.semester_semesterId = " +curSemester+";") == 0)
+													{
+														retVal = false;
+													}
+													else
+													{
+														if(!addTimeToTeacher(teacherId,courseId))
+														{
+															retVal = false;
+														}
+													}
+													
+												}
+												else
 												{
 													retVal = false;
 												}
@@ -1364,7 +1438,7 @@ public class CDal {
 					if(isTeachingUnitExist(teachingUnit))
 					{
 						Statement stmt = connection.createStatement();
-						stmt.executeUpdate("INSERT INTO teacher (user_id, maxHours, teachingUnit_teachingUnitId) VALUES ('" +userId+"','"+ maxTeachingHours +"','" +teachingUnit +"')");
+						stmt.executeUpdate("INSERT INTO teacher (user_id, maxHours, teachingUnit_teachingUnitId, freeHours) VALUES ('" +userId+"','"+ maxTeachingHours +"','" +teachingUnit +"','"+maxTeachingHours+"')");
 						
 					}
 					else

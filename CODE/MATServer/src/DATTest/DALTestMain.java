@@ -30,20 +30,21 @@ public class DALTestMain {
 		//checkAddStudentToClass(dl);
 		//checkGetStudentId(dl);
 		//chekcIsStudentInCourse(dl);
-			//checkAddStudentToCourse(dl);
+		//checkAddStudentToCourse(dl);
 		//checkRemoveStudentFromCourse(dl);
 		//checkFinishStudentCourse(dl);
 		//checkCreateCourse(dl);
 		//checkGetStudentsInCourse(dl);
 		/*Teacher teacher = dl.getTeacher(id);*/
 		//checkGetStudentsInClass( dl);
-		//checkAddCourseToClass(dl);
+		
 		//checkCreateTeachingUnit(dl);
 		//checkCreateAddTeachingUnitToCourse(dl);
 		//checkAddTeacherToCourseWithClass(dl);
 		//checkRemoveTeacherFromCourseWithClass(dl);
 		//checkCreateTeacher(dl);
-		//checkAddTeacherToCourseWithClass(dl);
+			checkAddCourseToClass(dl);
+			checkAddTeacherToCourseWithClass(dl);
 		//checkAddPrevCourseToCourse(dl);
 		
 		//checkisFinishedPrevCourse(dl);
@@ -65,7 +66,7 @@ public class DALTestMain {
 		//checkAddAssignmentToClassWithCourse(dl);
 		//checkAddSubmission(dl);
 		//getSubmissionToCheck(dl);
-		checkAddSubmissionResponse(dl);
+		//checkAddSubmissionResponse(dl);
 		//getAssignments(dl);
 	}
 	public static void checkLogin(CDal dl )
@@ -202,7 +203,7 @@ public class DALTestMain {
 	
 	public static void checkCreateCourse(CDal dl)
 	{
-		System.out.println(dl.createCourse("algebra3"));
+		System.out.println(dl.createCourse( "physics1", 20, 2));
 	}
 	
 	public static void checkGetStudentId(CDal dl)
@@ -250,7 +251,7 @@ public class DALTestMain {
 	
 	public static void checkAddCourseToClass(CDal dl)
 	{
-		System.out.println(dl.addCourseToClass(1, 2) == true);
+		System.out.println(dl.addCourseToClass(1, 6) == true);
 		//System.out.println(dl.addCourseToClass(1, 124 )==false);
 		//System.out.println(dl.addCourseToClass(124, 1 )==false);
 	}	
@@ -270,7 +271,7 @@ public class DALTestMain {
 		//System.out.println(dl.addTeacherToCourseInClass(1, 1, 1) == false);
 		//System.out.println(dl.addTeacherToCourseInClass(1233, 1, 123) == false);
 		//System.out.println(dl.addTeacherToCourseInClass(1, 1234, 123) == false);
-		System.out.println(dl.addTeacherToCourseInClass(1, 2, 123) == true);
+		System.out.println(dl.addTeacherToCourseInClass(1, 6, 130) == true);
 	}
 	
 	public static void checkChangeTeacher(CDal dl)
@@ -298,7 +299,7 @@ public class DALTestMain {
 	public static void checkCreateTeacher(CDal dl)
 	{
 		//System.out.println(dl.createTeacher(123, 20, 20) == false);
-		System.out.println(dl.createTeacher(128, 20, 1) == true);
+		System.out.println(dl.createTeacher(130, 200, 2) == true);
 		//System.out.println(dl.createTeacher(124, 20, 1) == false);
 		//System.out.println(dl.createTeacher(123, 20, 1) == false);
 	}
