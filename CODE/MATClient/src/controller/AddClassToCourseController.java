@@ -96,7 +96,7 @@ public void localPrompt(final int clid, final int coid, final String eror, final
 				if(success)
 					Prompt.alert(1, "class " + classId + " added successfully to course " + courseId);	
 				else
-					Prompt.alert(3, erorText);
+					Prompt.alert(3, "cannot add class to course, check the details again");
 			}
 		} );
 	}

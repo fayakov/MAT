@@ -12,9 +12,10 @@ private static final long serialVersionUID = 1L;
 	private String errText;
 	ArrayList<Student> excludedStudents;
 	
-	public AddClassToCourseResponse(boolean requestSecceded, ArrayList<Student> excludedStudents, String string) {
+	public AddClassToCourseResponse(boolean requestSecceded, ArrayList<Student> excludedStudents, String errText) {
 		this.isSucceeded = requestSecceded;
 		this.excludedStudents = excludedStudents;
+		this.errText = errText;
 	}
 
 	public ArrayList<Student> getExcludedStudents() {
