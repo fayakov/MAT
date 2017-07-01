@@ -940,6 +940,24 @@ public class CDal {
 		return retVal;
 	}
 	
+	
+	private static int getCourseTeachingUnit(int courseId)
+	{
+		int retVal = 0;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT course.teachingunit_teachingUnitId FROM course "
+					+ "WHERE courseId = " +courseId + ";");
+			if(resultSet.first()) {
+
+				retVal = resultSet.getInt(1);
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
 	private static int getTeacherFreeHours(int teacherId)
 	{
 		int retVal = 0;
@@ -3267,8 +3285,13 @@ public class CDal {
 	
 	
 	public static Course getCourseData(int courseId) {
-		// TODO Auto-generated method stub
-		return null;
+		Course courseData = new Course();
+		courseData.setCourseId(courseId);
+		courseData.setCourseName(getCourseName(courseId));
+		courseData.setDuration(getCourseHours(courseId));
+		courseData.setTeachingUnit(getCourseTeachingUnit(courseId));
+		courseData.setPreCourses(getPrevCourses(courseId));
+		return courseData;
 	}
 	
 	private static boolean isAssignmentExist(int assignmentId)

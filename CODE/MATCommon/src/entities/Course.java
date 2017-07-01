@@ -10,6 +10,9 @@ public class Course  {
 	private ArrayList<Integer> preCourses;
 	private int duration;
 	
+	public Course(){
+	}
+	
 	public Course(int courseId, String courseName, int teachingUnit, ArrayList<Integer> preCourses, int duration) {
 		super();
 		this.courseId = courseId;
