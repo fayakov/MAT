@@ -72,6 +72,11 @@ public class HistogramClassAndCoursesController implements Initializable, Handle
 		
 		
 	}
+
+	public void initData(ArrayList<CourseWithGrade> arr) {
+		// TODO Auto-generated method stub
+		
+	}
  
 	
 	

@@ -17,6 +17,7 @@ import communication.MATClientController;
 import communication.Message;
 import entities.ClassWithGrade;
 import entities.TeacherWithGrade;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +29,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import utils.Handler;
 
 
@@ -86,38 +88,83 @@ public class StatisticTeacherAndClassesController implements Initializable, Hand
 				GetTeacherStatsResponse res = (GetTeacherStatsResponse)msg;
 				ArrayList<ClassWithGrade> arr = res.getStats();
 				
-				if( arr.size() == 0) {
-					// PopUp
-					;
-				}
+				if(res.getStats() == null)
+					Prompt.alert(3, "teacher is not exist");
 				else{
-//					((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-					Stage primaryStage = new Stage();
-					FXMLLoader loader = new FXMLLoader();
-					Pane root;
-					try {
-						root = loader.load(getClass().getResource("/gui/HistogramTeachrAndClass.fxml").openStream());
-						Scene scene = new Scene(root);			
-						scene.getStylesheets().add(getClass().getResource("/gui/HistogramTeachrAndClass.fxml").toExternalForm());
+
+					ArrayList<ClassWithGrade> arr = res.getStats();
+					statisticsClass(arr);
+					}
+					Platform.runLater(new Runnable() {
 						
-						primaryStage.setScene(scene);		
-						primaryStage.show();
+						@Override
+						public void run() {
+
+					    	Pane root;
+							try {
+								root = FXMLLoader.load(getClass().getResource("/gui/HistogramTeachrAndClass.fxml"));
+								Scene scene = new Scene(root);
+								Stage primaryStage = new Stage();
+								primaryStage.setScene(scene);
+								primaryStage.show();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+									
+						}
+					}};
+		
+
+					
+
+
+			
+			
+			
+			
+			
+			
+			
+				
+		}
+
+
+		private void statisticsClass(ArrayList<ClassWithGrade> arr) {
+			// TODO Auto-generated method stub
+			
+Platform.runLater(new Runnable() {
+				
+	    		public void run() {
+	    		FXMLLoader loader = new FXMLLoader(
+	        		    getClass().getResource(
+	        		      "/gui/HistogramTeachrAndClass.fxml"
+	        		    )
+	        		  );
+
+	        		  Stage stage = new Stage(StageStyle.DECORATED);
+	        		  try {
+						stage.setScene(
+						    new Scene(
+						      (Pane) loader.load()
+						    )
+						  );
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					StatisticTeacherAndClassesController StatisticTeacherAndClassesController = loader.getController();		
-					//StatisticClassAndTeachersController.loadStudent(Test.students.get(itemIndex));
-					
+
+	        		  HistogramClassAndTeachersController controller = 
+	        		    loader.< HistogramClassAndTeachersController>getController();
+	        		  
+	        		  controller.initData(arr);
+
+	        		  stage.show();
+	    		}
+	    	});
+	    }
 			
-			
-			
-			
-			
-			
-			
-			
-		}
+		
 
 
 		public void initialize(URL location, ResourceBundle resources) {

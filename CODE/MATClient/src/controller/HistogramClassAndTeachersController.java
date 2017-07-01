@@ -10,6 +10,7 @@ import communication.GetClassTeachersStatsResponse;
 import communication.GetStudentDataResponse;
 import communication.LoginResponseMsg;
 import communication.Message;
+import entities.ClassWithGrade;
 import entities.Request;
 import entities.TeacherWithGrade;
 import javafx.event.ActionEvent;
@@ -75,7 +76,7 @@ public class HistogramClassAndTeachersController implements  Initializable, Hand
 		
 	}
 
-	public void initData(ArrayList<TeacherWithGrade> arr) {
+	public void initData(ArrayList<ClassWithGrade> arr) {
 		// TODO Auto-generated method stub
 	  
 		
