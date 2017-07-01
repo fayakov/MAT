@@ -2549,11 +2549,10 @@ public class CDal {
 	
 	
 	
-	public static boolean createRequest( ERequestType type, int teacherId, int classId, int courseId)
+	public static boolean createRequest( ERequestType type, int userId, int classId, int courseId)
 	{
 		boolean retVal = true;
 		int curSemester = getCurrentSemester();
-		int userId = getTeacherUserId(teacherId);
 		if(curSemester != 0)
 		{
 			if(isRequestInputValid(type, userId, classId, courseId, curSemester))

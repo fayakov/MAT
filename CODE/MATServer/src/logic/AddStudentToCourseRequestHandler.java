@@ -16,9 +16,10 @@ public class AddStudentToCourseRequestHandler implements Handler {
 	public void handle(Message msg, Object obj) {
 		ConnectionToClient client = (ConnectionToClient) obj;
 		AddStudentToCourseRequest addStudentToCourseMsg = (AddStudentToCourseRequest)msg;
-					
+				
 		CDALError error = new CDALError();
-		boolean requestSecceded = CDal.createRequest(ERequestType.addStudent, addStudentToCourseMsg.getRequest().getClassNumber(),addStudentToCourseMsg.getRequest().getCourseId(),addStudentToCourseMsg.getRequest().getUserId());		
+		int userId = CDal.getStudentUserId(addStudentToCourseMsg.getStudentId());
+		boolean requestSecceded = CDal.createRequest(ERequestType.addStudent, userId, addStudentToCourseMsg.getClassId() ,addStudentToCourseMsg.getCourseId());		
 		
 		AddStudentToCourseResponse res = new AddStudentToCourseResponse(requestSecceded, error.getString());
 		try {

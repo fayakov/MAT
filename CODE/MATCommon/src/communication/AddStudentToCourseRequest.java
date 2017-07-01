@@ -6,21 +6,44 @@ import entities.Request;
 public class AddStudentToCourseRequest extends Message {
 	private static final long serialVersionUID = 1L;
 	
-	private Request request;
+	private int studentId, classId, courseId;
 	
 	
+	public int getStudentId() {
+		return studentId;
+	}
 
-	public AddStudentToCourseRequest(Request request) {
+
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
+	}
+
+
+	public int getClassId() {
+		return classId;
+	}
+
+
+	public void setClassId(int classId) {
+		this.classId = classId;
+	}
+
+
+	public int getCourseId() {
+		return courseId;
+	}
+
+
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
+	}
+
+
+	public AddStudentToCourseRequest(int studentId, int classId, int courseId) {
 		super();
-		this.request = request;
-	}
-
-	public Request getRequest() {
-		return request;
-	}
-
-	public void setRequest(Request request) {
-		this.request = request;
+		this.studentId = studentId;
+		this.classId = classId;
+		this.courseId = courseId;
 	}
 	
 }

@@ -23,9 +23,7 @@ import javafx.stage.Stage;
 import utils.Handler;
 
 public class RequestChangeTeacherController implements Initializable, Handler
-{
-	public Request request;
-	
+{	
 	
 	public RequestChangeTeacherController(){
 		Dispatcher.addHandler(ChangeTeacherResponse.class.getCanonicalName(), this);
@@ -54,7 +52,7 @@ public class RequestChangeTeacherController implements Initializable, Handler
     	if(studentIdTextFiled.getText().isEmpty() || courseIdTextFiled.getText().isEmpty()|| classNumberTextFiled.getText().isEmpty()) 
     		Prompt.alert(3,"one or more of the fields is empty");
     	
-    	else { // add request to db
+    	else { 
     		try {
     			int teacherId = Integer.parseInt(studentIdTextFiled.getText());
     			int classId = Integer.parseInt(classNumberTextFiled.getText());
