@@ -337,22 +337,22 @@ public class DALTestMain {
 	}
 
 	public static void checkTecherClassStatistics(CDal dl)
-	{
+	{/*
 		ArrayList<ClassWithGrade> mylist =dl.getTeacherClassesStatistics(1,dl.getCurrentSemester());
 		for(ClassWithGrade classWithG  : mylist)
 		{
 			System.out.println("class: "+ classWithG.getName()+ " grade: "+classWithG.getGrade());
-		}
+		}*/
 	}
 	
 	public static void checkCourseClassStatistics(CDal dl)
 	{
-		
+	/*	
 		ArrayList<CourseWithGrade> mylist =dl.getClassesCoursesStatistics(1,dl.getCurrentSemester());
 		for(CourseWithGrade courseWithG  : mylist)
 		{
 			System.out.println("course: "+ courseWithG.getName()+ " grade: "+courseWithG.getGrade());
-		}
+		}*/
 	}
 	
 	public static void checkCreateNewSemester(CDal dl)
@@ -406,6 +406,7 @@ public class DALTestMain {
 	
 	public static void checkCreateAssignment(CDal dl)
 	{
+		/*
 		Date dueDate = new Date(2017,10,9);
 		String filePath = "C:\\Users\\fayakov\\Desktop\\tmp2.pdf";
 		try{
@@ -423,7 +424,7 @@ public class DALTestMain {
 		}
 		catch (IOException ex) {
             ex.printStackTrace();
-        }
+        }*/
 
 	}
 	
@@ -484,6 +485,7 @@ public class DALTestMain {
 	
 	public static void checkAddSubmissionResponse(CDal dl)
 	{
+		/*
 		Date date = new Date(2017,10,8);
 		String filePath = "C:\\Users\\fayakov\\Desktop\\tmp.docx";
 		try{
@@ -501,7 +503,7 @@ public class DALTestMain {
 		}
 		catch (IOException ex) {
             ex.printStackTrace();
-        }
+        }*/
 	}
 	
 	

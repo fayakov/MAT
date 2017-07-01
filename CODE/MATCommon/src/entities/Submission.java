@@ -9,23 +9,14 @@ import java.sql.Date;
 public class Submission implements Serializable {
 
 	private Date date;
-	private int submissionNumber;
+	private int submissionNumber; //-- output
 	private String fileName;
 	private byte[] file;
 	private int assignmentNumber;
+	private int studentId;
 	
 	public Submission(){
 	}
-	
-	public Submission(Date date, int submissionNumber, String fileName,  byte[] assingmeniletFile) 
-	{
-		//super();
-		this.date = date;
-		this.submissionNumber = submissionNumber;
-		this.file = file;
-		this.fileName = fileName;
-	}
-	
 	
 	public Date getDate() {
 		return date;
@@ -36,12 +27,29 @@ public class Submission implements Serializable {
 	}
 	
 	public int getAssignmentNumber() {
+		return assignmentNumber;
+	}
+	
+	public void setAssignmentNumber(int assignmentNumber) {
+		this.assignmentNumber = assignmentNumber;
+	}
+	
+	public int getSubmissionNumber() {
 		return submissionNumber;
 	}
 	
-	public void setAssignmentNumber(int submissionNumber) {
+	public void setSubmissionNumber(int submissionNumber) {
 		this.submissionNumber = submissionNumber;
 	}
+	
+	public int getStudentId() {
+		return studentId;
+	}
+	
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
+	}
+	
 	
 	public String getFileName() {
 		return fileName;

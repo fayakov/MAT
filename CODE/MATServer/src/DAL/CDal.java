@@ -1661,7 +1661,29 @@ public class CDal {
 		return courseList;
 	}
 	
+
+	private static boolean isTeacherHasCourses(int teahcerId, int courseId ,int semesterId)
+	{
+		boolean retVal = false;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT course_courseId FROM class_has_course "
+					+ "WHERE class_has_course.teacher_teacherId = " + teahcerId + " "
+					+ "AND class_has_course.semester_semesterId = " + semesterId +" "
+					+ "AND class_has_course.course_courseId = " + courseId + ";");
+			while(resultSet.next()){
+
+				retVal = true;
+			}
+			
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return retVal;
+	}
+	
 	public static ArrayList<Integer> getTeacherClassesBySemester(int teahcerId, int semesterId)
+
 	{
 		ArrayList<Integer> classList = new ArrayList<Integer>();
 		try 
@@ -2713,35 +2735,43 @@ public class CDal {
 		
 	}
 	
-	public static int createAssignment(Date dueDate, byte[] fileData, String fileName)
+	public static int createAssignment(Date dueDate, byte[] fileData, String fileName, int teacherId, int courseId)
 	{
+		
+		
 		int retVal = 0;
-		try{ 
-			String[] returnId = { "assignmentId" };
-            String sql = "INSERT INTO assignment (date, assignmentFile, fileName) values (?, ?, ?)";
-            PreparedStatement statement = connection.prepareStatement(sql,returnId);
-            
-            statement.setString(1, " " +dueDate.getYear()+"-"+(dueDate.getMonth() + 1)+"-"+(dueDate.getDate()+1) +" ");
-            
-     
-            ByteArrayInputStream bis = new ByteArrayInputStream(fileData);
-            
-            statement.setBlob(2, bis);
-            statement.setString(3, fileName);
- 
-		    int affectedRows = statement.executeUpdate();
-		    
-		    if (affectedRows > 0) {
-		    	 try (ResultSet rs = statement.getGeneratedKeys()) {
-				        if (rs.next()) {
-				        	retVal = rs.getInt(1);
-				        }
-				    }
-		    }
+		if(isTeacherHasCourses(teacherId, courseId, getCurrentSemester()))
+		{
+			try{ 
+				String[] returnId = { "assignmentId" };
+	            String sql = "INSERT INTO assignment (date, assignmentFile, fileName, teacherId, courseId) values (?, ?, ?, ?, ?)";
+	            PreparedStatement statement = connection.prepareStatement(sql,returnId);
+	            
+	            statement.setString(1, " " +dueDate.getYear()+"-"+(dueDate.getMonth() + 1)+"-"+(dueDate.getDate()+1) +" ");
+	            
+	     
+	            ByteArrayInputStream bis = new ByteArrayInputStream(fileData);
+	            
+	            statement.setBlob(2, bis);
+	            statement.setString(3, fileName);
+	            statement.setInt(4, teacherId);
+	            statement.setInt(5, courseId);
+			    int affectedRows = statement.executeUpdate();
+			    
+			    if (affectedRows > 0) {
+			    	 try (ResultSet rs = statement.getGeneratedKeys()) {
+					        if (rs.next()) {
+					        	retVal = rs.getInt(1);
+					        }
+					    }
+			    }
+			}
+			catch (SQLException e) {
+				e.printStackTrace();			
+			}
 		}
-		catch (SQLException e) {
-			e.printStackTrace();			
-		}
+
+	
 		
 		return retVal;
 		
@@ -2862,7 +2892,7 @@ public class CDal {
 		return retVal;
 	}
 	
-	public static boolean createSubmissionResponse(byte[] fileData, String fileName, int submissionId, int grade, Date responseDate)
+	public static boolean createSubmissionResponse(byte[] fileData, String fileName, int submissionId, int grade, String teacherComments ,Date responseDate)
 	{
 		boolean retVal = true;
 		if(isStudentHasSubmission(submissionId))
@@ -2881,7 +2911,8 @@ public class CDal {
 							if(stmt.executeUpdate("UPDATE student_has_course_has_submission "
 									+ "set submission_responseId = "+submissionResponseId +", "
 									+ "grade = "+grade+", "
-									+ "isHandled = 1") == 0)
+									+ "isHandled = 1, "
+									+ "teacherComment = "+teacherComments+";") == 0)
 							{
 								retVal = false;
 							}
@@ -3023,7 +3054,7 @@ public class CDal {
 		return retVal;
 	}
 	
-	public static ArrayList<Integer> getStudentFinishedSubmissionResponseNumbers(int studentId)
+	public static ArrayList<Integer> getFinishedStudentHasSubmissionId(int studentId)
 	{
 		 ArrayList<Integer> myList = new  ArrayList<Integer>();
 		try 
@@ -3040,7 +3071,7 @@ public class CDal {
 		catch (SQLException e) {e.printStackTrace();}
 		return myList;
 	}
-	public static ArrayList<Integer> getStudentSubmissionNumbers(int studentId)
+	public static ArrayList<Integer> getStudentSubmissionId(int studentId)
 	{
 		 ArrayList<Integer> myList = new  ArrayList<Integer>();
 		try 
@@ -3085,26 +3116,53 @@ public class CDal {
 		return submission;
 	}
 	
+	/*
+	public static int getSubmissionGrade(int submissionId)
+	
+	private static ArrayList<Integer> getStudentHasSubmition(int studentId)
+	{
+		int id = 0;
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT student_has_courseId  FROM student_has_course "
+					+ "WHERE student_has_course.course_courseId = " + courseId + " "
+					+ "AND student_has_course.student_idstudent = "+studentId +";");
+			if(resultSet.first()) {
+
+				id= resultSet.getInt(1);
+				
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return id;
+	}
+	*/
+	/*
 	public static ArrayList<SubmissionResponse> getStudentSubmissionResponse(int studentId)
 	{
 		ArrayList<SubmissionResponse> responseList = new ArrayList<SubmissionResponse>();
-		ArrayList<Integer> submisionIdList = getStudentFinishedSubmissionResponseNumbers(studentId);
+		ArrayList<Integer> submisionIdList = getFinishedStudentHasSubmissionId(studentId);
 		for (int submissionNum : submisionIdList)
 		{
-			responseList.add(getSubmssionResponse(submissionNum));
+			SubmissionResponse response = getSubmssionResponse(submissionNum);
+			response.setGrade(get);
+			responseList.add();
 		}
 		return responseList;
 	}
+	*/
 	
-	public static ArrayList<SubmissionResponse> getStudentSubmission(int studentId)
+	
+	public static ArrayList<Submission> getStudentSubmission(int studentId)
 	{
-		ArrayList<SubmissionResponse> responseList = new ArrayList<SubmissionResponse>();
-		ArrayList<Integer> submisionIdList = getStudentSubmissionNumbers(studentId);
-		for (int submissionNum : submisionIdList)
+		ArrayList<Submission> submissionList = new ArrayList<Submission>();
+		ArrayList<Integer> studentSubmiisionIdList = getStudentSubmissionId(studentId);
+		for (int submissionNum : studentSubmiisionIdList)
 		{
-			responseList.add(getSubmssionResponse(submissionNum));
+			submissionList.add(getSubmission(submissionNum));
 		}
-		return responseList;
+		return submissionList;
 	}
 	
 	
