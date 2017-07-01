@@ -65,9 +65,8 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
     @FXML
     private TableColumn<Request, Boolean> isHandled;
 
-    @FXML
-    
-    final ObservableList<Request> data= FXCollections.observableArrayList(
+    @FXML 
+    ObservableList<Request> data= FXCollections.observableArrayList(
     		new Request(1,22,333,3333,true,true),
     		new Request(2,222,555,66666,true,true));
 
@@ -107,6 +106,7 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
 
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
@@ -119,7 +119,8 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
 			int len =res.getPendingRequests().size();
 			for (int i = 0; i< len; i++)
 			{
-				data1= res.getPendingRequests();
+				data1 = (res.getPendingRequests().get(i).getRequestNumber(),res.getPendingRequests().get(i).getUserId(),res.getPendingRequests().get(i).getClassNumber(),
+						res.getPendingRequests().get(i).getCourseId(),res.getPendingRequests().get(i).isConfirmed(),res.getPendingRequests().get(i).isHandeled(),data.set(i, ERequestType.addStudent));
 				
 			}
 			
