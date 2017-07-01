@@ -25,19 +25,7 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
 {
 	
 	private ArrayList<Request> allRequests;
-	
-	/*
-	 * public ResponseAddStudentToCourseController()
-	 
-	{
-		Dispatcher.addHandler(GetPendingRequestsResponse.class.getCanonicalName(), this);
-	}
-*/
-	
-	
-	
-    @FXML
-    private ResourceBundle resources;
+
 
     public void initData(ArrayList<Request> allRequests) {
     	data.clear();
@@ -46,6 +34,11 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
 			data.add(request);
 		}
 	}
+	
+	
+    @FXML
+    private ResourceBundle resources;
+    
 	@FXML
     private URL location;
 
@@ -106,12 +99,7 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
-		//GetPendingRequestsRequest pendigreq= new GetPendingRequestsRequest(ERequestType.addStudent);
-		//MATClientController.getInstance().sendRequestToServer(pendigreq); 
-		
-		
-		
+	
     	requestNumber.setCellValueFactory(new PropertyValueFactory<Request, Integer>("requestNumber"));
     	userId.setCellValueFactory(new PropertyValueFactory<Request, Integer>("userId"));
     	classNumber.setCellValueFactory(new PropertyValueFactory<Request, Integer>("classNumber"));
@@ -127,14 +115,7 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
 		// TODO Auto-generated method stub
 		
 		if (msg instanceof GetPendingRequestsResponse) {
-//			GetPendingRequestsResponse res = (GetPendingRequestsResponse)msg;
-//	
-//			ArrayList<Request> requests = res.getPendingRequests();
-//			for( Request req : requests)
-//			{
-//				data =FXCollections.observableArrayList(req);
-//			
-//			}	
+
 		
 		}
 	}	
