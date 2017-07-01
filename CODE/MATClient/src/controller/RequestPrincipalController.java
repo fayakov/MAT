@@ -45,10 +45,12 @@ public class RequestPrincipalController implements Handler {
     @FXML
     private ComboBox<String> requestComboBox;
     
+    
     public RequestPrincipalController() {
   		super();
   		Dispatcher.addHandler(GetPendingRequestsResponse.class.getCanonicalName(), this);
   	}
+    
     
     private void responseChangeTeacher(ArrayList<Request> requests) {
     	
@@ -93,8 +95,7 @@ public class RequestPrincipalController implements Handler {
 					FXMLLoader loader = new FXMLLoader();
 					Pane root = loader.load(getClass().getResource("/gui/ResponseAddStudentToCourse.fxml"));
 					
-					ResponseAddStudentToCourseController cont = 
-							loader.getController();
+					ResponseAddStudentToCourseController cont = loader.getController();
 					
 					cont.setAllRequests(requestsToShow);
 					

@@ -18,14 +18,12 @@
             <Font size="33.0" />
          </font>
       </Text>
-      <TableView fx:id="table" layoutX="55.0" layoutY="101.0" prefHeight="218.0" prefWidth="490.0" tableMenuButtonVisible="true">
+      <TableView fx:id="table" layoutX="143.0" layoutY="99.0" prefHeight="218.0" prefWidth="337.0" tableMenuButtonVisible="true">
          <columns>
             <TableColumn fx:id="requestNumber" prefWidth="98.0" text="request number" />
             <TableColumn fx:id="userId" prefWidth="75.0" text="student id" />
             <TableColumn fx:id="classNumber" prefWidth="87.0" text="class number" />
             <TableColumn fx:id="courseId" prefWidth="67.0" text="course id" />
-            <TableColumn fx:id="isHandled" prefWidth="90.0" text="is handled" />
-            <TableColumn fx:id="isConfirmed" prefWidth="75.0" text="is confirmed" />
          </columns>
       </TableView>
       <Button layoutX="359.0" layoutY="341.0" mnemonicParsing="false" onAction="#confirm" text="confirm" />
