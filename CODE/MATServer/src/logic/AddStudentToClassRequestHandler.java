@@ -18,7 +18,7 @@ public class AddStudentToClassRequestHandler implements Handler {
 		AddStudentToClassRequest addClassMsg = (AddStudentToClassRequest)msg;
 		
 		CDALError error = new CDALError();
-		boolean isSucceeded = CDal.addStudentToClass(addClassMsg.getStudentId(), addClassMsg.getClassId());		
+		boolean isSucceeded = CDal.addStudentToClass(addClassMsg.getClassId(), addClassMsg.getStudentId());		
 		
 		AddStudentToClassResponse res = new AddStudentToClassResponse(isSucceeded, error.getString());
 		try {

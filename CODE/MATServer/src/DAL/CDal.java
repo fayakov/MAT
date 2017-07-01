@@ -710,8 +710,9 @@ public class CDal {
 		return retVal;
 	}
 	
-	public static boolean addStudentToClass(int classId, int userId){
+	public static boolean addStudentToClass(int classId, int studentId){
 		boolean retVal = true;
+		int userId = getStudentUserId(studentId);
 		
 		if(getUserType(userId) == EUserType.EUserStudent)
 		{
@@ -720,7 +721,6 @@ public class CDal {
 			{
 				if(isClassExist(classId))
 				{
-					int studentId = getStudentId(userId);
 					if(studentId != 0)
 					{
 						

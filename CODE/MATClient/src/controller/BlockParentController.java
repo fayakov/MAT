@@ -64,7 +64,8 @@ public class BlockParentController implements Initializable, Handler {
 			if (msg instanceof BlockParentResponse) {
 				BlockParentResponse res = (BlockParentResponse)msg;
 				if (res.isRequestSecceded())  {
-					 Prompt.alert(1, "Parent " + pid + " is blocked ");
+					 Prompt.alert(1, "Parent " + pid + " has been blocked ");
+					 System.out.println("Parent " + pid + " has been blocked ");
 				} else {
 					Prompt.alert(3, res.getErrText());	
 				}

@@ -21,8 +21,8 @@
       <Text layoutX="167.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id" wrappingWidth="14.6392822265625" />
       <Text layoutX="167.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="password" />
       <TextField fx:id="userIdTextField" layoutX="258.0" layoutY="141.0" />
-      <Button layoutX="281.0" layoutY="256.0" mnemonicParsing="false" onAction="#logInBtn" text="log in" />
       <PasswordField fx:id="passwordTextField" layoutX="258.0" layoutY="172.0" />
+      <Button layoutX="281.0" layoutY="256.0" mnemonicParsing="false" onAction="#logInBtn" text="log in" />
       <Text fx:id="errorText" layoutX="250.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="148.99999555945396" />
    </children>
 </AnchorPane>
