@@ -2,15 +2,21 @@ package controller;
 
  import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import communication.Dispatcher;
 import communication.GetClassDataRequest;
 import communication.GetClassDataResponse;
+import communication.GetClassTeachersStatsResponse;
 import communication.GetTeacherDataRequest;
 import communication.GetTeacherDataResponse;
+import communication.GetTeacherStatsRequest;
+import communication.GetTeacherStatsResponse;
 import communication.MATClientController;
 import communication.Message;
+import entities.ClassWithGrade;
+import entities.TeacherWithGrade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +35,7 @@ import utils.Handler;
 public class StatisticTeacherAndClassesController implements Initializable, Handler {
 	
 	public StatisticTeacherAndClassesController(){
-		Dispatcher.addHandler(GetTeacherDataResponse.class.getCanonicalName(), this);
+		Dispatcher.addHandler(GetTeacherStatsResponse.class.getCanonicalName(), this);
 	}
 		private int tid;
 
@@ -49,7 +55,7 @@ public class StatisticTeacherAndClassesController implements Initializable, Hand
 		    	 try {
 					    tid = Integer.parseInt(TeacherID.getText());
 					    
-					    GetTeacherDataRequest TeacherData = new GetTeacherDataRequest(tid);
+					    GetTeacherStatsRequest TeacherData = new GetTeacherStatsRequest(tid);
 						 MATClientController.getInstance().sendRequestToServer(TeacherData);
 				    	
 				    	} catch(NumberFormatException e){
@@ -57,11 +63,11 @@ public class StatisticTeacherAndClassesController implements Initializable, Hand
 				    	return;
 				    	}  	
 		    	 
-		    	 	Pane root = FXMLLoader.load(getClass().getResource("/gui/HistogramTeachrAndClass.fxml"));
-					Scene scene = new Scene(root);
-					Stage primaryStage = new Stage();
-					primaryStage.setScene(scene);
-					primaryStage.show();
+		    	 //	Pane root = FXMLLoader.load(getClass().getResource("/gui/HistogramTeachrAndClass.fxml"));
+				//	Scene scene = new Scene(root);
+					//Stage primaryStage = new Stage();
+					//primaryStage.setScene(scene);
+					//primaryStage.show();
 		     	}		
 		     }	    			 
 	    
@@ -75,6 +81,41 @@ public class StatisticTeacherAndClassesController implements Initializable, Hand
 
 		public void handle(Message msg, Object obj) {
 			// TODO Auto-generated method stub
+			
+			if (msg instanceof GetTeacherStatsResponse) {
+				GetTeacherStatsResponse res = (GetTeacherStatsResponse)msg;
+				ArrayList<ClassWithGrade> arr = res.getStats();
+				
+				if( arr.size() == 0) {
+					// PopUp
+					;
+				}
+				else{
+//					((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+					Stage primaryStage = new Stage();
+					FXMLLoader loader = new FXMLLoader();
+					Pane root;
+					try {
+						root = loader.load(getClass().getResource("/gui/HistogramTeachrAndClass.fxml").openStream());
+						Scene scene = new Scene(root);			
+						scene.getStylesheets().add(getClass().getResource("/gui/HistogramTeachrAndClass.fxml").toExternalForm());
+						
+						primaryStage.setScene(scene);		
+						primaryStage.show();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					StatisticTeacherAndClassesController StatisticTeacherAndClassesController = loader.getController();		
+					//StatisticClassAndTeachersController.loadStudent(Test.students.get(itemIndex));
+					
+			
+			
+			
+			
+			
+			
+			
 			
 		}
 
