@@ -95,9 +95,9 @@ public void localPrompt(final String eror, final boolean succ)  throws Exception
 			
 			public void run() {
 				if(success)
-					Prompt.alert(1, "The request added successfully");	
+					Prompt.alert(1, "The request sent successfully");	
 				else
-					Prompt.alert(3, erorText);
+					Prompt.alert(3, "cannot send request, check details again");
 			}
 		} );
 	}

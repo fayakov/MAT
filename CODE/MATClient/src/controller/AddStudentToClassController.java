@@ -96,7 +96,7 @@ public void localPrompt(final int sid, final int cid, final String eror, final b
 				if(success)
 					Prompt.alert(1, "student " + studentId + " added successfully to class " + classId);	
 				else
-					Prompt.alert(3, erorText);
+					Prompt.alert(3, "cannot send request, check details again");
 			}
 		} );
 	}

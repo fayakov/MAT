@@ -10,6 +10,7 @@ import communication.MATClientController;
 import communication.Message;
 import entities.ERequestType;
 import entities.Request;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,7 +21,7 @@ import utils.Handler;
 
 public class RequestRemoveStudentFromCourseController implements Initializable, Handler{
 
-	public Request request;
+	int studentId, classId, courseId;
 	
 	public RequestRemoveStudentFromCourseController(){
 		Dispatcher.addHandler(DeleteStudentFromCourseResponse.class.getCanonicalName(), this);
@@ -51,21 +52,17 @@ public class RequestRemoveStudentFromCourseController implements Initializable, 
     	
     	else { // add request to db
     		try {
-    			request.setUserId(Integer.parseInt(studentIdTextField.getText()));
-    			request.setClassNumber(Integer.parseInt(classTextFiled.getText()));
-    			request.setCourseId(Integer.parseInt(courseTextField.getText()));
-    			request.setHandeled(false);
-    			request.setConfirmed(false);
-    			request.setRequestType(ERequestType.removeStudent);
-    	    	
-    	    	DeleteStudentFromCourseRequest delstureq= new DeleteStudentFromCourseRequest(request);
-    			MATClientController.getInstance().sendRequestToServer(delstureq); 
-    			
-    	    	} catch(NumberFormatException e){
+    			studentId = Integer.parseInt(studentIdTextField.getText());
+    			classId = Integer.parseInt(classTextFiled.getText());
+    			courseId = Integer.parseInt(courseTextField.getText());
+    		} catch(NumberFormatException e){
     	    	Prompt.alert(3,"please enter numerical value");
     	    	return;
     	    	}  		
-        	Prompt.alert(1,"The request added successfully ");
+    	    	
+    	    	DeleteStudentFromCourseRequest delstureq= new DeleteStudentFromCourseRequest(studentId, classId, courseId);
+    			MATClientController.getInstance().sendRequestToServer(delstureq); 
+    			
     	}
 
     }
@@ -82,13 +79,31 @@ public class RequestRemoveStudentFromCourseController implements Initializable, 
 		// TODO Auto-generated method stub
 		if (msg instanceof DeleteStudentFromCourseResponse) {
 			DeleteStudentFromCourseResponse res = (DeleteStudentFromCourseResponse)msg;
-			if (res.isRequestSaved()) {
-				System.out.println("Server response: Success");
-			} else {
-				System.out.println("Server response:" + res.getErrText());
+			
+			try {
+				localPrompt(res.getErrText(), res.isRequestSaved());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			
 		}
 		
+	}
+	
+public void localPrompt(final String eror, final boolean succ)  throws Exception {
+		
+		Platform.runLater(new Runnable() {		
+			String erorText = eror;
+			boolean success = succ;
+			
+			public void run() {
+				if(success)
+					Prompt.alert(1, "The request added successfully");	
+				else
+					Prompt.alert(3, "cannot send request, check details again");
+			}
+		} );
 	}
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
