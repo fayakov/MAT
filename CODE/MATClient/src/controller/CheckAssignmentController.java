@@ -28,13 +28,13 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import utils.Handler;
 
-public class CheckAssignmentController implements Initializable, Handler 
+public class CheckAssignmentController //implements Initializable, Handler 
 {
 
-	public CheckAssignmentController()
-	{
-		Dispatcher.addHandler(AddEvaluationFormResponse.class.getCanonicalName(), this);
-	}
+	//public CheckAssignmentController()
+	//{
+	//	Dispatcher.addHandler(AddEvaluationFormResponse.class.getCanonicalName(), this);
+	//}
 	
 
 	 @FXML
@@ -97,14 +97,9 @@ public class CheckAssignmentController implements Initializable, Handler
 	    	//MATClientController.getInstance().sendRequestToServer(addReq);
 	    }
 
-	    
-	    @FXML
-	    void initialize() 
-	    {
-	        
-	    }
+	  
 
-		public void handle(Message msg, Object obj) 
+		/*public void handle(Message msg, Object obj) 
 		{
 			// TODO Auto-generated method stub
 			if (msg instanceof GetAssignmentOfStudentResponse) 
@@ -136,7 +131,7 @@ public class CheckAssignmentController implements Initializable, Handler
 				}
 			}
 		}
-
+*/
 		public void initialize(URL location, ResourceBundle resources) 
 		{
 			// TODO Auto-generated method stub
@@ -148,11 +143,15 @@ public class CheckAssignmentController implements Initializable, Handler
 		}
 
 		
-		/*public void func(int option)
-		{
-			int a=option;
-		}
-		*/
+		
+		
+		
+		  
+	    @FXML
+	    void initialize() 
+	    {
+	        
+	    }
 }
 
 

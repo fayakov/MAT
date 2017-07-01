@@ -6,14 +6,14 @@ import java.util.ArrayList;
 public class SubmissionsForTeacherCheck implements Serializable {
 	
 	private ArrayList<Submission> submissionList;
-	public void setAssignments(ArrayList<Submission> assignment)
-	{
-		this.submissionList = assignment;
-	}
-	
-	public ArrayList<Submission> getAssignments()
-	{
+
+	public ArrayList<Submission> getSubmissionList() {
 		return submissionList;
 	}
+
+	public void setSubmissionList(ArrayList<Submission> submissionList) {
+		this.submissionList = submissionList;
+	}
+	
 	
 }

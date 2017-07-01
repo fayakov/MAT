@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -9,7 +10,12 @@ import communication.Dispatcher;
 import communication.GetAssignmentsOfStudentResponse;
 import communication.GetAssignmentsOfTeacherRequest;
 import communication.GetAssignmentsOfTeacherResponse;
+import communication.MATClientController;
 import communication.Message;
+import entities.Assignment;
+import entities.StudentCourse;
+import entities.Submission;
+import entities.SubmissionsForTeacherCheck;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,6 +26,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import utils.Handler;
@@ -27,13 +35,8 @@ import utils.Handler;
 
 public class SubmissionStudentController implements Initializable, Handler
 {
-	public static String option;
 	ObservableList<String> list ;
 	
-	public static  String getOption()
-	{
-		return option;
-	}
 	
 	public SubmissionStudentController()
 	{
@@ -50,23 +53,25 @@ public class SubmissionStudentController implements Initializable, Handler
 	    private URL location;
 
 	    @FXML
+	    private TableColumn<SubmissionsForTeacherCheck, Integer> colStuID;
+
+	    @FXML
 	    private Label labelListOfStuSub;
 
 	    @FXML
-	    private Button buttonNext;
+	    private TableColumn<SubmissionsForTeacherCheck, Integer> colAssNum;
 
 	    @FXML
-	    private ComboBox<String> comboChooseSub;
+	    private TableColumn<SubmissionsForTeacherCheck, Integer> colSubNum;
 
+	    @FXML
+	    private TableColumn<SubmissionsForTeacherCheck, Date> colSubDate;
+
+	    
 	    
 	    @FXML
 	    void nextStudentSubmission(ActionEvent event) throws Exception 
 	    {
-	    	option = comboChooseSub.getValue().toString();
-	    	//int assNum = Integer.parseInt(option); //save the option to next window
-	    	//CheckAssignmentController check= new CheckAssignmentController();
-	    	//check.func(option);
-	    	
 	    	Pane root = FXMLLoader.load(getClass().getResource("/gui/CheckAssinment.fxml"));
 			Scene scene = new Scene(root);
 			Stage primaryStage = new Stage();
@@ -75,20 +80,26 @@ public class SubmissionStudentController implements Initializable, Handler
 	    }
 	    
 	    
+	    
+	    
     @FXML
     void initialize() 
     {
- 
     	
-    	//GetAssignmentsOfTeacherRequest getAssignmentsOfTeachertReq = new GetAssignmentsOfTeacherRequest(userIdStr);//need id
-    	//MATClientController.getInstance().sendRequestToServer(getAssignmentsOfTeachertReq);
+    	colAssNum.setCellValueFactory(new PropertyValueFactory<SubmissionsForTeacherCheck, Integer>("assignmentNumber"));
+    	colSubNum.setCellValueFactory(new PropertyValueFactory<SubmissionsForTeacherCheck, Integer>("submissionNumber"));
+    	colStuID.setCellValueFactory(new PropertyValueFactory<SubmissionsForTeacherCheck, Integer>("studentId"));
+    	colSubDate.setCellValueFactory(new PropertyValueFactory<SubmissionsForTeacherCheck, Date>("date"));
+    	
+    	GetAssignmentsOfTeacherRequest getAssignmentsOfTeachertReq = new GetAssignmentsOfTeacherRequest(userIdStr);//need id
+    	MATClientController.getInstance().sendRequestToServer(getAssignmentsOfTeachertReq);
         
     }
 
 	public void handle(Message msg, Object obj) 
 	{
 		// TODO Auto-generated method stub
-ArrayList<String> assignments = new ArrayList<String>();
+     ArrayList<String> assignments = new ArrayList<String>();
 		
 		if (msg instanceof GetAssignmentsOfTeacherResponse) 
 		{
@@ -96,17 +107,11 @@ ArrayList<String> assignments = new ArrayList<String>();
 			
 			if (res.isRequestSecceded()) 
 			{
-				int len=res.getListOfStudenstSubmissions().size();
-				for(int i = 0 ; i < len ; i++)
+				ArrayList<Submission> temp=res.getSubsTeaCheck().getSubmissionList();
+				for(Submission t: temp )
 				{
-				Integer intAss =(Integer) res.getListOfStudenstSubmissions().get(i);
-				String strSubID = Integer.toString(intAss);
-				assignments.add(strSubID);
+					data =FXCollections.observableArrayList(t);
 				}
-				
-				list = FXCollections.observableArrayList(assignments);
-				comboChooseSub.setItems(list);
-				
 				
 				
 			} else {
@@ -116,7 +121,9 @@ ArrayList<String> assignments = new ArrayList<String>();
 		}
 		
 	}
-
+	
+	
+	
 	public void initialize(URL arg0, ResourceBundle arg1) 
 	{
 		// TODO Auto-generated method stub

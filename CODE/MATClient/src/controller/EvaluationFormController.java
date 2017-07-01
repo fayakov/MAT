@@ -1,10 +1,11 @@
 package controller;
 
 import java.net.URL;
+import java.sql.Date;
 import java.util.ResourceBundle;
-
 import communication.AddCheckAssignmentRequest;
 import communication.AddEvaluationFormRequest;
+import communication.AddEvaluationFormResponse;
 import communication.Dispatcher;
 import communication.GetAssignmentDataRequest;
 import communication.MATClientController;
@@ -65,25 +66,41 @@ public class EvaluationFormController implements Initializable, Handler
 	    	    	Prompt.alert(3,"please enter numerical value");
 	    	    	return;
 	    	    	}  		
-	        	Prompt.alert(1,"Checked file and evaluation form were added successfully ");
 	    	}
 	    	
-	    	
-	    	//AddEvaluationFormRequest addReq = new AddEvaluationFormRequest(grade, textFieldGrade.getText());
-	    	//MATClientController.getInstance().sendRequestToServer(addReq);
+	    	AddEvaluationFormRequest addReq = new AddEvaluationFormRequest(grade, textFieldGrade.getText()......);
+	    	MATClientController.getInstance().sendRequestToServer(addReq);
 	    }
 
+	  
+
+
+	   /* private int grade;
+		private String comment;
+		private Date date;
+		private int submissionNumber; //-- output
+		private String fileName;
+		private byte[] file;
+		private int teacherId;*/
 	    
-	    @FXML
-	    void initialize() 
-	    {
-	    	
-	    }
-
-
+	    
 		public void handle(Message msg, Object obj) 
 		{
 			// TODO Auto-generated method stub
+			if (msg instanceof AddEvaluationFormResponse) 
+			{
+				AddEvaluationFormResponse res = (AddEvaluationFormResponse)msg;
+				
+				if (res.isSucceed()) 
+				{
+				
+					Prompt.alert(1,"Checked file and evaluation form were added successfully ");
+					
+				} else {
+					System.out.println("Server response:" + res.getErrText());
+				}
+				
+			}
 			
 		}
 
@@ -93,6 +110,13 @@ public class EvaluationFormController implements Initializable, Handler
 			// TODO Auto-generated method stub
 			
 		}
+		
+		  
+	    @FXML
+	    void initialize() 
+	    {
+	    	
+	    }
 }
 
 
