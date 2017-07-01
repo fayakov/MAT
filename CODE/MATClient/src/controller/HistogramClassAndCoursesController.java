@@ -22,7 +22,7 @@ import utils.Handler;
 public class HistogramClassAndCoursesController implements Initializable, Handler {
 	
 	public HistogramClassAndCoursesController(){
-		//Dispatcher.addHandler(GetClassTeachersStatsResponse.class.getCanonicalName(), this);
+		//Dispatcher.addHandler(GetClassCoursesStatsResponse.class.getCanonicalName(), this);
 	}
 	
 	

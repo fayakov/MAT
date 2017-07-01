@@ -18,6 +18,8 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Data;
+import javafx.scene.chart.XYChart.Series;
 
 public class HistogramTeacherAndClassesController implements  Initializable, Handler{
 	
@@ -47,8 +49,8 @@ public class HistogramTeacherAndClassesController implements  Initializable, Han
 		this.arrToDisplay = arrToDisplay;
 	}
 	
-	static int count = arrToDisplay.size();
-	private int i = 0;
+	//static int count = arrToDisplay.size();
+	//private int i = 0;
 	
 	
 	
@@ -59,21 +61,41 @@ public class HistogramTeacherAndClassesController implements  Initializable, Han
 		
 		
 		
-		XYChart<x,y>.Series set1 = new XYChart.Series<>();
-		for(int i=0; i<count;i++){
-		set1.getData().add(new XYChart.Data)();
+		//XYChart<x,y>.Series set1 = new XYChart.Series<>();
+		//for(int i=0; i<count;i++){
+	//	set1.getData().add(new XYChart.Data)();
 		}
-		CourseChart.getData().addAll(set1);
 		
-	}
+	//CourseChart.getData().addAll(set1);
+		
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		
-		XYChart<x,y>.Series set1 = new XYChart.Series<>();
-		set1.getData().add(new XYChart.Data(arrToDisplay);
+		 
 		
+		ClassWithGrade c1 = new ClassWithGrade(7, "a1");
+		ClassWithGrade c2 = new ClassWithGrade(77, "a3");
+		ClassWithGrade c3 = new ClassWithGrade(26, "a4");
+		ClassWithGrade c4 = new ClassWithGrade(19, "a5");
+		
+		arrToDisplay.add(c1);
+		arrToDisplay.add(c2);
+		arrToDisplay.add(c3);
+		arrToDisplay.add(c4);
+		
+		Series<Object, Object> set1 = new XYChart.Series<>();
+		
+		set1.getData().add(new XYChart.Data(c1));
+		set1.getData().add(new XYChart.Data(c2));
+		set1.getData().add(new XYChart.Data(c3));
+		set1.getData().add(new XYChart.Data(c4));
+		//set1.getData().add(new XYChart.Data(arrToDisplay.get(58),arrToDisplay.getClass()));
+	//	set1.getData().add(new XYChart.Data(arrToDisplay.get(28),arrToDisplay.getClass()));
+		
+		
+		ClassChart.getData().addAll(set1);
 		
 		
 		
