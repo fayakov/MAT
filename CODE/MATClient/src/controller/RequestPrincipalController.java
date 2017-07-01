@@ -52,38 +52,59 @@ public class RequestPrincipalController implements Handler {
   	}
     
     
-    private void responseChangeTeacher(ArrayList<Request> requests) {
-    	
-    	Pane root;
-		try {
-			root = FXMLLoader.load(getClass().getResource("/gui/RequestChangeTeacher.fxml"));
-			Scene scene = new Scene(root);
-			Stage primaryStage = new Stage();
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+    private void responseChangeTeacher(final ArrayList<Request> requests) {
+		Platform.runLater(new Runnable() {
+			ArrayList<Request> requestsToShow = requests;
+			public void run() {
+			// TODO Auto-generated method stub
+				try {
+					FXMLLoader loader = new FXMLLoader();
+					Pane root = loader.load(getClass().getResource("/gui/ResponseChangeTeacher.fxml"));
+				
+					ResponseAddStudentToCourseController cont = loader.getController();
+				
+					cont.setAllRequests(requestsToShow);
+				
+					Scene scene = new Scene(root);
+					Stage primaryStage = new Stage();
+					primaryStage.setScene(scene);
+					primaryStage.show();
+				
+				} catch (IOException e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
 		}
-		
-    }
+	} );
+}
+   
 
-	private void responseRemoveStudentFromCourse(ArrayList<Request> requests) {
+	private void responseRemoveStudentFromCourse(final ArrayList<Request> requests) {
     	
-    	Pane root;
-		try {
-			root = FXMLLoader.load(getClass().getResource("/gui/ResponseRemoveStudentFromCourse.fxml"));
-			Scene scene = new Scene(root);
-			Stage primaryStage = new Stage();
-			primaryStage.setScene(scene);
-			primaryStage.show();		
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		Platform.runLater(new Runnable() {
+			ArrayList<Request> requestsToShow = requests;
+			public void run() {
+			// TODO Auto-generated method stub
+				try {
+					FXMLLoader loader = new FXMLLoader();
+					Pane root = loader.load(getClass().getResource("/gui/ResponseRemoveStudentFromCourse.fxml"));
+				
+					ResponseAddStudentToCourseController cont = loader.getController();
+				
+					cont.setAllRequests(requestsToShow);
+				
+					Scene scene = new Scene(root);
+					Stage primaryStage = new Stage();
+					primaryStage.setScene(scene);
+					primaryStage.show();
+				
+				} catch (IOException e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
 		}
-		
-    }
-    
+	} );
+}
     
     private void responseAddStudentToCourse(final ArrayList<Request> requests) {
 		
