@@ -18,29 +18,29 @@ public class PrincipalDecisionRequestHandler implements Handler {
 		ConnectionToClient client = (ConnectionToClient) obj;
 		PrincipalDecisionRequest principalDecisionMsg = (PrincipalDecisionRequest)msg;
 					
-		//CDALError error = new CDALError();
-		Request request = CDal.getRequest(principalDecisionMsg.getRequest().getRequestNumber());
+		Request request = principalDecisionMsg.getRequest();
 		boolean requestSecceded = false;		
 		
-		if (request.getRequestType() == ERequestType.addStudent)
-		{
-			requestSecceded = CDal.addStudentToCourseWithClass(principalDecisionMsg.getRequest().getCourseId(), principalDecisionMsg.getRequest().getClassNumber(), principalDecisionMsg.getRequest().getUserId());
+		if (!principalDecisionMsg.isToApprove()) {
+			requestSecceded = CDal.confirmRequest(request.getRequestNumber(), false);
 		}
-		else if (request.getRequestType() == ERequestType.changeTeacher)
-		{
-			requestSecceded = CDal.changeTeacherToCourseInClass(principalDecisionMsg.getRequest().getClassNumber(), principalDecisionMsg.getRequest().getCourseId(), principalDecisionMsg.getRequest().getUserId());
+		else {
+			if (request.getRequestType() == ERequestType.addStudent) {
+				requestSecceded = CDal.addStudentToCourseWithClass(request.getCourseId(), request.getClassNumber(), request.getUserId());
+			}
+			else if (request.getRequestType() == ERequestType.changeTeacher) {
+				requestSecceded = CDal.changeTeacherToCourseInClass(request.getClassNumber(), request.getCourseId(), request.getUserId());
+			}
+			else if (request.getRequestType() == ERequestType.removeStudent) {
+				requestSecceded = CDal.removeStudentFromCourseWithClass(request.getCourseId(), request.getClassNumber(), request.getUserId());
+			}		
+			
+			if (requestSecceded) {
+				requestSecceded = CDal.confirmRequest(request.getRequestNumber(), true);
+			}
 		}
-		else if (request.getRequestType() == ERequestType.removeStudent)
-		{
-			requestSecceded = CDal.removeStudentFromCourseWithClass(principalDecisionMsg.getRequest().getCourseId(), principalDecisionMsg.getRequest().getClassNumber(), principalDecisionMsg.getRequest().getUserId());
-		}		
 		
-		if (requestSecceded)
-		{
-			requestSecceded = CDal.confirmRequest(principalDecisionMsg.getRequest().getRequestNumber(), true);
-		}
-		
-		PrincipalDecisionResponse res = new PrincipalDecisionResponse(requestSecceded, principalDecisionMsg.getRequest().getRequestNumber(), "");//error.getString());
+		PrincipalDecisionResponse res = new PrincipalDecisionResponse(requestSecceded, request.getRequestNumber(), "");
 		try {
 			client.sendToClient(res);
 		} catch (IOException e) {

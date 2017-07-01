@@ -3,6 +3,11 @@ package controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import communication.GetPendingRequestsResponse;
+import communication.MATClientController;
+import communication.Message;
+import communication.PrincipalDecisionRequest;
 import entities.Request;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,11 +16,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import utils.Handler;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
 
-public class ResponseAddStudentToCourseController implements Initializable//, Handler
+public class ResponseAddStudentToCourseController implements Initializable, Handler
 {
 	
 	private ArrayList<Request> allRequests;
@@ -59,9 +65,6 @@ public class ResponseAddStudentToCourseController implements Initializable//, Ha
     @FXML
     private TableView<Request> table;
 
-
-    
-    
     @FXML
     private Button btnDecline;
 
@@ -73,22 +76,25 @@ public class ResponseAddStudentToCourseController implements Initializable//, Ha
     @FXML
     void confirm(ActionEvent event) {
     	
-    	Prompt.alert(1,"This request is confirmed");
-        table.requestFocus();
-        table.getSelectionModel().select(0);
-        table.getFocusModel().focus(0);
-
+    	Request req = table.getSelectionModel().getSelectedItem();
+    	PrincipalDecisionRequest msg = new PrincipalDecisionRequest(req, true);
+    	
+    	MATClientController.getInstance().sendRequestToServer(msg);
+    	
+    	data.remove(req);
     }
 
     @FXML
     void decline(ActionEvent event) {
     	
-    	Prompt.alert(1,"This request is declined");
-        table.requestFocus();
-        table.getSelectionModel().select(0);
-        table.getFocusModel().focus(0);
-
+    	Request req = table.getSelectionModel().getSelectedItem();
+    	PrincipalDecisionRequest msg = new PrincipalDecisionRequest(req, false);
+    	
+    	MATClientController.getInstance().sendRequestToServer(msg);
+    	    	
+    	data.remove(req);
     }
+    
     @FXML 
     ObservableList<Request> data= FXCollections.observableArrayList(
     		new Request(1,22,333,5555,true,true),
@@ -116,23 +122,20 @@ public class ResponseAddStudentToCourseController implements Initializable//, Ha
 	}
 
 
-/*	@Override
+	@Override
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
 		
 		if (msg instanceof GetPendingRequestsResponse) {
-			GetPendingRequestsResponse res = (GetPendingRequestsResponse)msg;
-	
-			ArrayList<Request> requests = res.getPendingRequests();
-			for( Request req : requests)
-			{
-				data =FXCollections.observableArrayList(req);
-			
-			}	
+//			GetPendingRequestsResponse res = (GetPendingRequestsResponse)msg;
+//	
+//			ArrayList<Request> requests = res.getPendingRequests();
+//			for( Request req : requests)
+//			{
+//				data =FXCollections.observableArrayList(req);
+//			
+//			}	
 		
 		}
-	}
-	*/	
-	
-
+	}	
 }
