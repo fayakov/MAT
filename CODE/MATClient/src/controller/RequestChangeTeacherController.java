@@ -55,14 +55,11 @@ public class RequestChangeTeacherController implements Initializable, Handler
     	
     	else { // add request to db
     		try {
-    			request.setUserId(Integer.parseInt(studentIdTextFiled.getText()));
-    			request.setClassNumber(Integer.parseInt(classNumberTextFiled.getText()));
-    			request.setCourseId(Integer.parseInt(courseIdTextFiled.getText()));
-    			request.setHandeled(false);
-    			request.setConfirmed(false);
-    			request.setRequestType(ERequestType.changeTeacher);
+    			int teacherId = Integer.parseInt(studentIdTextFiled.getText());
+    			int classId = Integer.parseInt(classNumberTextFiled.getText());
+    			int coursId = Integer.parseInt(courseIdTextFiled.getText());
     	    	
-    	    	ChangeTeacherRequest changeTeachreq= new ChangeTeacherRequest(request);
+    	    	ChangeTeacherRequest changeTeachreq= new ChangeTeacherRequest(teacherId, classId, coursId);
     			MATClientController.getInstance().sendRequestToServer(changeTeachreq);
     	    	
     	    	
@@ -70,7 +67,7 @@ public class RequestChangeTeacherController implements Initializable, Handler
     	    	Prompt.alert(3,"please enter numerical value");
     	    	return;
     	    	}  		
-        	Prompt.alert(1,"The request added successfully ");
+        	//Prompt.alert(1,"The request added successfully ");
     	}
 
     }
@@ -88,9 +85,9 @@ public class RequestChangeTeacherController implements Initializable, Handler
 		if (msg instanceof ChangeTeacherResponse) {
 			ChangeTeacherResponse res = (ChangeTeacherResponse)msg;
 			if (res.isRequestSaved()) {
-				System.out.println("Server response: Success");
+				System.out.println("teacher has been added to class");
 			} else {
-				System.out.println("Server response:" + res.getErrText());
+				System.out.println("cannot add teacher, check details");
 			}
 		}
 		

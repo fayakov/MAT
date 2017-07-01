@@ -6,21 +6,38 @@ import entities.Request;
 public class ChangeTeacherRequest extends Message {
 	private static final long serialVersionUID = 1L;
 	
-	private Request request;
+	private int teacherId, classId, courseId;
 
-	public ChangeTeacherRequest(Request request) {
+	public ChangeTeacherRequest(int teacherId, int classId, int courseId) {
 		super();
-		this.request = request;
+		this.teacherId = teacherId;
+		this.classId = classId;
+		this.courseId = courseId;
 	}
 
-	public Request getRequest() {
-		return request;
+	public int getTeacherId() {
+		return teacherId;
 	}
 
-	public void setRequest(Request request) {
-		this.request = request;
+	public void setTeacherId(int teacherId) {
+		this.teacherId = teacherId;
 	}
-	
-	
+
+	public int getClassId() {
+		return classId;
+	}
+
+	public void setClassId(int classId) {
+		this.classId = classId;
+	}
+
+	public int getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
+	}
+
 	
 }
