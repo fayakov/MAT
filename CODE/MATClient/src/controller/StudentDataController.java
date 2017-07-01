@@ -5,7 +5,7 @@ import javafx.scene.control.TableView;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import communication.Dispatcher;
-import communication.GetStudentDataRequest;
+import communication.GetStudentDataByUserIDRequest;
 import communication.GetStudentDataResponse;
 import communication.LoginRequestMsg;
 import communication.LoginResponseMsg;

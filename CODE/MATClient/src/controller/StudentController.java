@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import communication.Dispatcher;
 import communication.GetPendingRequestsRequest;
 import communication.GetPendingRequestsResponse;
-import communication.GetStudentDataRequest;
+import communication.GetStudentDataByUserIDRequest;
 import communication.GetStudentDataResponse;
 import communication.MATClientController;
 import communication.Message;
@@ -46,7 +46,7 @@ public class StudentController implements Handler
 
 	public void studentData1() throws Exception 
     {
-    	GetStudentDataRequest getStudentDataRequest = new GetStudentDataRequest(userID);
+    	GetStudentDataByUserIDRequest getStudentDataRequest = new GetStudentDataByUserIDRequest(userID);
 		MATClientController.getInstance().sendRequestToServer(getStudentDataRequest);   
     }
     

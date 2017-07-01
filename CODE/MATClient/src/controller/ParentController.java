@@ -5,7 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import communication.Dispatcher;
-import communication.GetStudentDataRequest;
+import communication.GetStudentDataByStudentIDRequest;
+import communication.GetStudentDataByUserIDRequest;
 import communication.GetStudentDataResponse;
 import communication.MATClientController;
 import communication.Message;
@@ -60,7 +61,7 @@ public class ParentController implements Initializable, Handler  {
 				try {
 				    sid = Integer.parseInt(StudentID.getText());
 				    
-			 GetStudentDataRequest StudentData = new GetStudentDataRequest(sid);
+			GetStudentDataByStudentIDRequest StudentData = new GetStudentDataByStudentIDRequest(sid);
 			 MATClientController.getInstance().sendRequestToServer(StudentData);
 	    			
 			    	
