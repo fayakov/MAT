@@ -66,6 +66,7 @@ public class DALTestMain {
 		//checkAddSubmission(dl);
 		//getSubmissionToCheck(dl);
 		checkAddSubmissionResponse(dl);
+		//getAssignments(dl);
 	}
 	public static void checkLogin(CDal dl )
 	{
@@ -406,7 +407,7 @@ public class DALTestMain {
 	
 	public static void checkCreateAssignment(CDal dl)
 	{
-		/*
+		
 		Date dueDate = new Date(2017,10,9);
 		String filePath = "C:\\Users\\fayakov\\Desktop\\tmp2.pdf";
 		try{
@@ -420,11 +421,11 @@ public class DALTestMain {
 			}
 			bos.flush();
 			byte[] result = bos.toByteArray();
-			System.out.println(dl.createAssignment(dueDate, result ,"tmp2.pdf"));
+			System.out.println(dl.createAssignment(dueDate, result, "tmp2.pdf", 2, 1));
 		}
 		catch (IOException ex) {
             ex.printStackTrace();
-        }*/
+        }
 
 	}
 	
@@ -475,7 +476,7 @@ public class DALTestMain {
 			}
 			bos.flush();
 			byte[] result = bos.toByteArray();
-			System.out.println(dl.createSubmissionToStudentWithCourse(1 , 1,date  ,result, "tmp.docx", 9 ) == true);
+			System.out.println(dl.createSubmissionToStudentWithCourse(1 , 1,date  ,result, "tmp.docx",22 ) == true);
 		}
 		catch (IOException ex) {
             ex.printStackTrace();
@@ -485,7 +486,7 @@ public class DALTestMain {
 	
 	public static void checkAddSubmissionResponse(CDal dl)
 	{
-		/*
+		
 		Date date = new Date(2017,10,8);
 		String filePath = "C:\\Users\\fayakov\\Desktop\\tmp.docx";
 		try{
@@ -499,11 +500,11 @@ public class DALTestMain {
 			}
 			bos.flush();
 			byte[] result = bos.toByteArray();
-			System.out.println(dl.createSubmissionResponse(result, "tmp.docx", 11, 100, date ) == true);
+			System.out.println(dl.createSubmissionResponse(result, "tmp.docx", 14, 100, "very good" , date ) == true);
 		}
 		catch (IOException ex) {
             ex.printStackTrace();
-        }*/
+        }
 	}
 	
 	
@@ -515,6 +516,16 @@ public class DALTestMain {
 			System.out.println("submission :" +i);
 		}
 	}
+	
+	public static void getAssignments(CDal dl)
+	{
+		StudentCourseAssignment arr = dl.getStudentAssignments(1);
+		for(Assignment assignment : arr.getAssignments())
+		{
+			System.out.println("submission :" +assignment.getAssignmentNumber());
+		}
+	}
+	
 	
 	
 }
