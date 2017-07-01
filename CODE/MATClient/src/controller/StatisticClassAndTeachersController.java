@@ -91,7 +91,7 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 					try {
 						root = loader.load(getClass().getResource("/gui/HistogramClassAndTeachers.fxml").openStream());
 						Scene scene = new Scene(root);			
-						scene.getStylesheets().add(getClass().getResource("/gui/HistogramClassAndTeachers.css").toExternalForm());
+						scene.getStylesheets().add(getClass().getResource("/gui/HistogramClassAndTeachers.fxml").toExternalForm());
 						
 						primaryStage.setScene(scene);		
 						primaryStage.show();

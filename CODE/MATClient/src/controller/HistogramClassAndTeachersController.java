@@ -5,7 +5,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import communication.Dispatcher;
 import communication.GetClassTeachersStatsResponse;
+import communication.GetStudentDataResponse;
 import communication.LoginResponseMsg;
 import communication.Message;
 import entities.TeacherWithGrade;
@@ -24,6 +26,10 @@ import javafx.scene.chart.XYChart;
 public class HistogramClassAndTeachersController implements  Initializable, Handler {
 
 
+	public HistogramClassAndTeachersController(){
+		Dispatcher.addHandler(GetClassTeachersStatsResponse.class.getCanonicalName(), this);
+	}
+	
 	private ArrayList<TeacherWithGrade> arrToDisplay;
 	static int count = arrToDisplay.size();
 	private int i = 0;
@@ -57,7 +63,7 @@ public class HistogramClassAndTeachersController implements  Initializable, Hand
 		for(int i=0; i<count;i++){
 		set1.getData().add(new XYChart.Data)();
 		}
-		CourseChart.getData().addAll(set1);
+		Coursehart.getData().addAll(set1);
 	}
 
 	@Override
