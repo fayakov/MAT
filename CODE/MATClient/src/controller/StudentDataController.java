@@ -35,6 +35,9 @@ import javafx.scene.control.TextField;
 //נשאר להעביר ת.ז ולהוסיף ציונים
 public class StudentDataController  implements Initializable, Handler
 {
+	
+	private Student student;
+	
 	ObservableList<String> list ;
 	final ObservableList<StudentCourse> data= FXCollections.observableArrayList(new StudentCourse(1,2,5));
 	
@@ -72,6 +75,9 @@ public class StudentDataController  implements Initializable, Handler
     @FXML
     private TableView<StudentCourse> tableViewID;
     
+    void initData(Student student) {
+    	this.student = student;
+    }
     
     @FXML
     void StudentInfo(ActionEvent event) 

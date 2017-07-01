@@ -1,7 +1,16 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import communication.GetPendingRequestsRequest;
+import communication.GetPendingRequestsResponse;
+import communication.GetStudentDataRequest;
+import communication.GetStudentDataResponse;
+import communication.MATClientController;
+import communication.Message;
+import entities.Student;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,10 +21,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import utils.Handler;
 
-public class StudentController 
+public class StudentController implements Handler
 {
 	ObservableList<String> list ;
+	private int studentNum = 123;
 
     @FXML
     private ComboBox<String> optionCombo;
@@ -23,11 +35,12 @@ public class StudentController
     
     public void studentData1() throws Exception 
     {
-    	Pane root = FXMLLoader.load(getClass().getResource("/gui/StudentData.fxml"));
-		Scene scene = new Scene(root);
-		Stage primaryStage = new Stage();
-		primaryStage.setScene(scene);
-		primaryStage.show();
+    	GetStudentDataRequest getStudentDataRequest = new GetStudentDataRequest(studentNum);
+		MATClientController.getInstance().sendRequestToServer(getStudentDataRequest);   
+    	
+    	
+    	
+
     }
     
 
@@ -75,4 +88,52 @@ public class StudentController
 		optionCombo.setItems(list);
 
     }
+
+
+
+	@Override
+	public void handle(Message msg, Object obj) {
+		if (msg instanceof GetStudentDataResponse) {
+			GetStudentDataResponse res = (GetStudentDataResponse)msg;
+			Student student = res.getStudentData();
+			
+			runStudentDataForm(student);
+			
+		}
+		
+	}
+
+
+
+	private void runStudentDataForm(final Student student) {
+		Platform.runLater(new Runnable() {
+			
+			public void run() {
+			FXMLLoader loader = new FXMLLoader(
+				    getClass().getResource(
+				      "/gui/StudentData.fxml"
+				    )
+				  );
+
+				  Stage stage = new Stage(StageStyle.DECORATED);
+				  try {
+					stage.setScene(
+					    new Scene(
+					      (Pane) loader.load()
+					    )
+					  );
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				  StudentDataController controller = 
+				    loader.<StudentDataController>getController();
+				  
+				  controller.initData(student);
+
+				  stage.show();
+			}
+		});
+	}
 }
