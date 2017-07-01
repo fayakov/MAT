@@ -1661,7 +1661,7 @@ public class CDal {
 		return courseList;
 	}
 	
-	public ArrayList<Integer> getTeacherClasses(int teahcerId, int semesterId)
+	public static ArrayList<Integer> getTeacherClassesBySemester(int teahcerId, int semesterId)
 	{
 		ArrayList<Integer> classList = new ArrayList<Integer>();
 		try 
@@ -1670,6 +1670,24 @@ public class CDal {
 			ResultSet resultSet  = stmt.executeQuery("SELECT class_classId "
 					+ "FROM class_has_course WHERE class_has_course.teacher_teacherId = " + teahcerId + " "
 					+ "AND class_has_course.semester_semesterId = " + semesterId +";");
+			while(resultSet.next()){
+
+				classList.add(resultSet.getInt(1));
+			}
+			
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		return classList;
+	}
+	
+	public static ArrayList<Integer> getTeacherClasses(int teahcerId)
+	{
+		ArrayList<Integer> classList = new ArrayList<Integer>();
+		try 
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet  = stmt.executeQuery("SELECT class_classId "
+					+ "FROM class_has_course WHERE class_has_course.teacher_teacherId = " + teahcerId +";");
 			while(resultSet.next()){
 
 				classList.add(resultSet.getInt(1));
@@ -1720,17 +1738,17 @@ public class CDal {
 	
 	
 	// get statistics from all class of teacher
-	public ArrayList<ClassWithGrade> getTeacherClassesStatistics(int teacherId, int semesterId){
+	public static ArrayList<ClassWithGrade> getTeacherClassesStatistics(int teacherId){
 		ArrayList<ClassWithGrade> myList = new ArrayList<ClassWithGrade>();
-		ArrayList<Integer> classes = getTeacherClasses(teacherId,semesterId);
+		ArrayList<Integer> classes = getTeacherClasses(teacherId);
 	
 		for (int classId : classes) {
-			ArrayList<Integer> courseList = getCourseOfClassWithTeacherGradeBySemester(classId, teacherId, semesterId);
+			ArrayList<Integer> courseList = getCourseOfClassWithTeacherGrade(classId, teacherId);
 			int sum = 0;
 			int cnt = 0;
 			for (int courseId : courseList) {
 				
-				ArrayList<Integer> studentList = getStudensInCourseBySemesterID(courseId,semesterId);
+				ArrayList<Integer> studentList = getStudensInCourse(courseId);
 				
 				for (int studentId : studentList) {
 					int curGrade = getFinishedGrade(studentId, courseId);
