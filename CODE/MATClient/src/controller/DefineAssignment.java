@@ -44,31 +44,22 @@ public class DefineAssignment implements Initializable, Handler
 	
 	 @FXML
 	    private Label labelDefineAss;
-
 	    @FXML
 	    private Label labelUpload;
-
 	    @FXML
 	    private Label labelInsertClass;
-
 	    @FXML
 	    private Label labelInsertCourse;
-
 	    @FXML
 	    private DatePicker datePickerDefineDate;
-
 	    @FXML
 	    private TextField textFieldInsertClass;
-
 	    @FXML
 	    private TextField textFieldInsertCouse;
-
 	    @FXML
 	    private Button buttonSendDefineAss;
-
 	    @FXML
 	    private Label labelDefineDate;
-	    
 	    @FXML
 	    private Button buttonUpload;
 
