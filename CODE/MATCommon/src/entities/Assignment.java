@@ -150,7 +150,7 @@ public class Assignment implements Serializable
 	 *
 	 * @return the file
 	 */
-	public  byte[]  getFile() {
+	public  byte[]  getFileData() {
 		return assingmentFile;
 	}
 	

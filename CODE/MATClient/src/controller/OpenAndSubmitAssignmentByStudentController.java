@@ -1,7 +1,10 @@
 package controller;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -60,8 +63,10 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
     	@FXML
 	    private Button buttonSendSub;
 
-	    public void initData(Assignment assignment) {
+		private Assignment assignment;
 
+	    public void initData(Assignment assignment) {
+	    	this.assignment = assignment;
 			textFieldAssNum.setText(Integer.toString(assignment.getAssignmentNumber()));
 	    }
 	    
@@ -75,6 +80,26 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
     	@FXML
 	    void pressDownload(ActionEvent event) throws Exception 
 	    {
+    		try {
+    			// Yinon: Save the file to Documents folder of current user.
+    			String fileDirectory = System.getProperty("user.home") + File.separator + "Documents" + File.separator;
+    			String outputFile = fileDirectory + assignment.getFileName();
+    			
+    			if (!new File(fileDirectory).exists()) {
+    				new File(fileDirectory).mkdirs();
+    			}
+    			
+	    		File dstFile = new File(outputFile);
+	    		FileOutputStream fileOutputStream = new FileOutputStream(dstFile);
+	    		fileOutputStream.write(assignment.getFileData());
+	    		fileOutputStream.flush();
+	    		fileOutputStream.close();
+    		} catch (IOException e) {
+    			e.printStackTrace();
+    		}
+    		
+    		
+    		/*
 	    	 String line;
 	         BufferedReader in;
 
@@ -89,7 +114,7 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 
 	         System.out.println(line);
 	    	
-	    	
+	    	*/
 	    }
 
 	    

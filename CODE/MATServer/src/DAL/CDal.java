@@ -1,6 +1,9 @@
 package DAL;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -2848,7 +2851,6 @@ public class CDal {
 	
 	public static StudentCourseAssignment getStudentAssignments(int studentId)
 	{
-		
 			ArrayList<Assignment> assignmentsArray = new ArrayList<Assignment> ();
 			ArrayList<Integer> assignmentsId = getStudentAssignmentsId(studentId);
 			for(int assignmentIdx : assignmentsId)
@@ -2859,19 +2861,26 @@ public class CDal {
 				while(resultSet.next())
 		 		{		
 					Assignment assignment = new Assignment();
-//					Blob blob = resultSet.getBlob("assignmentFile");
-//					int blobLength = (int) blob.length();  
-//					byte[] blobAsBytes = blob.getBytes(1, blobLength);
-//					assignment.setFile(blobAsBytes);
-//					blob.free();
+					
+					InputStream is = resultSet.getBinaryStream("assignmentFile");
+					ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+					int nRead;
+					byte[] data = new byte[16384];
+					while ((nRead = is.read(data, 0, data.length)) != -1) {
+					  buffer.write(data, 0, nRead);
+					}
+					buffer.flush();
+					assignment.setFile(buffer.toByteArray());					
+					
 					assignment.setTeacherId(resultSet.getInt("teacherId"));
 					assignment.setCourseName(getCourseName(resultSet.getInt("courseId")));
 					assignment.setDate(resultSet.getDate("date"));
-					assignment.setAssignmentNumber(resultSet.getInt("assignmentId"));	
+					assignment.setAssignmentNumber(resultSet.getInt("assignmentId"));
+					assignment.setFileName(resultSet.getString("fileName"));
 					assignmentsArray.add(assignment);
 				}
 			}
-			catch (SQLException e) {
+			catch (SQLException | IOException e) {
 				e.printStackTrace();	
 			}	
 			StudentCourseAssignment studentCoursAssignment = new StudentCourseAssignment(assignmentsArray);

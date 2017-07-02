@@ -437,7 +437,7 @@ public class DALTestMain {
 		String filePath = "C:\\Users\\fayakov\\Desktop\\tmp2ret.pdf";
 		try{
 			Assignment assignment = dl.getAssignment(12);
-			byte[] retFile = assignment.getFile();
+			byte[] retFile = assignment.getFileData();
 		   
 		      File file = new File(filePath);
 		      if (file.createNewFile()){
