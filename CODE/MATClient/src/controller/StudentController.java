@@ -51,8 +51,6 @@ public class StudentController implements Handler
 		MATClientController.getInstance().sendRequestToServer(getStudentDataRequest);   
     }
     
-
-    
     public void assignment() throws Exception 
     {
     	
@@ -108,11 +106,6 @@ public class StudentController implements Handler
 			
 			runStudentDataForm(student);
 		}
-		
-		
-		
-		
-		
 	}
 
 	private void runStudentDataForm(final Student student) {

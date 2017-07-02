@@ -37,8 +37,6 @@ import javafx.scene.control.TextField;
 public class StudentDataController  implements Initializable
 {
 	
-	private Student student;
-	
 	ObservableList<String> list ;
 	final ObservableList<StudentCourse> data= FXCollections.observableArrayList(new StudentCourse(1,2,5));
 	
@@ -73,18 +71,9 @@ public class StudentDataController  implements Initializable
     
     void initData(Student student) 
     {
-    	this.student = student;
-    }
-    
-    @FXML
-    void StudentInfo(ActionEvent event) 
-    {
-    	GetStudentDataByStudentIDRequest GetStudentDataReq = new GetStudentDataByStudentIDRequest(student.getId());
-		MATClientController.getInstance().sendRequestToServer(GetStudentDataReq);
-
     	if (student != null) {
     		String strStudentID = Integer.toString(student.getId());
-    		String strClass = Integer.toString(student.getId());
+    		String strClass = Integer.toString(student.getClassID());
 	    	
     		textStudentID.setText(strStudentID);
 	    	textFName.setText(student.getFirstName());
@@ -118,18 +107,4 @@ public class StudentDataController  implements Initializable
 		//tableViewID.setItems(data);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
 
