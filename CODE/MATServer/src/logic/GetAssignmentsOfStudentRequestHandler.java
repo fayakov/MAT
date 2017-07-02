@@ -16,17 +16,14 @@ public class GetAssignmentsOfStudentRequestHandler implements Handler {
 		ConnectionToClient client = (ConnectionToClient) obj;
 		GetAssignmentsOfStudentRequest getAssignmentsOfStudentMsg = (GetAssignmentsOfStudentRequest)msg;
 		
-		/*
-		// TODO Check in database
-		CDALError error = new CDALError();
-		boolean connectionSecceded = false;//CDal.connectUser(getAssignmentsOfStudentMsg.isToConnect(), getAssignmentsOfStudentMsg.getUserId(), getAssignmentsOfStudentMsg.getPassword(), error);		
-		
-		GetAssignmentsOfStudentResponse res = new GetAssignmentsOfStudentResponse(connectionSecceded, error.getString());
+		GetAssignmentsOfStudentResponse res = new GetAssignmentsOfStudentResponse(
+				CDal.getStudentAssignments(CDal.getStudentId(getAssignmentsOfStudentMsg.getUserID()))
+		);
 		try {
 			client.sendToClient(res);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 	}
 }

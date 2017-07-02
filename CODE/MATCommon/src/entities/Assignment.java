@@ -1,11 +1,13 @@
 package entities;
 
 import java.io.InputStream;
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Assignment 
+public class Assignment implements Serializable
 {
-
+	private static final long serialVersionUID = 1L;
+	
 	private Date date;
 	private int assignmentNumber;
 	private String fileName;

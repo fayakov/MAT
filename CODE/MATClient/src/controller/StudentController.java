@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import communication.Dispatcher;
+import communication.GetAssignmentsOfStudentRequest;
 import communication.GetAssignmentsOfStudentResponse;
 import communication.GetPendingRequestsRequest;
 import communication.GetPendingRequestsResponse;
@@ -10,6 +11,7 @@ import communication.GetStudentDataByUserIDRequest;
 import communication.GetStudentDataResponse;
 import communication.MATClientController;
 import communication.Message;
+import entities.Assignment;
 import entities.Student;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -38,7 +40,7 @@ public class StudentController implements Handler
     {
 		super();
 		Dispatcher.addHandler(GetStudentDataResponse.class.getCanonicalName(), this);
-		//Dispatcher.addHandler(GetAssignmentsOfStudentResponse.class.getCanonicalName(), this);
+		Dispatcher.addHandler(GetAssignmentsOfStudentResponse.class.getCanonicalName(), this);
 	}
     
     public void initData(int userId) {
@@ -53,12 +55,8 @@ public class StudentController implements Handler
     
     public void assignment() throws Exception 
     {
-    	
-    	Pane root = FXMLLoader.load(getClass().getResource("/gui/AssignmentsStudent.fxml"));
-		Scene scene = new Scene(root);
-		Stage primaryStage = new Stage();
-		primaryStage.setScene(scene);
-		primaryStage.show();
+    	GetAssignmentsOfStudentRequest getAssignmentsOfStudentRequest = new GetAssignmentsOfStudentRequest(userID);
+		MATClientController.getInstance().sendRequestToServer(getAssignmentsOfStudentRequest);
     }
     
     
@@ -105,6 +103,13 @@ public class StudentController implements Handler
 			Student student = res.getStudentData();
 			
 			runStudentDataForm(student);
+		} else if (msg instanceof GetAssignmentsOfStudentResponse) {
+			GetAssignmentsOfStudentResponse res = (GetAssignmentsOfStudentResponse)msg;
+			if (res.getStuCourseAss() != null) {
+				ArrayList<Assignment> assignments = res.getStuCourseAss().getAssignments();
+				
+				runAssignmentsForm(assignments);
+			}
 		}
 	}
 
@@ -134,6 +139,38 @@ public class StudentController implements Handler
 				    loader.<StudentDataController>getController();
 				  
 				  controller.initData(student);
+
+				  stage.show();
+			}
+		});
+	}
+	
+	private void runAssignmentsForm(final ArrayList<Assignment> assignments) {
+		Platform.runLater(new Runnable() {
+			
+			public void run() {
+			FXMLLoader loader = new FXMLLoader(
+				    getClass().getResource(
+				      "/gui/AssignmentStudentController.fxml"
+				    )
+				  );
+
+				  Stage stage = new Stage(StageStyle.DECORATED);
+				  try {
+					stage.setScene(
+					    new Scene(
+					      (Pane) loader.load()
+					    )
+					  );
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				  AssignmentStudentController controller = 
+				    loader.<AssignmentStudentController>getController();
+				  
+				  controller.initData(assignments);
 
 				  stage.show();
 			}

@@ -14,6 +14,10 @@ public class GetAssignmentsOfStudentResponse extends Message
 	private String errText;
 	private StudentCourseAssignment stuCourseAss;
 	
+	public GetAssignmentsOfStudentResponse(StudentCourseAssignment stuCourseAss) {
+		super();
+		this.stuCourseAss = stuCourseAss;
+	}
 	
 	public boolean isRequestSecceded() {
 		return requestSecceded;

@@ -61,14 +61,14 @@ public class DALTestMain {
 		//checkCreateReq(dl);
 		//checkGetRequests(dl);
 		//checkConfirmRequest(dl);
-		//checkCreateAssignment(dl);
+		checkCreateAssignment(dl);
 		//checkGetAssignment(dl);
 		//checkAddAssignmentToClassWithCourse(dl);
 		//checkAddSubmission(dl);
 		//getSubmissionToCheck(dl);
 		//checkAddSubmissionResponse(dl);
 		//getAssignments(dl);
-		checkGetCourseData(dl);
+		//checkGetCourseData(dl);
 	}
 	public static void checkLogin(CDal dl )
 	{
@@ -411,7 +411,7 @@ public class DALTestMain {
 	{
 		
 		Date dueDate = new Date(2017,10,9);
-		String filePath = "C:\\Users\\fayakov\\Desktop\\tmp2.pdf";
+		String filePath = "C:\\sagi.txt";
 		try{
 			File file = new File(filePath);
 			InputStream inputStream = new FileInputStream(file);
@@ -423,7 +423,7 @@ public class DALTestMain {
 			}
 			bos.flush();
 			byte[] result = bos.toByteArray();
-			System.out.println(dl.createAssignment(dueDate, result, "tmp2.pdf", 2, 1));
+			System.out.println(dl.createAssignment(dueDate, result, "sagi.txt", 2, 1));
 		}
 		catch (IOException ex) {
             ex.printStackTrace();

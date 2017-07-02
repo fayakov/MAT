@@ -2859,11 +2859,11 @@ public class CDal {
 				while(resultSet.next())
 		 		{		
 					Assignment assignment = new Assignment();
-					Blob blob = resultSet.getBlob("assignmentFile");
-					int blobLength = (int) blob.length();  
-					byte[] blobAsBytes = blob.getBytes(1, blobLength);
-					assignment.setFile(blobAsBytes);
-					blob.free();
+//					Blob blob = resultSet.getBlob("assignmentFile");
+//					int blobLength = (int) blob.length();  
+//					byte[] blobAsBytes = blob.getBytes(1, blobLength);
+//					assignment.setFile(blobAsBytes);
+//					blob.free();
 					assignment.setTeacherId(resultSet.getInt("teacherId"));
 					assignment.setCourseName(getCourseName(resultSet.getInt("courseId")));
 					assignment.setDate(resultSet.getDate("date"));

@@ -4,22 +4,22 @@ public class GetAssignmentsOfStudentRequest extends Message
 {
 	private static final long serialVersionUID = 1L;
 	
-	private int studentID;
+	private int userID;
 	
 	
-	public GetAssignmentsOfStudentRequest(int assignmentNumber) 
+	public GetAssignmentsOfStudentRequest(int userID) 
 	{
 		super();
-		this.studentID = assignmentNumber;
+		this.userID = userID;
 	}
 
 	
-	public int getAssignmentNumber() {
-		return studentID;
+	public int getUserID() {
+		return userID;
 	}
 
-	public void setAssignmentNumber(int assignmentNumber) {
-		this.studentID = assignmentNumber;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
 

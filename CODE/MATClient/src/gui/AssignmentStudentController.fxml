@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="705.0" prefWidth="869.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AssignmentStudent">
+<AnchorPane prefHeight="705.0" prefWidth="869.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AssignmentStudentController">
    <children>
       <Label fx:id="labelMyAssignment" layoutX="274.0" layoutY="21.0" prefHeight="72.0" prefWidth="240.0" text="My Assignments:">
          <font>
