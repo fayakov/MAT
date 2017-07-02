@@ -3,6 +3,9 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.StringTokenizer;
+import java.util.function.UnaryOperator;
+
 import communication.Dispatcher;
 import communication.LoginRequestMsg;
 import communication.LoginResponseMsg;
@@ -21,8 +24,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.control.TextFormatter.Change;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import entities.EUserType;
@@ -53,13 +59,60 @@ public class loginController implements Initializable, Handler
     @FXML
     private PasswordField passwordTextField;
     
-
     @FXML
     private Text errorText;
 
     @FXML
-    void logInBtn(ActionEvent event) {
+    private Text serverIpLabel;
+    @FXML
+    private Text serverPortLabel;
+    @FXML
+    private TextField serverIpTextField;
+    @FXML
+    private TextField serverPortTextField;
+    
+    private static boolean checkIfValidIpv4(String text)  {
+    	   StringTokenizer st = new StringTokenizer(text,".");
+    	   for(int i = 0; i < 4; i++){ 
+    	     if(!st.hasMoreTokens()){
+    	       return false;
+    	     }
+    	     int num = 0;
+    	     try {
+    	    	 num = Integer.parseInt(st.nextToken());
+    	     }
+    	     catch (NumberFormatException e) {
+    	    	 	return false;
+    	     }
+    	     if(num < 0 || num > 255){
+    	       return false;
+    	    }
+    	   }
+    	   if(st.hasMoreTokens()){
+    	     return false;
+    	   }
+    	   return true;
+    }
+    
+    @FXML
+    void logInBtn(ActionEvent event) {    			
     	errorText.setText("");
+    	
+    	if (!checkIfValidIpv4(serverIpTextField.getText())) {
+    		errorText.setText("Enter valid IP address");
+    		return;
+    	}
+    	
+    	String serverPortStr = serverPortTextField.getText();
+    	int serverPort = 5555;
+    	try{
+			serverPort = Integer.parseInt(serverPortStr);			
+		}catch (NumberFormatException nfe) {
+    		errorText.setText("port must be number");
+    		return;
+    	}
+    	
+    	
 		String userIdStr = userIdTextField.getText();
 		String userPassword = passwordTextField.getText();
     	if(userPassword.equals("") || userIdStr.equals("") ){
@@ -69,12 +122,26 @@ public class loginController implements Initializable, Handler
     		try{
     			int userId = Integer.parseInt(userIdStr);
     			LoginRequestMsg loginReqMsg = new LoginRequestMsg(userId, userPassword,true);
-    			MATClientController.getInstance().sendRequestToServer(loginReqMsg);
+    			if (MATClientController.getInstance(serverIpTextField.getText(), serverPort) == null) {
+    				errorText.setText("Connection refused. Unable to connect to Server.");
+    				return;
+    			}
+    			else {    				
+    				MATClientController.getInstance(serverIpTextField.getText(), serverPort).sendRequestToServer(loginReqMsg);
+    			}
     			
     		}catch (NumberFormatException nfe) {
 	    		errorText.setText("id must be number");
 	    	}
     	}
+    }
+    
+    @FXML
+    void settingsBtn(ActionEvent event) {
+        serverIpLabel.setVisible(!serverIpLabel.isVisible());
+        serverPortLabel.setVisible(!serverPortLabel.isVisible());
+        serverIpTextField.setVisible(!serverIpTextField.isVisible());
+        serverPortTextField.setVisible(!serverPortTextField.isVisible());    	
     }
     
     public void getLogInResault(boolean isLoged, boolean errorPassword, boolean errorId){
@@ -97,14 +164,30 @@ public class loginController implements Initializable, Handler
     }
     
 	public void start(Stage primaryStage) throws Exception {	
-	    
+	  /*
+		final String regex = makePartialIPRegex();
+        final UnaryOperator<Change> ipAddressFilter = c -> {
+            String text = c.getControlNewText();
+            if  (text.matches(regex)) {
+                return c ;
+            } else {
+                return null ;
+            }
+        };
+        serverIpTextField.setTextFormatter(new TextFormatter<>(ipAddressFilter));
+        */
 	    Parent root = FXMLLoader.load(getClass().getResource("/gui/logIn.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-	}
+    }
 
-
+    private String makePartialIPRegex() {
+        String partialBlock = "(([01]?[0-9]{0,2})|(2[0-4][0-9])|(25[0-5]))" ;
+        String subsequentPartialBlock = "(\\."+partialBlock+")" ;
+        String ipAddress = partialBlock+"?"+subsequentPartialBlock+"{0,3}";
+        return "^"+ipAddress ;
+    }
 
 	@Override
 	public void handle(Message msg, Object obj) {

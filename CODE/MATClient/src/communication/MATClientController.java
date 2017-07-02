@@ -84,4 +84,16 @@ public class MATClientController extends AbstractClient
 	    	System.out.println("Could not send message to server.  Terminating client.");	      
 	    }
 	}
+
+	public static MATClientController getInstance(String ip, int port) {
+		if (instance == null)
+			try {
+				instance = new MATClientController(ip, port);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		return instance;
+	}
 }

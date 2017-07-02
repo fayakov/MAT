@@ -22,7 +22,14 @@
       <Text layoutX="167.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="password" />
       <TextField fx:id="userIdTextField" layoutX="258.0" layoutY="141.0" />
       <PasswordField fx:id="passwordTextField" layoutX="258.0" layoutY="172.0" />
-      <Button layoutX="281.0" layoutY="256.0" mnemonicParsing="false" onAction="#logInBtn" text="log in" />
-      <Text fx:id="errorText" layoutX="250.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="148.99999555945396" />
+      <Button layoutX="261.0" layoutY="206.0" mnemonicParsing="false" onAction="#logInBtn" text="log in" />
+      <Text fx:id="errorText" layoutX="200.0" layoutY="120" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="148.99999555945396"/>
+            
+      <Button layoutX="310.0" layoutY="206" mnemonicParsing="false" onAction="#settingsBtn" text="more settings" />
+      <Text fx:id="serverIpLabel" layoutX="167.0" layoutY="260" strokeType="OUTSIDE" strokeWidth="0.0" text="Server Ip:" visible="false"/>
+      <Text fx:id="serverPortLabel" layoutX="167.0" layoutY="290" strokeType="OUTSIDE" strokeWidth="0.0" text="Server Port:" visible="false"/>
+      <TextField fx:id="serverIpTextField" layoutX="258.0" layoutY="246" text="127.0.0.1" visible="false"/>
+      <TextField fx:id="serverPortTextField" layoutX="258.0" layoutY="276" text="5555" visible="false"/>
+
    </children>
 </AnchorPane>

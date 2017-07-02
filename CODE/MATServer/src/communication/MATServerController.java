@@ -95,15 +95,7 @@ public class MATServerController extends AbstractServer
 	private void logoutUser(ConnectionToClient client) {
 		CDALError error = new CDALError();
 		
-		boolean connectionSecceded = CDal.connectUser(false, getCurrentLoggedInUserId(), getCurrentLoggedInUserPassword(), error);		
-		
-		LoginResponseMsg res = new LoginResponseMsg(connectionSecceded, CDal.getUserType(getCurrentLoggedInUserId()), error.getString());
-		try {
-			client.sendToClient(res);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		boolean connectionSecceded = CDal.connectUser(false, getCurrentLoggedInUserId(), getCurrentLoggedInUserPassword(), error);
 		
 		super.clientDisconnected(client);
 	}
