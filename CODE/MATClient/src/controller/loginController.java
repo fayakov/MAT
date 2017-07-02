@@ -70,7 +70,10 @@ public class loginController implements Initializable, Handler
     private TextField serverIpTextField;
     @FXML
     private TextField serverPortTextField;
-
+    
+    @FXML
+    private Button loginBtn;
+    
 	private Parent root;
 
 	private Scene scene;
@@ -184,6 +187,8 @@ public class loginController implements Initializable, Handler
 		if (msg instanceof LoginResponseMsg) {
 			LoginResponseMsg res = (LoginResponseMsg)msg;
 			if (res.isValidUser()) {
+				loginBtn.setDisable(true);
+				
 				try {
 					open(res, userIdTextField.getText());
 				} catch (Exception e) {
@@ -274,6 +279,6 @@ public class loginController implements Initializable, Handler
 				  stage.show();
 			}
 		});
-		this.primaryStage.hide();
+		
 	}
 }
