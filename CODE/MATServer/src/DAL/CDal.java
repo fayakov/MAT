@@ -2874,7 +2874,7 @@ public class CDal {
 			catch (SQLException e) {
 				e.printStackTrace();	
 			}	
-			StudentCourseAssignment studentCoursAssignment = new StudentCourseAssignment();
+			StudentCourseAssignment studentCoursAssignment = new StudentCourseAssignment(assignmentsArray);
 			studentCoursAssignment.setAssignments(assignmentsArray);
 			return studentCoursAssignment;
 	}
@@ -3485,7 +3485,7 @@ public class CDal {
 		}
 		catch (SQLException e) {e.printStackTrace();}
 		SubmissionsForTeacherCheck sub = new SubmissionsForTeacherCheck();
-		sub.setAssignments(myList);
+		sub.setSubmissionList(myList);
 		return sub;
 	}
 	
