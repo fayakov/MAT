@@ -33,12 +33,12 @@ public class HistogramClassAndTeachersController implements  Initializable {
 //    private BarChart<String, Number> TeacherChart;
     
 	@FXML
-    final CategoryAxis xAxis = new CategoryAxis();
+    final CategoryAxis x = new CategoryAxis();
     
 	@FXML
-	final NumberAxis yAxis = new NumberAxis();
+	final NumberAxis y = new NumberAxis();
 	@FXML
-	final BarChart<String,Number> bc = new BarChart<String,Number>(xAxis,yAxis);
+	final BarChart<String,Number> TeacherChart = new BarChart<String,Number>(x,y);
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -66,26 +66,23 @@ public class HistogramClassAndTeachersController implements  Initializable {
 //			Coursehart.getData().addAll(set1);
 			
 			
-			
-			
 			arr.add(new TeacherWithGrade(7, "Sagi"));
 			arr.add(new TeacherWithGrade(77, "Sagi4"));
 			arr.add(new TeacherWithGrade(90, "Sagi3"));
 			arr.add(new TeacherWithGrade(10, "Sagi2"));
 			
 			
-	        bc.setTitle("Country Summary");
-	        xAxis.setLabel("Country");       
-	        yAxis.setLabel("Value");
+	        TeacherChart.setTitle("Country Summary");
+	        x.setLabel("Country");       
+	        y.setLabel("Value");
 	 
 	        XYChart.Series series1 = new XYChart.Series();
 	        series1.setName("2003");
 	        for (TeacherWithGrade teacherWithGrade : arr) {
 	        	series1.getData().addAll(new XYChart.Data(teacherWithGrade.getName(), teacherWithGrade.getGrade()));
-		        
 			}
 	                
-	        bc.getData().add(series1);
+	        TeacherChart.getData().add(series1);
 		}
 		
 	}
