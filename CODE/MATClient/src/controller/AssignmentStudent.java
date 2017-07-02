@@ -25,6 +25,7 @@ import communication.LoginResponseMsg;
 import communication.MATClientController;
 import communication.Message;
 import entities.Assignment;
+import entities.Request;
 import entities.Student;
 import entities.StudentCourse;
 import entities.StudentCourseAssignment;
@@ -38,7 +39,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class AssignmentStudent implements Initializable, Handler
 {
 	ObservableList<String> list ;
-	final ObservableList<StudentCourseAssignment> data;
 	
 	
 	public AssignmentStudent()
@@ -63,6 +63,14 @@ public class AssignmentStudent implements Initializable, Handler
     private TableColumn<StudentCourseAssignment,Integer> colAssNum;
     @FXML
     private TableColumn<StudentCourseAssignment, String> colDate;
+    
+    @FXML
+    private Button buttonNext;
+    
+    
+    @FXML 
+    ObservableList<Assignment> data= FXCollections.observableArrayList(
+    		new Assignment(1,22,333,5555,true,true));
 
 
     public void initialize(URL location, ResourceBundle resources) 
@@ -84,9 +92,8 @@ public class AssignmentStudent implements Initializable, Handler
     
     
     @FXML
-    void AssignmentNext(ActionEvent event) throws IOException 
+    void pressNext(ActionEvent event) 
     {
-    	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/OpenAndSubmitAssigmentByStudent.fxml"));
 		Scene scene = new Scene(root);
 		Stage primaryStage = new Stage();
@@ -94,6 +101,7 @@ public class AssignmentStudent implements Initializable, Handler
 		primaryStage.show();
     }
     
+ 
   
 	public void handle(Message msg, Object obj) 
 	{
@@ -107,7 +115,7 @@ public class AssignmentStudent implements Initializable, Handler
 				ArrayList<Assignment> temp=res.getStuCourseAss().getAssignments();
 				for(Assignment t: temp )
 				{
-					data =FXCollections.observableArrayList(t);
+					//data =FXCollections.observableArrayList(t);
 				}
 				
 				
@@ -120,11 +128,6 @@ public class AssignmentStudent implements Initializable, Handler
 		
 	}
 
-
-	
-
-
-	
 
 }
 

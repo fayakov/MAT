@@ -2,8 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import communication.Dispatcher;
+import communication.GetAssignmentsOfStudentResponse;
 import communication.GetPendingRequestsRequest;
 import communication.GetPendingRequestsResponse;
 import communication.GetStudentDataByUserIDRequest;
@@ -34,10 +34,11 @@ public class StudentController implements Handler
     private ComboBox<String> optionCombo;
     
     
-    
-    public StudentController() {
+    public StudentController() 
+    {
 		super();
 		Dispatcher.addHandler(GetStudentDataResponse.class.getCanonicalName(), this);
+		//Dispatcher.addHandler(GetAssignmentsOfStudentResponse.class.getCanonicalName(), this);
 	}
     
     public void initData(int userId) {
@@ -99,13 +100,19 @@ public class StudentController implements Handler
 
 
 	@Override
-	public void handle(Message msg, Object obj) {
+	public void handle(Message msg, Object obj) 
+	{
 		if (msg instanceof GetStudentDataResponse) {
 			GetStudentDataResponse res = (GetStudentDataResponse)msg;
 			Student student = res.getStudentData();
 			
 			runStudentDataForm(student);
 		}
+		
+		
+		
+		
+		
 	}
 
 	private void runStudentDataForm(final Student student) {
