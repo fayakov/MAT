@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package logic;
 
 import java.io.IOException;
@@ -10,14 +13,20 @@ import entities.Student;
 import ocsf.server.ConnectionToClient;
 import utils.Handler;
 
+/**
+ * The Class GetStudentDataRequestByStudentIdHandler.
+ */
 public class GetStudentDataRequestByStudentIdHandler implements Handler {
+	
+	/* (non-Javadoc)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	 */
 	public void handle(Message msg, Object obj) {
 		ConnectionToClient client = (ConnectionToClient) obj;
 		GetStudentDataByStudentIDRequest getStudentData = (GetStudentDataByStudentIDRequest)msg;
 				
 		int userId = CDal.getStudentUserId(getStudentData.getStudentId());
 				
-		// TODO Check in database
 		Student studentData = CDal.getStudentData(userId);		
 		
 		GetStudentDataResponse res = new GetStudentDataResponse(studentData);

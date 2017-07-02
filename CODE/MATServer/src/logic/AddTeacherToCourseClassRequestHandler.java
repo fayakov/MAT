@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package logic;
 
 import java.io.IOException;
@@ -15,8 +18,14 @@ import entities.*;
 import ocsf.server.ConnectionToClient;
 import utils.Handler;
 
+/**
+ * The Class AddTeacherToCourseClassRequestHandler.
+ */
 public class AddTeacherToCourseClassRequestHandler implements Handler {
 
+	/* (non-Javadoc)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	 */
 	public void handle(Message msg, Object obj) {
 		ConnectionToClient client = (ConnectionToClient) obj;
 		AddTeacherToCourseClassRequest addTeacherToCourseClassMsg = (AddTeacherToCourseClassRequest)msg;

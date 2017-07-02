@@ -1,8 +1,19 @@
+/*
+ * 
+ */
 import communication.*;
 
 
+/**
+ * The Class MATServerMain.
+ */
 public class MATServerMain {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
