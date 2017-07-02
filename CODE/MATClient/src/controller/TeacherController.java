@@ -15,20 +15,33 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * The Class TeacherController.
+ */
 public class TeacherController 
 {
+	
+	/** The list T. */
 	ObservableList<String> listT ;
 	
+	/** The combo choose option teacher. */
 	@FXML
     private ComboBox<String> comboChooseOptionTeacher;
 
+    /** The Label teacher menu. */
     @FXML
     private Label LabelTeacherMenu;
 
+    /** The button send teacher menu. */
     @FXML
     private Button buttonSendTeacherMenu;
 
     
+    /**
+     * Define assignment.
+     *
+     * @throws Exception the exception
+     */
     void defineAssignment() throws Exception 
     {
         	
@@ -39,6 +52,11 @@ public class TeacherController
     		primaryStage.show();
         }
 
+    /**
+     * Check assignment.
+     *
+     * @throws Exception the exception
+     */
     void checkAssignment() throws Exception 
     {
         	
@@ -49,6 +67,12 @@ public class TeacherController
     		primaryStage.show();
         }
     
+    /**
+     * Send teacher menu.
+     *
+     * @param event the event
+     * @throws Exception the exception
+     */
     @FXML
     void sendTeacherMenu(ActionEvent event) throws Exception 
     {
@@ -61,6 +85,12 @@ public class TeacherController
     
     
 
+    /**
+     * Start.
+     *
+     * @param primaryStage the primary stage
+     * @throws Exception the exception
+     */
     public void start(Stage primaryStage) throws Exception 
     {
 		
@@ -70,6 +100,9 @@ public class TeacherController
 		primaryStage.show();
 	}   
     
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() 
     {

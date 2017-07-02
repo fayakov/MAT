@@ -28,31 +28,48 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import utils.Handler;
 
+/**
+ * The Class RequestPrincipalController.
+ */
 public class RequestPrincipalController implements Handler {
 	
+	/** The list. */
 	ObservableList<String> list ;
 
+	/** The selected option. */
 	String selectedOption;
 	
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
+    /** The btn close. */
     @FXML
     private Button btnClose;
 
+    /** The request combo box. */
     @FXML
     private ComboBox<String> requestComboBox;
     
     
+    /**
+     * Instantiates a new request principal controller.
+     */
     public RequestPrincipalController() {
   		super();
   		Dispatcher.addHandler(GetPendingRequestsResponse.class.getCanonicalName(), this);
   	}
     
     
+    /**
+     * Response change teacher.
+     *
+     * @param requests the requests
+     */
     private void responseChangeTeacher(final ArrayList<Request> requests) {
     	
     	Platform.runLater(new Runnable() {
@@ -86,6 +103,11 @@ public class RequestPrincipalController implements Handler {
 	});
 }
 
+	/**
+	 * Response remove student from course.
+	 *
+	 * @param requests the requests
+	 */
 	private void responseRemoveStudentFromCourse(final ArrayList<Request> requests) {
 
 	Platform.runLater(new Runnable() {
@@ -119,6 +141,11 @@ public class RequestPrincipalController implements Handler {
 	});
 }
     
+    /**
+     * Response add student to course.
+     *
+     * @param requests the requests
+     */
     private void responseAddStudentToCourse(final ArrayList<Request> requests) {
 
     	Platform.runLater(new Runnable() {
@@ -153,6 +180,12 @@ public class RequestPrincipalController implements Handler {
     }
     
     
+    /**
+     * Start.
+     *
+     * @param primaryStage the primary stage
+     * @throws Exception the exception
+     */
     public void start(Stage primaryStage) throws Exception {
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/RequestPrincipal.fxml"));
@@ -162,6 +195,12 @@ public class RequestPrincipalController implements Handler {
 	}
     
 
+    /**
+     * Send.
+     *
+     * @param event the event
+     * @throws Exception the exception
+     */
     @FXML
     void send(ActionEvent event) throws Exception{
     	
@@ -171,6 +210,11 @@ public class RequestPrincipalController implements Handler {
 		MATClientController.getInstance().sendRequestToServer(pendigreq);    	
     }
 
+    /**
+     * Close.
+     *
+     * @param event the event
+     */
     @FXML
     void close(ActionEvent event) {
         Stage stage = (Stage) btnClose.getScene().getWindow();
@@ -178,6 +222,9 @@ public class RequestPrincipalController implements Handler {
 
     }
 
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
     	ArrayList<String> options = new ArrayList<String>();
@@ -193,6 +240,9 @@ public class RequestPrincipalController implements Handler {
     }
 
 
+	/* (non-Javadoc)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	 */
 	@Override
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub

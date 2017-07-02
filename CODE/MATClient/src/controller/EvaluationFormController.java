@@ -19,40 +19,59 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import utils.Handler;
 
+/**
+ * The Class EvaluationFormController.
+ */
 public class EvaluationFormController implements Initializable, Handler
 {
 
+	/**
+	 * Instantiates a new evaluation form controller.
+	 */
 	public EvaluationFormController()
 	{
 		Dispatcher.addHandler(AddCheckAssignmentRequest.class.getCanonicalName(), this);
 	}
 	
-	 @FXML
+	 /** The resources. */
+ 	@FXML
 	    private ResourceBundle resources;
 
-	    @FXML
+	    /** The location. */
+    	@FXML
 	    private URL location;
 
-	    @FXML
+	    /** The text field grade. */
+    	@FXML
 	    private TextField textFieldGrade;
 
-	    @FXML
+	    /** The label final grade. */
+    	@FXML
 	    private Label labelFinalGrade;
 
-	    @FXML
+	    /** The label step 2. */
+    	@FXML
 	    private Label labelStep2;
 
-	    @FXML
+	    /** The text area comment. */
+    	@FXML
 	    private TextArea textAreaComment;
 
-	    @FXML
+	    /** The button send form. */
+    	@FXML
 	    private Button buttonSendForm;
 
-	    @FXML
+	    /** The label comment. */
+    	@FXML
 	    private Label labelComment;
 
 	    
-	    @FXML
+	    /**
+    	 * Send evaluation form.
+    	 *
+    	 * @param event the event
+    	 */
+    	@FXML
 	    void sendEvaluationForm(ActionEvent event) 
 	    {
 	    	
@@ -84,7 +103,10 @@ public class EvaluationFormController implements Initializable, Handler
 		private int teacherId;*/
 	    
 	    
-		public void handle(Message msg, Object obj) 
+		/* (non-Javadoc)
+   	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+   	 */
+   	public void handle(Message msg, Object obj) 
 		{
 			// TODO Auto-generated method stub
 			if (msg instanceof AddEvaluationFormResponse) 
@@ -105,6 +127,9 @@ public class EvaluationFormController implements Initializable, Handler
 		}
 
 
+		/* (non-Javadoc)
+		 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+		 */
 		public void initialize(URL location, ResourceBundle resources) 
 		{
 			// TODO Auto-generated method stub
@@ -112,7 +137,10 @@ public class EvaluationFormController implements Initializable, Handler
 		}
 		
 		  
-	    @FXML
+	    /**
+    	 * Initialize.
+    	 */
+    	@FXML
 	    void initialize() 
 	    {
 	    	

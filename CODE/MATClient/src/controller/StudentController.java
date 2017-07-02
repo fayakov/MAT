@@ -27,15 +27,26 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import utils.Handler;
 
+/**
+ * The Class StudentController.
+ */
 public class StudentController implements Handler
 {
+	
+	/** The list. */
 	ObservableList<String> list ;
+	
+	/** The user ID. */
 	private int userID = 124;
 
+    /** The option combo. */
     @FXML
     private ComboBox<String> optionCombo;
     
     
+    /**
+     * Instantiates a new student controller.
+     */
     public StudentController() 
     {
 		super();
@@ -43,16 +54,31 @@ public class StudentController implements Handler
 		Dispatcher.addHandler(GetAssignmentsOfStudentResponse.class.getCanonicalName(), this);
 	}
     
+    /**
+     * Inits the data.
+     *
+     * @param userId the user id
+     */
     public void initData(int userId) {
     	this.userID = userId;
     }
 
+	/**
+	 * Student data 1.
+	 *
+	 * @throws Exception the exception
+	 */
 	public void studentData1() throws Exception 
     {
     	GetStudentDataByUserIDRequest getStudentDataRequest = new GetStudentDataByUserIDRequest(userID);
 		MATClientController.getInstance().sendRequestToServer(getStudentDataRequest);   
     }
     
+    /**
+     * Assignment.
+     *
+     * @throws Exception the exception
+     */
     public void assignment() throws Exception 
     {
     	GetAssignmentsOfStudentRequest getAssignmentsOfStudentRequest = new GetAssignmentsOfStudentRequest(userID);
@@ -60,6 +86,12 @@ public class StudentController implements Handler
     }
     
     
+    /**
+     * Start.
+     *
+     * @param primaryStage the primary stage
+     * @throws Exception the exception
+     */
     public void start(Stage primaryStage) throws Exception 
     {
 		
@@ -69,6 +101,12 @@ public class StudentController implements Handler
 		primaryStage.show();
 	}   
     
+    /**
+     * Student info.
+     *
+     * @param event the event
+     * @throws Exception the exception
+     */
     @FXML
     public void StudentInfo(ActionEvent event) throws Exception 
     {
@@ -80,6 +118,9 @@ public class StudentController implements Handler
     		assignment();
     }
 
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() 
     {
@@ -95,6 +136,9 @@ public class StudentController implements Handler
 
 
 
+	/* (non-Javadoc)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	 */
 	@Override
 	public void handle(Message msg, Object obj) 
 	{
@@ -113,6 +157,11 @@ public class StudentController implements Handler
 		}
 	}
 
+	/**
+	 * Run student data form.
+	 *
+	 * @param student the student
+	 */
 	private void runStudentDataForm(final Student student) {
 		Platform.runLater(new Runnable() {
 			
@@ -145,6 +194,11 @@ public class StudentController implements Handler
 		});
 	}
 	
+	/**
+	 * Run assignments form.
+	 *
+	 * @param assignments the assignments
+	 */
 	private void runAssignmentsForm(final ArrayList<Assignment> assignments) {
 		Platform.runLater(new Runnable() {
 			

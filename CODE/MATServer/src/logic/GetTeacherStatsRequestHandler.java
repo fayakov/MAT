@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package logic;
 
 import java.io.IOException;
@@ -9,8 +12,14 @@ import communication.Message;
 import ocsf.server.ConnectionToClient;
 import utils.Handler;
 
+/**
+ * The Class GetTeacherStatsRequestHandler.
+ */
 public class GetTeacherStatsRequestHandler implements Handler {
 
+	/* (non-Javadoc)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	 */
 	public void handle(Message msg, Object obj) {
 		ConnectionToClient client = (ConnectionToClient) obj;
 		GetTeacherStatsRequest getTeacherStatsRequestMsg = (GetTeacherStatsRequest)msg;

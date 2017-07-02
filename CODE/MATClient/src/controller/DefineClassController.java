@@ -18,24 +18,41 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import utils.Handler;
 
+/**
+ * The Class DefineClassController.
+ */
 public class DefineClassController implements Handler {
 	
+	/**
+	 * Instantiates a new define class controller.
+	 */
 	public DefineClassController() {
 		Dispatcher.addHandler(DefineClassResponse.class.getCanonicalName(), this);
 	}
 	
+	/** The clid. */
 	int clid; 
+	
+	/** The cl name. */
 	String clName;
 	
+	/** The class id. */
 	@FXML
     private TextField classId;
 
+    /** The class name. */
     @FXML
     private TextField className;
     
+    /** The btn close. */
     @FXML
     private Button btnClose;
 
+    /**
+     * Creates the class.
+     *
+     * @param event the event
+     */
     @FXML
     void createClass(ActionEvent event) {
     	
@@ -50,12 +67,20 @@ public class DefineClassController implements Handler {
     	}
     }
     
+    /**
+     * Close define class.
+     *
+     * @param event the event
+     */
     @FXML
     void closeDefineClass(ActionEvent event) {	
 	    Stage stage = (Stage) btnClose.getScene().getWindow();
 	    stage.close();
     }
 
+	/* (non-Javadoc)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	 */
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
 		if (msg instanceof DefineClassResponse) {
@@ -72,6 +97,14 @@ public class DefineClassController implements Handler {
 		
 	}
 	
+	/**
+	 * Local prompt.
+	 *
+	 * @param clName1 the cl name 1
+	 * @param eror1 the eror 1
+	 * @param succ the succ
+	 * @throws Exception the exception
+	 */
 	public void localPrompt(final String clName1,final String eror1, final boolean succ)  throws Exception {
 		
 		Platform.runLater(new Runnable() {

@@ -21,30 +21,50 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 
+/**
+ * The Class HistogramTeacherAndClassesController.
+ */
 public class HistogramTeacherAndClassesController implements  Initializable, Handler{
 	
+	/**
+	 * Instantiates a new histogram teacher and classes controller.
+	 */
 	public HistogramTeacherAndClassesController(){
 	//	Dispatcher.addHandler(GetClassTeachersStatsResponse.class.getCanonicalName(), this);
 	}
 	
 	
 	
-	 @FXML
+	 /** The Class chart. */
+ 	@FXML
 	 private BarChart<String, Number> ClassChart;
 	
+	/** The x. */
 	@FXML
     private CategoryAxis x;
 
+    /** The y. */
     @FXML
     private NumberAxis y;
     
+	/** The arr to display. */
 	private ArrayList<ClassWithGrade> arrToDisplay;
 
 	
+    /**
+     * Gets the arr to display.
+     *
+     * @return the arr to display
+     */
     public ArrayList<ClassWithGrade> getArrToDisplay() {
 		return arrToDisplay;
 	}
 
+	/**
+	 * Sets the arr to display.
+	 *
+	 * @param arrToDisplay the new arr to display
+	 */
 	public void setArrToDisplay(ArrayList<ClassWithGrade> arrToDisplay) {
 		this.arrToDisplay = arrToDisplay;
 	}
@@ -55,6 +75,9 @@ public class HistogramTeacherAndClassesController implements  Initializable, Han
 	
 	
 	
+	/* (non-Javadoc)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	 */
 	@Override
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
@@ -69,6 +92,9 @@ public class HistogramTeacherAndClassesController implements  Initializable, Han
 	//CourseChart.getData().addAll(set1);
 		
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub

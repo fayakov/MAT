@@ -21,12 +21,21 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import utils.Handler;
 
+/**
+ * The Class ResponseChangeTeacherController.
+ */
 public class ResponseChangeTeacherController implements Initializable, Handler{
 
+		/** The all requests. */
 		private ArrayList<Request> allRequests;
 		
 		
-	    public void initData(ArrayList<Request> allRequests) {
+	    /**
+    	 * Inits the data.
+    	 *
+    	 * @param allRequests the all requests
+    	 */
+    	public void initData(ArrayList<Request> allRequests) {
 	    	data.clear();
 			
 			for (Request request : allRequests) {
@@ -36,41 +45,56 @@ public class ResponseChangeTeacherController implements Initializable, Handler{
 		}
 
 
-	        @FXML
+	        /** The resources. */
+        	@FXML
 	        private ResourceBundle resources;
 
-	        @FXML
+	        /** The location. */
+        	@FXML
 	        private URL location;
 
-	        @FXML
+	        /** The user id. */
+        	@FXML
 	        private TableColumn<Request, Integer> userId;
 
 
-	        @FXML
+	        /** The request number. */
+        	@FXML
 	        private TableColumn<Request, Integer> requestNumber;
 
-	        @FXML
+	        /** The class number. */
+        	@FXML
 	        private TableColumn<Request, Integer> classNumber;
 
-	        @FXML
+	        /** The course id. */
+        	@FXML
 	        private TableColumn<Request, Integer> courseId;
 
-	        @FXML
+	        /** The table. */
+        	@FXML
 	        private TableView<Request> table;
 
-	        @FXML
+	        /** The btn decline. */
+        	@FXML
 	        private Button btnDecline;
 
 
-	        @FXML
+	        /** The btn confirm. */
+        	@FXML
 	        private Button btnConfirm;
 	        
 	        
-	        @FXML 
+	        /** The data. */
+        	@FXML 
 	        ObservableList<Request> data= FXCollections.observableArrayList();
 	        		
 
-	        @FXML
+	        /**
+        	 * Confirm.
+        	 *
+        	 * @param event the event
+        	 */
+        	@FXML
 	        void confirm(ActionEvent event) {
 	        	
 	        	Request req = table.getSelectionModel().getSelectedItem();
@@ -82,7 +106,12 @@ public class ResponseChangeTeacherController implements Initializable, Handler{
 	        
 	        }
 
-	        @FXML
+	        /**
+        	 * Decline.
+        	 *
+        	 * @param event the event
+        	 */
+        	@FXML
 	        void decline(ActionEvent event) {
 	        	
 	        	Request req = table.getSelectionModel().getSelectedItem();
@@ -94,6 +123,9 @@ public class ResponseChangeTeacherController implements Initializable, Handler{
 	        }
 
 
+	    	/* (non-Javadoc)
+	    	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	    	 */
 	    	@Override
 	    	public void handle(Message msg, Object obj) {
 	    		// TODO Auto-generated method stub
@@ -104,6 +136,9 @@ public class ResponseChangeTeacherController implements Initializable, Handler{
 	    	}	
 	    	
 
+			/* (non-Javadoc)
+			 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+			 */
 			@Override
 			public void initialize(URL location, ResourceBundle resources) {
 				// TODO Auto-generated method stub

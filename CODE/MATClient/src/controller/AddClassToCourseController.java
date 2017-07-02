@@ -19,30 +19,47 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 
+/**
+ * The Class AddClassToCourseController.
+ */
 public class AddClassToCourseController implements Handler {
 	
+	/**
+	 * Instantiates a new adds the class to course controller.
+	 */
 	public AddClassToCourseController(){
 		Dispatcher.addHandler(AddClassToCourseResponse.class.getCanonicalName(), this);
 	}
 	
-	 int clid, coid;  // class id, course id
+	 /** The coid. */
+ 	int clid, coid;  // class id, course id
 	
-	 @FXML
+	 /** The resources. */
+ 	@FXML
      private ResourceBundle resources;
 
-	 @FXML
+	 /** The location. */
+ 	@FXML
      private URL location;
 
-	 @FXML
+	 /** The class id. */
+ 	@FXML
 	 private TextField classId;
 
-	 @FXML
+	 /** The course id. */
+ 	@FXML
 	 private TextField courseId;
 	 
-	 @FXML
+	 /** The btn close. */
+ 	@FXML
 	 private Button btnClose;
 	 
-	 @FXML
+	 /**
+ 	 * Send add class.
+ 	 *
+ 	 * @param event the event
+ 	 */
+ 	@FXML
 	 void sendAddClass(ActionEvent event) {		
 		 
 		 if(classId.getText().isEmpty() || courseId.getText().isEmpty()) 
@@ -63,12 +80,20 @@ public class AddClassToCourseController implements Handler {
 	    	  }
 	    }
 	 
-	 @FXML
+	 /**
+ 	 * Close.
+ 	 *
+ 	 * @param event the event
+ 	 */
+ 	@FXML
 	 void close(ActionEvent event) {		
 		    Stage stage = (Stage) btnClose.getScene().getWindow();
 		    stage.close();
 	 }
 
+	/* (non-Javadoc)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	 */
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
 		if (msg instanceof AddClassToCourseResponse) {
@@ -84,6 +109,15 @@ public class AddClassToCourseController implements Handler {
 		
 	}
 	
+/**
+ * Local prompt.
+ *
+ * @param clid the clid
+ * @param coid the coid
+ * @param eror the eror
+ * @param succ the succ
+ * @throws Exception the exception
+ */
 public void localPrompt(final int clid, final int coid, final String eror, final boolean succ)  throws Exception {
 		
 		Platform.runLater(new Runnable() {

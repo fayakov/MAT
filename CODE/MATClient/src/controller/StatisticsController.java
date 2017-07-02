@@ -12,16 +12,28 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+/**
+ * The Class StatisticsController.
+ */
 public class StatisticsController {
 	
+	/** The list. */
 	ObservableList<String> list ;
 
+    /** The btn close. */
     @FXML
     private Button btnClose;
 
+    /** The Statistics combox. */
     @FXML
     private ComboBox<String> StatisticsCombox;
     
+    /**
+     * Statistics between teacher to classes.
+     *
+     * @throws Exception the exception
+     */
     void StatisticsBetweenTeacherToClasses() throws Exception {
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/StatisticTeacherAndClasses.fxml"));
@@ -31,6 +43,11 @@ public class StatisticsController {
 		primaryStage.show();
     }
     
+    /**
+     * Statistics between class to teachers.
+     *
+     * @throws Exception the exception
+     */
     void StatisticsBetweenClassToTeachers() throws Exception {
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/StatisticClassAndTeachers.fxml"));
@@ -41,6 +58,11 @@ public class StatisticsController {
     }
     
     
+    /**
+     * Statistics between class to courses.
+     *
+     * @throws Exception the exception
+     */
     void StatisticsBetweenClassToCourses() throws Exception {
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/StatisticClassAndCourses.fxml"));
@@ -50,6 +72,12 @@ public class StatisticsController {
 		primaryStage.show();
     }
 
+    /**
+     * Send.
+     *
+     * @param event the event
+     * @throws Exception the exception
+     */
     @FXML
     void send(ActionEvent event) throws Exception {
     	
@@ -64,6 +92,11 @@ public class StatisticsController {
     	
     }
 
+    /**
+     * Close.
+     *
+     * @param event the event
+     */
     @FXML
     void close(ActionEvent event) {
 
@@ -71,6 +104,9 @@ public class StatisticsController {
 	    stage.close();
     }
     
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
     	ArrayList<String> options = new ArrayList<String>();

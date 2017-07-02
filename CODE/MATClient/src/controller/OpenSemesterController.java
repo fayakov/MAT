@@ -20,26 +20,43 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utils.Handler;
 
+/**
+ * The Class OpenSemesterController.
+ */
 public class OpenSemesterController implements Handler {
 	
+	/**
+	 * Instantiates a new open semester controller.
+	 */
 	public OpenSemesterController(){
 		Dispatcher.addHandler(OpenSemesterResponse.class.getCanonicalName(), this);
 	}
 	
+		/** The list. */
 		//ArrayList<Semester> semester = new ArrayList<Semester>();
 		ObservableList<String> list;
+		
+		/** The e date. */
 		private Date sDate, eDate;
 	    
+		/** The end date. */
 		@FXML
 		private DatePicker endDate;
 
+		/** The start date. */
 		@FXML
 		private DatePicker startDate;
 	    
-	    @FXML
+	    /** The btn close. */
+    	@FXML
 	    private Button btnClose;
 
-	    @FXML
+	    /**
+    	 * Creates the semester.
+    	 *
+    	 * @param event the event
+    	 */
+    	@FXML
 	    void createSemester(ActionEvent event)	{
 	    	
 	    	if(false)
@@ -57,13 +74,21 @@ public class OpenSemesterController implements Handler {
 	    	}	    		    		
 	    		    
 	  	    
-	    @FXML
+	    /**
+    	 * Close semester.
+    	 *
+    	 * @param event the event
+    	 */
+    	@FXML
 	    void closeSemester(ActionEvent event) {	
 		    Stage stage = (Stage) btnClose.getScene().getWindow();
 		    stage.close();
 	    }
 
 
+		/* (non-Javadoc)
+		 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+		 */
 		public void handle(Message msg, Object obj) {
 			// TODO Auto-generated method stub
 			if (msg instanceof OpenSemesterResponse) {
@@ -74,6 +99,11 @@ public class OpenSemesterController implements Handler {
 			
 		}
 		
+		/**
+		 * Local prompt.
+		 *
+		 * @param succ the succ
+		 */
 		public void localPrompt(final boolean succ)  {
 			
 			Platform.runLater(new Runnable() {

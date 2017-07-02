@@ -14,23 +14,41 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utils.Handler;
 
+/**
+ * The Class DefineCourseController.
+ */
 public class DefineCourseController implements Handler {
 	
+	/**
+	 * Instantiates a new define course controller.
+	 */
 	public DefineCourseController() {
 		Dispatcher.addHandler(DefineCourseResponse.class.getCanonicalName(), this);
 	}
+	
+	/** The t unit. */
 	private int teachHours, tUnit;
+	
+	/** The course name. */
 	private String courseName;
 
-	 @FXML
+	 /** The teaching unit text. */
+ 	@FXML
 	 private TextField teachingUnitText;
 
-	 @FXML
+	 /** The course name text. */
+ 	@FXML
 	 private TextField courseNameText;
 
-	 @FXML
+	 /** The teaching hours text. */
+ 	@FXML
 	 private TextField teachingHoursText;
 	
+    /**
+     * Define course send.
+     *
+     * @param event the event
+     */
     @FXML
     void defineCourseSend(ActionEvent event) {
     	
@@ -54,6 +72,12 @@ public class DefineCourseController implements Handler {
 
     }
     
+/**
+ * Start.
+ *
+ * @param primaryStage the primary stage
+ * @throws Exception the exception
+ */
 public void start(Stage primaryStage) throws Exception {
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/DefineCourse.fxml"));
@@ -62,6 +86,9 @@ public void start(Stage primaryStage) throws Exception {
 		primaryStage.show();
 	}
 
+/* (non-Javadoc)
+ * @see utils.Handler#handle(communication.Message, java.lang.Object)
+ */
 public void handle(Message msg, Object obj) {
 	// TODO Auto-generated method stub
 		if (msg instanceof DefineCourseRequest) {

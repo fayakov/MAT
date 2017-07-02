@@ -33,42 +33,80 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 
+/**
+ * The Class StudentDataController.
+ */
 //נשאר להעביר ת.ז ולהוסיף ציונים
 public class StudentDataController  implements Initializable
 {
 	
+	/** The list. */
 	ObservableList<String> list ;
+	
+	/** The data. */
 	final ObservableList<StudentCourse> data= FXCollections.observableArrayList(new StudentCourse(1,2,5));
 	
+    /** The resources. */
     @FXML 
     private ResourceBundle resources;
+    
+    /** The location. */
     @FXML 
     private URL location;
+    
+    /** The text student ID. */
     @FXML
     private TextField textStudentID;
+    
+    /** The text L name. */
     @FXML
     private TextField textLName;
+    
+    /** The label L name. */
     @FXML
     private Label labelLName;
+    
+    /** The text F name. */
     @FXML
     private TextField textFName;
+    
+    /** The label student ID. */
     @FXML
     private Label labelStudentID;
+    
+    /** The col grade. */
     @FXML
     private TableColumn<StudentCourse, Integer> colGrade;
+    
+    /** The text classes. */
     @FXML
     private TextField textClasses;
+    
+    /** The col course. */
     @FXML
     private TableColumn<StudentCourse, Integer> colCourse;
+    
+    /** The label FN name. */
     @FXML
     private Label labelFNName;
+    
+    /** The label cllass ID. */
     @FXML
     private Label labelCllassID;
+    
+    /** The label student data. */
     @FXML
     private Label labelStudentData;
+    
+    /** The table view ID. */
     @FXML
     private TableView<StudentCourse> tableViewID;
     
+    /**
+     * Inits the data.
+     *
+     * @param student the student
+     */
     void initData(Student student) 
     {
     	if (student != null) {
@@ -82,6 +120,9 @@ public class StudentDataController  implements Initializable
     	}
     }
     
+    /* (non-Javadoc)
+     * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+     */
     //בלי טבלה
     public void initialize(URL location, ResourceBundle resources) 
 	{

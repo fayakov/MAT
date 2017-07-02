@@ -34,20 +34,36 @@ import utils.Handler;
 
 
 
+/**
+ * The Class StatisticTeacherAndClassesController.
+ */
 public class StatisticTeacherAndClassesController implements Initializable, Handler {
 	
+	/**
+	 * Instantiates a new statistic teacher and classes controller.
+	 */
 	public StatisticTeacherAndClassesController(){
 		Dispatcher.addHandler(GetTeacherStatsResponse.class.getCanonicalName(), this);
 	}
+		
+		/** The tid. */
 		private int tid;
 
-	    @FXML
+	    /** The Teacher ID. */
+    	@FXML
 	    private TextField TeacherID;
 	    
-	    @FXML
+	    /** The btn close. */
+    	@FXML
 	    private Button btnClose;
 
-	    @FXML
+	    /**
+    	 * Statistic teacher and classes.
+    	 *
+    	 * @param event the event
+    	 * @throws Exception the exception
+    	 */
+    	@FXML
 	    void StatisticTeacherAndClasses(ActionEvent event) throws Exception {
 	    	
 	    	 if(TeacherID.getText().isEmpty()) 
@@ -74,13 +90,21 @@ public class StatisticTeacherAndClassesController implements Initializable, Hand
 		     }	    			 
 	    
 	    
-	    @FXML
+	    /**
+    	 * Close statistic teacher and classes.
+    	 *
+    	 * @param event the event
+    	 */
+    	@FXML
 	    void closeStatisticTeacherAndClasses(ActionEvent event) {	
 		    Stage stage = (Stage) btnClose.getScene().getWindow();
 		    stage.close();
 	    }
 
 
+		/* (non-Javadoc)
+		 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+		 */
 		public void handle(Message msg, Object obj) {
 			// TODO Auto-generated method stub
 			
@@ -130,6 +154,11 @@ public class StatisticTeacherAndClassesController implements Initializable, Hand
 		}
 
 
+		/**
+		 * Statistics class.
+		 *
+		 * @param arr the arr
+		 */
 		private void statisticsClass(ArrayList<ClassWithGrade> arr) {
 			// TODO Auto-generated method stub
 			
@@ -167,6 +196,9 @@ Platform.runLater(new Runnable() {
 		
 
 
+		/* (non-Javadoc)
+		 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+		 */
 		public void initialize(URL location, ResourceBundle resources) {
 			// TODO Auto-generated method stub
 			

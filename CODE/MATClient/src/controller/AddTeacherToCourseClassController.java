@@ -13,29 +13,46 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utils.Handler;
 
+/**
+ * The Class AddTeacherToCourseClassController.
+ */
 public class AddTeacherToCourseClassController implements Handler {
 	
+	/**
+	 * Instantiates a new adds the teacher to course class controller.
+	 */
 	public AddTeacherToCourseClassController(){
 		Dispatcher.addHandler(AddTeacherToCourseClassResponse.class.getCanonicalName(), this);
 	}
 	
+	/** The clid. */
 	int tid, coid, clid;
 
+    /** The class id. */
     @FXML
     private TextField classId;
 
+    /** The teacher id. */
     @FXML
     private TextField teacherId;
 
+    /** The btn add. */
     @FXML
     private Button btnAdd;
 
+    /** The course id. */
     @FXML
     private TextField courseId;
     
+    /** The btn close. */
     @FXML
     private Button btnClose;
 
+    /**
+     * Adds the teacher.
+     *
+     * @param event the event
+     */
     @FXML
     void AddTeacher(ActionEvent event) {
     	
@@ -56,12 +73,20 @@ public class AddTeacherToCourseClassController implements Handler {
     	}
     }
     
+    /**
+     * Close add teacher.
+     *
+     * @param event the event
+     */
     @FXML
     void closeAddTeacher(ActionEvent event) {	
 	    Stage stage = (Stage) btnClose.getScene().getWindow();
 	    stage.close();
     }
 
+	/* (non-Javadoc)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	 */
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
 		if (msg instanceof AddTeacherToCourseClassResponse) {
@@ -84,6 +109,15 @@ public class AddTeacherToCourseClassController implements Handler {
 		
 	}
 	
+/**
+ * Local prompt.
+ *
+ * @param tid the tid
+ * @param coid the coid
+ * @param eror the eror
+ * @param succ the succ
+ * @throws Exception the exception
+ */
 public void localPrompt(final int tid, final int coid, final String eror, final boolean succ)  throws Exception {
 		
 		Platform.runLater(new Runnable() {

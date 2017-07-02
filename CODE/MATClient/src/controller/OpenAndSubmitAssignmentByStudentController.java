@@ -18,27 +18,46 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import utils.Handler;
 
+/**
+ * The Class OpenAndSubmitAssignmentByStudentController.
+ */
 public class OpenAndSubmitAssignmentByStudentController implements Initializable, Handler
 {
 	
+	/**
+	 * Instantiates a new open and submit assignment by student controller.
+	 */
 	public OpenAndSubmitAssignmentByStudentController()
 	{
 		Dispatcher.addHandler(AddAssignmentForResponse.class.getCanonicalName(), this);
 	}
 	
-	    @FXML
+	    /** The text field ass num. */
+    	@FXML
 	    private TextField textFieldAssNum;
-	    @FXML
+	    
+    	/** The button download. */
+    	@FXML
 	    private Button buttonDownload;
-	    @FXML
+	    
+    	/** The label upload. */
+    	@FXML
 	    private Label labelUpload;
-	    @FXML
+	    
+    	/** The label ass num. */
+    	@FXML
 	    private Label labelAssNum;
-	    @FXML
+	    
+    	/** The button upload. */
+    	@FXML
 	    private Button buttonUpload;
-	    @FXML
+	    
+    	/** The label download. */
+    	@FXML
 	    private Label labelDownload;
-	    @FXML
+	    
+    	/** The button send sub. */
+    	@FXML
 	    private Button buttonSendSub;
 
 	    public void initData(Assignment assignment) {
@@ -47,7 +66,13 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 	    }
 	    
 	    
-	    @FXML
+	    /**
+    	 * Press download.
+    	 *
+    	 * @param event the event
+    	 * @throws Exception the exception
+    	 */
+    	@FXML
 	    void pressDownload(ActionEvent event) throws Exception 
 	    {
 	    	 String line;
@@ -68,7 +93,12 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 	    }
 
 	    
-	    @FXML
+	    /**
+    	 * Press upload.
+    	 *
+    	 * @param event the event
+    	 */
+    	@FXML
 	    void pressUpload(ActionEvent event) 
 	    {
 //	    	JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
@@ -94,6 +124,11 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
     
 
 	    
+    /**
+     * Send submission.
+     *
+     * @param event the event
+     */
     @FXML
     void sendSubmission(ActionEvent event) 
     {
@@ -116,6 +151,9 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
    
 
 
+	/* (non-Javadoc)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	 */
 	public void handle(Message msg, Object obj) 
 	{
 		// TODO Auto-generated method stub
@@ -137,6 +175,9 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 
 
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	public void initialize(URL location, ResourceBundle resources) 
 	{
 		// TODO Auto-generated method stub
@@ -144,6 +185,9 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 	}
 	
  
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
          

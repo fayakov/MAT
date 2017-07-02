@@ -33,43 +33,65 @@ import javafx.stage.Stage;
 import utils.Handler;
 
 
+/**
+ * The Class SubmissionStudentController.
+ */
 public class SubmissionStudentController implements Initializable, Handler
 {
+	
+	/** The list. */
 	ObservableList<String> list ;
 	
 	
+	/**
+	 * Instantiates a new submission student controller.
+	 */
 	public SubmissionStudentController()
 	{
 		Dispatcher.addHandler(GetAssignmentsOfTeacherRequest.class.getCanonicalName(), this);
 	}
 	
 	
+	/** The list ass. */
 	ObservableList<String> listAss;
 	
-	 @FXML
+	 /** The resources. */
+ 	@FXML
 	    private ResourceBundle resources;
 
-	    @FXML
+	    /** The location. */
+    	@FXML
 	    private URL location;
 
-	    @FXML
+	    /** The col stu ID. */
+    	@FXML
 	    private TableColumn<SubmissionsForTeacherCheck, Integer> colStuID;
 
-	    @FXML
+	    /** The label list of stu sub. */
+    	@FXML
 	    private Label labelListOfStuSub;
 
-	    @FXML
+	    /** The col ass num. */
+    	@FXML
 	    private TableColumn<SubmissionsForTeacherCheck, Integer> colAssNum;
 
-	    @FXML
+	    /** The col sub num. */
+    	@FXML
 	    private TableColumn<SubmissionsForTeacherCheck, Integer> colSubNum;
 
-	    @FXML
+	    /** The col sub date. */
+    	@FXML
 	    private TableColumn<SubmissionsForTeacherCheck, Date> colSubDate;
 
 	    
 	    
-	    @FXML
+	    /**
+    	 * Next student submission.
+    	 *
+    	 * @param event the event
+    	 * @throws Exception the exception
+    	 */
+    	@FXML
 	    void nextStudentSubmission(ActionEvent event) throws Exception 
 	    {
 	    	Pane root = FXMLLoader.load(getClass().getResource("/gui/CheckAssinment.fxml"));
@@ -82,6 +104,9 @@ public class SubmissionStudentController implements Initializable, Handler
 	    
 	    
 	    
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() 
     {
@@ -96,6 +121,9 @@ public class SubmissionStudentController implements Initializable, Handler
         
     }
 
+	/* (non-Javadoc)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	 */
 	public void handle(Message msg, Object obj) 
 	{
 		// TODO Auto-generated method stub
@@ -124,6 +152,9 @@ public class SubmissionStudentController implements Initializable, Handler
 	
 	
 	
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	public void initialize(URL arg0, ResourceBundle arg1) 
 	{
 		// TODO Auto-generated method stub

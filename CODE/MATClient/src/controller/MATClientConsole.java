@@ -4,8 +4,13 @@ import java.io.*;
 
 import communication.*;
 
+/**
+ * The Class MATClientConsole.
+ */
 public class MATClientConsole 
 {
+	
+	/** The Constant DEFAULT_PORT. */
 	final public static int DEFAULT_PORT = 5555;
 
 	//Instance variables **********************************************
@@ -79,6 +84,11 @@ public class MATClientConsole
 	 }*/
 	}
 	
+	/**
+	 * Display.
+	 *
+	 * @param message the message
+	 */
 	public void display(String message) 
 	{
 	 System.out.println("> " + message);

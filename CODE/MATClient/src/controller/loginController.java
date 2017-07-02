@@ -35,10 +35,18 @@ import entities.EUserType;
 import entities.Student;
 
 
+/**
+ * The Class loginController.
+ */
 public class loginController implements Initializable, Handler 
 {
+	
+	/** The st. */
 	public static Student st= new Student();
 
+	/**
+	 * Instantiates a new login controller.
+	 */
 	public loginController()
 	{
 		Dispatcher.addHandler(LoginResponseMsg.class.getCanonicalName(), this);
@@ -46,40 +54,68 @@ public class loginController implements Initializable, Handler
 	
 	
 	
+	/**
+	 * Sets the client.
+	 *
+	 * @param clientTst the new client
+	 */
 	public void setClient(clientTest clientTst){
 	}
 	
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 	}
 	
+    /** The user id text field. */
     @FXML
     private TextField userIdTextField;
 
+    /** The password text field. */
     @FXML
     private PasswordField passwordTextField;
     
+    /** The error text. */
     @FXML
     private Text errorText;
 
+    /** The server ip label. */
     @FXML
     private Text serverIpLabel;
+    
+    /** The server port label. */
     @FXML
     private Text serverPortLabel;
+    
+    /** The server ip text field. */
     @FXML
     private TextField serverIpTextField;
+    
+    /** The server port text field. */
     @FXML
     private TextField serverPortTextField;
     
+    /** The login btn. */
     @FXML
     private Button loginBtn;
     
+	/** The root. */
 	private Parent root;
 
+	/** The scene. */
 	private Scene scene;
 
+	/** The primary stage. */
 	private Stage primaryStage;
     
+    /**
+     * Check if valid ipv 4.
+     *
+     * @param text the text
+     * @return true, if successful
+     */
     private static boolean checkIfValidIpv4(String text)  {
     	   StringTokenizer st = new StringTokenizer(text,".");
     	   for(int i = 0; i < 4; i++){ 
@@ -103,6 +139,11 @@ public class loginController implements Initializable, Handler
     	   return true;
     }
     
+    /**
+     * Log in btn.
+     *
+     * @param event the event
+     */
     @FXML
     void logInBtn(ActionEvent event) {    			
     	errorText.setText("");
@@ -145,6 +186,11 @@ public class loginController implements Initializable, Handler
     	}
     }
     
+    /**
+     * Sets the tings btn.
+     *
+     * @param event the new tings btn
+     */
     @FXML
     void settingsBtn(ActionEvent event) {
         serverIpLabel.setVisible(!serverIpLabel.isVisible());
@@ -153,6 +199,14 @@ public class loginController implements Initializable, Handler
         serverPortTextField.setVisible(!serverPortTextField.isVisible());    	
     }
     
+    /**
+     * Gets the log in resault.
+     *
+     * @param isLoged the is loged
+     * @param errorPassword the error password
+     * @param errorId the error id
+     * @return the log in resault
+     */
     public void getLogInResault(boolean isLoged, boolean errorPassword, boolean errorId){
     	errorText.setText("");
     	if(isLoged)
@@ -172,6 +226,12 @@ public class loginController implements Initializable, Handler
     	}
     }
     
+	/**
+	 * Start.
+	 *
+	 * @param primaryStage the primary stage
+	 * @throws Exception the exception
+	 */
 	public void start(Stage primaryStage) throws Exception {	
 	  
 	    root = FXMLLoader.load(getClass().getResource("/gui/logIn.fxml"));
@@ -181,6 +241,9 @@ public class loginController implements Initializable, Handler
 		this.primaryStage.show();
     }
 
+	/* (non-Javadoc)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	 */
 	@Override
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
@@ -224,7 +287,14 @@ public class loginController implements Initializable, Handler
 //		}
 //	}
 //	
-//	
+/**
+	 * Open.
+	 *
+	 * @param res the res
+	 * @param userId the user id
+	 * @throws Exception the exception
+	 */
+	//	
 	public void open(final LoginResponseMsg res, final String userId) throws Exception {
 		
 			Platform.runLater(new Runnable() {

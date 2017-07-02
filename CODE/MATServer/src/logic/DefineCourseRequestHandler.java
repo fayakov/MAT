@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package logic;
 
 import java.io.IOException;
@@ -10,8 +13,14 @@ import communication.Message;
 import ocsf.server.ConnectionToClient;
 import utils.Handler;
 
+/**
+ * The Class DefineCourseRequestHandler.
+ */
 public class DefineCourseRequestHandler implements Handler {
 
+	/* (non-Javadoc)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	 */
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
 		ConnectionToClient client = (ConnectionToClient) obj;

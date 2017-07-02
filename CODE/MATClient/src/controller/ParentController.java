@@ -28,19 +28,28 @@ import javafx.stage.StageStyle;
 import utils.Handler;
 
 
+/**
+ * The Class ParentController.
+ */
 public class ParentController implements Initializable, Handler  {
 	
+	/**
+	 * Instantiates a new parent controller.
+	 */
 	public ParentController(){
 		Dispatcher.addHandler(GetStudentDataResponse.class.getCanonicalName(), this);
 	}
 	
 	
+		/** The sid. */
 		private int sid;
 
-	    @FXML
+	    /** The Student ID. */
+    	@FXML
 	    private TextField StudentID;
 	    
-	    @FXML
+	    /** The btn close. */
+    	@FXML
 	    private Button btnClose;
 
 	       	
@@ -51,6 +60,12 @@ public class ParentController implements Initializable, Handler  {
 	    	
 	    	
 			
+	    	/**
+	    	 * Searchstudent ID.
+	    	 *
+	    	 * @param event the event
+	    	 * @throws Exception the exception
+	    	 */
 	    	@FXML
 	 	    void searchstudentID (ActionEvent event) throws Exception {
 	    	
@@ -77,7 +92,13 @@ public class ParentController implements Initializable, Handler  {
 			}
 	    }
 	    	 
-	   	 public void start(Stage primaryStage) throws Exception {
+	   	 /**
+ 	   	 * Start.
+ 	   	 *
+ 	   	 * @param primaryStage the primary stage
+ 	   	 * @throws Exception the exception
+ 	   	 */
+ 	   	public void start(Stage primaryStage) throws Exception {
 	    			
 	   			Parent root = FXMLLoader.load(getClass().getResource("/gui/ParentMenu.fxml"));
     			Scene scene = new Scene(root);
@@ -86,12 +107,20 @@ public class ParentController implements Initializable, Handler  {
 	    		}	 
 	    
 	    
-	    @FXML
+	    /**
+    	 * Close parent menu.
+    	 *
+    	 * @param event the event
+    	 */
+    	@FXML
 	    void closeParentMenu(ActionEvent event) {	
 		    Stage stage = (Stage) btnClose.getScene().getWindow();
 		    stage.close();
 	    }
 
+		/* (non-Javadoc)
+		 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+		 */
 		public void handle(Message msg, Object obj) {
 			// TODO Auto-generated method stub
 				if (msg instanceof GetStudentDataResponse) {
@@ -108,6 +137,11 @@ public class ParentController implements Initializable, Handler  {
 			
 		}
 
+		/**
+		 * Show student data.
+		 *
+		 * @param stu the stu
+		 */
 		private void showStudentData(final Student stu) {
 			// TODO Auto-generated method stub
 			Platform.runLater(new Runnable() {
@@ -141,6 +175,9 @@ public class ParentController implements Initializable, Handler  {
 	    	});
 		}
 
+		/* (non-Javadoc)
+		 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+		 */
 		public void initialize(URL arg0, ResourceBundle arg1) {
 			// TODO Auto-generated method stub
 			
