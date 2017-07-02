@@ -20,26 +20,41 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * The Class secretaryController.
+ */
 public class secretaryController {
 
+	/** The list. */
 	ObservableList<String> list ;
 	
+	/** The request. */
 	public Request request;
 
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
     
+    /** The secretary menu combox. */
     @FXML
     private ComboBox<String> secretaryMenuCombox;
     
+    /** The btn close. */
     @FXML
     private Button btnClose;
 
  
+    /**
+     * Define new semester.
+     *
+     * @param event the event
+     * @throws Exception the exception
+     */
     @FXML
     void defineNewSemester(ActionEvent event) throws Exception {
     	
@@ -50,6 +65,11 @@ public class secretaryController {
 		primaryStage.show();
     }
     
+    /**
+     * Change teacher.
+     *
+     * @throws Exception the exception
+     */
     void ChangeTeacher() throws Exception {
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/RequestChangeTeacher.fxml"));
@@ -60,6 +80,11 @@ public class secretaryController {
     }
     
     
+    /**
+     * Removes the student from course.
+     *
+     * @throws Exception the exception
+     */
     void RemoveStudentFromCourse() throws Exception {
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/RequestRemoveStudentFromCourse.fxml"));
@@ -70,6 +95,11 @@ public class secretaryController {
     }
     
     
+    /**
+     * Adds the student to course.
+     *
+     * @throws Exception the exception
+     */
     void AddStudentToCourse() throws Exception {
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/RequestAddStudentToCourse.fxml"));
@@ -80,6 +110,12 @@ public class secretaryController {
     }
     
     
+    /**
+     * Start.
+     *
+     * @param primaryStage the primary stage
+     * @throws Exception the exception
+     */
     public void start(Stage primaryStage) throws Exception {
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/SecretaryMenu.fxml"));
@@ -89,6 +125,12 @@ public class secretaryController {
 	}
     
     
+    /**
+     * Send.
+     *
+     * @param event the event
+     * @throws Exception the exception
+     */
     @FXML
     public void send(ActionEvent event) throws Exception {
     	
@@ -102,12 +144,20 @@ public class secretaryController {
     		ChangeTeacher();   	
     }
     
+    /**
+     * Close.
+     *
+     * @param event the event
+     */
     @FXML
     void close(ActionEvent event) {	
 	    Stage stage = (Stage) btnClose.getScene().getWindow();
 	    stage.close();
     }
     
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
     	ArrayList<String> options = new ArrayList<String>();

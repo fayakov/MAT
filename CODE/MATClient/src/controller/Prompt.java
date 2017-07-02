@@ -2,7 +2,17 @@ package controller;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+/**
+ * The Class Prompt.
+ */
 public class Prompt {
+	
+	/**
+	 * Alert.
+	 *
+	 * @param type the type
+	 * @param msg the msg
+	 */
 	/*
 	 *  1 - Information
 	 *  2 - Confirmation

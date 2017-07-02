@@ -28,6 +28,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import utils.Handler;
 
+/**
+ * The Class CheckAssignmentController.
+ */
 public class CheckAssignmentController //implements Initializable, Handler 
 {
 
@@ -37,53 +40,80 @@ public class CheckAssignmentController //implements Initializable, Handler
 	//}
 	
 
-	 @FXML
+	 /** The resources. */
+	@FXML
 	    private ResourceBundle resources;
 
-	    @FXML
+	    /** The location. */
+    	@FXML
 	    private URL location;
 
-	    @FXML
+	    /** The label sub num. */
+    	@FXML
 	    private Label labelSubNum;
 
-	    @FXML
+	    /** The button download. */
+    	@FXML
 	    private Button buttonDownload;
 
-	    @FXML
+	    /** The label step 1. */
+    	@FXML
 	    private Label labelStep1;
 
-	    @FXML
+	    /** The label upload. */
+    	@FXML
 	    private Label labelUpload;
 
-	    @FXML
+	    /** The button next. */
+    	@FXML
 	    private Button buttonNext;
 
-	    @FXML
+	    /** The label download. */
+    	@FXML
 	    private Label labelDownload;
 
-	    @FXML
+	    /** The label check ass. */
+    	@FXML
 	    private Label labelCheckAss;
 
-	    @FXML
+	    /** The text field sub num. */
+    	@FXML
 	    private TextField textFieldSubNum;
 
-	    @FXML
+	    /** The button apload. */
+    	@FXML
 	    private Button buttonApload;
 
 	    
-	   @FXML
+	   /**
+   	 * Download submission.
+   	 *
+   	 * @param event the event
+   	 */
+   	@FXML
 	    void downloadSubmission(ActionEvent event) 
 	    {
 
 	    }
 
-	    @FXML
+	    /**
+    	 * Upload submission.
+    	 *
+    	 * @param event the event
+    	 */
+    	@FXML
 	    void uploadSubmission(ActionEvent event) 
 	    {
 
 	    }
 
-	    @FXML
+	    /**
+    	 * Next to step 2.
+    	 *
+    	 * @param event the event
+    	 * @throws Exception the exception
+    	 */
+    	@FXML
 	    void nextToStep2(ActionEvent event) throws Exception 
 	    {
 	    	Pane root = FXMLLoader.load(getClass().getResource("/gui/EvaluationForm.fxml"));
@@ -99,6 +129,12 @@ public class CheckAssignmentController //implements Initializable, Handler
 
 	  
 
+		/**
+		 * Initialize.
+		 *
+		 * @param location the location
+		 * @param resources the resources
+		 */
 		/*public void handle(Message msg, Object obj) 
 		{
 			// TODO Auto-generated method stub
@@ -147,7 +183,10 @@ public class CheckAssignmentController //implements Initializable, Handler
 		
 		
 		  
-	    @FXML
+	    /**
+    	 * Initialize.
+    	 */
+    	@FXML
 	    void initialize() 
 	    {
 	        

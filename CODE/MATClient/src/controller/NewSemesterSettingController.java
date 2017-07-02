@@ -17,25 +17,38 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * The Class NewSemesterSettingController.
+ */
 public class NewSemesterSettingController {
 	
+	/** The list. */
 	ObservableList<String> list ;
 	
+	/** The btn close. */
 	@FXML
 	private Button btnClose;
 	
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
     
+    /** The secretary combox. */
     @FXML
     private ComboBox<String> secretaryCombox;
     
     
 
     
+    /**
+     * Adds the student to class.
+     *
+     * @throws Exception the exception
+     */
     void AddStudentToClass() throws Exception {
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/AddStudentToClass.fxml"));
@@ -45,6 +58,11 @@ public class NewSemesterSettingController {
 		primaryStage.show();
     }
     
+    /**
+     * Adds the class to course.
+     *
+     * @throws Exception the exception
+     */
     void AddClassToCourse() throws Exception {
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/AddClassToCourse.fxml"));
@@ -53,6 +71,12 @@ public class NewSemesterSettingController {
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }
+    
+    /**
+     * Define class.
+     *
+     * @throws Exception the exception
+     */
     void DefineClass() throws Exception {
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/DefineClass.fxml"));
@@ -62,6 +86,11 @@ public class NewSemesterSettingController {
 		primaryStage.show();
     }
     
+    /**
+     * Open semester.
+     *
+     * @throws Exception the exception
+     */
     void OpenSemester() throws Exception {
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/OpenSemester.fxml"));
@@ -71,6 +100,11 @@ public class NewSemesterSettingController {
 		primaryStage.show();
     }
     
+    /**
+     * Adds the teacher to course class.
+     *
+     * @throws Exception the exception
+     */
     void AddTeacherToCourseClass() throws Exception {
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/AddTeacherToCourseClass.fxml"));
@@ -82,6 +116,12 @@ public class NewSemesterSettingController {
     
     
     
+    /**
+     * Start.
+     *
+     * @param primaryStage the primary stage
+     * @throws Exception the exception
+     */
     public void start(Stage primaryStage) throws Exception {
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/NewSemesterSettingSecretary.fxml"));
@@ -90,6 +130,12 @@ public class NewSemesterSettingController {
 		primaryStage.show();
 	}
     
+    /**
+     * Send.
+     *
+     * @param event the event
+     * @throws Exception the exception
+     */
     public void send(ActionEvent event) throws Exception {
     	//String name = StudentName.getValue().toString();
     	String option = secretaryCombox.getValue().toString();
@@ -105,6 +151,11 @@ public class NewSemesterSettingController {
     		AddTeacherToCourseClass();    	
     }
     
+    /**
+     * Close.
+     *
+     * @param event the event
+     */
     @FXML
     void close(ActionEvent event) {	
 	    Stage stage = (Stage) btnClose.getScene().getWindow();
@@ -112,6 +163,9 @@ public class NewSemesterSettingController {
     }
     
 
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
     	ArrayList<String> options = new ArrayList<String>();

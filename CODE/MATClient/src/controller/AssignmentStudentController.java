@@ -36,13 +36,25 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 
+/**
+ * The Class AssignmentStudentController.
+ */
 public class AssignmentStudentController implements Initializable, Handler
 {
+	
+	/**
+	 * Instantiates a new assignment student controller.
+	 */
 	public AssignmentStudentController()
 	{
 		Dispatcher.addHandler(GetAssignmentsOfStudentResponse.class.getCanonicalName(), this);
 	}
 	
+	/**
+	 * Inits the data.
+	 *
+	 * @param assignments the assignments
+	 */
 	public void initData(ArrayList<Assignment> assignments) {
 		if (assignments == null)
 			return;
@@ -54,31 +66,51 @@ public class AssignmentStudentController implements Initializable, Handler
 		}
 	}
 	
+	/** The resources. */
 	@FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
+    
+    /** The location. */
     @FXML // URL location of the FXML file that was given to the FXMLLoader
     private URL location;
+    
+    /** The label my assignment. */
     @FXML
     private Label labelMyAssignment;
+    
+    /** The table view. */
     @FXML
     private TableView<Assignment> tableView;
+    
+    /** The col tea ID. */
     @FXML
     private TableColumn<Assignment,Integer > colTeaID;
+    
+    /** The col course. */
     @FXML
     private TableColumn<Assignment, String> colCourse;
+    
+    /** The col ass num. */
     @FXML
     private TableColumn<Assignment,Integer> colAssNum;
+    
+    /** The col date. */
     @FXML
     private TableColumn<Assignment, String> colDate;
     
+    /** The button next. */
     @FXML
     private Button buttonNext;
     
     
+    /** The data. */
     @FXML 
     ObservableList<Assignment> data= FXCollections.observableArrayList();
 
 
+    /* (non-Javadoc)
+     * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+     */
     public void initialize(URL location, ResourceBundle resources) 
 	{
 		// TODO Auto-generated method stub
@@ -96,6 +128,11 @@ public class AssignmentStudentController implements Initializable, Handler
 	}
     
     
+    /**
+     * Press next.
+     *
+     * @param event the event
+     */
     @FXML
     void pressNext(ActionEvent event) 
     {
@@ -108,6 +145,9 @@ public class AssignmentStudentController implements Initializable, Handler
     
  
   
+	/* (non-Javadoc)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	 */
 	public void handle(Message msg, Object obj) 
 	{
 		// TODO Auto-generated method stub

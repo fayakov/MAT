@@ -20,21 +20,35 @@ import utils.Handler;
 
 
 
+/**
+ * The Class BlockParentController.
+ */
 public class BlockParentController implements Initializable, Handler {
 	
+	/**
+	 * Instantiates a new block parent controller.
+	 */
 	public BlockParentController(){
 		Dispatcher.addHandler(BlockParentResponse.class.getCanonicalName(), this);
 	}
 	
+	/** The pid. */
 	private int pid;
 
+    /** The Parent ID. */
     @FXML
     private TextField ParentID;
 
+    /** The btn close. */
     @FXML
     private Button btnClose;
 
-	    @FXML
+	    /**
+    	 * Block parent.
+    	 *
+    	 * @param event the event
+    	 */
+    	@FXML
 	    void BlockParent(ActionEvent event) {
 	    	
 	    	if(ParentID.getText().isEmpty()) 
@@ -53,12 +67,20 @@ public class BlockParentController implements Initializable, Handler {
 	    		}	    			
 	    }
 	    
-	    @FXML
+	    /**
+    	 * Close block parent.
+    	 *
+    	 * @param event the event
+    	 */
+    	@FXML
 	    void closeBlockParent(ActionEvent event) {	
 		    Stage stage = (Stage) btnClose.getScene().getWindow();
 		    stage.close();
 	    }
 
+		/* (non-Javadoc)
+		 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+		 */
 		public void handle(Message msg, Object obj) {
 			// TODO Auto-generated method stub
 			
@@ -84,6 +106,14 @@ public class BlockParentController implements Initializable, Handler {
 			
 		}
 		
+		/**
+		 * Local prompt.
+		 *
+		 * @param pid the pid
+		 * @param eror the eror
+		 * @param succ the succ
+		 * @throws Exception the exception
+		 */
 		public void localPrompt(final int pid, final String eror, final boolean succ)  throws Exception {
 			
 			Platform.runLater(new Runnable() {
@@ -100,6 +130,9 @@ public class BlockParentController implements Initializable, Handler {
 			} );
 		}
 
+		/* (non-Javadoc)
+		 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+		 */
 		public void initialize(URL arg0, ResourceBundle arg1) {
 			// TODO Auto-generated method stub
 			

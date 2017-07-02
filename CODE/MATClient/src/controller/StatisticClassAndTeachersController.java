@@ -31,21 +31,36 @@ import javafx.stage.StageStyle;
 import utils.Handler;
 
 
+/**
+ * The Class StatisticClassAndTeachersController.
+ */
 public class StatisticClassAndTeachersController implements Initializable, Handler {
 	
+	/**
+	 * Instantiates a new statistic class and teachers controller.
+	 */
 	public StatisticClassAndTeachersController(){
 		Dispatcher.addHandler(GetClassTeachersStatsResponse.class.getCanonicalName(), this);
 	}
 	
+		/** The clid. */
 		private int clid;
 
-	    @FXML
+	    /** The Class number. */
+    	@FXML
 	    private TextField ClassNumber;
 	    
-	    @FXML
+	    /** The btn close. */
+    	@FXML
 	    private Button btnClose;
 
-	    @FXML
+	    /**
+    	 * Statistic class and teachers.
+    	 *
+    	 * @param event the event
+    	 * @throws Exception the exception
+    	 */
+    	@FXML
 	    void StatisticClassAndTeachers(ActionEvent event) throws Exception {
 	    	
 	    	 if(ClassNumber.getText().isEmpty()) 
@@ -67,12 +82,20 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 		     }	    			 
 	    
 	    
-	    @FXML
+	    /**
+    	 * Close statistic class and teachers.
+    	 *
+    	 * @param event the event
+    	 */
+    	@FXML
 	    void closeStatisticClassAndTeachers(ActionEvent event) {	
 		    Stage stage = (Stage) btnClose.getScene().getWindow();
 		    stage.close();
 	    }
 
+		/* (non-Javadoc)
+		 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+		 */
 		public void handle(Message msg, Object obj) {
 			// TODO Auto-generated method stub
 			if (msg instanceof GetClassTeachersStatsResponse) {
@@ -143,6 +166,11 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 		
 
 
+		/**
+		 * Statistics teacher.
+		 *
+		 * @param arr the arr
+		 */
 		private void statisticsTeacher(final ArrayList<TeacherWithGrade> arr) {
 			// TODO Auto-generated method stub
 			
@@ -214,6 +242,9 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 		
 
 
+		/* (non-Javadoc)
+		 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+		 */
 		public void initialize(URL location, ResourceBundle resources) {
 			// TODO Auto-generated method stub
 			

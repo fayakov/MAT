@@ -5,15 +5,29 @@ import ocsf.client.*;
 import java.io.*;
 
 import entities.Teacher;
-//import logic.LoginRequestHandler;
 
+/**
+ * The Class MATClientController.
+ */
 public class MATClientController extends AbstractClient
 {
+	
+	/** The Constant DEFAULT_HOST. */
 	final private static String	DEFAULT_HOST = "127.0.0.1";
+	
+	/** The Constant DEFAULT_PORT. */
 	final private static int	DEFAULT_PORT = 5555;
 
+	/** The instance. */
 	private static MATClientController instance = null;
 	
+	/**
+	 * Instantiates a new MAT client controller.
+	 *
+	 * @param host the host
+	 * @param port the port
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private MATClientController(String host, int port) throws IOException 
 	{
 		super(host, port); //Call the superclass constructor
@@ -21,6 +35,11 @@ public class MATClientController extends AbstractClient
 		openConnection();
 	}
 	
+	/**
+	 * Gets the single instance of MATClientController.
+	 *
+	 * @return single instance of MATClientController
+	 */
 	public static MATClientController getInstance() {
 		if (instance == null)
 			try {
@@ -34,11 +53,17 @@ public class MATClientController extends AbstractClient
 	}
 	
 
+	/**
+	 * Bind handlers to messages.
+	 */
 	private void bindHandlersToMessages() {
 		//Dispatcher.addHandler(LoginMsgRes.class.getCanonicalName(), new LoginResHandler());
 	
 	}
 	
+	/* (non-Javadoc)
+	 * @see ocsf.client.AbstractClient#handleMessageFromServer(java.lang.Object)
+	 */
 	protected void handleMessageFromServer(Object msg) 
 	{
 		Dispatcher.handleMessage((Message)msg, null);
@@ -72,6 +97,11 @@ public class MATClientController extends AbstractClient
 		}*/		
 	}
 
+	/**
+	 * Send request to server.
+	 *
+	 * @param message the message
+	 */
 	public void sendRequestToServer(Object message) 
 	{
 		// TODO Auto-generated method stub
@@ -85,6 +115,13 @@ public class MATClientController extends AbstractClient
 	    }
 	}
 
+	/**
+	 * Gets the single instance of MATClientController.
+	 *
+	 * @param ip the ip
+	 * @param port the port
+	 * @return single instance of MATClientController
+	 */
 	public static MATClientController getInstance(String ip, int port) {
 		if (instance == null)
 			try {

@@ -18,29 +18,46 @@ import utils.Handler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+/**
+ * The Class AddStudentToClassController.
+ */
 public class AddStudentToClassController implements Handler {
 	
+	/**
+	 * Instantiates a new adds the student to class controller.
+	 */
 	public AddStudentToClassController(){
 		Dispatcher.addHandler(AddStudentToClassResponse.class.getCanonicalName(), this);
 	}
 	
+	/** The cid. */
 	int sid, cid;   // student id, class id
 
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
     
+    /** The btn close. */
     @FXML
     private Button btnClose;
 
+    /** The Class ID. */
     @FXML
     private TextField ClassID;
 
+    /** The Student ID. */
     @FXML
     private TextField StudentID;
 
+    /**
+     * Send add student.
+     *
+     * @param event the event
+     */
     @FXML
     void sendAddStudent(ActionEvent event) {      	
     	
@@ -63,12 +80,20 @@ public class AddStudentToClassController implements Handler {
     	}
     }
       
+    /**
+     * Close add stodent.
+     *
+     * @param event the event
+     */
     @FXML
     void closeAddStodent(ActionEvent event) {	
 	    Stage stage = (Stage) btnClose.getScene().getWindow();
 	    stage.close();
     }
 
+	/* (non-Javadoc)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	 */
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
 		if (msg instanceof AddStudentToClassResponse) {
@@ -84,6 +109,15 @@ public class AddStudentToClassController implements Handler {
 		
 	}
 	
+/**
+ * Local prompt.
+ *
+ * @param sid the sid
+ * @param cid the cid
+ * @param eror the eror
+ * @param succ the succ
+ * @throws Exception the exception
+ */
 public void localPrompt(final int sid, final int cid, final String eror, final boolean succ)  throws Exception {
 		
 		Platform.runLater(new Runnable() {

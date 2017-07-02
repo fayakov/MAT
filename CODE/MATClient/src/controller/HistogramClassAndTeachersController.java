@@ -17,9 +17,15 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 
 
+/**
+ * The Class HistogramClassAndTeachersController.
+ */
 public class HistogramClassAndTeachersController implements  Initializable {
 
 
+	/**
+	 * Instantiates a new histogram class and teachers controller.
+	 */
 	public HistogramClassAndTeachersController(){
 	}
 
@@ -32,14 +38,21 @@ public class HistogramClassAndTeachersController implements  Initializable {
 //    @FXML
 //    private BarChart<String, Number> TeacherChart;
     
-	@FXML
+	/** The x. */
+@FXML
     final CategoryAxis x = new CategoryAxis();
     
+	/** The y. */
 	@FXML
 	final NumberAxis y = new NumberAxis();
+	
+	/** The Teacher chart. */
 	@FXML
 	final BarChart<String,Number> TeacherChart = new BarChart<String,Number>(x,y);
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -47,6 +60,11 @@ public class HistogramClassAndTeachersController implements  Initializable {
 		
 	}
 
+	/**
+	 * Inits the data.
+	 *
+	 * @param arr the arr
+	 */
 	public void initData(ArrayList<TeacherWithGrade> arr) {
 		// TODO Auto-generated method stub
 	  

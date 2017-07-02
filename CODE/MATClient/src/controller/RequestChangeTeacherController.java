@@ -22,31 +22,48 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utils.Handler;
 
+/**
+ * The Class RequestChangeTeacherController.
+ */
 public class RequestChangeTeacherController implements Initializable, Handler
 {	
 	
+	/**
+	 * Instantiates a new request change teacher controller.
+	 */
 	public RequestChangeTeacherController(){
 		Dispatcher.addHandler(ChangeTeacherResponse.class.getCanonicalName(), this);
 	}
 	
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
+    /** The btn close. */
     @FXML
     private Button btnClose;
     
+    /** The class number text filed. */
     @FXML
     private TextField classNumberTextFiled;
 
+    /** The student id text filed. */
     @FXML
     private TextField studentIdTextFiled;
 
+    /** The course id text filed. */
     @FXML
     private TextField courseIdTextFiled;
 
+    /**
+     * Send request 3.
+     *
+     * @param event the event
+     */
     @FXML
     void SendRequest3(ActionEvent event) {
     	if(studentIdTextFiled.getText().isEmpty() || courseIdTextFiled.getText().isEmpty()|| classNumberTextFiled.getText().isEmpty()) 
@@ -71,6 +88,11 @@ public class RequestChangeTeacherController implements Initializable, Handler
 
     }
 
+    /**
+     * Close 3.
+     *
+     * @param event the event
+     */
     @FXML
     void close3(ActionEvent event) {
         Stage stage = (Stage) btnClose.getScene().getWindow();
@@ -79,6 +101,9 @@ public class RequestChangeTeacherController implements Initializable, Handler
 
     }
 
+	/* (non-Javadoc)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	 */
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
 		if (msg instanceof ChangeTeacherResponse) {
@@ -94,6 +119,12 @@ public class RequestChangeTeacherController implements Initializable, Handler
 		
 	}
 	
+/**
+ * Local prompt.
+ *
+ * @param succ the succ
+ * @throws Exception the exception
+ */
 public void localPrompt(final boolean succ)  throws Exception {
 		
 		Platform.runLater(new Runnable() {
@@ -108,6 +139,9 @@ public void localPrompt(final boolean succ)  throws Exception {
 		} );
 	}
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		

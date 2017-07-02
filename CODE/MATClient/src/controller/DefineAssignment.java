@@ -29,10 +29,18 @@ import javafx.scene.control.TextField;
 import utils.Handler;
 import javafx.scene.control.Button;
 
+/**
+ * The Class DefineAssignment.
+ */
 public class DefineAssignment implements Initializable, Handler
 {
+	
+	/** The format file. */
 	String formatFile; //save format file
 	
+	/**
+	 * Instantiates a new define assignment.
+	 */
 	public DefineAssignment()
 	{
 		Dispatcher.addHandler(CreateAssignmentResponse.class.getCanonicalName(), this);
@@ -40,32 +48,57 @@ public class DefineAssignment implements Initializable, Handler
 	
 	
 	
+	/** The coid. */
 	int clid, coid;  // class id, course id
 	
-	 @FXML
+	 /** The label define ass. */
+ 	@FXML
 	    private Label labelDefineAss;
-	    @FXML
+	    
+    	/** The label upload. */
+    	@FXML
 	    private Label labelUpload;
-	    @FXML
+	    
+    	/** The label insert class. */
+    	@FXML
 	    private Label labelInsertClass;
-	    @FXML
+	    
+    	/** The label insert course. */
+    	@FXML
 	    private Label labelInsertCourse;
-	    @FXML
+	    
+    	/** The date picker define date. */
+    	@FXML
 	    private DatePicker datePickerDefineDate;
-	    @FXML
+	    
+    	/** The text field insert class. */
+    	@FXML
 	    private TextField textFieldInsertClass;
-	    @FXML
+	    
+    	/** The text field insert couse. */
+    	@FXML
 	    private TextField textFieldInsertCouse;
-	    @FXML
+	    
+    	/** The button send define ass. */
+    	@FXML
 	    private Button buttonSendDefineAss;
-	    @FXML
+	    
+    	/** The label define date. */
+    	@FXML
 	    private Label labelDefineDate;
-	    @FXML
+	    
+    	/** The button upload. */
+    	@FXML
 	    private Button buttonUpload;
 
 	    
 	    
-	    @FXML
+	    /**
+    	 * Press upload.
+    	 *
+    	 * @param event the event
+    	 */
+    	@FXML
 	    void pressUpload(ActionEvent event) 
 	    {
 	    	JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
@@ -80,7 +113,12 @@ public class DefineAssignment implements Initializable, Handler
 	    }
 	    
 	    
-	    @FXML
+	    /**
+    	 * Send define assignment.
+    	 *
+    	 * @param event the event
+    	 */
+    	@FXML
 	    void sendDefineAssignment(ActionEvent event) 
 	    {
 	    	
@@ -123,6 +161,9 @@ public class DefineAssignment implements Initializable, Handler
    
 
 
+	/* (non-Javadoc)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	 */
 	public void handle(Message msg, Object obj) 
 	{
 		// TODO Auto-generated method stub
@@ -143,12 +184,18 @@ public class DefineAssignment implements Initializable, Handler
 	}
 
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
 	}
 	
 	 
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() 
     {

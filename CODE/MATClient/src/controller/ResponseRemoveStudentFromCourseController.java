@@ -21,11 +21,20 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import utils.Handler;
 
+/**
+ * The Class ResponseRemoveStudentFromCourseController.
+ */
 public class ResponseRemoveStudentFromCourseController implements Initializable, Handler{
 
+	/** The all requests. */
 	private ArrayList<Request> allRequests;
 	
 	
+    /**
+     * Inits the data.
+     *
+     * @param allRequests the all requests
+     */
     public void initData(ArrayList<Request> allRequests) {
     	data.clear();
 		
@@ -36,40 +45,55 @@ public class ResponseRemoveStudentFromCourseController implements Initializable,
 	}
 
 
+        /** The resources. */
         @FXML
         private ResourceBundle resources;
 
+        /** The location. */
         @FXML
         private URL location;
 
+        /** The user id. */
         @FXML
         private TableColumn<Request, Integer> userId;
 
 
+        /** The request number. */
         @FXML
         private TableColumn<Request, Integer> requestNumber;
 
+        /** The class number. */
         @FXML
         private TableColumn<Request, Integer> classNumber;
 
+        /** The course id. */
         @FXML
         private TableColumn<Request, Integer> courseId;
 
+        /** The table. */
         @FXML
         private TableView<Request> table;
 
+        /** The btn decline. */
         @FXML
         private Button btnDecline;
 
 
+        /** The btn confirm. */
         @FXML
         private Button btnConfirm;
         
         
+        /** The data. */
         @FXML 
         ObservableList<Request> data= FXCollections.observableArrayList();
         		
 
+        /**
+         * Confirm.
+         *
+         * @param event the event
+         */
         @FXML
         void confirm(ActionEvent event) {
         	
@@ -82,6 +106,11 @@ public class ResponseRemoveStudentFromCourseController implements Initializable,
         
         }
 
+        /**
+         * Decline.
+         *
+         * @param event the event
+         */
         @FXML
         void decline(ActionEvent event) {
         	
@@ -94,7 +123,10 @@ public class ResponseRemoveStudentFromCourseController implements Initializable,
         }
 
 
-    	@Override
+    	/* (non-Javadoc)
+	     * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	     */
+	    @Override
     	public void handle(Message msg, Object obj) {
     		// TODO Auto-generated method stub
     		
@@ -104,6 +136,9 @@ public class ResponseRemoveStudentFromCourseController implements Initializable,
     	}	
     	
 
+		/* (non-Javadoc)
+		 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+		 */
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
 			// TODO Auto-generated method stub

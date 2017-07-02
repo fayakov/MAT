@@ -29,20 +29,36 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import utils.Handler;
 
+/**
+ * The Class SearchStudentController.
+ */
 public class SearchStudentController implements Initializable, Handler {
 	
 	
+	/**
+	 * Instantiates a new search student controller.
+	 */
 	public SearchStudentController(){
 		Dispatcher.addHandler(GetStudentDataResponse.class.getCanonicalName(), this);
 	}
+	
+	/** The sid. */
 	private int sid;
 
+    /** The closebtn. */
     @FXML
     private Button closebtn;
     
+    /** The student id. */
     @FXML
     private TextField studentId;
 
+    /**
+     * Send.
+     *
+     * @param event the event
+     * @throws Exception the exception
+     */
     @FXML
     void send(ActionEvent event) throws Exception {
     	
@@ -71,6 +87,11 @@ public class SearchStudentController implements Initializable, Handler {
 
     }
 
+    /**
+     * Close.
+     *
+     * @param event the event
+     */
     @FXML
     void close(ActionEvent event) {
     	 Stage stage = (Stage) closebtn.getScene().getWindow();
@@ -78,11 +99,17 @@ public class SearchStudentController implements Initializable, Handler {
 
     }
     
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
 	}
     
+	/* (non-Javadoc)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	 */
 	@Override
 	public void handle(Message msg, Object obj) {
 		if (msg instanceof GetStudentDataResponse) {
@@ -93,6 +120,11 @@ public class SearchStudentController implements Initializable, Handler {
 		}
 	}
 
+	/**
+	 * Run student data form.
+	 *
+	 * @param student the student
+	 */
 	private void runStudentDataForm(final Student student) {
 		Platform.runLater(new Runnable() {
 			

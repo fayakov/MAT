@@ -19,32 +19,50 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utils.Handler;
 
+/**
+ * The Class RequestRemoveStudentFromCourseController.
+ */
 public class RequestRemoveStudentFromCourseController implements Initializable, Handler{
 
+	/** The course id. */
 	int studentId, classId, courseId;
 	
+	/**
+	 * Instantiates a new request remove student from course controller.
+	 */
 	public RequestRemoveStudentFromCourseController(){
 		Dispatcher.addHandler(DeleteStudentFromCourseResponse.class.getCanonicalName(), this);
 	}
 	
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
+    /** The btn close. */
     @FXML
     private Button btnClose;
 
+    /** The class text filed. */
     @FXML
     private TextField classTextFiled;
 
+    /** The student id text field. */
     @FXML
     private TextField studentIdTextField;
 
+    /** The course text field. */
     @FXML
     private TextField courseTextField;
 
+    /**
+     * Send request 2.
+     *
+     * @param event the event
+     */
     @FXML
     void sendRequest2(ActionEvent event) {
     	if(studentIdTextField.getText().isEmpty() || courseTextField.getText().isEmpty()|| classTextFiled.getText().isEmpty()) 
@@ -67,6 +85,11 @@ public class RequestRemoveStudentFromCourseController implements Initializable, 
 
     }
 
+    /**
+     * Close request 2.
+     *
+     * @param event the event
+     */
     @FXML
     void closeRequest2(ActionEvent event) {
         Stage stage = (Stage) btnClose.getScene().getWindow();
@@ -75,6 +98,9 @@ public class RequestRemoveStudentFromCourseController implements Initializable, 
 
     }
 
+	/* (non-Javadoc)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
+	 */
 	public void handle(Message msg, Object obj) {
 		// TODO Auto-generated method stub
 		if (msg instanceof DeleteStudentFromCourseResponse) {
@@ -91,6 +117,13 @@ public class RequestRemoveStudentFromCourseController implements Initializable, 
 		
 	}
 	
+/**
+ * Local prompt.
+ *
+ * @param eror the eror
+ * @param succ the succ
+ * @throws Exception the exception
+ */
 public void localPrompt(final String eror, final boolean succ)  throws Exception {
 		
 		Platform.runLater(new Runnable() {		
@@ -106,6 +139,9 @@ public void localPrompt(final String eror, final boolean succ)  throws Exception
 		} );
 	}
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		

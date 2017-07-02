@@ -20,26 +20,41 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
+/**
+ * The Class PrincipalController.
+ */
 public class PrincipalController {
 
+	/** The list. */
 	ObservableList<String> list ;
+	
+	/** The option. */
 	String option;
 
+    /** The resources. */
     @FXML
     private ResourceBundle resources;
 
+    /** The location. */
     @FXML
     private URL location;
 
     
+    /** The principal combo box. */
     @FXML
     private ComboBox<String> principalComboBox;
     
+    /** The btn close. */
     @FXML
     private Button btnClose;
 
  
   
+    /**
+     * Statistics.
+     *
+     * @throws Exception the exception
+     */
     void statistics() throws Exception {
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/StatisticsData.fxml"));
@@ -50,6 +65,11 @@ public class PrincipalController {
     }
     
     
+    /**
+     * Show student data.
+     *
+     * @throws Exception the exception
+     */
     void ShowStudentData() throws Exception {
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/SearchStudent.fxml"));
@@ -60,6 +80,11 @@ public class PrincipalController {
     }
     
     
+    /**
+     * Block parent.
+     *
+     * @throws Exception the exception
+     */
     void BlockParent() throws Exception {
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/BlockParent.fxml"));
@@ -71,6 +96,11 @@ public class PrincipalController {
 	
 	
 	
+    /**
+     * Request.
+     *
+     * @throws Exception the exception
+     */
     void request() throws Exception {
     	
     	Pane root = FXMLLoader.load(getClass().getResource("/gui/RequestPrincipal.fxml"));
@@ -82,6 +112,12 @@ public class PrincipalController {
     
     
     
+    /**
+     * Start.
+     *
+     * @param primaryStage the primary stage
+     * @throws Exception the exception
+     */
     public void start(Stage primaryStage) throws Exception {
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/PrincipalMenu.fxml"));
@@ -91,6 +127,12 @@ public class PrincipalController {
 	}
     
     
+    /**
+     * Send.
+     *
+     * @param event the event
+     * @throws Exception the exception
+     */
     @FXML
     public void send(ActionEvent event) throws Exception {
     	
@@ -112,12 +154,20 @@ public class PrincipalController {
     	//if(principalComboBox.getValue().isEmpty())		
     }
     
+    /**
+     * Close.
+     *
+     * @param event the event
+     */
     @FXML
     void close(ActionEvent event) {	
 	    Stage stage = (Stage) btnClose.getScene().getWindow();
 	    stage.close();
     }
     
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
     	ArrayList<String> options = new ArrayList<String>();
