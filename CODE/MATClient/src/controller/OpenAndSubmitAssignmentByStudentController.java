@@ -13,6 +13,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import javax.swing.JFileChooser;
@@ -46,24 +47,18 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 		Dispatcher.addHandler(AddAssignmentForResponse.class.getCanonicalName(), this);
 	}
 	
-	 @FXML
+	    @FXML
 	    private TextField textFieldAssNum;
-
 	    @FXML
 	    private Button buttonDownload;
-
 	    @FXML
 	    private Label labelUpload;
-
 	    @FXML
 	    private Label labelAssNum;
-
 	    @FXML
 	    private Button buttonUpload;
-
 	    @FXML
 	    private Label labelDownload;
-
 	    @FXML
 	    private Button buttonSendSub;
 
@@ -101,9 +96,17 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
 				File selectedFile = jfc.getSelectedFile();
 				System.out.println(selectedFile.getAbsolutePath());
-				
 			}
-	    	//need to check validation of format.....
+			
+			
+			//check format file:
+	    	 String fileName= selectedFile.getName();
+	    	    int dotIndex = fileName.lastIndexOf('.');
+	    	    String format= (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
+	    	 if ((Objects.equals(format, new String("word"))) ||
+	    	    (Objects.equals(format, new String("PDF"))) ||
+	    		(Objects.equals(format, new String("Excel")))  )
+	    		        Prompt.alert(3,"please upload a file with valid format");
 	    }
     
 
@@ -114,7 +117,14 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
     	//get date of today:
     	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 		LocalDate todayDate = LocalDate.now();
-		System.out.println(dtf.format(todayDate)); //2017/06/29
+		System.out.println(dtf.format(todayDate)); //2017/06/29 FORMAT
+		
+		//check if late the submission
+		if(todayDate.compareTo(todayDate)>0){
+            System.out.println("Date1 is after Date2");
+        }else if(todayDate.compareTo(todayDate)<0){
+            System.out.println("Date1 is before Date2");
+        //if late-send sign....?
 		
 		
     	AddAssignmentForResponse addAssignmentForReq = new AddAssignmentForResponse(fileName, file, teacher, course, todayDate,assignmentNumber, studentId);
