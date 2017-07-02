@@ -12,8 +12,10 @@
             <Font size="32.0" />
          </font>
       </Text>
-      <TextField fx:id="cName" layoutX="279.0" layoutY="168.0" />
-      <Text layoutX="192.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course name" />
+      <TextField fx:id="cName" layoutX="280.0" layoutY="135.0" />
+      <Text layoutX="183.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course name" />
       <Button layoutX="274.0" layoutY="263.0" mnemonicParsing="false" onAction="#defineCourseSend" text="Create" />
+      <Text layoutX="183.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="teaching unit" />
+      <TextField fx:id="teachingUnit" layoutX="280.0" layoutY="188.0" />
    </children>
 </AnchorPane>

@@ -161,7 +161,8 @@ public class loginController implements Initializable, Handler
 				case EUserTeacher: path = "/gui/TeacherMenu.fxml"; break;    
 				case EUserSecretary: path = "/gui/SecretaryMenu.fxml"; break;    		
 				case EUserStudent: path = "/gui/StudentMenu.fxml"; break;    
-				case EUserParent: path = "/gui/ParentMenu.fxml"; break;    
+				case EUserParent: path = "/gui/ParentMenu.fxml"; break; 
+				case EUserSystemManager: path = "/gui/DefineCourse.fxml"; break;
 				}
 				
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(path));

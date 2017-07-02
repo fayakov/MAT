@@ -27,6 +27,9 @@ public class DefineCourseController implements Handler {
 
     @FXML
     private TextField cName;
+    
+    @FXML
+    private TextField teachingUnit;
 
     @FXML
     void defineCourseSend(ActionEvent event) {
@@ -37,7 +40,7 @@ public class DefineCourseController implements Handler {
     		Prompt.alert(3,  "one or more of the fields is empty");    
     	
     	else {  
-    		DefineCourseRequest defineClassReq = new DefineCourseRequest(cid, courseName, tUnit, pre);
+    		DefineCourseRequest defineClassReq = new DefineCourseRequest(courseName, tUnit, pre);
 	        MATClientController.getInstance().sendRequestToServer(defineClassReq);    		
     	}
 
