@@ -9,7 +9,8 @@ import communication.Dispatcher;
 import communication.GetParentDataRequest;
 import communication.GetParentDataResponse;
 import communication.GetPendingRequestsResponse;
-import communication.GetStudentDataRequest;
+import communication.GetStudentDataByStudentIDRequest;
+import communication.GetStudentDataByUserIDRequest;
 import communication.GetStudentDataResponse;
 import communication.MATClientController;
 import communication.Message;
@@ -53,9 +54,8 @@ public class SearchStudentController implements Initializable, Handler {
     	else {  		    		
     		try {
 			    sid = Integer.parseInt(studentId.getText());
-		    	
 			    
-			    GetStudentDataRequest StudentData = new GetStudentDataRequest(sid);
+			    GetStudentDataByStudentIDRequest StudentData = new GetStudentDataByStudentIDRequest(sid);
     			MATClientController.getInstance().sendRequestToServer(StudentData);
     			
 		    	} catch(NumberFormatException e){
@@ -77,41 +77,34 @@ public class SearchStudentController implements Initializable, Handler {
  	    stage.close();
 
     }
-
-	public void handle(Message msg, Object obj) {
-		// TODO Auto-generated method stub
-		if (msg instanceof GetStudentDataResponse) {
-			GetStudentDataResponse res = (GetStudentDataResponse)msg;
-			if(res.getStudentData() == null)
-				Prompt.alert(3,"Student is not exist");
-			else
-				showStudentData(res.getStudentData());
-				
-				
-				
-			
-		}
-	}
-
+    
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
 	}
-
     
-    private void showStudentData(final Student stu ) {
-
-    	Platform.runLater(new Runnable() {
+	@Override
+	public void handle(Message msg, Object obj) {
+		if (msg instanceof GetStudentDataResponse) {
+			GetStudentDataResponse res = (GetStudentDataResponse)msg;
+			Student student = res.getStudentData();
 			
-    		public void run() {
-    		FXMLLoader loader = new FXMLLoader(
-        		    getClass().getResource(
-        		      "/gui/StudentData.fxml"
-        		    )
-        		  );
+			runStudentDataForm(student);
+		}
+	}
 
-        		  Stage stage = new Stage(StageStyle.DECORATED);
-        		  try {
+	private void runStudentDataForm(final Student student) {
+		Platform.runLater(new Runnable() {
+			
+			public void run() {
+			FXMLLoader loader = new FXMLLoader(
+				    getClass().getResource(
+				      "/gui/StudentData.fxml"
+				    )
+				  );
+
+				  Stage stage = new Stage(StageStyle.DECORATED);
+				  try {
 					stage.setScene(
 					    new Scene(
 					      (Pane) loader.load()
@@ -122,18 +115,13 @@ public class SearchStudentController implements Initializable, Handler {
 					e.printStackTrace();
 				}
 
-        		  StudentDataController controller = 
-        		    loader.<StudentDataController>getController();
-        		  
-        		  controller.initData(stu);
+				  StudentDataController controller = 
+				    loader.<StudentDataController>getController();
+				  
+				  controller.initData(student);
 
-        		  stage.show();
-    		}
-    	});
-    }
-    
-
-	
-	
-	
+				  stage.show();
+			}
+		});
+	}
 }

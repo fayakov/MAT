@@ -1,12 +1,12 @@
 package communication;
 
-public class GetStudentDataRequest extends Message 
+public class GetStudentDataByUserIDRequest extends Message 
 {
 	private static final long serialVersionUID = 1L;
 	
 	private int userId;
 	
-	public GetStudentDataRequest(int userId) {
+	public GetStudentDataByUserIDRequest(int userId) {
 		this.userId = userId;
 		
 	}
