@@ -12,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import utils.Handler;
 import java.io.IOException;
 import java.net.URL;
@@ -99,11 +100,29 @@ public class AssignmentStudentController implements Initializable, Handler
     @FXML
     void pressNext(ActionEvent event) 
     {
-    /*	Pane root = FXMLLoader.load(getClass().getResource("/gui/OpenAndSubmitAssigmentByStudent.fxml"));
-		Scene scene = new Scene(root);
-		Stage primaryStage = new Stage();
-		primaryStage.setScene(scene);
-		primaryStage.show();*/
+    	Assignment assignment = tableView.getSelectionModel().getSelectedItem();
+    	
+    	FXMLLoader loader = new FXMLLoader(
+				getClass().getResource(
+						"/gui/OpenAndSubmitAssigmentByStudent.fxml"));
+		
+		Stage stage = new Stage(StageStyle.DECORATED);
+		try {
+			stage.setScene(
+					new Scene(
+							(Pane) loader.load()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		OpenAndSubmitAssignmentByStudentController controller =
+				loader.<OpenAndSubmitAssignmentByStudentController>getController();
+		
+		controller.initData(assignment);
+		
+		stage.show();
+		
     }
     
  
