@@ -52,6 +52,7 @@ public class MATServerController extends AbstractServer
 		Dispatcher.addHandler(GetAssignmentsOfStudentRequest.class.getCanonicalName(), new GetAssignmentsOfStudentRequestHandler());
 		Dispatcher.addHandler(GetAssignmentsOfTeacherRequest.class.getCanonicalName(), new GetAssignmentsOfTeacherRequestHandler());		
 		Dispatcher.addHandler(GetClassDataRequest.class.getCanonicalName(), new GetClassDataRequestHandler());
+		Dispatcher.addHandler(GetClassDataRequest.class.getCanonicalName(), new GetClassDataRequestHandler());
 		Dispatcher.addHandler(GetParentDataRequest.class.getCanonicalName(), new GetParentDataRequestHandler());
 		Dispatcher.addHandler(GetPendingRequestsRequest.class.getCanonicalName(), new GetPendingRequestsRequestHandler());
 		Dispatcher.addHandler(GetStudentDataByUserIDRequest.class.getCanonicalName(), new GetStudentDataRequestByUserIdHandler());

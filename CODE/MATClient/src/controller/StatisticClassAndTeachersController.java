@@ -73,7 +73,6 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 		    stage.close();
 	    }
 
-
 		public void handle(Message msg, Object obj) {
 			// TODO Auto-generated method stub
 			if (msg instanceof GetClassTeachersStatsResponse) {
@@ -85,25 +84,25 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 				ArrayList<TeacherWithGrade> arr = res.getStats();
 				statisticsTeacher(arr);
 				}
-				Platform.runLater(new Runnable() {
-					
-					@Override
-					public void run() {
-
-				    	Pane root;
-						try {
-							root = FXMLLoader.load(getClass().getResource("/gui/HistogramClassAndTeachers.fxml"));
-							Scene scene = new Scene(root);
-							Stage primaryStage = new Stage();
-							primaryStage.setScene(scene);
-							primaryStage.show();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-								
-					}
-				});
+//				Platform.runLater(new Runnable() {
+//					
+//					@Override
+//					public void run() {
+//
+//				    	Pane root;
+//						try {
+//							root = FXMLLoader.load(getClass().getResource("/gui/HistogramClassAndTeachers.fxml"));
+//							Scene scene = new Scene(root);
+//							Stage primaryStage = new Stage();
+//							primaryStage.setScene(scene);
+//							primaryStage.show();
+//						} catch (IOException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+//								
+//					}
+//				});
 				
 
 				
@@ -144,21 +143,53 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 		
 
 
-		private void statisticsTeacher(ArrayList<TeacherWithGrade> arr) {
+		private void statisticsTeacher(final ArrayList<TeacherWithGrade> arr) {
 			// TODO Auto-generated method stub
 			
 
-	    	Platform.runLater(new Runnable() {
+//	    	Platform.runLater(new Runnable() {
+//				
+//	    		public void run() {
+//	    		FXMLLoader loader = new FXMLLoader(
+//	        		    getClass().getResource(
+//	        		      "/gui/HistogramClassAndTeachers.fxml"
+//	        		    )
+//	        		  );
+//
+//	        		  Stage stage = new Stage(StageStyle.DECORATED);
+//	        		  try {
+//						stage.setScene(
+//						    new Scene(
+//						      (Pane) loader.load()
+//						    )
+//						  );
+//					} catch (IOException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//
+//	        		  HistogramClassAndTeachersController controller = 
+//	        		    loader.<HistogramClassAndTeachersController>getController();
+//	        		  
+//	        		  controller.initData(arr);
+//
+//	        		  stage.show();
+//	    		}
+//	    	});
+			
+			
+			
+			Platform.runLater(new Runnable() {
 				
-	    		public void run() {
-	    		FXMLLoader loader = new FXMLLoader(
-	        		    getClass().getResource(
-	        		      "/gui/HistogramClassAndTeachers.fxml"
-	        		    )
-	        		  );
+				public void run() {
+				FXMLLoader loader = new FXMLLoader(
+					    getClass().getResource(
+					      "/gui/HistogramClassAndTeachers.fxml"
+					    )
+					  );
 
-	        		  Stage stage = new Stage(StageStyle.DECORATED);
-	        		  try {
+					  Stage stage = new Stage(StageStyle.DECORATED);
+					  try {
 						stage.setScene(
 						    new Scene(
 						      (Pane) loader.load()
@@ -169,14 +200,14 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 						e.printStackTrace();
 					}
 
-	        		  HistogramClassAndTeachersController controller = 
-	        		    loader.< HistogramClassAndTeachersController>getController();
-	        		  
-	        		  controller.initData(arr);
+					  HistogramClassAndTeachersController controller = 
+					    loader.<HistogramClassAndTeachersController>getController();
+					  
+					  controller.initData(arr);
 
-	        		  stage.show();
-	    		}
-	    	});
+					  stage.show();
+				}
+			});
 	    }
 			
 			

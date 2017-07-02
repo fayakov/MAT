@@ -1927,8 +1927,10 @@ public class CDal {
 				}
 			}
 			
-			TeacherWithGrade classGrade = new TeacherWithGrade((float)(sum/cnt) , getUserName(getTeacherUserId(teacher)));
-			myList.add(classGrade);
+			if (cnt != 0) {
+				TeacherWithGrade classGrade = new TeacherWithGrade((float)(sum/cnt) , getUserName(getTeacherUserId(teacher)));
+				myList.add(classGrade);
+			}
 		}
 		return myList;
 	}
