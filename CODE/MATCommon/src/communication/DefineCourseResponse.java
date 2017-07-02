@@ -4,8 +4,7 @@ public class DefineCourseResponse extends Message {
 
 private static final long serialVersionUID = 1L;
 	
-	boolean isSucceeded;
-	String requestId;	
+	boolean isSucceeded;	
 	private String errText;
 	
 	

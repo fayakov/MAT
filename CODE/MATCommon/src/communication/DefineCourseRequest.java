@@ -5,31 +5,14 @@ import java.util.ArrayList;
 public class DefineCourseRequest extends Message {
 	private static final long serialVersionUID = 1L;
 	
-	private int courseId, tUnit;
-	private String courseName;
-	ArrayList<Integer> pre;
+	String courseName;
+	private int teachingUnit;
+	private int teachingHours;
 	
-	public DefineCourseRequest(int courseId, String courseName, int tUnit, ArrayList<Integer> pre) {
-		this.courseId = courseId;
+	public DefineCourseRequest(String courseName, int teachingHours, int teachingUnit) {
 		this.courseName = courseName;
-		this.tUnit = tUnit;
-		this.pre = pre;
-	}
-
-	public int getCourseId() {
-		return courseId;
-	}
-
-	public void setCourseId(int courseId) {
-		this.courseId = courseId;
-	}
-
-	public int gettUnit() {
-		return tUnit;
-	}
-
-	public void settUnit(int tUnit) {
-		this.tUnit = tUnit;
+		this.teachingHours = teachingHours;
+		this.teachingUnit = teachingUnit;
 	}
 
 	public String getCourseName() {
@@ -40,12 +23,21 @@ public class DefineCourseRequest extends Message {
 		this.courseName = courseName;
 	}
 
-	public ArrayList<Integer> getPre() {
-		return pre;
+	public int getTeachingUnit() {
+		return teachingUnit;
 	}
 
-	public void setPre(ArrayList<Integer> pre) {
-		this.pre = pre;
+	public void setTeachingUnit(int teachingUnit) {
+		this.teachingUnit = teachingUnit;
 	}
+
+	public int getTeachingHours() {
+		return teachingHours;
+	}
+
+	public void setTeachingHours(int teachingHours) {
+		this.teachingHours = teachingHours;
+	}
+
 	
 }

@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
-
 import communication.DefineCourseRequest;
 import communication.DefineCourseResponse;
 import communication.Dispatcher;
@@ -21,27 +19,37 @@ public class DefineCourseController implements Handler {
 	public DefineCourseController() {
 		Dispatcher.addHandler(DefineCourseResponse.class.getCanonicalName(), this);
 	}
-	private int cid, tUnit;
-	ArrayList<Integer> pre;
+	private int teachHours, tUnit;
 	private String courseName;
 
-    @FXML
-    private TextField cName;
-    
-    @FXML
-    private TextField teachingUnit;
+	 @FXML
+	 private TextField teachingUnitText;
 
+	 @FXML
+	 private TextField courseNameText;
+
+	 @FXML
+	 private TextField teachingHoursText;
+	
     @FXML
     void defineCourseSend(ActionEvent event) {
     	
-    	courseName = cName.getText().toString(); 	
+    	courseName = courseNameText.getText().toString(); 	
     	
-    	if(cName.getText().isEmpty()) 
+    	if(courseNameText.getText().isEmpty() || teachingUnitText.getText().isEmpty() || teachingHoursText.getText().isEmpty()) 
     		Prompt.alert(3,  "one or more of the fields is empty");    
     	
-    	else {  
-    		DefineCourseRequest defineClassReq = new DefineCourseRequest(courseName, tUnit, pre);
-	        MATClientController.getInstance().sendRequestToServer(defineClassReq);    		
+    	else {
+    		try {
+    		teachHours = Integer.parseInt(teachingHoursText.getText());
+    		tUnit =  Integer.parseInt(teachingUnitText.getText());
+    		
+    		DefineCourseRequest defineClassReq = new DefineCourseRequest(courseName, teachHours, tUnit);
+	        MATClientController.getInstance().sendRequestToServer(defineClassReq);  
+    		}
+    		catch(NumberFormatException e){
+		    	Prompt.alert(3,"please enter numerical value");
+		    	return; }
     	}
 
     }
