@@ -70,6 +70,12 @@ public class loginController implements Initializable, Handler
     private TextField serverIpTextField;
     @FXML
     private TextField serverPortTextField;
+
+	private Parent root;
+
+	private Scene scene;
+
+	private Stage primaryStage;
     
     private static boolean checkIfValidIpv4(String text)  {
     	   StringTokenizer st = new StringTokenizer(text,".");
@@ -164,29 +170,12 @@ public class loginController implements Initializable, Handler
     }
     
 	public void start(Stage primaryStage) throws Exception {	
-	  /*
-		final String regex = makePartialIPRegex();
-        final UnaryOperator<Change> ipAddressFilter = c -> {
-            String text = c.getControlNewText();
-            if  (text.matches(regex)) {
-                return c ;
-            } else {
-                return null ;
-            }
-        };
-        serverIpTextField.setTextFormatter(new TextFormatter<>(ipAddressFilter));
-        */
-	    Parent root = FXMLLoader.load(getClass().getResource("/gui/logIn.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-    }
-
-    private String makePartialIPRegex() {
-        String partialBlock = "(([01]?[0-9]{0,2})|(2[0-4][0-9])|(25[0-5]))" ;
-        String subsequentPartialBlock = "(\\."+partialBlock+")" ;
-        String ipAddress = partialBlock+"?"+subsequentPartialBlock+"{0,3}";
-        return "^"+ipAddress ;
+	  
+	    root = FXMLLoader.load(getClass().getResource("/gui/logIn.fxml"));
+		scene = new Scene(root);
+		this.primaryStage = primaryStage;
+		this.primaryStage.setScene(scene);
+		this.primaryStage.show();
     }
 
 	@Override
@@ -232,6 +221,7 @@ public class loginController implements Initializable, Handler
 //	
 //	
 	public void open(final LoginResponseMsg res, final String userId) throws Exception {
+		
 			Platform.runLater(new Runnable() {
 			
 			public void run() {
@@ -284,6 +274,6 @@ public class loginController implements Initializable, Handler
 				  stage.show();
 			}
 		});
+		this.primaryStage.hide();
 	}
-
 }

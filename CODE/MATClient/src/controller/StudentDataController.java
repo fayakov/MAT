@@ -5,6 +5,7 @@ import javafx.scene.control.TableView;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import communication.Dispatcher;
+import communication.GetStudentDataByStudentIDRequest;
 import communication.GetStudentDataByUserIDRequest;
 import communication.GetStudentDataResponse;
 import communication.LoginRequestMsg;
@@ -73,15 +74,14 @@ public class StudentDataController  implements Initializable
     void initData(Student student) 
     {
     	this.student = student;
-<<<<<<< HEAD
     }
     
     @FXML
     void StudentInfo(ActionEvent event) 
     {
-    	GetStudentDataRequest GetStudentDataReq = new GetStudentDataRequest(student.getId());
+    	GetStudentDataByStudentIDRequest GetStudentDataReq = new GetStudentDataByStudentIDRequest(student.getId());
 		MATClientController.getInstance().sendRequestToServer(GetStudentDataReq);
-=======
+
     	if (student != null) {
     		String strStudentID = Integer.toString(student.getId());
     		String strClass = Integer.toString(student.getId());
@@ -91,7 +91,6 @@ public class StudentDataController  implements Initializable
 	    	textLName.setText(student.getLastName());
 	    	textClasses.setText(strClass); 
     	}
->>>>>>> bf91243622cc993605f71f536eba1afa78b2e6f7
     }
     
     //בלי טבלה
