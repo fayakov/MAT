@@ -10,6 +10,11 @@ import java.util.ArrayList;
 public class StudentCourseAssignment implements Serializable 
 {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	/** The assignment list. */
 	private ArrayList<Assignment> assignmentList;
 

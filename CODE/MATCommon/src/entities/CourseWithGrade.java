@@ -1,11 +1,17 @@
 package entities;
 
+import java.io.Serializable;
 
 /**
  * The Class CourseWithGrade.
  */
-public class CourseWithGrade {
+public class CourseWithGrade implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The m grade. */
 	private float m_grade;
 	

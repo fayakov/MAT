@@ -12,6 +12,11 @@ import java.sql.Date;
 //TAL
 public class Submission implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The date. */
 	private Date date;
 	

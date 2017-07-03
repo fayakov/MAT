@@ -8,6 +8,11 @@ import java.io.Serializable;
  */
 public class TeachingUnit implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The tu number. */
 	int tuNumber;
 	

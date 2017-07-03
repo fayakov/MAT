@@ -27,11 +27,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import utils.Handler;
 
 /**
  * The Class TeacherController.
  */
-public class TeacherController 
+public class TeacherController implements Handler
 {
 	/** The user ID. */
 	private int userID = 124;
@@ -121,8 +122,6 @@ public class TeacherController
     		checkAssignment();
     }
     
-    
-
     /**
      * Start.
      *
@@ -153,8 +152,6 @@ public class TeacherController
 		comboChooseOptionTeacher.setItems(listT);
        
     }
-    
-    
     
     /* (non-Javadoc)
 	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
