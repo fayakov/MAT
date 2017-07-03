@@ -35,6 +35,17 @@ public class HistogramTeacherAndClassesController implements  Initializable{
     @FXML
     private NumberAxis y;
     
+<<<<<<< HEAD
+=======
+	/** The arr to display. */
+	private ArrayList<ClassWithGrade> arrToDisplay;
+
+	
+
+	
+	
+	
+>>>>>>> f732568c13c052f98afbf853ee2c29183798f80e
 	/* (non-Javadoc)
 	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
 	 */
