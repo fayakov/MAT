@@ -1,5 +1,6 @@
 package test;
 
+import controller.HistogramClassAndTeachersController;
 import controller.ParentController;
 import controller.PrincipalController;
 import javafx.application.Application;
@@ -27,7 +28,8 @@ launch(args);
 	@Override
 	public void start(Stage arg0) throws Exception {
 		
-		PrincipalController prinController = new PrincipalController();
+		HistogramClassAndTeachersController prinController = new HistogramClassAndTeachersController();
+	//	PrincipalController prinController = new PrincipalController();
 		//ParentController prinController = new ParentController();
 		prinController.start(arg0);
 	}
