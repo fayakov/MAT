@@ -192,15 +192,6 @@ public class DefineAssignment implements Initializable, Handler
 		
 	}
 	
-	 
-    /**
-     * Initialize.
-     */
-    @FXML
-    void initialize() 
-    {
-       
-    }
 	
 }
 

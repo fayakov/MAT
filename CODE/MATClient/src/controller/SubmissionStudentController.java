@@ -27,6 +27,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -39,21 +40,32 @@ import utils.Handler;
 public class SubmissionStudentController implements Initializable, Handler
 {
 	
-	/** The list. */
-	ObservableList<String> list ;
-	
-	
 	/**
 	 * Instantiates a new submission student controller.
 	 */
 	public SubmissionStudentController()
 	{
-		Dispatcher.addHandler(GetAssignmentsOfTeacherRequest.class.getCanonicalName(), this);
+		Dispatcher.addHandler(GetAssignmentsOfTeacherResponse.class.getCanonicalName(), this);
 	}
 	
 	
-	/** The list ass. */
-	ObservableList<String> listAss;
+	/**
+	 * Inits the data.
+	 *
+	 * @param submissions the submissions
+	 */
+	public void initData(ArrayList<Submission> submissions) {
+		if (submissions == null)
+			return;
+		
+		data.clear();
+		
+		for (Submission submission : submissions) {
+			data.add(submission);
+		}
+	}
+	
+	
 	
 	 /** The resources. */
  	@FXML
@@ -65,7 +77,7 @@ public class SubmissionStudentController implements Initializable, Handler
 
 	    /** The col stu ID. */
     	@FXML
-	    private TableColumn<SubmissionsForTeacherCheck, Integer> colStuID;
+	    private TableColumn<Submission, Integer> colStuID;
 
 	    /** The label list of stu sub. */
     	@FXML
@@ -73,18 +85,43 @@ public class SubmissionStudentController implements Initializable, Handler
 
 	    /** The col ass num. */
     	@FXML
-	    private TableColumn<SubmissionsForTeacherCheck, Integer> colAssNum;
+	    private TableColumn<Submission, Integer> colAssNum;
 
 	    /** The col sub num. */
     	@FXML
-	    private TableColumn<SubmissionsForTeacherCheck, Integer> colSubNum;
+	    private TableColumn<Submission, Integer> colSubNum;
 
 	    /** The col sub date. */
     	@FXML
-	    private TableColumn<SubmissionsForTeacherCheck, Date> colSubDate;
+	    private TableColumn<Submission, Date> colSubDate;
 
+    	/** The data. */
+        @FXML 
+        ObservableList<Submission> data= FXCollections.observableArrayList();
+    	
+        @FXML
+        private TableView<Submission> tableView;
+        
+        
+        /* (non-Javadoc)
+    	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+    	 */
+    	public void initialize(URL arg0, ResourceBundle arg1) 
+    	{
+    		// TODO Auto-generated method stub
+    		colAssNum.setCellValueFactory(new PropertyValueFactory<Submission, Integer>("assignmentNumber"));
+        	colSubNum.setCellValueFactory(new PropertyValueFactory<Submission, Integer>("submissionNumber"));
+        	colStuID.setCellValueFactory(new PropertyValueFactory<Submission, Integer>("studentId"));
+        	colSubDate.setCellValueFactory(new PropertyValueFactory<Submission, Date>("date"));
+        	
+        	tableView.setItems(data);
+        	
+        	//GetAssignmentsOfTeacherRequest getAssignmentsOfTeachertReq = new GetAssignmentsOfTeacherRequest(userIdStr);//need id
+        	//MATClientController.getInstance().sendRequestToServer(getAssignmentsOfTeachertReq);
+    	}
 	    
-	    
+        
+        
 	    /**
     	 * Next student submission.
     	 *
@@ -104,22 +141,7 @@ public class SubmissionStudentController implements Initializable, Handler
 	    
 	    
 	    
-    /**
-     * Initialize.
-     */
-    @FXML
-    void initialize() 
-    {
-    	
-    	colAssNum.setCellValueFactory(new PropertyValueFactory<SubmissionsForTeacherCheck, Integer>("assignmentNumber"));
-    	colSubNum.setCellValueFactory(new PropertyValueFactory<SubmissionsForTeacherCheck, Integer>("submissionNumber"));
-    	colStuID.setCellValueFactory(new PropertyValueFactory<SubmissionsForTeacherCheck, Integer>("studentId"));
-    	colSubDate.setCellValueFactory(new PropertyValueFactory<SubmissionsForTeacherCheck, Date>("date"));
-    	
-    	GetAssignmentsOfTeacherRequest getAssignmentsOfTeachertReq = new GetAssignmentsOfTeacherRequest(userIdStr);//need id
-    	MATClientController.getInstance().sendRequestToServer(getAssignmentsOfTeachertReq);
-        
-    }
+    
 
 	/* (non-Javadoc)
 	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
@@ -152,15 +174,7 @@ public class SubmissionStudentController implements Initializable, Handler
 	
 	
 	
-	/* (non-Javadoc)
-	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
-	 */
-	public void initialize(URL arg0, ResourceBundle arg1) 
-	{
-		// TODO Auto-generated method stub
-		
-		
-	}
+	
 }
 
 

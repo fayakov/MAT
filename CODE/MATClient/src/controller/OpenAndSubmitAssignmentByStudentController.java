@@ -63,6 +63,7 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
     	@FXML
 	    private Button buttonSendSub;
 
+    	
 		private Assignment assignment;
 
 	    public void initData(Assignment assignment) {
@@ -170,7 +171,7 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 //        //if late-send sign....?
 //		
 //		
-//    	AddAssignmentForResponse addAssignmentForReq = new AddAssignmentForResponse(fileName, file, teacher, course, todayDate,assignmentNumber, studentId);
+//    	AddAssignmentForResponse addAssignmentForReq = new AddAssignmentForResponse(fileName, file,assignment.teacherId, assignment.courseName, todayDate,assignment.assignmentNumber, studentId);
 //    	MATClientController.getInstance().sendRequestToServer(addAssignmentForReq);
     }
    
