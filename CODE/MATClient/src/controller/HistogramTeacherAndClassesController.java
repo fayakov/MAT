@@ -15,7 +15,7 @@ import javafx.scene.chart.XYChart;
 /**
  * The Class HistogramTeacherAndClassesController.
  */
-public class HistogramTeacherAndClassesController implements  Initializable{
+public class HistogramTeacherAndClassesController implements  Initializable {
 	
 	/**
 	 * Instantiates a new histogram teacher and classes controller.
@@ -35,22 +35,8 @@ public class HistogramTeacherAndClassesController implements  Initializable{
     @FXML
     private NumberAxis y;
     
-<<<<<<< HEAD
-=======
-	/** The arr to display. */
-	private ArrayList<ClassWithGrade> arrToDisplay;
 
-	
-
-	
-	
-	
->>>>>>> f732568c13c052f98afbf853ee2c29183798f80e
-	/* (non-Javadoc)
-	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
-	 */
-
-	public void initialize(URL arg0, ResourceBundle arg1) {
+    public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 
 	}

@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
 /**
  * The Class HistogramClassAndCoursesController.
  */
-public class HistogramClassAndCoursesController implements Initializable{
+public class HistogramClassAndCoursesController implements Initializable {
 	
 	/**
 	 * Instantiates a new histogram class and courses controller.
@@ -22,24 +22,6 @@ public class HistogramClassAndCoursesController implements Initializable{
 	public HistogramClassAndCoursesController(){
 	}
 	
-<<<<<<< HEAD
-=======
-	
-	/** The arr to display. */
-	private ArrayList<CourseWithGrade> arrToDisplay;
-
-	
-    /**
-     * Gets the arr to display.
-     *
-     * @return the arr to display
-     */
-    public ArrayList<CourseWithGrade> getArrToDisplay() {
-		return arrToDisplay;
-	}
-
-	
->>>>>>> f732568c13c052f98afbf853ee2c29183798f80e
 	/** The x. */
 	@FXML
     private CategoryAxis x;
@@ -50,15 +32,8 @@ public class HistogramClassAndCoursesController implements Initializable{
 
     /** The Course chart. */
     @FXML
-<<<<<<< HEAD
 
     private BarChart<String, Number> CourseChart;
-=======
-    private BarChart<Number, String> CourseChart;
-
-
-
->>>>>>> f732568c13c052f98afbf853ee2c29183798f80e
 
 	/* (non-Javadoc)
 	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
@@ -72,7 +47,6 @@ public class HistogramClassAndCoursesController implements Initializable{
 	 *
 	 * @param arr the arr
 	 */
-<<<<<<< HEAD
 	public void initData(ArrayList<CourseWithGrade> arr) {
 		// TODO Auto-generated method stub
 		XYChart.Series set1 = new XYChart.Series<>();
@@ -84,26 +58,3 @@ public class HistogramClassAndCoursesController implements Initializable{
 		
 	}
 }
-=======
-	
-	public void initData(ArrayList<CourseWithGrade> arr){
-		// TODO Auto-generated method stub
-	 
-	       
-			XYChart.Series series1 = new XYChart.Series();
-	        series1.setName("2003");
-	        
-	        for (CourseWithGrade coursewithgrade : arr) 
-	        	series1.getData().add(new XYChart.Data(coursewithgrade.getName(), coursewithgrade.getGrade()));
-	        	        
-	     CourseChart.getData().add(series1);
-		}
-		// TODO Auto-generated method stub
-
-	
-	}
-		
-		
-
-
->>>>>>> f732568c13c052f98afbf853ee2c29183798f80e
