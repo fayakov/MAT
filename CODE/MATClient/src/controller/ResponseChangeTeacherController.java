@@ -101,7 +101,7 @@ public class ResponseChangeTeacherController implements Initializable, Handler{
 	        	PrincipalDecisionRequest msg = new PrincipalDecisionRequest(req, true);
 	        	
 	        	MATClientController.getInstance().sendRequestToServer(msg);
-	        	
+	        	Prompt.alert(1,"The request was confirmed");
 	        	data.remove(req);
 	        
 	        }
@@ -118,7 +118,7 @@ public class ResponseChangeTeacherController implements Initializable, Handler{
 	        	PrincipalDecisionRequest msg = new PrincipalDecisionRequest(req, false);
 	        	
 	        	MATClientController.getInstance().sendRequestToServer(msg);
-	        	    	
+	        	Prompt.alert(1,"The request was declined");	    	
 	        	data.remove(req);
 	        }
 

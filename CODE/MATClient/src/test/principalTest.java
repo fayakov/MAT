@@ -22,14 +22,12 @@ public class principalTest extends Application {
 launch(args);		
 	  } // end main
 	
-	/* (non-Javadoc)
-	 * @see javafx.application.Application#start(javafx.stage.Stage)
-	 */
+
 	@Override
 	public void start(Stage arg0) throws Exception {
 		
-		HistogramClassAndTeachersController prinController = new HistogramClassAndTeachersController();
-	//	PrincipalController prinController = new PrincipalController();
+		//HistogramClassAndTeachersController prinController = new HistogramClassAndTeachersController();
+		PrincipalController prinController = new PrincipalController();
 		//ParentController prinController = new ParentController();
 		prinController.start(arg0);
 	}
