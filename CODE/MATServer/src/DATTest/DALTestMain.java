@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Random;
 
 import DAL.*;
 
@@ -22,11 +23,13 @@ public class DALTestMain {
 
 		CDal dl = new CDal();
 		dl.connect("admin");
+		
+		//checkCreateUser(dl);
 		//checkLogin(dl);
 		//checkGetUserData(dl);
 		//checkGetUserType(dl);
 		//checkIsExistClass(dl);
-		checkAddClass(dl);
+		//checkAddClass(dl);
 		//checkAddStudentToClass(dl);
 		//checkGetStudentId(dl);
 		//chekcIsStudentInCourse(dl);
@@ -51,7 +54,7 @@ public class DALTestMain {
 		//checkFinishedGrade(dl);
 		//checkClassTecherStatistics(dl);
 		//checkTecherClassStatistics(dl);
-		//checkCourseClassStatistics(dl);
+		checkCourseClassStatistics(dl);
 		//checkCreateNewSemester(dl);
 		//checkCreateParant(dl);
 		//checkAddStudentToParent(dl);
@@ -161,6 +164,15 @@ public class DALTestMain {
 		}
 	}
 	
+	public static void  checkCreateUser(CDal dl){
+		for(int i = 2000 ; i <2010 ; ++i)
+		{
+			String name = Long.toHexString(Double.doubleToLongBits(Math.random()));
+			dl.createUser(i, String.valueOf(i), name, name,1);
+		}
+	
+	}
+	
 	public static void checkGetUserType(CDal dl){
 		int id = 123;
 		if(dl.getUserType(id) == EUserType.EUserTeacher)
@@ -216,9 +228,16 @@ public class DALTestMain {
 	
 	public static void checkAddStudentToCourse(CDal dl)
 	{
-		//System.out.println(dl.addStudentToCourse("Algebra1", 124 ));
+		for(int i = 1000 ; i < 2000 ; ++i)
+		{
+
+			dl.addStudentToCourseWithClass(6, 1, i);
+			dl.addStudentToCourseWithClass(7, 2, i);
+			dl.addStudentToCourseWithClass(8, 3, i);
+		}
+		//System.out.println();
 		//System.out.println(dl.addStudentToCourseWithClass(dl.getCourseId("Algebra1"), 1, 124));
-		System.out.println(dl.addStudentToCourseWithClass(dl.getCourseId("Algebra2"), 1, 124));
+		//System.out.println(dl.addStudentToCourseWithClass(dl.getCourseId("Algebra2"), 1, 124));
 		//System.out.println(dl.addStudentToCourse("Algebra3", 124 ));
 	}
 	
@@ -245,16 +264,25 @@ public class DALTestMain {
 	
 	public static void checkAddStudentToClass(CDal dl)
 	{
-		System.out.println(dl.addStudentToClass(1, 124) == false);
-		System.out.println(dl.addStudentToClass(5, 124 )==false);
-		System.out.println(dl.addStudentToClass(1, 129)==false);
+		for(int i = 3 ; i < 1000 ; ++i)
+		{
+			dl.addStudentToClass(1, i);
+			dl.addStudentToClass(2, i);
+			dl.addStudentToClass(3, i);
+		}
 	}	
 	
 	public static void checkAddCourseToClass(CDal dl)
 	{
 		System.out.println(dl.addCourseToClass(1, 6) == true);
-		//System.out.println(dl.addCourseToClass(1, 124 )==false);
-		//System.out.println(dl.addCourseToClass(124, 1 )==false);
+		System.out.println(dl.addCourseToClass(2, 6) == true);
+		System.out.println(dl.addCourseToClass(3, 6) == true);
+		System.out.println(dl.addCourseToClass(1, 7) == true);
+		System.out.println(dl.addCourseToClass(2, 7) == true);
+		System.out.println(dl.addCourseToClass(3, 7) == true);
+		System.out.println(dl.addCourseToClass(1, 8) == true);
+		System.out.println(dl.addCourseToClass(2, 8) == true);
+		System.out.println(dl.addCourseToClass(3, 8) == true);
 	}	
 	
 	
@@ -272,7 +300,15 @@ public class DALTestMain {
 		//System.out.println(dl.addTeacherToCourseInClass(1, 1, 1) == false);
 		//System.out.println(dl.addTeacherToCourseInClass(1233, 1, 123) == false);
 		//System.out.println(dl.addTeacherToCourseInClass(1, 1234, 123) == false);
-		System.out.println(dl.addTeacherToCourseInClass(1, 6, 130) == true);
+		System.out.println(dl.addTeacherToCourseInClass(1, 6, 2000) == true);
+		System.out.println(dl.addTeacherToCourseInClass(2, 6, 2000) == true);
+		System.out.println(dl.addTeacherToCourseInClass(3, 6, 2000) == true);
+		System.out.println(dl.addTeacherToCourseInClass(1, 7, 2001) == true);
+		System.out.println(dl.addTeacherToCourseInClass(2, 7, 2001) == true);
+		System.out.println(dl.addTeacherToCourseInClass(3, 7, 2001) == true);
+		System.out.println(dl.addTeacherToCourseInClass(1, 8, 2002) == true);
+		System.out.println(dl.addTeacherToCourseInClass(2, 8, 2002) == true);
+		System.out.println(dl.addTeacherToCourseInClass(3, 8, 2002) == true);
 	}
 	
 	public static void checkChangeTeacher(CDal dl)
@@ -299,8 +335,12 @@ public class DALTestMain {
 	
 	public static void checkCreateTeacher(CDal dl)
 	{
+		for(int i = 2000 ; i < 2010 ; ++i)
+		{
+			dl.createTeacher(i, 200, 2);
+		}
 		//System.out.println(dl.createTeacher(123, 20, 20) == false);
-		System.out.println(dl.createTeacher(130, 200, 2) == true);
+		//System.out.println(dl.createTeacher(130, 200, 2) == true);
 		//System.out.println(dl.createTeacher(124, 20, 1) == false);
 		//System.out.println(dl.createTeacher(123, 20, 1) == false);
 	}
@@ -313,7 +353,19 @@ public class DALTestMain {
 	
 	public static void checkFinishStudentCourse(CDal dl)
 	{
-		System.out.println(dl.finishStudentCourse(1, 1, 100, dl.getCurrentSemester()));
+		Random rand = new Random(); 
+		int value;
+
+		for(int i = 0 ; i < 1000 ; ++i)
+		{
+			value = rand.nextInt(100); 
+			dl.finishStudentCourse(6, i, value, dl.getCurrentSemester());
+			value = rand.nextInt(100); 
+			dl.finishStudentCourse(7, i, value, dl.getCurrentSemester());
+			value = rand.nextInt(100); 
+			dl.finishStudentCourse(8, i, value, dl.getCurrentSemester());
+		}
+		
 	}
 	
 	public static void checkisFinishedPrevCourse(CDal dl)
@@ -340,22 +392,22 @@ public class DALTestMain {
 	}
 
 	public static void checkTecherClassStatistics(CDal dl)
-	{/*
-		ArrayList<ClassWithGrade> mylist =dl.getTeacherClassesStatistics(1,dl.getCurrentSemester());
+	{
+		ArrayList<ClassWithGrade> mylist =dl.getTeacherClassesStatistics(4);
 		for(ClassWithGrade classWithG  : mylist)
 		{
 			System.out.println("class: "+ classWithG.getName()+ " grade: "+classWithG.getGrade());
-		}*/
+		}
 	}
 	
 	public static void checkCourseClassStatistics(CDal dl)
 	{
-	/*	
-		ArrayList<CourseWithGrade> mylist =dl.getClassesCoursesStatistics(1,dl.getCurrentSemester());
+	
+		ArrayList<CourseWithGrade> mylist =dl.getClassesCoursesStatistics(1);
 		for(CourseWithGrade courseWithG  : mylist)
 		{
 			System.out.println("course: "+ courseWithG.getName()+ " grade: "+courseWithG.getGrade());
-		}*/
+		}
 	}
 	
 	public static void checkCreateNewSemester(CDal dl)
@@ -389,7 +441,11 @@ public class DALTestMain {
 
 	public static void checkCreateStudent(CDal dl)
 	{
-		System.out.println(dl.createStudent(129) == true);
+		for(int i = 1000 ; i < 2000 ; ++i)
+		{
+			dl.createStudent(i);
+		}
+
 	}
 	public static void checkGetRequests(CDal dl)
 	{

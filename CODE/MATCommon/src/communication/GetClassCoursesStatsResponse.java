@@ -15,7 +15,6 @@ public class GetClassCoursesStatsResponse extends Message {
 
 	/** The stats. */
 	private ArrayList<CourseWithGrade> stats;
-
 	
 	/**
 	 * Instantiates a new gets the class courses stats response.
@@ -23,7 +22,7 @@ public class GetClassCoursesStatsResponse extends Message {
 	 * @param stats the stats
 	 * @param errText the err text
 	 */
-	public GetClassCoursesStatsResponse(ArrayList<CourseWithGrade> stats, String errText) {
+	public GetClassCoursesStatsResponse(ArrayList<CourseWithGrade> stats) {
 		super();
 		this.stats = stats;
 	}

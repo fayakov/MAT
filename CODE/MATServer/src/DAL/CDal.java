@@ -19,6 +19,8 @@ public class CDal {
 	private static String connectionString = "jdbc:mysql://localhost/mat_db?autoReconnect=true&useSSL=false";
 	private static Connection connection;
 
+
+	
 	public static void connect(String db_password) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -250,6 +252,20 @@ public class CDal {
 				Statement stmt = connection.createStatement();
 				stmt.executeUpdate("INSERT INTO class (classId, name) VALUES (" + classId + ", '" + className + "')");
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return retVal;
+	}
+	
+	public static boolean createUser(int userId, String password, String firstName, String lastName, int userType)
+	{
+		boolean retVal = true;
+		try {
+	
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate("INSERT INTO user (id, firstName, lastName, password, userType) VALUES (" + userId + ", '" + firstName + "', '"+lastName+"', '"+password+"', "+userType+")");
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -1666,8 +1682,12 @@ public class CDal {
 
 				}
 			}
-			ClassWithGrade classGrade = new ClassWithGrade((float) (sum / cnt), getClassName(classId));
-			myList.add(classGrade);
+			if(cnt!= 0)
+			{
+				ClassWithGrade classGrade = new ClassWithGrade((float) (sum / cnt), getClassName(classId));
+				myList.add(classGrade);
+			}
+			
 		}
 
 		return myList;
@@ -1720,8 +1740,12 @@ public class CDal {
 				}
 
 			}
-			CourseWithGrade courseGrade = new CourseWithGrade((float) (sum / cnt), getCourseName(course));
-			myList.add(courseGrade);
+			if(cnt!= 0)
+			{
+				CourseWithGrade courseGrade = new CourseWithGrade((float) (sum / cnt), getCourseName(course));
+				myList.add(courseGrade);
+			}
+			
 		}
 		return myList;
 	}

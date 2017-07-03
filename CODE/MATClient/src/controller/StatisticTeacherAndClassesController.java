@@ -6,27 +6,19 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import communication.Dispatcher;
-import communication.GetClassDataRequest;
-import communication.GetClassDataResponse;
-import communication.GetClassTeachersStatsResponse;
-import communication.GetTeacherDataRequest;
-import communication.GetTeacherDataResponse;
 import communication.GetTeacherStatsRequest;
 import communication.GetTeacherStatsResponse;
 import communication.MATClientController;
 import communication.Message;
 import entities.ClassWithGrade;
-import entities.TeacherWithGrade;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -67,7 +59,7 @@ public class StatisticTeacherAndClassesController implements Initializable, Hand
 	    void StatisticTeacherAndClasses(ActionEvent event) throws Exception {
 	    	
 	    	 if(TeacherID.getText().isEmpty()) 
-				 	Prompt.alert(3,"please enter teacher Id");		    	
+				 	Prompt.alert(3,"Please enter teacher Id");		    	
 		     else {  	
 		    		
 		    	 try {
@@ -77,18 +69,11 @@ public class StatisticTeacherAndClassesController implements Initializable, Hand
 						 MATClientController.getInstance().sendRequestToServer(TeacherData);
 				    	
 				    	} catch(NumberFormatException e){
-				    	Prompt.alert(3,"please enter numerical value");
+				    	Prompt.alert(3,"Please enter numerical value");
 				    	return;
-				    	}  	
-		    	 
-		    	 //	Pane root = FXMLLoader.load(getClass().getResource("/gui/HistogramTeachrAndClass.fxml"));
-				//	Scene scene = new Scene(root);
-					//Stage primaryStage = new Stage();
-					//primaryStage.setScene(scene);
-					//primaryStage.show();
+				    	}
 		     	}		
 		     }	    			 
-	    
 	    
 	    /**
     	 * Close statistic teacher and classes.
@@ -101,7 +86,6 @@ public class StatisticTeacherAndClassesController implements Initializable, Hand
 		    stage.close();
 	    }
 
-
 		/* (non-Javadoc)
 		 * @see utils.Handler#handle(communication.Message, java.lang.Object)
 		 */
@@ -110,59 +94,26 @@ public class StatisticTeacherAndClassesController implements Initializable, Hand
 			
 			if (msg instanceof GetTeacherStatsResponse) {
 				GetTeacherStatsResponse res = (GetTeacherStatsResponse)msg;
-				ArrayList<ClassWithGrade> arr = res.getStats();
 				
 				if(res.getStats() == null)
-					Prompt.alert(3, "teacher is not exist");
+					Prompt.alert(3, "Teacher does not exist");
 				else{
 
-					ArrayList<ClassWithGrade> arr = res.getStats();
-					statisticsClass(arr);
-					}
-					Platform.runLater(new Runnable() {
-						
-						@Override
-						public void run() {
-
-					    	Pane root;
-							try {
-								root = FXMLLoader.load(getClass().getResource("/gui/HistogramTeachrAndClass.fxml"));
-								Scene scene = new Scene(root);
-								Stage primaryStage = new Stage();
-								primaryStage.setScene(scene);
-								primaryStage.show();
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-									
-						}
-					}};
-		
-
-					
-
-
-			
-			
-			
-			
-			
-			
-			
-				
+				ArrayList<ClassWithGrade> arr = res.getStats();
+				statisticsClass(arr);
+				}
+			}
 		}
-
 
 		/**
 		 * Statistics class.
 		 *
 		 * @param arr the arr
 		 */
-		private void statisticsClass(ArrayList<ClassWithGrade> arr) {
+		private void statisticsClass(final ArrayList<ClassWithGrade> arr) {
 			// TODO Auto-generated method stub
 			
-Platform.runLater(new Runnable() {
+			Platform.runLater(new Runnable() {
 				
 	    		public void run() {
 	    		FXMLLoader loader = new FXMLLoader(
@@ -183,8 +134,8 @@ Platform.runLater(new Runnable() {
 						e.printStackTrace();
 					}
 
-	        		  HistogramClassAndTeachersController controller = 
-	        		    loader.< HistogramClassAndTeachersController>getController();
+	        		  HistogramTeacherAndClassesController controller = 
+	        		    loader.< HistogramTeacherAndClassesController>getController();
 	        		  
 	        		  controller.initData(arr);
 
@@ -192,10 +143,7 @@ Platform.runLater(new Runnable() {
 	    		}
 	    	});
 	    }
-			
 		
-
-
 		/* (non-Javadoc)
 		 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
 		 */
