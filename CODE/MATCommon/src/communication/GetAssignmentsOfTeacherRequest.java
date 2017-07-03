@@ -12,7 +12,7 @@ public class GetAssignmentsOfTeacherRequest extends Message
 private static final long serialVersionUID = 1L;
 	
 	/** The teacher ID. */
-	private int teacherID;
+	private int userID;
 	
 	
 	/**
@@ -20,20 +20,18 @@ private static final long serialVersionUID = 1L;
 	 *
 	 * @param teacherID the teacher ID
 	 */
-	public GetAssignmentsOfTeacherRequest(int teacherID) {
+	public GetAssignmentsOfTeacherRequest(int userID) {
 		super();
-		this.teacherID = teacherID;
+		this.userID = userID;
 	}
-	
-	
 
 	/**
 	 * Gets the teacher ID.
 	 *
 	 * @return the teacher ID
 	 */
-	public int getTeacherID() {
-		return teacherID;
+	public int getUserID() {
+		return userID;
 	}
 
 
@@ -42,21 +40,7 @@ private static final long serialVersionUID = 1L;
 	 *
 	 * @param teacherID the new teacher ID
 	 */
-	public void setTeacherID(int teacherID) {
-		this.teacherID = teacherID;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
-
-
-	/**
-	 * Gets the serialversionuid.
-	 *
-	 * @return the serialversionuid
-	 */
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
-	
-	
-	
 }
