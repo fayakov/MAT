@@ -4,12 +4,14 @@
 package logic;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import DAL.CDALError;
 import DAL.CDal;
 import communication.GetAssignmentsOfTeacherRequest;
 import communication.GetAssignmentsOfTeacherResponse;
 import communication.Message;
+import entities.SubmissionsForTeacherCheck;
 import ocsf.server.ConnectionToClient;
 import utils.Handler;
 
@@ -25,17 +27,21 @@ public class GetAssignmentsOfTeacherRequestHandler implements Handler {
 		ConnectionToClient client = (ConnectionToClient) obj;
 		GetAssignmentsOfTeacherRequest getAssignmentsOfTeacher = (GetAssignmentsOfTeacherRequest)msg;
 
-		/*
-		// TODO Check in database
-		CDALError error = new CDALError();
-		boolean connectionSecceded = false;//CDal.connectUser(getAssignmentsOfTeacher.isToConnect(), getAssignmentsOfTeacher.getUserId(), getAssignmentsOfTeacher.getPassword(), error);		
+		ArrayList<Integer> courses = CDal.getTeacherCourses(getAssignmentsOfTeacher.getTeacherID(), CDal.getCurrentSemester());
 		
-		GetAssignmentsOfTeacherResponse res = new GetAssignmentsOfTeacherResponse(connectionSecceded, error.getString());
+		SubmissionsForTeacherCheck submissions = new SubmissionsForTeacherCheck();
+		
+		for (Integer course : courses) {
+			submissions.mergeSubmissions(CDal.getSubmissionsToCheck(course));
+		}
+		
+		GetAssignmentsOfTeacherResponse res = new GetAssignmentsOfTeacherResponse(submissions);
+		
 		try {
 			client.sendToClient(res);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 	}
 }

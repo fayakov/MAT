@@ -2,24 +2,15 @@ package controller;
 
 import java.io.File;
 import java.net.URL;
-import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 
-import communication.AddAssignmentForResponse;
-import communication.CreateAssignmentRequest;
 import communication.CreateAssignmentResponse;
 import communication.Dispatcher;
-import communication.GetAssignmentDataResponse;
-import communication.GetStudentDataResponse;
-import communication.MATClientController;
 import communication.Message;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -45,8 +36,6 @@ public class DefineAssignment implements Initializable, Handler
 	{
 		Dispatcher.addHandler(CreateAssignmentResponse.class.getCanonicalName(), this);
 	}
-	
-	
 	
 	/** The coid. */
 	int clid, coid;  // class id, course id

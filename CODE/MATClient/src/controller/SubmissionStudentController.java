@@ -97,7 +97,7 @@ public class SubmissionStudentController implements Initializable, Handler
 
     	/** The data. */
         @FXML 
-        ObservableList<Submission> data= FXCollections.observableArrayList();
+        ObservableList<Submission> data = FXCollections.observableArrayList();
     	
         @FXML
         private TableView<Submission> tableView;
@@ -138,43 +138,35 @@ public class SubmissionStudentController implements Initializable, Handler
 			primaryStage.show();
 	    }
 	    
-	    
-	    
-	    
-    
 
 	/* (non-Javadoc)
 	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
 	 */
 	public void handle(Message msg, Object obj) 
 	{
-		// TODO Auto-generated method stub
-     ArrayList<String> assignments = new ArrayList<String>();
-		
-		if (msg instanceof GetAssignmentsOfTeacherResponse) 
-		{
-			GetAssignmentsOfTeacherResponse res = (GetAssignmentsOfTeacherResponse)msg;
-			
-			if (res.isRequestSecceded()) 
-			{
-				ArrayList<Submission> temp=res.getSubsTeaCheck().getSubmissionList();
-				for(Submission t: temp )
-				{
-					data =FXCollections.observableArrayList(t);
-				}
-				
-				
-			} else {
-				System.out.println("Server response:" + res.getErrText());
-			}
-			
-		}
+//		// TODO Auto-generated method stub
+//     ArrayList<String> assignments = new ArrayList<String>();
+//		
+//		if (msg instanceof GetAssignmentsOfTeacherResponse) 
+//		{
+//			GetAssignmentsOfTeacherResponse res = (GetAssignmentsOfTeacherResponse)msg;
+//			
+//			if (res.isRequestSecceded()) 
+//			{
+//				ArrayList<Submission> temp=res.getSubsTeaCheck().getSubmissionList();
+//				for(Submission t: temp )
+//				{
+//					data =FXCollections.observableArrayList(t);
+//				}
+//				
+//				
+//			} else {
+//				System.out.println("Server response:" + res.getErrText());
+//			}
+//			
+//		}
 		
 	}
-	
-	
-	
-	
 }
 
 

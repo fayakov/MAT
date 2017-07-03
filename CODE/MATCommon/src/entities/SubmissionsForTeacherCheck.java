@@ -35,5 +35,7 @@ public class SubmissionsForTeacherCheck implements Serializable {
 		this.submissionList = submissionList;
 	}
 	
-	
+	public void mergeSubmissions(SubmissionsForTeacherCheck submissions) {
+		this.submissionList.addAll(submissions.getSubmissionList());
+	}
 }
