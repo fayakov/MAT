@@ -77,6 +77,9 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 
     	
 		private Assignment assignment;
+		
+		@FXML
+	    private TextField textFieldChoosen;
 
 		private int userId;
 
@@ -174,7 +177,7 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 				e.printStackTrace();
 			}
     		
-    	    
+			textFieldChoosen.setText(selectedFile.getName());
     	    
     		/*
 	    	JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
