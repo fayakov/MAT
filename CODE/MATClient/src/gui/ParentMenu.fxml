@@ -17,13 +17,18 @@
             <Font size="32.0" />
          </font>
       </Text>
-      <Text layoutX="143.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Id">
+      <Text layoutX="128.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Id">
          <font>
-            <Font size="18.0" />
+            <Font size="13.0" />
          </font>
       </Text>
-      <TextField fx:id="StudentID" layoutX="234.0" layoutY="134.0" prefHeight="22.0" prefWidth="169.0" />
-      <Button layoutX="438.0" layoutY="347.0" mnemonicParsing="false" onAction="#searchstudentID" text="send" />
-      <Button fx:id="btnClose" layoutX="151.0" layoutY="347.0" mnemonicParsing="false" onAction="#closeParentMenu" text="close" />
+      <TextField fx:id="StudentID" layoutX="208.0" layoutY="187.0" prefHeight="22.0" prefWidth="169.0" />
+      <Button layoutX="441.0" layoutY="187.0" mnemonicParsing="false" onAction="#searchstudentID" text="send" />
+      <Button fx:id="btnClose" layoutX="503.0" layoutY="345.0" mnemonicParsing="false" onAction="#closeParentMenu" text="close" />
+      <Text layoutX="92.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your child's ID to see the information">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
