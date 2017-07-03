@@ -6,18 +6,24 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="593.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OpenAndSubmitAssignmentByStudentController">
+<AnchorPane prefHeight="409.0" prefWidth="554.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OpenAndSubmitAssignmentByStudentController">
    <children>
-      <Label fx:id="labelDownload" layoutX="42.0" layoutY="166.0" text="Download Assignment File:" />
-      <Label fx:id="labelUpload" layoutX="42.0" layoutY="283.0" text="Upload Submission File:" />
-      <Label fx:id="labelAssNum" layoutX="42.0" layoutY="58.0" text="Choosen Assignment Number:">
+      <Label fx:id="labelDownload" layoutX="38.0" layoutY="136.0" text="Download Assignment File:">
          <font>
-            <Font size="29.0" />
+            <Font size="20.0" />
+         </font></Label>
+      <Label fx:id="labelUpload" layoutX="42.0" layoutY="219.0" text="Edit Submission File:">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label fx:id="labelAssNum" layoutX="42.0" layoutY="58.0" text="Assignment Number:">
+         <font>
+            <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="textFieldAssNum" layoutX="484.0" layoutY="60.0" prefHeight="39.0" prefWidth="189.0" />
-      <Button fx:id="buttonDownload" layoutX="347.0" layoutY="160.0" mnemonicParsing="false" onAction="#pressDownload" text="DOWNLOAD" />
-      <Button fx:id="buttonUpload" layoutX="347.0" layoutY="277.0" mnemonicParsing="false" onAction="#pressUpload" prefHeight="39.0" prefWidth="127.0" text="UPLOAD" />
-      <Button fx:id="buttonSendSub" layoutX="565.0" layoutY="277.0" mnemonicParsing="false" onAction="#sendSubmission" text="SEND" />
+      <TextField fx:id="textFieldAssNum" layoutX="345.0" layoutY="58.0" prefHeight="30.0" prefWidth="116.0" />
+      <Button fx:id="buttonDownload" layoutX="345.0" layoutY="136.0" mnemonicParsing="false" onAction="#pressDownload" prefHeight="30.0" prefWidth="116.0" text="Select File" />
+      <Button fx:id="buttonUpload" layoutX="345.0" layoutY="219.0" mnemonicParsing="false" onAction="#pressUpload" prefHeight="30.0" prefWidth="116.0" text="Edit File" />
+      <Button fx:id="buttonSendSub" layoutX="219.0" layoutY="338.0" mnemonicParsing="false" onAction="#sendSubmission" prefHeight="30.0" prefWidth="116.0" text="Upload" />
    </children>
 </AnchorPane>
