@@ -2434,11 +2434,11 @@ public class CDal {
 					.executeQuery("SELECT * FROM submission " + "WHERE submissionId = " + submissionId + ";");
 			if (resultSet.first()) {
 				submission.setAssignmentNumber(submissionId);
-				Blob blob = resultSet.getBlob("file");
-				int blobLength = (int) blob.length();
-				byte[] blobAsBytes = blob.getBytes(1, blobLength);
-				submission.setFile(blobAsBytes);
-				blob.free();
+//				Blob blob = resultSet.getBlob("file");
+//				int blobLength = (int) blob.length();
+//				byte[] blobAsBytes = blob.getBytes(1, blobLength);
+//				submission.setFile(blobAsBytes);
+//				blob.free();
 				submission.setFileName(resultSet.getString("fileName"));
 				submission.setDate(resultSet.getDate("date"));
 				submission.setAssignmentNumber(resultSet.getInt("submissionId"));

@@ -331,17 +331,30 @@ public class loginController implements Initializable, Handler
 					
 					case EUserPrincipal: 
 						break;  
-					case EUserTeacher: 
-						break;    
-					case EUserSecretary: 
-						break;    		
-					case EUserStudent:
+					case EUserTeacher: {
+						TeacherController controller = 
+					    loader.<TeacherController>getController();
+					  
+						int userIdInt = Integer.parseInt(userId);
+						controller.initData(userIdInt);
+						break;
+					}
+					case EUserSecretary: {
+						secretaryController controller = 
+					    loader.<secretaryController>getController();
+					  
+						int userIdInt = Integer.parseInt(userId);
+//						controller.initData(userIdInt);
+						break;
+					}  		
+					case EUserStudent: {
 						StudentController controller = 
 					    loader.<StudentController>getController();
 					  
 						int userIdInt = Integer.parseInt(userId);
 						controller.initData(userIdInt);
-						break;    
+						break;
+					}
 					case EUserParent: 
 						break;    
 					}

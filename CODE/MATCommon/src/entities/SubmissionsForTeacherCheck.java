@@ -17,6 +17,14 @@ public class SubmissionsForTeacherCheck implements Serializable {
 	/** The submission list. */
 	private ArrayList<Submission> submissionList;
 
+	
+	
+	
+	public SubmissionsForTeacherCheck() {
+		super();
+		submissionList = new ArrayList<Submission>();
+	}
+
 	/**
 	 * Gets the submission list.
 	 *
@@ -36,6 +44,10 @@ public class SubmissionsForTeacherCheck implements Serializable {
 	}
 	
 	public void mergeSubmissions(SubmissionsForTeacherCheck submissions) {
-		this.submissionList.addAll(submissions.getSubmissionList());
+		if (submissions.getSubmissionList() != null) {
+			for (Submission submission : submissions.getSubmissionList()) {
+				this.submissionList.add(submission);
+			}
+		}
 	}
 }

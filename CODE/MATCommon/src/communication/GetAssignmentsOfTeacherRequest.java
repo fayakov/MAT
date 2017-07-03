@@ -6,10 +6,8 @@ package communication;
  */
 public class GetAssignmentsOfTeacherRequest extends Message 
 {
-
-
-/** The Constant serialVersionUID. */
-private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 	
 	/** The teacher ID. */
 	private int userID;

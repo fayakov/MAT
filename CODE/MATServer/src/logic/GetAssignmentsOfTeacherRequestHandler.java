@@ -27,7 +27,8 @@ public class GetAssignmentsOfTeacherRequestHandler implements Handler {
 		ConnectionToClient client = (ConnectionToClient) obj;
 		GetAssignmentsOfTeacherRequest getAssignmentsOfTeacher = (GetAssignmentsOfTeacherRequest)msg;
 
-		ArrayList<Integer> courses = CDal.getTeacherCourses(getAssignmentsOfTeacher.getTeacherID(), CDal.getCurrentSemester());
+		int teacherID = CDal.getTeacherId(getAssignmentsOfTeacher.getUserID());
+		ArrayList<Integer> courses = CDal.getTeacherCourses(teacherID, CDal.getCurrentSemester());
 		
 		SubmissionsForTeacherCheck submissions = new SubmissionsForTeacherCheck();
 		
