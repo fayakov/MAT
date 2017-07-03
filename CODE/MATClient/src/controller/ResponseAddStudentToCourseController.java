@@ -30,21 +30,6 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
 	
 	/** The all requests. */
 	private ArrayList<Request> allRequests;
-
-
-    /**
-     * Inits the data.
-     *
-     * @param allRequests the all requests
-     */
-    public void initData(ArrayList<Request> allRequests) {
-    	data.clear();
-		
-		for (Request request : allRequests) {
-			if(request.getRequestType() == ERequestType.addStudent)
-				data.add(request);
-		}
-	}
 	
 	
     /** The resources. */
@@ -125,7 +110,19 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
     		new Request(1,22,333,6666,true,true),
     		new Request(1,22,333,4444,true,true));
 
-
+    /**
+     * Inits the data.
+     *
+     * @param allRequests the all requests
+     */
+    public void initData(ArrayList<Request> allRequests) {
+    	data.clear();
+		
+		for (Request request : allRequests) {
+			if(request.getRequestType() == ERequestType.addStudent)
+				data.add(request);
+		}
+	}
 
 	/* (non-Javadoc)
 	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
