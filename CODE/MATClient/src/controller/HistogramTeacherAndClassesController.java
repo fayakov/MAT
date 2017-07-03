@@ -24,7 +24,7 @@ import javafx.scene.chart.XYChart.Series;
 /**
  * The Class HistogramTeacherAndClassesController.
  */
-public class HistogramTeacherAndClassesController implements  Initializable, Handler{
+public class HistogramTeacherAndClassesController implements  Initializable{
 	
 	/**
 	 * Instantiates a new histogram teacher and classes controller.
@@ -51,51 +51,14 @@ public class HistogramTeacherAndClassesController implements  Initializable, Han
 	private ArrayList<ClassWithGrade> arrToDisplay;
 
 	
-    /**
-     * Gets the arr to display.
-     *
-     * @return the arr to display
-     */
-    public ArrayList<ClassWithGrade> getArrToDisplay() {
-		return arrToDisplay;
-	}
 
-	/**
-	 * Sets the arr to display.
-	 *
-	 * @param arrToDisplay the new arr to display
-	 */
-	public void setArrToDisplay(ArrayList<ClassWithGrade> arrToDisplay) {
-		this.arrToDisplay = arrToDisplay;
-	}
-	
-	//static int count = arrToDisplay.size();
-	//private int i = 0;
-	
 	
 	
 	
 	/* (non-Javadoc)
 	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
 	 */
-	@Override
-	public void handle(Message msg, Object obj) {
-		// TODO Auto-generated method stub
-		
-		
-		
-		//XYChart<x,y>.Series set1 = new XYChart.Series<>();
-		//for(int i=0; i<count;i++){
-	//	set1.getData().add(new XYChart.Data)();
-		}
-		
-	//CourseChart.getData().addAll(set1);
-		
 
-	/* (non-Javadoc)
-	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
-	 */
-	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		
