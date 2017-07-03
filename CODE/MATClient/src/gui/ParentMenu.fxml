@@ -17,17 +17,17 @@
             <Font size="32.0" />
          </font>
       </Text>
-      <Text layoutX="128.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Id">
+      <Text layoutX="113.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Id">
          <font>
-            <Font size="13.0" />
+            <Font size="18.0" />
          </font>
       </Text>
       <TextField fx:id="StudentID" layoutX="208.0" layoutY="187.0" prefHeight="22.0" prefWidth="169.0" />
       <Button layoutX="441.0" layoutY="187.0" mnemonicParsing="false" onAction="#searchstudentID" text="send" />
       <Button fx:id="btnClose" layoutX="503.0" layoutY="345.0" mnemonicParsing="false" onAction="#closeParentMenu" text="close" />
-      <Text layoutX="92.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your child's ID to see the information">
+      <Text layoutX="110.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your child's ID to see the information" wrappingWidth="379.81982421875">
          <font>
-            <Font size="22.0" />
+            <Font size="19.0" />
          </font>
       </Text>
    </children>

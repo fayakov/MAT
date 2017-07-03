@@ -23,7 +23,7 @@
          </font>
       </Text>
       <TextField fx:id="ParentID" layoutX="258.0" layoutY="131.0" />
-      <Button layoutX="405.0" layoutY="337.0" mnemonicParsing="false" onAction="#BlockParent" text="Send" />
-      <Button fx:id="btnClose" layoutX="152.0" layoutY="337.0" mnemonicParsing="false" onAction="#closeBlockParent" text="Close" />
+      <Button layoutX="446.0" layoutY="131.0" mnemonicParsing="false" onAction="#BlockParent" text="Send" />
+      <Button fx:id="btnClose" layoutX="513.0" layoutY="333.0" mnemonicParsing="false" onAction="#closeBlockParent" text="Close" />
    </children>
 </AnchorPane>

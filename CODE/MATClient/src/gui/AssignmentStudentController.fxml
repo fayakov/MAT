@@ -21,7 +21,10 @@
             <TableColumn fx:id="colCourse" prefWidth="136.0" text="Course Name" />
         </columns>
       </TableView>
-      <Button fx:id="buttonNext" layoutX="270.0" layoutY="402.0" mnemonicParsing="false" onAction="#pressNext" prefHeight="39.0" prefWidth="106.0" text="NEXT" />
-      <Label layoutX="281.0" layoutY="103.0" text="Choose Assignment" />
+      <Button fx:id="buttonNext" layoutX="297.0" layoutY="402.0" mnemonicParsing="false" onAction="#pressNext" prefHeight="27.0" prefWidth="79.0" text="Next" />
+      <Label layoutX="244.0" layoutY="100.0" text="Choose Assignment">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
    </children>
 </AnchorPane>

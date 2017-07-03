@@ -12,8 +12,14 @@
             <Font size="32.0" />
          </font>
       </Text>
-      <Text layoutX="157.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start date" />
-      <Text layoutX="157.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End date" />
+      <Text layoutX="157.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start date">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Text layoutX="157.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End date">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
       <Button layoutX="275.0" layoutY="272.0" mnemonicParsing="false" onAction="#createSemester" text="Create" />
       <Button fx:id="btnClose" layoutX="515.0" layoutY="343.0" mnemonicParsing="false" onAction="#closeSemester" text="Close" />
       <DatePicker fx:id="startDate" layoutX="256.0" layoutY="131.0" />

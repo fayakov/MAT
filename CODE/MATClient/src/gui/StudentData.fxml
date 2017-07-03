@@ -13,25 +13,40 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StudentDataController">
    <children>
-      <Label fx:id="labelStudentData" layoutX="227.0" layoutY="14.0" prefHeight="45.0" prefWidth="193.0" text="Student Data:">
+      <Label fx:id="labelStudentData" layoutX="254.0" layoutY="14.0" prefHeight="50.0" prefWidth="214.0" text="Student Data">
          <font>
-            <Font size="30.0" />
+            <Font size="34.0" />
          </font>
       </Label>
-      <Label fx:id="labelStudentID" layoutX="38.0" layoutY="78.0" prefHeight="14.0" prefWidth="65.0" text="ID:" />
-      <Label fx:id="labelFNName" layoutX="38.0" layoutY="123.0" text="First Name:" />
-      <Label fx:id="labelLName" layoutX="33.0" layoutY="180.0" text="Last Name:" />
-      <Label fx:id="labelCllassID" layoutX="38.0" layoutY="224.0" prefHeight="27.0" prefWidth="77.0" text="Class ID:" />
-      <TextField fx:id="textStudentID" layoutX="287.0" layoutY="72.0" />
-      <TextField fx:id="textFName" layoutX="287.0" layoutY="117.0" />
-      <TextField fx:id="textLName" layoutX="287.0" layoutY="174.0" />
-      <TextField fx:id="textClasses" layoutX="287.0" layoutY="218.0" />
+      <Label fx:id="labelStudentID" layoutX="38.0" layoutY="92.0" prefHeight="14.0" prefWidth="65.0" text="Id:">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="labelFNName" layoutX="32.0" layoutY="143.0" text="First Name:">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="labelLName" layoutX="33.0" layoutY="194.0" text="Last Name:">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="labelCllassID" layoutX="38.0" layoutY="243.0" prefHeight="27.0" prefWidth="77.0" text="Class Id:">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <TextField fx:id="textStudentID" layoutX="287.0" layoutY="93.0" />
+      <TextField fx:id="textFName" layoutX="287.0" layoutY="144.0" />
+      <TextField fx:id="textLName" layoutX="287.0" layoutY="195.0" />
+      <TextField fx:id="textClasses" layoutX="287.0" layoutY="244.0" />
       <TableView fx:id="tableViewID" layoutX="287.0" layoutY="309.0" prefHeight="242.0" prefWidth="342.0">
         <columns>
           <TableColumn fx:id="colCourse" prefWidth="171.0" text="Course" />
           <TableColumn fx:id="colGrade" prefWidth="201.0" text="Grade" />
         </columns>
       </TableView>
-      <Label layoutX="36.0" layoutY="309.0" text="List Of Grade in Course" />
+      <Label layoutX="36.0" layoutY="309.0" prefHeight="27.0" prefWidth="201.0" text="List Of Grade in Course:">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
    </children>
 </Pane>

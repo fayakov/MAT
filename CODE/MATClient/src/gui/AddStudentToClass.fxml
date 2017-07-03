@@ -13,10 +13,16 @@
          </font>
       </Text>
       <TextField fx:id="StudentID" layoutX="279.0" layoutY="125.0" />
-      <Text layoutX="192.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student ID" />
-      <Text layoutX="199.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class ID" />
+      <Text layoutX="166.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Id :">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Text layoutX="166.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class Id :">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
       <TextField fx:id="ClassID" layoutX="279.0" layoutY="179.0" />
-      <Button layoutX="286.0" layoutY="250.0" mnemonicParsing="false" onAction="#sendAddStudent" text="Send" />
+      <Button layoutX="286.0" layoutY="250.0" mnemonicParsing="false" onAction="#sendAddStudent" text="Add" />
       <Button fx:id="btnClose" layoutX="499.0" layoutY="330.0" mnemonicParsing="false" onAction="#closeAddStodent" text="Close" />
    </children>
 </AnchorPane>
