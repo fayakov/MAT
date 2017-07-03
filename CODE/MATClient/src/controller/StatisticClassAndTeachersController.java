@@ -57,20 +57,20 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 	    void StatisticClassAndTeachers(ActionEvent event) throws Exception {
 	    	
 	    	 if(ClassNumber.getText().isEmpty()) 
-				 	Prompt.alert(3,"please enter class number");		    	
+				 	Prompt.alert(3,"Please enter class number");		    	
 		     else {  	
 		    	 try {
-					    clid = Integer.parseInt(ClassNumber.getText());
-					    
-					    GetClassTeachersStatsRequest ClassData = new GetClassTeachersStatsRequest(clid);
-					    MATClientController.getInstance().sendRequestToServer(ClassData);
-				    	
-				    }catch(NumberFormatException e){
-				    	Prompt.alert(3,"please enter numerical value");
-				    	return;
-				    	}
-					}		
-		     }	    			 
+		    		 clid = Integer.parseInt(ClassNumber.getText());
+		    		 
+		    		 GetClassTeachersStatsRequest ClassData = new GetClassTeachersStatsRequest(clid);
+		    		 MATClientController.getInstance().sendRequestToServer(ClassData);
+		    	 
+		    	 } catch(NumberFormatException e){
+		    		 Prompt.alert(3,"Please enter numerical value");
+		    		 return;
+		    	 }
+		     }		
+    	}
 	  
 	    /**
     	 * Close statistic class and teachers.
@@ -89,8 +89,9 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 			// TODO Auto-generated method stub
 			if (msg instanceof GetClassTeachersStatsResponse) {
 				GetClassTeachersStatsResponse res = (GetClassTeachersStatsResponse)msg;
+				
 				if(res.getStats() == null)
-					Prompt.alert(3, "class is not exist");
+					Prompt.alert(3, "class does not exist");
 				else{
 					
 				ArrayList<TeacherWithGrade> arr = res.getStats();
@@ -98,60 +99,6 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 				}
 			}
 		}
-//				Platform.runLater(new Runnable() {
-//					
-//					@Override
-//					public void run() {
-//
-//				    	Pane root;
-//						try {
-//							root = FXMLLoader.load(getClass().getResource("/gui/HistogramClassAndTeachers.fxml"));
-//							Scene scene = new Scene(root);
-//							Stage primaryStage = new Stage();
-//							primaryStage.setScene(scene);
-//							primaryStage.show();
-//						} catch (IOException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}
-//								
-//					}
-//				});
-				
-//				if( arr.size() == 0) {
-//					// PopUp
-//					;
-//				}
-//				else{
-////					((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-//					Stage primaryStage = new Stage();
-//					FXMLLoader loader = new FXMLLoader();
-//					Pane root;
-//					try {
-//						root = loader.load(getClass().getResource("/gui/HistogramClassAndTeachers.fxml").openStream());
-//						Scene scene = new Scene(root);			
-//						scene.getStylesheets().add(getClass().getResource("/gui/HistogramClassAndTeachers.fxml").toExternalForm());
-//						
-//						primaryStage.setScene(scene);		
-//						primaryStage.show();
-//					} catch (IOException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//					StatisticClassAndTeachersController StatisticClassAndTeachers = loader.getController();		
-//					//StatisticClassAndTeachersController.loadStudent(Test.students.get(itemIndex));
-//					
-//					 
-					
-					
-		//		}
-					
-			
-				//con.setDisplayArr(arr);
-	//		}
-			
-		
-
 
 		/**
 		 * Statistics teacher.
@@ -164,7 +111,8 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 			Platform.runLater(new Runnable() {
 				
 				public void run() {
-				FXMLLoader loader = new FXMLLoader(
+					
+					FXMLLoader loader = new FXMLLoader(
 					    getClass().getResource(
 					      "/gui/HistogramClassAndTeachers.fxml"
 					    )
@@ -182,12 +130,11 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 						e.printStackTrace();
 					}
 
-				  HistogramClassAndTeachersController controller = 
-				    loader.<HistogramClassAndTeachersController>getController();
-					  
-					 controller.initData(arr);
-
-					  stage.show();
+				  HistogramClassAndTeachersController controller =
+						  loader.<HistogramClassAndTeachersController>getController();
+				  
+				  controller.initData(arr);
+				  stage.show();
 				}
 			});
 	    }
@@ -195,7 +142,7 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 	
 		public void initialize(URL location, ResourceBundle resources) {
 			// TODO Auto-generated method stub
-			
+		
 		}
 	}
 
