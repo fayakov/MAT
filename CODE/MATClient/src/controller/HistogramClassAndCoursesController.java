@@ -22,7 +22,7 @@ import utils.Handler;
 /**
  * The Class HistogramClassAndCoursesController.
  */
-public class HistogramClassAndCoursesController implements Initializable, Handler {
+public class HistogramClassAndCoursesController implements Initializable{
 	
 	/**
 	 * Instantiates a new histogram class and courses controller.
@@ -45,21 +45,6 @@ public class HistogramClassAndCoursesController implements Initializable, Handle
 		return arrToDisplay;
 	}
 
-	/**
-	 * Sets the arr to display.
-	 *
-	 * @param arrToDisplay the new arr to display
-	 */
-	public void setArrToDisplay(ArrayList<CourseWithGrade> arrToDisplay) {
-		this.arrToDisplay = arrToDisplay;
-	}
-	
-	/** The count. */
-	static int count = arrToDisplay.size();
-	
-	/** The i. */
-	private int i = 0;
-	
 	
 	/** The x. */
 	@FXML
@@ -71,31 +56,15 @@ public class HistogramClassAndCoursesController implements Initializable, Handle
 
     /** The Course chart. */
     @FXML
-    private BarChart<?, ?> CourseChart;
+    private BarChart<Number, String> CourseChart;
 
 
 
-	/* (non-Javadoc)
-	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
-	 */
-	public void handle(Message msg, Object obj) {
-		// TODO Auto-generated method stub
-		
-		//XYChart<x,y>.Series1 set1 = new XYChart.Series<>();
-		XYChart.Series<x, y> set1 = new XYChart.Series<>();
-		for(int i=0; i<count;i++){
-		set1.getData().add(new XYChart.Data)();
-		}
-		CourseChart.getData().addAll(set1);
-		
-		
-		
-		}
 
 	/* (non-Javadoc)
 	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
 	 */
-	public void initialize(URL location, ResourceBundle resources) {
+	public void initialize(URL location, ResourceBundle resources){
 		// TODO Auto-generated method stub
 		
 		
@@ -107,13 +76,24 @@ public class HistogramClassAndCoursesController implements Initializable, Handle
 	 *
 	 * @param arr the arr
 	 */
-	public void initData(ArrayList<CourseWithGrade> arr) {
+	
+	public void initData(ArrayList<CourseWithGrade> arr){
 		// TODO Auto-generated method stub
-		
+	 
+	       
+			XYChart.Series series1 = new XYChart.Series();
+	        series1.setName("2003");
+	        
+	        for (CourseWithGrade coursewithgrade : arr) 
+	        	series1.getData().add(new XYChart.Data(coursewithgrade.getName(), coursewithgrade.getGrade()));
+	        	        
+	     CourseChart.getData().add(series1);
+		}
+		// TODO Auto-generated method stub
+
+	
 	}
- 
-	
-	
-	
-}
+		
+		
+
 
