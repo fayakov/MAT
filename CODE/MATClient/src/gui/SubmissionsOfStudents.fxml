@@ -21,5 +21,6 @@
             <TableColumn fx:id="colSubDate" prefWidth="181.0" text="Submission Date" />
         </columns>
       </TableView>
+      <Button fx:id="buttonNext" layoutX="364.0" layoutY="566.0" mnemonicParsing="false" onAction="#next" text="NEXT" />
    </children>
 </AnchorPane>

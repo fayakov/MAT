@@ -102,6 +102,8 @@ public class SubmissionStudentController implements Initializable, Handler
         @FXML
         private TableView<Submission> tableView;
         
+        @FXML
+        private Button buttonNext;
         
         /* (non-Javadoc)
     	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
@@ -121,23 +123,23 @@ public class SubmissionStudentController implements Initializable, Handler
     	}
 	    
         
-        
-	    /**
-    	 * Next student submission.
+    	/**
+    	 * Next 
     	 *
     	 * @param event the event
     	 * @throws Exception the exception
     	 */
-    	@FXML
-	    void nextStudentSubmission(ActionEvent event) throws Exception 
-	    {
-	    	Pane root = FXMLLoader.load(getClass().getResource("/gui/CheckAssinment.fxml"));
-			Scene scene = new Scene(root);
-			Stage primaryStage = new Stage();
-			primaryStage.setScene(scene);
-			primaryStage.show();
-	    }
-	    
+    	 @FXML
+    	    void next(ActionEvent event) throws Exception
+    	 {
+    		 Pane root = FXMLLoader.load(getClass().getResource("/gui/CheckAssinment.fxml"));
+ 			Scene scene = new Scene(root);
+ 			Stage primaryStage = new Stage();
+ 			primaryStage.setScene(scene);
+ 			primaryStage.show();
+    	    }
+    	
+    	
 
 	/* (non-Javadoc)
 	 * @see utils.Handler#handle(communication.Message, java.lang.Object)

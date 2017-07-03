@@ -29,7 +29,7 @@
             <Font size="18.0" />
          </font></Label>
       <Button fx:id="buttonApload" layoutX="315.0" layoutY="242.0" mnemonicParsing="false" onAction="#uploadSubmission" prefHeight="27.0" prefWidth="103.0" text="Edit File" />
-      <Button fx:id="buttonNext" layoutX="308.0" layoutY="349.0" mnemonicParsing="false" onAction="#nextToStep2" prefHeight="27.0" prefWidth="103.0" text="Upload" />
+      <Button fx:id="buttonNext" layoutX="308.0" layoutY="349.0" mnemonicParsing="false" onAction="#nextToStep2" prefHeight="27.0" prefWidth="103.0" text="NEXT" />
       <Label fx:id="labelStep1" layoutX="59.0" layoutY="160.0" prefHeight="27.0" prefWidth="74.0" underline="true" />
       <Label layoutX="481.0" layoutY="242.0" prefHeight="27.0" prefWidth="183.0" text="Choosen Checked File:" />
       <TextField fx:id="textFieldChoosenFile" layoutX="684.0" layoutY="242.0" prefHeight="39.0" prefWidth="159.0" />
