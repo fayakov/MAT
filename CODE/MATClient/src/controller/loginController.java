@@ -326,32 +326,31 @@ public class loginController implements Initializable, Handler
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
+				  int userIdInt = Integer.parseInt(userId);
 				  switch(res.getUserType()) {
 					
 					case EUserPrincipal: 
 						break;  
-					case EUserTeacher: {
-						TeacherController controller = 
+					case EUserTeacher: 
+						TeacherController teacherController = 
 					    loader.<TeacherController>getController();
-					  
-						int userIdInt = Integer.parseInt(userId);
-						controller.initData(userIdInt);
-						break;
-					}
+					  						
+						teacherController.initData(userIdInt);
+						break;    					
+
 					case EUserSecretary: {
 						secretaryController controller = 
 					    loader.<secretaryController>getController();
 					  
-						int userIdInt = Integer.parseInt(userId);
+						userIdInt = Integer.parseInt(userId);
 //						controller.initData(userIdInt);
 						break;
 					}  		
 					case EUserStudent: {
+
 						StudentController controller = 
 					    loader.<StudentController>getController();
-					  
-						int userIdInt = Integer.parseInt(userId);
+					  						
 						controller.initData(userIdInt);
 						break;
 					}

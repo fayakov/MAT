@@ -176,6 +176,8 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+<<<<<<< HEAD
+=======
     		
 			textFieldChoosen.setText(selectedFile.getName());
     	    
@@ -199,6 +201,7 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 //	    	    (Objects.equals(format, new String("PDF"))) ||
 //	    		(Objects.equals(format, new String("Excel")))  )
 //	    		        Prompt.alert(3,"please upload a file with valid format");
+>>>>>>> dd548c6562eb4b35bef17d4654f692fb4bf62711
 	    }
     
 

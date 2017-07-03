@@ -79,9 +79,38 @@ public class TeacherController implements Handler
      *
      * @throws Exception the exception
      */
-    void defineAssignment() throws Exception 
+    void defineAssignment(final int userId) throws Exception 
     {
-        	
+    	Platform.runLater(new Runnable() {
+			
+			public void run() {
+			FXMLLoader loader = new FXMLLoader(
+				    getClass().getResource(
+				    		"/gui/DefineAssignment.fxml"
+				    )
+				  );
+
+				  Stage stage = new Stage(StageStyle.DECORATED);
+				  try {
+					stage.setScene(
+					    new Scene(
+					      (Pane) loader.load()
+					    )
+					  );
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				  DefineAssignment controller = 
+				    loader.<DefineAssignment>getController();
+				  
+				  controller.initData(userId);
+
+				  stage.show();
+			}
+		});
+
         	Pane root = FXMLLoader.load(getClass().getResource("/gui/DefineAssignment.fxml"));
     		Scene scene = new Scene(root);
     		Stage primaryStage = new Stage();
@@ -110,7 +139,7 @@ public class TeacherController implements Handler
     {
     	String option = comboChooseOptionTeacher.getValue().toString();
     	if(option.equalsIgnoreCase("Define Assignment"))
-    		defineAssignment();	
+    		defineAssignment(this.userID);	
     	if(option.equalsIgnoreCase("Show Submission Of Student"))
     		checkAssignment();
     }
