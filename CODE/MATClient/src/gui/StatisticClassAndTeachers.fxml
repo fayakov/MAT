@@ -17,13 +17,13 @@
             <Font size="32.0" />
          </font>
       </Text>
-      <Text layoutX="154.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class Number">
+      <Text layoutX="154.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class Number :">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
       <TextField fx:id="ClassNumber" layoutX="287.0" layoutY="127.0" />
-      <Button layoutX="400.0" layoutY="327.0" mnemonicParsing="false" onAction="#StatisticClassAndTeachers" text="Send" />
-      <Button fx:id="btnClose" layoutX="130.0" layoutY="327.0" mnemonicParsing="false" onAction="#closeStatisticClassAndTeachers" text="Close" />
+      <Button layoutX="466.0" layoutY="127.0" mnemonicParsing="false" onAction="#StatisticClassAndTeachers" text="Send" />
+      <Button fx:id="btnClose" layoutX="515.0" layoutY="328.0" mnemonicParsing="false" onAction="#closeStatisticClassAndTeachers" text="Close" />
    </children>
 </AnchorPane>

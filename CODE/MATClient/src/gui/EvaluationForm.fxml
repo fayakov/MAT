@@ -6,17 +6,28 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="633.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EvaluationFormController">
+<AnchorPane prefHeight="428.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EvaluationFormController">
    <children>
-      <Label fx:id="labelStep2" layoutX="37.0" layoutY="44.0" prefHeight="45.0" prefWidth="125.0" text="Step 2:" underline="true">
+      <Label fx:id="labelStep2" layoutX="37.0" layoutY="44.0" prefHeight="45.0" prefWidth="125.0" underline="true">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <Label fx:id="labelFinalGrade" layoutX="45.0" layoutY="601.0" text="Insert Final Grade:" />
-      <TextField fx:id="textFieldGrade" layoutX="212.0" layoutY="582.0" prefHeight="39.0" prefWidth="74.0" />
-      <TextArea fx:id="textAreaComment" layoutX="54.0" layoutY="170.0" prefHeight="390.0" prefWidth="427.0" />
-      <Label fx:id="labelComment" layoutX="37.0" layoutY="127.0" text="Comments:" />
-      <Button fx:id="buttonSendForm" layoutX="404.0" layoutY="595.0" mnemonicParsing="false" onAction="#sendEvaluationForm" text="SEND" />
+      <Label fx:id="labelFinalGrade" layoutX="21.0" layoutY="342.0" text="Insert Final Grade :">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <TextField fx:id="textFieldGrade" layoutX="175.0" layoutY="343.0" prefHeight="25.0" prefWidth="61.0" />
+      <TextArea fx:id="textAreaComment" layoutX="95.0" layoutY="112.0" prefHeight="217.0" prefWidth="425.0" />
+      <Label fx:id="labelComment" layoutX="21.0" layoutY="76.0" text="Comments :">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Button fx:id="buttonSendForm" layoutX="271.0" layoutY="382.0" mnemonicParsing="false" onAction="#sendEvaluationForm" prefHeight="25.0" prefWidth="61.0" text="Create" />
+      <Text layoutX="175.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EvaluationForm">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

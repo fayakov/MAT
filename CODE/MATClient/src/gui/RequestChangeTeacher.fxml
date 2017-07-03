@@ -21,13 +21,22 @@
             <Font size="27.0" />
          </font>
       </Text>
-      <Text layoutX="170.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teacher Id:" />
-      <Text layoutX="160.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class Number:" />
-      <Text layoutX="172.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Id:" />
-      <TextField fx:id="studentIdTextFiled" layoutX="253.0" layoutY="140.0" />
-      <TextField fx:id="classNumberTextFiled" layoutX="253.0" layoutY="188.0" />
-      <TextField fx:id="courseIdTextFiled" layoutX="253.0" layoutY="237.0" />
-      <Button layoutX="283.0" layoutY="318.0" mnemonicParsing="false" onAction="#SendRequest3" text="Send Request" />
+      <Text layoutX="156.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teacher Id :">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Text layoutX="150.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class Number :">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Text layoutX="160.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Id :">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <TextField fx:id="studentIdTextFiled" layoutX="298.0" layoutY="139.0" />
+      <TextField fx:id="classNumberTextFiled" layoutX="298.0" layoutY="188.0" />
+      <TextField fx:id="courseIdTextFiled" layoutX="298.0" layoutY="236.0" />
+      <Button layoutX="256.0" layoutY="289.0" mnemonicParsing="false" onAction="#SendRequest3" text="Send Request" />
       <Button fx:id="btnClose" layoutX="508.0" layoutY="343.0" mnemonicParsing="false" onAction="#close3" text="close" />
    </children>
 </AnchorPane>

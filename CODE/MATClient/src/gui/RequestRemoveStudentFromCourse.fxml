@@ -18,13 +18,22 @@
             <Font size="27.0" />
          </font>
       </Text>
-      <Text layoutX="147.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Id:" />
-      <Text layoutX="140.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class Number: " />
-      <Text layoutX="149.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Id:" />
-      <TextField fx:id="studentIdTextField" layoutX="243.0" layoutY="148.0" />
-      <TextField fx:id="classTextFiled" layoutX="243.0" layoutY="188.0" />
-      <TextField fx:id="courseTextField" layoutX="243.0" layoutY="231.0" />
-      <Button layoutX="275.0" layoutY="303.0" mnemonicParsing="false" onAction="#sendRequest2" text="Send request" />
+      <Text layoutX="140.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Id :">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Text layoutX="140.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class Number : ">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Text layoutX="143.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Id :">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <TextField fx:id="studentIdTextField" layoutX="300.0" layoutY="147.0" />
+      <TextField fx:id="classTextFiled" layoutX="300.0" layoutY="188.0" />
+      <TextField fx:id="courseTextField" layoutX="300.0" layoutY="230.0" />
+      <Button layoutX="257.0" layoutY="286.0" mnemonicParsing="false" onAction="#sendRequest2" text="Send request" />
       <Button fx:id="btnClose" layoutX="519.0" layoutY="349.0" mnemonicParsing="false" onAction="#closeRequest2" text="close" />
    </children>
 </AnchorPane>
