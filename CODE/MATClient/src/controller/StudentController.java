@@ -152,7 +152,7 @@ public class StudentController implements Handler
 			if (res.getStuCourseAss() != null) {
 				ArrayList<Assignment> assignments = res.getStuCourseAss().getAssignments();
 				
-				runAssignmentsForm(assignments);
+				runAssignmentsForm(assignments, this.userID);
 			}
 		}
 	}
@@ -199,7 +199,7 @@ public class StudentController implements Handler
 	 *
 	 * @param assignments the assignments
 	 */
-	private void runAssignmentsForm(final ArrayList<Assignment> assignments) {
+	private void runAssignmentsForm(final ArrayList<Assignment> assignments, final int userId) {
 		Platform.runLater(new Runnable() {
 			
 			public void run() {
@@ -224,7 +224,7 @@ public class StudentController implements Handler
 				  AssignmentStudentController controller = 
 				    loader.<AssignmentStudentController>getController();
 				  
-				  controller.initData(assignments);
+				  controller.initData(assignments, userId);
 
 				  stage.show();
 			}

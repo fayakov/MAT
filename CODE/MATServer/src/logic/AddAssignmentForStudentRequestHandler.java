@@ -9,6 +9,7 @@ import DAL.CDALError;
 import DAL.CDal;
 import communication.AddAssignmentForStudentRequest;
 import communication.Message;
+import entities.Assignment;
 import ocsf.server.ConnectionToClient;
 import utils.Handler;
 
@@ -22,13 +23,20 @@ public class AddAssignmentForStudentRequestHandler implements Handler {
 	 */
 	public void handle(Message msg, Object obj) {
 		ConnectionToClient client = (ConnectionToClient) obj;
-		AddAssignmentForStudentRequest AddAssignmentForStudentMsg = (AddAssignmentForStudentRequest)msg;
+		AddAssignmentForStudentRequest addAssignmentForStudentMsg = (AddAssignmentForStudentRequest)msg;
 				
 		// TODO Check in database
 		CDALError error = new CDALError();
-		/*boolean connectionSecceded = false; //CDal.connectUser(AddAssignmentForStudentMsg.isToConnect(), AddAssignmentForStudentMsg.getUserId(), AddAssignmentForStudentMsg.getPassword(), error);		
+		int studentId = CDal.getStudentId(addAssignmentForStudentMsg.getStudentId());		
+		Assignment ass = CDal.getAssignment(addAssignmentForStudentMsg.getAssignmentNumber());
 		
-		AddAssignmentForStudentResponseMsg res = new AddAssignmentForStudentResponse(connectionSecceded, error.getString());
+		CDal.createSubmissionToStudentWithCourse(studentId,
+				CDal.getCourseId(ass.getCourseName()),
+				ass.getDate(),
+				ass.getFileData(),
+				ass.getFileName(),
+				ass.getAssignmentNumber());
+		/*AddAssignmentForStudentResponseMsg res = new AddAssignmentForStudentResponse(connectionSecceded, error.getString());
 		try {
 			client.sendToClient(res);
 		} catch (IOException e) {

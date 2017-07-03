@@ -1,15 +1,25 @@
 package controller;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileSystemView;
+
 import communication.AddAssignmentForResponse;
+import communication.AddAssignmentForStudentRequest;
 import communication.Dispatcher;
+import communication.MATClientController;
 import communication.Message;
 import entities.Assignment;
 import javafx.event.ActionEvent;
@@ -19,6 +29,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import utils.Handler;
 
 /**
@@ -66,9 +78,12 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
     	
 		private Assignment assignment;
 
-	    public void initData(Assignment assignment) {
+		private int userId;
+
+	    public void initData(Assignment assignment, int userId) {
 	    	this.assignment = assignment;
 			textFieldAssNum.setText(Integer.toString(assignment.getAssignmentNumber()));
+			this.userId = userId;
 	    }
 	    
 	    
@@ -127,15 +142,50 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
     	@FXML
 	    void pressUpload(ActionEvent event) 
 	    {
-//	    	JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-//
-//			int returnValue = jfc.showOpenDialog(null);
-//			// int returnValue = jfc.showSaveDialog(null);
-//
-//			if (returnValue == JFileChooser.APPROVE_OPTION) {
-//				File selectedFile = jfc.getSelectedFile();
-//				System.out.println(selectedFile.getAbsolutePath());
-//			}
+    		FileChooser chooser = new FileChooser();
+    	    chooser.setTitle("Open File");
+    	    File selectedFile = chooser.showOpenDialog(new Stage());
+    	    if (selectedFile == null) return;
+    	    
+    	    System.out.println(selectedFile.getAbsolutePath());
+    	    
+    	    DataInputStream diStream;
+			try {
+				diStream = new DataInputStream(new FileInputStream(selectedFile));
+				long len = (int) selectedFile.length();
+	    		byte[] fileBytes = new byte[(int) len];
+	    		int read = 0;
+	    		int numRead = 0;
+	    		while (read < fileBytes.length && (numRead = diStream.read(fileBytes, read, fileBytes.length - read)) >= 0) {
+	    			read = read + numRead;
+	    		}
+	    			    		
+	    		AddAssignmentForStudentRequest newAssignment = new AddAssignmentForStudentRequest(
+	    					new java.sql.Date(Calendar.getInstance().getTime().getTime()),
+	    					selectedFile.getName(),
+	    					fileBytes,
+	    					assignment.getAssignmentNumber(),
+	    					this.userId);
+	    		
+	    		MATClientController.getInstance().sendRequestToServer(newAssignment);
+	    		
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		
+    	    
+    	    
+    		/*
+	    	JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+			int returnValue = jfc.showOpenDialog(null);
+			// int returnValue = jfc.showSaveDialog(null);
+
+			if (returnValue == JFileChooser.APPROVE_OPTION) {
+				File selectedFile = jfc.getSelectedFile();
+				System.out.println(selectedFile.getAbsolutePath());
+			} */
 //			
 //			
 //			//check format file:

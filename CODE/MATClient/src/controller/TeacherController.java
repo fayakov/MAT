@@ -94,17 +94,10 @@ public class TeacherController implements Handler
      *
      * @throws Exception the exception
      */
-    void checkAssignment() throws Exception 
-    {
+    void checkAssignment() throws Exception {
     	GetAssignmentsOfTeacherRequest getAssignmentsOfTeacherRequest = new GetAssignmentsOfTeacherRequest(userID);
 		MATClientController.getInstance().sendRequestToServer(getAssignmentsOfTeacherRequest);
-        	
-        	//Pane root = FXMLLoader.load(getClass().getResource("/gui/SubmissionsOfStudents.fxml"));
-    		//Scene scene = new Scene(root);
-    		//Stage primaryStage = new Stage();
-    		//primaryStage.setScene(scene);
-    		//primaryStage.show();
-        }
+    }
     
     /**
      * Send teacher menu.

@@ -56,3 +56,6 @@ bin/
 CODE/MATClient/bin/*
 bin/
 *.class
+*.class
+*.class
+*.class

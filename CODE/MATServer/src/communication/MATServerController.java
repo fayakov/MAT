@@ -45,6 +45,7 @@ public class MATServerController extends AbstractServer
 		
 		//matDAL = new CDal();
 		CDal.connect(db_password);
+		CDal.logoutAllUsers();
 	}
 	
 	/**
