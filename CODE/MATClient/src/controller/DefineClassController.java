@@ -57,11 +57,16 @@ public class DefineClassController implements Handler {
     void createClass(ActionEvent event) {
     	
     	clName = className.getText().toString();
+    	String classIdStr = classId.getText().toString();
+    	 
+    			
     	
     	if(className.getText().isEmpty()) 
-    		Prompt.alert(3,  "please enter class name");    
-    	
-    	else {  
+    		Prompt.alert(3,  "please enter class name");
+    	else if(classId.getText().isEmpty()) 
+    		Prompt.alert(3,  "please enter class id");
+    	else { 
+    		clid = Integer.parseInt(classIdStr);
     		DefineClassRequest defineClassReq = new DefineClassRequest(clid, clName);
 	        MATClientController.getInstance().sendRequestToServer(defineClassReq);
     	}

@@ -21,5 +21,7 @@ public enum EDALError {
 	EUpdateNotSucced, 
 	
 	/** The E teacher exceed max hours. */
-	ETeacherExceedMaxHours
+	ETeacherExceedMaxHours,
+	
+	EClassAllreadyExist
 }

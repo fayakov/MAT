@@ -57,14 +57,26 @@ public class CDALError {
 		// Yinon: Convert error code to string... may use switch/case instead of ugly if/else
 		String returnString = "";
 		
-		if (this.error == EDALError.ETeacherExceedMaxHours)
+		switch(this.error)
 		{
-			returnString = "Teacher Exceeded Max Hours";
+			case ETeacherExceedMaxHours:
+			{
+				returnString = "Teacher Exceeded Max Hours";
+			}
+			break;
+			case EUserAllreadyConnectedDisconnected:
+			{
+				returnString = "User allready loogged in to system";
+			}
+			break;
+			case EClassAllreadyExist:
+			{
+				returnString = "class allready exist";
+			}
+			default:
+			break;
 		}
-		else if (this.error == EDALError.EUserAllreadyConnectedDisconnected)
-		{
-			returnString = "User allready loogged in to system";
-		}
+		
 		return returnString;
 	}
 

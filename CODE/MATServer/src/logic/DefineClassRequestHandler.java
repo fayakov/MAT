@@ -31,7 +31,7 @@ public class DefineClassRequestHandler implements Handler {
 		
 		// TODO Check in database
 		CDALError error = new CDALError();
-		boolean isSucceeded = CDal.addNewClass(addClassMsg.getClassName());		
+		boolean isSucceeded = CDal.addNewClass(addClassMsg.getClassName(),addClassMsg.getClassId());		
 		
 		DefineClassResponse res = new DefineClassResponse(isSucceeded, error.getString());
 		try {

@@ -26,7 +26,7 @@ public class DALTestMain {
 		//checkGetUserData(dl);
 		//checkGetUserType(dl);
 		//checkIsExistClass(dl);
-		//checkAddClass(dl);
+		checkAddClass(dl);
 		//checkAddStudentToClass(dl);
 		//checkGetStudentId(dl);
 		//chekcIsStudentInCourse(dl);
@@ -61,7 +61,7 @@ public class DALTestMain {
 		//checkCreateReq(dl);
 		//checkGetRequests(dl);
 		//checkConfirmRequest(dl);
-		checkCreateAssignment(dl);
+		//checkCreateAssignment(dl);
 		//checkGetAssignment(dl);
 		//checkAddAssignmentToClassWithCourse(dl);
 		//checkAddSubmission(dl);
@@ -193,8 +193,8 @@ public class DALTestMain {
 	}
 	
 	public static void checkAddClass(CDal dl){
-		System.out.println(dl.addNewClass("a1")==false);
-		System.out.println(dl.addNewClass("a4"));
+		//System.out.println(dl.addNewClass("a1")==false);
+		System.out.println(dl.addNewClass("a5",20));
 	}
 	public static void checkIsExistClass(CDal dl){
 		System.out.println(dl.isClassExist("a1"));
