@@ -83,6 +83,9 @@ public class CheckAssignmentController //implements Initializable, Handler
 	    /** The button apload. */
     	@FXML
 	    private Button buttonApload;
+    	
+    	@FXML
+        private TextField textFieldChoosenFile;
 
 	    
 	   /**
@@ -105,6 +108,10 @@ public class CheckAssignmentController //implements Initializable, Handler
 	    void uploadSubmission(ActionEvent event) 
 	    {
 
+    		
+    		
+    		
+    		textFieldChoosenFile.setText();
 	    }
 
 	    /**
