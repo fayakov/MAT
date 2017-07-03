@@ -9,6 +9,11 @@ import java.util.ArrayList;
  */
 public class SubmissionsForTeacherCheck implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	/** The submission list. */
 	private ArrayList<Submission> submissionList;
 

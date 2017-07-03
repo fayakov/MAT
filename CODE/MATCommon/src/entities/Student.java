@@ -7,9 +7,13 @@ import java.util.ArrayList;
 /**
  * The Class Student.
  */
-public class Student  extends User 
-{
-	 
+public class Student extends User implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The parent ID. */
 	public ArrayList<Integer> parentID = new ArrayList<Integer>();
 	 

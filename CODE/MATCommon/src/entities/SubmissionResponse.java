@@ -9,6 +9,11 @@ import java.sql.Date;
  */
 public class SubmissionResponse implements Serializable  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The grade. */
 	private int grade;
 	

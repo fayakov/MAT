@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class TeacherWithGrade implements Serializable {
 	
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = -2991536140659722413L;
+	private static final long serialVersionUID = 1L;
 	
 	/** The m grade. */
 	private float m_grade;

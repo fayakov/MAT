@@ -1,11 +1,16 @@
 package entities;
 
-
+import java.io.Serializable;
 
 /**
  * The Class Semester.
  */
-public class Semester {
+public class Semester implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/** The semester number. */
 	private int semesterNumber;

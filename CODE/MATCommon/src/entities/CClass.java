@@ -1,13 +1,19 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
 /**
  * The Class CClass.
  */
-public class CClass {
+public class CClass implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The class number. */
 	private int classNumber;
 	

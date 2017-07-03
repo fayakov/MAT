@@ -9,6 +9,11 @@ import java.io.Serializable;
 public class EvaluationForm implements Serializable 
 {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The comment. */
 	private String comment;
 	

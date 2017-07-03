@@ -1,14 +1,20 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
 /**
  * The Class Parent.
  */
-public class Parent extends User{
+public class Parent extends User implements Serializable{
 
- /** The isblocked. */
+ /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+/** The isblocked. */
  private Boolean isblocked;
  
  /** The student list. */

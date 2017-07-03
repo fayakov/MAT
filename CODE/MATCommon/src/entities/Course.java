@@ -1,13 +1,19 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
 /**
  * The Class Course.
  */
-public class Course  {
+public class Course implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The course id. */
 	private int courseId;
 	
