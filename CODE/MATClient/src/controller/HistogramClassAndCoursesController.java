@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
 /**
  * The Class HistogramClassAndCoursesController.
  */
-public class HistogramClassAndCoursesController implements Initializable {
+public class HistogramClassAndCoursesController implements Initializable{
 	
 	/**
 	 * Instantiates a new histogram class and courses controller.
@@ -22,9 +22,6 @@ public class HistogramClassAndCoursesController implements Initializable {
 	public HistogramClassAndCoursesController(){
 	}
 	
-	/** The i. */
-	private int i = 0;
-		
 	/** The x. */
 	@FXML
     private CategoryAxis x;
@@ -35,12 +32,13 @@ public class HistogramClassAndCoursesController implements Initializable {
 
     /** The Course chart. */
     @FXML
+
     private BarChart<String, Number> CourseChart;
 
 	/* (non-Javadoc)
 	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
 	 */
-	public void initialize(URL location, ResourceBundle resources) {
+	public void initialize(URL location, ResourceBundle resources){
 		// TODO Auto-generated method stub
 	}
 
@@ -60,4 +58,3 @@ public class HistogramClassAndCoursesController implements Initializable {
 		
 	}
 }
-

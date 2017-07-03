@@ -4,28 +4,18 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import communication.Dispatcher;
-import communication.GetClassTeachersStatsResponse;
-import communication.Message;
 import entities.ClassWithGrade;
-import entities.TeacherWithGrade;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
-import utils.Handler;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.chart.XYChart.Data;
-import javafx.scene.chart.XYChart.Series;
 
 /**
  * The Class HistogramTeacherAndClassesController.
  */
-public class HistogramTeacherAndClassesController implements  Initializable {
+public class HistogramTeacherAndClassesController implements  Initializable{
 	
 	/**
 	 * Instantiates a new histogram teacher and classes controller.
@@ -46,9 +36,9 @@ public class HistogramTeacherAndClassesController implements  Initializable {
     private NumberAxis y;
     
 	/* (non-Javadoc)
-	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
 	 */
-	@Override
+
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 
