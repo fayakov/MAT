@@ -79,6 +79,9 @@ public class DefineAssignment implements Initializable, Handler
     	/** The button upload. */
     	@FXML
 	    private Button buttonUpload;
+    	
+    	@FXML
+        private TextField txtFieldChoosen;
 
 	    
 	    
@@ -99,6 +102,9 @@ public class DefineAssignment implements Initializable, Handler
 				File selectedFile = jfc.getSelectedFile();
 				System.out.println(selectedFile.getAbsolutePath());
 			}
+			
+			txtFieldChoosen.setText();
+			
 	    }
 	    
 	    

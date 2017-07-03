@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="407.0" prefWidth="591.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DefineAssignment">
+<AnchorPane prefHeight="420.0" prefWidth="754.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DefineAssignment">
    <children>
       <Label fx:id="labelDefineAss" layoutX="154.0" layoutY="21.0" prefHeight="45.0" prefWidth="284.0" text="Define Assignment">
          <font>
@@ -33,6 +33,8 @@
       <TextField fx:id="textFieldInsertClass" layoutX="277.0" layoutY="192.0" prefHeight="25.0" prefWidth="109.0" />
       <TextField fx:id="textFieldInsertCouse" layoutX="277.0" layoutY="250.0" prefHeight="25.0" prefWidth="109.0" />
       <Button fx:id="buttonUpload" layoutX="277.0" layoutY="79.0" mnemonicParsing="false" onAction="#pressUpload" prefHeight="25.0" prefWidth="109.0" text="choose File" />
-      <Button fx:id="buttonSendDefineAss" layoutX="263.0" layoutY="331.0" mnemonicParsing="false" onAction="#sendDefineAssignment" text="Create" />
+      <Button fx:id="buttonSendDefineAss" layoutX="294.0" layoutY="329.0" mnemonicParsing="false" onAction="#sendDefineAssignment" text="Create" />
+      <Label layoutX="450.0" layoutY="85.0" text="Choosen file:" />
+      <TextField fx:id="txtFieldChoosen" layoutX="572.0" layoutY="79.0" prefHeight="39.0" prefWidth="153.0" />
    </children>
 </AnchorPane>
