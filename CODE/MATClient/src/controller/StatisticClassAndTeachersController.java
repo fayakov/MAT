@@ -1,17 +1,12 @@
 package controller;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import communication.Dispatcher;
-import communication.GetClassDataRequest;
-import communication.GetClassDataResponse;
 import communication.GetClassTeachersStatsRequest;
 import communication.GetClassTeachersStatsResponse;
-import communication.LoginResponseMsg;
 import communication.MATClientController;
 import communication.Message;
 import entities.TeacherWithGrade;
@@ -21,15 +16,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import utils.Handler;
-
 
 /**
  * The Class StatisticClassAndTeachersController.
@@ -39,9 +31,9 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 	/**
 	 * Instantiates a new statistic class and teachers controller.
 	 */
-	public StatisticClassAndTeachersController(){
-		Dispatcher.addHandler(GetClassTeachersStatsResponse.class.getCanonicalName(), this);
-	}
+//	public StatisticClassAndTeachersController(){
+	//	Dispatcher.addHandler(GetClassTeachersStatsResponse.class.getCanonicalName(), this);
+	//}
 	
 		/** The clid. */
 		private int clid;
@@ -71,8 +63,8 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 		    	 try {
 					    clid = Integer.parseInt(ClassNumber.getText());
 					    
-					   GetClassTeachersStatsRequest ClassData = new GetClassTeachersStatsRequest(clid);
-					   MATClientController.getInstance().sendRequestToServer(ClassData);
+					//   GetClassTeachersStatsRequest ClassData = new GetClassTeachersStatsRequest(clid);
+				//	   MATClientController.getInstance().sendRequestToServer(ClassData);
 				    	
 				    	} catch(NumberFormatException e){
 				    	Prompt.alert(3,"please enter numerical value");
@@ -93,19 +85,17 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 		    stage.close();
 	    }
 
-		/* (non-Javadoc)
-		 * @see utils.Handler#handle(communication.Message, java.lang.Object)
-		 */
+	
 		public void handle(Message msg, Object obj) {
 			// TODO Auto-generated method stub
-			if (msg instanceof GetClassTeachersStatsResponse) {
-				GetClassTeachersStatsResponse res = (GetClassTeachersStatsResponse)msg;
-				if(res.getStats() == null)
-					Prompt.alert(3, "class is not exist");
-				else{
+		//	if (msg instanceof GetClassTeachersStatsResponse) {
+		//		GetClassTeachersStatsResponse res = (GetClassTeachersStatsResponse)msg;
+		//		if(res.getStats() == null)
+		//			Prompt.alert(3, "class is not exist");
+		//		else{
 					
-				ArrayList<TeacherWithGrade> arr = res.getStats();
-				statisticsTeacher(arr);
+		//		ArrayList<TeacherWithGrade> arr = res.getStats();
+		//		statisticsTeacher(arr);
 				}
 //				Platform.runLater(new Runnable() {
 //					
@@ -157,11 +147,11 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 //					 
 					
 					
-				}
+		//		}
 					
 			
 				//con.setDisplayArr(arr);
-			}
+	//		}
 			
 		
 
@@ -228,23 +218,17 @@ public class StatisticClassAndTeachersController implements Initializable, Handl
 						e.printStackTrace();
 					}
 
-					  HistogramClassAndTeachersController controller = 
-					    loader.<HistogramClassAndTeachersController>getController();
+				//	  HistogramClassAndTeachersController controller = 
+				//	    loader.<HistogramClassAndTeachersController>getController();
 					  
-					  controller.initData(arr);
+					//  controller.initData(arr);
 
 					  stage.show();
 				}
 			});
 	    }
 			
-			
-		
-
-
-		/* (non-Javadoc)
-		 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
-		 */
+	
 		public void initialize(URL location, ResourceBundle resources) {
 			// TODO Auto-generated method stub
 			
