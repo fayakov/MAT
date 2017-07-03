@@ -5,7 +5,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SearchStudentController">
    <children>
       <Text layoutX="193.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Student">
@@ -13,13 +12,13 @@
             <Font size="32.0" />
          </font>
       </Text>
-      <Text layoutX="158.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="StudentId">
+      <Text layoutX="158.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Id :">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="studentId" layoutX="244.0" layoutY="131.0" />
-      <Button layoutX="407.0" layoutY="325.0" mnemonicParsing="false" onAction="#send" text="Send" />
-      <Button fx:id="closebtn" layoutX="154.0" layoutY="325.0" mnemonicParsing="false" onAction="#close" text="Close" />
+      <TextField fx:id="studentId" layoutX="272.0" layoutY="131.0" />
+      <Button layoutX="448.0" layoutY="131.0" mnemonicParsing="false" onAction="#send" text="Send" />
+      <Button fx:id="closebtn" layoutX="498.0" layoutY="331.0" mnemonicParsing="false" onAction="#close" text="Close" />
    </children>
 </AnchorPane>

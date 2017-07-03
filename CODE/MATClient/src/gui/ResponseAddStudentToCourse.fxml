@@ -8,12 +8,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ResponseAddStudentToCourseController">
    <children>
-      <Text layoutX="265.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Request">
+      <Text layoutX="236.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Request">
          <font>
             <Font size="32.0" />
          </font>
       </Text>
-      <Text layoutX="184.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add student to course">
+      <Text layoutX="163.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add student to course">
          <font>
             <Font size="28.0" />
          </font>
@@ -26,7 +26,7 @@
             <TableColumn fx:id="courseId" prefWidth="66.0" text="course id" />
         </columns>
       </TableView>
-      <Button fx:id="btnConfirm" layoutX="342.0" layoutY="350.0" mnemonicParsing="false" onAction="#confirm" text="confirm" />
-      <Button fx:id="btnDecline" layoutX="239.0" layoutY="350.0" mnemonicParsing="false" onAction="#decline" text="decline" />
+      <Button fx:id="btnConfirm" layoutX="331.0" layoutY="338.0" mnemonicParsing="false" onAction="#confirm" text="confirm" />
+      <Button fx:id="btnDecline" layoutX="209.0" layoutY="338.0" mnemonicParsing="false" onAction="#decline" text="decline" />
    </children>
 </AnchorPane>

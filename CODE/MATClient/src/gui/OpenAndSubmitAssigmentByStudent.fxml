@@ -10,20 +10,25 @@
    <children>
       <Label fx:id="labelDownload" layoutX="38.0" layoutY="136.0" text="Download Assignment File:">
          <font>
-            <Font size="20.0" />
+            <Font size="18.0" />
          </font></Label>
-      <Label fx:id="labelUpload" layoutX="42.0" layoutY="219.0" text="Edit Submission File:">
+      <Label fx:id="labelUpload" layoutX="38.0" layoutY="190.0" text="Edit Submission File:">
          <font>
-            <Font size="20.0" />
+            <Font size="18.0" />
          </font></Label>
-      <Label fx:id="labelAssNum" layoutX="42.0" layoutY="58.0" text="Assignment Number:">
+      <Label fx:id="labelAssNum" layoutX="39.0" layoutY="88.0" text="Assignment Number:">
          <font>
-            <Font size="20.0" />
+            <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="textFieldAssNum" layoutX="345.0" layoutY="58.0" prefHeight="30.0" prefWidth="116.0" />
-      <Button fx:id="buttonDownload" layoutX="345.0" layoutY="136.0" mnemonicParsing="false" onAction="#pressDownload" prefHeight="30.0" prefWidth="116.0" text="Select File" />
-      <Button fx:id="buttonUpload" layoutX="345.0" layoutY="219.0" mnemonicParsing="false" onAction="#pressUpload" prefHeight="30.0" prefWidth="116.0" text="Edit File" />
+      <TextField fx:id="textFieldAssNum" layoutX="323.0" layoutY="87.0" prefHeight="30.0" prefWidth="116.0" />
+      <Button fx:id="buttonDownload" layoutX="323.0" layoutY="135.0" mnemonicParsing="false" onAction="#pressDownload" prefHeight="30.0" prefWidth="116.0" text="Select File" />
+      <Button fx:id="buttonUpload" layoutX="323.0" layoutY="190.0" mnemonicParsing="false" onAction="#pressUpload" prefHeight="30.0" prefWidth="116.0" text="Edit File" />
       <Button fx:id="buttonSendSub" layoutX="219.0" layoutY="338.0" mnemonicParsing="false" onAction="#sendSubmission" prefHeight="30.0" prefWidth="116.0" text="Upload" />
+      <Text layoutX="152.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="submit assignment">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

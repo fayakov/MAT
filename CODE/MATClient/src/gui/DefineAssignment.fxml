@@ -6,21 +6,33 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="531.0" prefWidth="591.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DefineAssignment">
+<AnchorPane prefHeight="407.0" prefWidth="591.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DefineAssignment">
    <children>
-      <Label fx:id="labelDefineAss" layoutX="166.0" layoutY="25.0" prefHeight="45.0" prefWidth="284.0" text="Define Assignment:">
+      <Label fx:id="labelDefineAss" layoutX="154.0" layoutY="21.0" prefHeight="45.0" prefWidth="284.0" text="Define Assignment">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <Label fx:id="labelUpload" layoutX="42.0" layoutY="78.0" text="Upload File:" />
-      <Label fx:id="labelDefineDate" layoutX="40.0" layoutY="134.0" text="Define Date Submission:" />
-      <Label fx:id="labelInsertClass" layoutX="42.0" layoutY="204.0" prefHeight="27.0" prefWidth="179.0" text="Insert Class Number:" />
-      <Label fx:id="labelInsertCourse" layoutX="40.0" layoutY="287.0" text="Insert Course Number:" />
-      <DatePicker fx:id="datePickerDefineDate" layoutX="277.0" layoutY="128.0" />
-      <TextField fx:id="textFieldInsertClass" layoutX="277.0" layoutY="198.0" />
-      <TextField fx:id="textFieldInsertCouse" layoutX="277.0" layoutY="268.0" />
-      <Button fx:id="buttonUpload" layoutX="277.0" layoutY="66.0" mnemonicParsing="false" onAction="#pressUpload" text="UPLOAD" />
-      <Button fx:id="buttonSendDefineAss" layoutX="238.0" layoutY="384.0" mnemonicParsing="false" onAction="#sendDefineAssignment" text="SEND" />
+      <Label fx:id="labelUpload" layoutX="42.0" layoutY="78.0" text="Add File :">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="labelDefineDate" layoutX="40.0" layoutY="134.0" text="Define Submission Date :">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="labelInsertClass" layoutX="43.0" layoutY="191.0" prefHeight="27.0" prefWidth="179.0" text="Insert Class Number :">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="labelInsertCourse" layoutX="41.0" layoutY="249.0" text="Insert Course Number :">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <DatePicker fx:id="datePickerDefineDate" layoutX="277.0" layoutY="135.0" prefHeight="25.0" prefWidth="109.0" />
+      <TextField fx:id="textFieldInsertClass" layoutX="277.0" layoutY="192.0" prefHeight="25.0" prefWidth="109.0" />
+      <TextField fx:id="textFieldInsertCouse" layoutX="277.0" layoutY="250.0" prefHeight="25.0" prefWidth="109.0" />
+      <Button fx:id="buttonUpload" layoutX="277.0" layoutY="79.0" mnemonicParsing="false" onAction="#pressUpload" prefHeight="25.0" prefWidth="109.0" text="choose File" />
+      <Button fx:id="buttonSendDefineAss" layoutX="263.0" layoutY="331.0" mnemonicParsing="false" onAction="#sendDefineAssignment" text="Create" />
    </children>
 </AnchorPane>
