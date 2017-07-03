@@ -43,6 +43,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class AssignmentStudentController implements Initializable, Handler
 {
 	
+	int userId;
+	
 	/**
 	 * Instantiates a new assignment student controller.
 	 */
@@ -56,7 +58,7 @@ public class AssignmentStudentController implements Initializable, Handler
 	 *
 	 * @param assignments the assignments
 	 */
-	public void initData(ArrayList<Assignment> assignments) {
+	public void initData(ArrayList<Assignment> assignments, int userId) {
 		if (assignments == null)
 			return;
 		
@@ -65,6 +67,8 @@ public class AssignmentStudentController implements Initializable, Handler
 		for (Assignment assignment : assignments) {
 			data.add(assignment);
 		}
+		
+		this.userId = userId;
 	}
 	
 	/** The resources. */
@@ -138,6 +142,7 @@ public class AssignmentStudentController implements Initializable, Handler
     void pressNext(ActionEvent event) 
     {
     	Assignment assignment = tableView.getSelectionModel().getSelectedItem();
+    	if (assignment == null) return;
     	
     	FXMLLoader loader = new FXMLLoader(
 				getClass().getResource(
@@ -156,7 +161,7 @@ public class AssignmentStudentController implements Initializable, Handler
 		OpenAndSubmitAssignmentByStudentController controller =
 				loader.<OpenAndSubmitAssignmentByStudentController>getController();
 		
-		controller.initData(assignment);
+		controller.initData(assignment, this.userId);
 		
 		stage.show();
 		

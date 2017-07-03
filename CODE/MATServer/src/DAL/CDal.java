@@ -386,6 +386,20 @@ public class CDal {
 		return retVal;
 	}
 
+	public static boolean logoutAllUsers() {
+		boolean retVal = true;
+		try {
+			Statement stmt = connection.createStatement();
+			int numOfUpdates = stmt
+					.executeUpdate("UPDATE user SET isLogged = false WHERE isLogged = true;");
+			
+			} catch (SQLException e) {
+				retVal = false;
+			e.printStackTrace();
+		}
+		return retVal;
+	}
+	
 	public static int getCourseId(String courseName) {
 		int retVal = 0;
 		try {
@@ -394,7 +408,7 @@ public class CDal {
 					.executeQuery("SELECT courseId FROM course WHERE course.name = '" + courseName + "';");
 			if (resultSet.first()) {
 
-				retVal = resultSet.getInt(1);
+				retVal = resultSet.getInt("courseId");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -2547,6 +2561,9 @@ public class CDal {
 
 				assignment.setDate(resultSet.getDate("date"));
 				assignment.setAssignmentNumber(resultSet.getInt("assignmentId"));
+				assignment.setCourseName(getCourseName(resultSet.getInt("courseId")));
+				assignment.setFileName(resultSet.getString("fileName"));
+				assignment.setTeacherId(resultSet.getInt("teacherId"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
