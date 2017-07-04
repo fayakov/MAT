@@ -17,11 +17,7 @@
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label fx:id="labelDefineDate" layoutX="40.0" layoutY="134.0" text="Define Submission Date :">
-         <font>
-            <Font size="18.0" />
-         </font></Label>
-      <Label fx:id="labelInsertClass" layoutX="43.0" layoutY="191.0" prefHeight="27.0" prefWidth="179.0" text="Insert Class Number :">
+      <Label fx:id="labelDefineDate" layoutX="41.0" layoutY="161.0" text="Define Submission Date :">
          <font>
             <Font size="18.0" />
          </font></Label>
@@ -29,8 +25,7 @@
          <font>
             <Font size="18.0" />
          </font></Label>
-      <DatePicker fx:id="datePickerDefineDate" layoutX="277.0" layoutY="135.0" prefHeight="25.0" prefWidth="109.0" />
-      <TextField fx:id="textFieldInsertClass" layoutX="277.0" layoutY="192.0" prefHeight="25.0" prefWidth="109.0" />
+      <DatePicker fx:id="datePickerDefineDate" layoutX="277.0" layoutY="155.0" prefHeight="25.0" prefWidth="109.0" />
       <TextField fx:id="textFieldInsertCouse" layoutX="277.0" layoutY="250.0" prefHeight="25.0" prefWidth="109.0" />
       <Button fx:id="buttonUpload" layoutX="277.0" layoutY="79.0" mnemonicParsing="false" onAction="#pressUpload" prefHeight="25.0" prefWidth="109.0" text="choose File" />
       <Button fx:id="buttonSendDefineAss" layoutX="294.0" layoutY="329.0" mnemonicParsing="false" onAction="#sendDefineAssignment" text="Create" />
