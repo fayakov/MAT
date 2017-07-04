@@ -18,7 +18,7 @@
             <Font size="32.0" />
          </font>
       </Text>
-      <Text layoutX="150.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id :" wrappingWidth="24.6392822265625">
+      <Text layoutX="150.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id :" wrappingWidth="39.6392822265625">
          <font>
             <Font size="18.0" />
          </font></Text>
@@ -27,11 +27,11 @@
             <Font size="18.0" />
          </font></Text>
       <TextField fx:id="userIdTextField" layoutX="250.0" layoutY="123.0" />
-      <PasswordField fx:id="passwordTextField" layoutX="250.0" layoutY="172.0" />
+      <PasswordField fx:id="passwordTextField" layoutX="250.0" layoutY="172.0" prefHeight="39.0" prefWidth="224.0" />
       <Button fx:id="loginBtn" layoutX="252.0" layoutY="219.0" mnemonicParsing="false" onAction="#logInBtn" text="log in" />
       <Text fx:id="errorText" layoutX="200.0" layoutY="120" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="148.99999555945396" />
             
-      <Button layoutX="310.0" layoutY="219.0" mnemonicParsing="false" onAction="#settingsBtn" text="more settings" />
+      <Button layoutX="333.0" layoutY="219.0" mnemonicParsing="false" onAction="#settingsBtn" text="more settings" />
       <Text fx:id="serverIpLabel" layoutX="167.0" layoutY="260" strokeType="OUTSIDE" strokeWidth="0.0" text="Server Ip:" visible="false" />
       <Text fx:id="serverPortLabel" layoutX="167.0" layoutY="290" strokeType="OUTSIDE" strokeWidth="0.0" text="Server Port:" visible="false" />
       <TextField fx:id="serverIpTextField" layoutX="258.0" layoutY="246" text="127.0.0.1" visible="false" />
