@@ -114,7 +114,8 @@ public class DefineAssignment implements Initializable, Handler
     		FileChooser chooser = new FileChooser();
     	    chooser.setTitle("Open File");
     	    this.selectedFile = chooser.showOpenDialog(new Stage());
-    	    			
+    	    
+    	    if (selectedFile == null) return;
 			txtFieldChoosen.setText(selectedFile.getName());
 			
 	    }
