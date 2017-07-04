@@ -23,7 +23,7 @@
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Button fx:id="buttonSendForm" layoutX="271.0" layoutY="382.0" mnemonicParsing="false" onAction="#sendEvaluationForm" prefHeight="25.0" prefWidth="61.0" text="Create" />
+      <Button fx:id="buttonSendForm" layoutX="271.0" layoutY="382.0" mnemonicParsing="false" onAction="#sendEvaluationForm" prefHeight="39.0" prefWidth="95.0" text="Create" />
       <Text layoutX="175.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EvaluationForm">
          <font>
             <Font size="32.0" />
