@@ -99,6 +99,8 @@ public class DefineAssignment implements Initializable, Handler
 
 		private int userId;
 
+		private File selectedFile;
+
 	    
 	    
 	    /**
@@ -108,7 +110,34 @@ public class DefineAssignment implements Initializable, Handler
     	 */
     	@FXML
 	    void pressUpload(ActionEvent event) 
+	    {    		
+    		FileChooser chooser = new FileChooser();
+    	    chooser.setTitle("Open File");
+    	    this.selectedFile = chooser.showOpenDialog(new Stage());
+    	    			
+			txtFieldChoosen.setText(selectedFile.getName());
+			
+	    }
+	    
+	    
+	    /**
+    	 * Send define assignment.
+    	 *
+    	 * @param event the event
+    	 */
+    	@FXML
+	    void sendDefineAssignment(ActionEvent event) 
 	    {
+    		if (this.selectedFile == null)
+    		{
+    			Alert alert = new Alert(AlertType.INFORMATION);
+    			alert.setTitle("Error");
+    			alert.setHeaderText(null);
+    			alert.setContentText("לא נבחר קובץ להעלאה");
+    			alert.showAndWait();
+    			return;
+    		}
+    	    
     		if (this.textFieldInsertCouse.getText().isEmpty()) {
     			Alert alert = new Alert(AlertType.INFORMATION);
     			alert.setTitle("Error");
@@ -118,11 +147,6 @@ public class DefineAssignment implements Initializable, Handler
     			return;
     		}
     		
-    		FileChooser chooser = new FileChooser();
-    	    chooser.setTitle("Open File");
-    	    File selectedFile = chooser.showOpenDialog(new Stage());
-    	    if (selectedFile == null) return;
-    	    
     	    System.out.println(selectedFile.getAbsolutePath());
     	    
     	    DataInputStream diStream;
@@ -153,55 +177,7 @@ public class DefineAssignment implements Initializable, Handler
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			//txtFieldChoosen.setText();
-			
-	    }
-	    
-	    
-	    /**
-    	 * Send define assignment.
-    	 *
-    	 * @param event the event
-    	 */
-    	@FXML
-	    void sendDefineAssignment(ActionEvent event) 
-	    {
 	    	
-	    	LocalDate date = datePickerDefineDate.getValue();
-	         //System.err.println("Selected date: " + date); //2017-07-04
-	    	
-	    	//check if date is in semester
-	    	
-	    	
-	    	 if(textFieldInsertClass.getText().isEmpty() || textFieldInsertCouse.getText().isEmpty()) 
-				 	Prompt.alert(3,"one or more of the fields is empty");		    	
-		     else {  	
-		    		//add
-		    	 try {
-					    clid = Integer.parseInt(textFieldInsertClass.getText());
-				    	coid = Integer.parseInt(textFieldInsertCouse.getText());
-				    	} 
-		    	 catch(NumberFormatException e){
-				    	Prompt.alert(3,"please enter numerical value");
-				    	return;
-				    	}  	
-		    	  //Prompt.alert(1, "Assignment added successfully to class:" + clid + ",course:" +coid);		    			 
-		    	  }
-	    	 
-	    	 /*
-	    	 //check format file:
-	    	 String fileName= selectedFile.getName();
-	    	    int dotIndex = fileName.lastIndexOf('.');
-	    	    String format= (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
-	    	 if ((Objects.equals(format, new String("word")))) formatFile= "word";
-	    	   else if (Objects.equals(format, new String("PDF"))) formatFile= "PDF";
-	    		    else if (Objects.equals(format, new String("Excel")))  formatFile= "Excel";
-	    		        else  Prompt.alert(3,"please upload a file with valid format"); */
-	    	 
-	    	 
-	    	 //CreateAssignmentRequest createAssignmentReq = new CreateAssignmentRequest(selectedFile, filename, date, clid, coid );
-	 		//MATClientController.getInstance().sendRequestToServer(createAssignmentReq);
 	    }
 
    
