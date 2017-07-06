@@ -15,7 +15,7 @@ import entities.*;
 
 public class CDal {
 	private static String userName = "root";
-	private static String password = "Braude";// "mysql_native_password";//"admin";
+	private static String password = "admin";// "mysql_native_password";//"admin";
 	private static String connectionString = "jdbc:mysql://localhost/mat_db?autoReconnect=true&useSSL=false";
 	private static Connection connection;
 
@@ -622,8 +622,6 @@ public class CDal {
 				stmt.executeUpdate("INSERT INTO course (name, teachingHours,teachingUnit_teachingUnitId) VALUES ('"
 						+ courseName + "'," + teachingHours + "," + teachingUnit + ")");
 
-				// addTeachingUnitToCourse(teachingUnit,
-				// getCourseId(courseName));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -806,6 +804,34 @@ public class CDal {
 		}
 		return retVal;
 	}
+	
+	public static ArrayList<Integer> getStudentsInClass(int classId) {
+
+		ArrayList<Integer> students = new ArrayList<Integer>();
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet = stmt
+					.executeQuery("SELECT * FROM class_has_student " + " "
+							+ "WHERE class_has_student.class_classId = '" + classId + "';");
+			while (resultSet.next()) {
+				students.add(resultSet.getInt(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return students;
+	}
+	
+	private static boolean addStudentFromClassToCourse(int classId, int courseId)
+	{
+		boolean retVal = true;
+		ArrayList<Integer> students = getStudentsInClass(classId);
+		for(int i : students)
+		{
+			addStudentToCourseWithClass(courseId, classId, getStudentUserId(i));
+		}
+		return retVal;
+	}
 
 	public static boolean addCourseToClass(int classId, int courseId) {
 		boolean retVal = true;
@@ -828,6 +854,10 @@ public class CDal {
 
 								{
 									retVal = false;
+								}
+								else
+								{
+									addStudentFromClassToCourse(classId, courseId);
 								}
 							}
 
