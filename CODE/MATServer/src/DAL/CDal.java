@@ -15,8 +15,8 @@ import entities.*;
 
 public class CDal {
 	private static String userName = "root";
-	private static String password = "admin";// "mysql_native_password";//"admin";
-	private static String connectionString = "jdbc:mysql://localhost/mat_db?autoReconnect=true&useSSL=false";
+	private static String password = "Braude";// "mysql_native_password";//"admin";
+	private static String connectionString = "jdbc:mysql://localhost/mat?autoReconnect=true&useSSL=false";
 	private static Connection connection;
 
 
