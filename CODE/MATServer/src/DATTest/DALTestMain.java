@@ -22,7 +22,7 @@ public class DALTestMain {
 	public static void main(String[] args) {
 
 		CDal dl = new CDal();
-		dl.connect("admin");
+		dl.connect("Braude");
 		
 		//checkCreateUser(dl);
 		//checkLogin(dl);
