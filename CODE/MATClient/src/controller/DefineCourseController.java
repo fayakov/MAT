@@ -8,9 +8,7 @@ import communication.DefineCourseResponse;
 import communication.Dispatcher;
 import communication.MATClientController;
 import communication.Message;
-import communication.PrincipalDecisionRequest;
 import entities.Course;
-import entities.Request;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,7 +23,7 @@ import utils.Handler;
 /**
  * The Class DefineCourseController.
  */
-public class DefineCourseController implements Handler, Initializable {
+public class DefineCourseController implements Initializable, Handler {
 	
 	/**
 	 * Instantiates a new define course controller.
@@ -108,7 +106,7 @@ public class DefineCourseController implements Handler, Initializable {
     	   	Course preCourse = perCourse.getSelectionModel().getSelectedItem();
     	   	preCourseId = preCourse.getCourseId();
 
-    		DefineCourseRequest defineCourseReq = new DefineCourseRequest(newCourseName, teachHours, tUnit, preCourseId);
+    		DefineCourseRequest defineCourseReq = new DefineCourseRequest(newCourseName, tUnit, teachHours, preCourseId);
 	        MATClientController.getInstance().sendRequestToServer(defineCourseReq);  
     		}
     		catch(NumberFormatException e){

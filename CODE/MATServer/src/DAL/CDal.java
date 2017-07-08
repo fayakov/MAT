@@ -611,7 +611,7 @@ public class CDal {
 		return retVal;
 	}
 
-	public static boolean createCourse(String courseName, int teachingHours, int teachingUnit, int preCourseId) {
+	public static boolean createCourse(String courseName, int teachingUnit, int teachingHours, int preCourseId) {
 
 		boolean retVal = true;
 		try {
@@ -619,8 +619,8 @@ public class CDal {
 				retVal = false;
 			} else {
 				Statement stmt = connection.createStatement();
-				stmt.executeUpdate("INSERT INTO course (name, teachingHours,teachingUnit_teachingUnitId, preCourse) VALUES ('"
-						+ courseName + "'," + teachingHours + "," + teachingUnit + "," + preCourseId +")");
+				stmt.executeUpdate("INSERT INTO course (name, teachingUnit_teachingUnitId, teachingHours, preCourse) VALUES ('"
+						+ courseName + "',"  + teachingUnit + "," + teachingHours + ","+ preCourseId +")");
 
 			}
 		} catch (SQLException e) {

@@ -28,9 +28,6 @@ import javafx.scene.control.Button;
 public class ResponseAddStudentToCourseController implements Initializable, Handler
 {
 	
-	/** The all requests. */
-	private ArrayList<Request> allRequests;
-	
 	
     /** The resources. */
     @FXML
@@ -105,16 +102,9 @@ public class ResponseAddStudentToCourseController implements Initializable, Hand
     
     /** The data. */
     @FXML 
-    ObservableList<Request> data= FXCollections.observableArrayList(
-    		new Request(1,22,333,5555,true,true),
-    		new Request(1,22,333,6666,true,true),
-    		new Request(1,22,333,4444,true,true));
-
-    /**
-     * Inits the data.
-     *
-     * @param allRequests the all requests
-     */
+    ObservableList<Request> data= FXCollections.observableArrayList();
+    
+    
     public void initData(ArrayList<Request> allRequests) {
     	data.clear();
 		

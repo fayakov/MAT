@@ -39,4 +39,15 @@ private static final long serialVersionUID = 1L;
 	public String getErrText() {
 		return errText;
 	}
+
+
+	public void setSucceeded(boolean isSucceeded) {
+		this.isSucceeded = isSucceeded;
+	}
+
+	public void setErrText(String errText) {
+		this.errText = errText;
+	}
+	
+	
 }

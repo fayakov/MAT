@@ -28,7 +28,7 @@ public class DefineCourseRequestHandler implements Handler {
 		
 		// TODO Check in database
 		CDALError error = new CDALError();
-		boolean isSucceeded = CDal.createCourse(addCourseMsg.getCourseName(), addCourseMsg.getTeachingHours(), addCourseMsg.getTeachingUnit(), addCourseMsg.getPreCourse());		
+		boolean isSucceeded = CDal.createCourse(addCourseMsg.getCourseName(), addCourseMsg.getTeachingUnit(), addCourseMsg.getTeachingHours(), addCourseMsg.getPreCourse());		
 		
 		DefineCourseResponse res = new DefineCourseResponse(isSucceeded, error.getString());
 		try {

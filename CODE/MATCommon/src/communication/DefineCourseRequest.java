@@ -9,7 +9,7 @@ public class DefineCourseRequest extends Message {
 	private static final long serialVersionUID = 1L;
 	
 	/** The course name. */
-	String courseName;
+	private String courseName;
 	
 	/** The teaching unit. */
 	private int teachingUnit;
@@ -17,7 +17,9 @@ public class DefineCourseRequest extends Message {
 	/** The teaching hours. */
 	private int teachingHours;
 	
+	/** The pre Course. */
 	private int preCourse;
+	
 	
 	/**
 	 * Instantiates a new define course request.
