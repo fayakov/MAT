@@ -1,1 +1,1 @@
-SELECT * FROM mat.course;
+SELECT * FROM mat.student_has_course;
