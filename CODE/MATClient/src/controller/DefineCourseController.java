@@ -106,7 +106,7 @@ public class DefineCourseController implements Handler, Initializable {
     		tUnit =  Integer.parseInt(teachingUnitText.getText());
 
     	   	Course preCourse = perCourse.getSelectionModel().getSelectedItem();
-    	   	preCourseId = preCourse.getPreCourses();
+    	   	preCourseId = preCourse.getCourseId();
 
     		DefineCourseRequest defineCourseReq = new DefineCourseRequest(newCourseName, teachHours, tUnit, preCourseId);
 	        MATClientController.getInstance().sendRequestToServer(defineCourseReq);  
@@ -126,7 +126,7 @@ public void handle(Message msg, Object obj) {
 		if (msg instanceof DefineCourseRequest) {
 			DefineCourseResponse res = (DefineCourseResponse)msg;
 			if (res.actionSucceed()) {
-				Prompt.alert(1, "course " + courseName + " was added succesfully");
+				Prompt.alert(1, "course " + newCourseName + " was added succesfully");
 			} else {
 				Prompt.alert(3, res.getErrText());	
 			}

@@ -619,7 +619,7 @@ public class CDal {
 				retVal = false;
 			} else {
 				Statement stmt = connection.createStatement();
-				stmt.executeUpdate("INSERT INTO course (name, teachingHours,teachingUnit_teachingUnitId,preCourse) VALUES ('"
+				stmt.executeUpdate("INSERT INTO course (name, teachingHours,teachingUnit_teachingUnitId, preCourse) VALUES ('"
 						+ courseName + "'," + teachingHours + "," + teachingUnit + "," + preCourseId +")");
 
 			}
