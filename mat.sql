@@ -192,7 +192,7 @@ CREATE TABLE `course` (
 
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
-INSERT INTO `course` VALUES (1,'algebra1',10,1,0),(2,'algebra2',10,1,0),(3,'algebra3',10,1,0),(4,'physics1',10,2,0),(5,'physics2',10,2,0),(6,'physics3',10,2,0),(7,'physics4',10,2,0),(33,'ss',10,1,2);
+INSERT INTO `course` VALUES (1,'algebra1',10,1,0),(2,'algebra2',10,1,0),(3,'algebra3',10,1,0),(4,'physics1',10,2,0),(5,'physics2',10,2,0),(6,'physics3',10,2,0),(7,'physics4',10,2,0);
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -630,4 +630,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-08 22:51:26
+-- Dump completed on 2017-07-08 23:02:11
