@@ -135,11 +135,11 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
     	 * @param event the event
     	 */
     	@FXML
-	    void pressUpload(ActionEvent event) 
+	    public void pressUpload(ActionEvent event) 
 	    {
     		FileChooser chooser = new FileChooser();
     	    chooser.setTitle("Open File");
-    	    File selectedFile = chooser.showOpenDialog(new Stage());
+    	    this.selectedFile = chooser.showOpenDialog(new Stage());
     	    if (selectedFile == null) return;
 
     	    textFieldChoosen.setText(selectedFile.getName());
@@ -152,7 +152,7 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
      * @param event the event
      */
     @FXML
-    void sendSubmission(ActionEvent event) 
+    public void sendSubmission(ActionEvent event) 
     {
     	if (this.selectedFile == null)
 		{

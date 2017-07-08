@@ -18,7 +18,8 @@ public class OpenAndSubmitAssignmentByStudentControllerTest
 	public void setUp() throws Exception 
 	{
 		
-		a1= new Assignment(date, assignmentNumber, String fileName,  byte[] assingmentFile);
+		//a1= new Assignment(date, assignmentNumber, String fileName,  byte[] assingmentFile);
+		OpenAndSubmitAssignmentByStudentControllerTest op= new OpenAndSubmitAssignmentByStudentControllerTest();
 	}
 
 	
