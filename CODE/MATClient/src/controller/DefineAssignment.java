@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import javax.swing.JFileChooser;
@@ -39,20 +40,8 @@ import javafx.scene.control.Button;
  */
 public class DefineAssignment implements Initializable, Handler
 {
-	
 	/** The format file. */
-	String formatFile; //save format file
-	
-	/**
-	 * Instantiates a new define assignment.
-	 */
-	public DefineAssignment()
-	{
-		Dispatcher.addHandler(CreateAssignmentResponse.class.getCanonicalName(), this);
-	}
-	
-	
-	
+	String formatFile; 
 	
 	/** The coid. */
 	int clid, coid;  // class id, course id
@@ -105,7 +94,20 @@ public class DefineAssignment implements Initializable, Handler
 		private File selectedFile;
 
 	    
+		/**
+		 * Instantiates a new define assignment.
+		 */
+		public DefineAssignment()
+		{
+			Dispatcher.addHandler(CreateAssignmentResponse.class.getCanonicalName(), this);
+		}
+		
+		public void initData(int userId) {
+			// TODO Auto-generated method stub
+			this.userId = userId;
+		}
 	    
+		
 	    /**
     	 * Press upload.
     	 *
@@ -117,10 +119,9 @@ public class DefineAssignment implements Initializable, Handler
     		FileChooser chooser = new FileChooser();
     	    chooser.setTitle("Open File");
     	    this.selectedFile = chooser.showOpenDialog(new Stage());
-    	    
     	    if (selectedFile == null) return;
+    	    
 			txtFieldChoosen.setText(selectedFile.getName());
-			
 	    }
 	    
 	    
@@ -163,10 +164,22 @@ public class DefineAssignment implements Initializable, Handler
 	    		while (read < fileBytes.length && (numRead = diStream.read(fileBytes, read, fileBytes.length - read)) >= 0) {
 	    			read = read + numRead;
 	    		}
-	    			    
+	    		
+	    		
+	    		//check format file:
+	         	 String fileName= selectedFile.getName();
+	          	    int dotIndex = fileName.lastIndexOf('.');
+	          	    String format= (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
+	          	 if ((Objects.equals(format, new String("word"))) ||
+	          	    (Objects.equals(format, new String("PDF"))) ||
+	          		(Objects.equals(format, new String("Excel")))  )
+	          		        Prompt.alert(3,"please upload a file with valid format");
+	    		
+	    		
 	    		LocalDate localDate = this.datePickerDefineDate.getValue();
 	    		Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
 	    		Date date = Date.from(instant);
+	    		
 	    		
 	    		DefineAssignmentRequest newAssignment = new DefineAssignmentRequest(
 	    					new java.sql.Date(date.getTime()),
@@ -218,13 +231,6 @@ public class DefineAssignment implements Initializable, Handler
 		
 	}
 
-
-	public void initData(int userId) {
-		// TODO Auto-generated method stub
-		this.userId = userId;
-	}
-	
-	
 }
 
 
