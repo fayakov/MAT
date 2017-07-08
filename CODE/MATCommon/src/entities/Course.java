@@ -24,7 +24,7 @@ public class Course implements Serializable {
 	private int teachingUnit;
 	
 	/** The pre courses. */
-	private ArrayList<Integer> preCourses;
+	private int preCourses;
 	
 	/** The duration. */
 	private int duration;
@@ -38,7 +38,7 @@ public class Course implements Serializable {
 	 * @param preCourses the pre courses
 	 * @param duration the duration
 	 */
-	public Course(int courseId, String courseName, int teachingUnit, ArrayList<Integer> preCourses, int duration) {
+	public Course(int courseId, String courseName, int teachingUnit, int preCourses, int duration) {
 		super();
 		this.courseId = courseId;
 		this.courseName = courseName;
@@ -82,7 +82,7 @@ public class Course implements Serializable {
 	 *
 	 * @return the pre courses
 	 */
-	public ArrayList<Integer> getPreCourses() {
+	public int getPreCourses() {
 		return preCourses;
 	}
 	
@@ -91,7 +91,7 @@ public class Course implements Serializable {
 	 *
 	 * @param preCourses the new pre courses
 	 */
-	public void setPreCourses(ArrayList<Integer> preCourses) {
+	public void setPreCourses(int preCourses) {
 		this.preCourses = preCourses;
 	}
 	

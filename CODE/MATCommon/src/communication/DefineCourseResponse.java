@@ -16,6 +16,12 @@ private static final long serialVersionUID = 1L;
 	private String errText;
 	
 	
+	public DefineCourseResponse(boolean isSucceeded, String errText) {
+		super();
+		this.isSucceeded = isSucceeded;
+		this.errText = errText;
+	}
+
 	/**
 	 * Action succeed.
 	 *

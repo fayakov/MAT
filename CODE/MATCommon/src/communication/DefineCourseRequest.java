@@ -1,8 +1,5 @@
 package communication;
 
-import java.util.ArrayList;
-
-
 /**
  * The Class DefineCourseRequest.
  */
@@ -20,6 +17,8 @@ public class DefineCourseRequest extends Message {
 	/** The teaching hours. */
 	private int teachingHours;
 	
+	private int preCourse;
+	
 	/**
 	 * Instantiates a new define course request.
 	 *
@@ -27,10 +26,13 @@ public class DefineCourseRequest extends Message {
 	 * @param teachingHours the teaching hours
 	 * @param teachingUnit the teaching unit
 	 */
-	public DefineCourseRequest(String courseName, int teachingHours, int teachingUnit) {
+	
+	public DefineCourseRequest(String courseName, int teachingUnit, int teachingHours, int preCourse) {
+		super();
 		this.courseName = courseName;
-		this.teachingHours = teachingHours;
 		this.teachingUnit = teachingUnit;
+		this.teachingHours = teachingHours;
+		this.preCourse = preCourse;
 	}
 
 	/**
@@ -41,7 +43,6 @@ public class DefineCourseRequest extends Message {
 	public String getCourseName() {
 		return courseName;
 	}
-
 	/**
 	 * Sets the course name.
 	 *
@@ -85,6 +86,14 @@ public class DefineCourseRequest extends Message {
 	 */
 	public void setTeachingHours(int teachingHours) {
 		this.teachingHours = teachingHours;
+	}
+
+	public int getPreCourse() {
+		return preCourse;
+	}
+
+	public void setPreCourse(int preCourse) {
+		this.preCourse = preCourse;
 	}
 
 	

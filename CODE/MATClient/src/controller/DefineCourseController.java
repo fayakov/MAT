@@ -8,7 +8,9 @@ import communication.DefineCourseResponse;
 import communication.Dispatcher;
 import communication.MATClientController;
 import communication.Message;
+import communication.PrincipalDecisionRequest;
 import entities.Course;
+import entities.Request;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -52,7 +54,7 @@ public class DefineCourseController implements Handler, Initializable {
     
     
 	/** The t unit. */
-	private int teachHours, tUnit;
+	private int teachHours, tUnit, preCourseId;
 	
 	/** The course name. */
 	private String newCourseName;
@@ -102,9 +104,12 @@ public class DefineCourseController implements Handler, Initializable {
     		try {
     		teachHours = Integer.parseInt(teachingHoursText.getText());
     		tUnit =  Integer.parseInt(teachingUnitText.getText());
-    		
-    		DefineCourseRequest defineClassReq = new DefineCourseRequest(newCourseName, teachHours, tUnit);
-	        MATClientController.getInstance().sendRequestToServer(defineClassReq);  
+
+    	   	Course preCourse = perCourse.getSelectionModel().getSelectedItem();
+    	   	preCourseId = preCourse.getPreCourses();
+
+    		DefineCourseRequest defineCourseReq = new DefineCourseRequest(newCourseName, teachHours, tUnit, preCourseId);
+	        MATClientController.getInstance().sendRequestToServer(defineCourseReq);  
     		}
     		catch(NumberFormatException e){
 		    	Prompt.alert(3,"please enter numerical value");

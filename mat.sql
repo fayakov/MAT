@@ -1,2 +1,1 @@
-delete from mat.class;
-WHERE classId='20';
+SELECT * FROM mat.course;
