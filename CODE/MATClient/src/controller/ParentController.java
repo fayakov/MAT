@@ -3,10 +3,8 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import communication.Dispatcher;
 import communication.GetStudentDataByStudentIDRequest;
-import communication.GetStudentDataByUserIDRequest;
 import communication.GetStudentDataResponse;
 import communication.MATClientController;
 import communication.Message;
@@ -16,13 +14,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import utils.Handler;
@@ -84,28 +79,10 @@ public class ParentController implements Initializable, Handler  {
 			    	Prompt.alert(3,"please enter numerical value");
 			    	return;
 			    	}  	
-	    //	Pane root = FXMLLoader.load(getClass().getResource("/gui/StudentData.fxml"));
-		//	Scene scene = new Scene(root);
-		//	Stage primaryStage = new Stage();
-		//	primaryStage.setScene(scene);
-		//	primaryStage.show();
+
 			}
 	    }
 	    	 
-	   	 /**
- 	   	 * Start.
- 	   	 *
- 	   	 * @param primaryStage the primary stage
- 	   	 * @throws Exception the exception
- 	   	 */
- 	   	public void start(Stage primaryStage) throws Exception {
-	    			
-	   			Parent root = FXMLLoader.load(getClass().getResource("/gui/ParentMenu.fxml"));
-    			Scene scene = new Scene(root);
-	    		primaryStage.setScene(scene);
-	    		primaryStage.show();
-	    		}	 
-	    
 	    
 	    /**
     	 * Close parent menu.

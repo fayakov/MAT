@@ -2256,8 +2256,24 @@ public class CDal {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return reqArr;
+	}
+	
+	public static ArrayList<Course> getCourse(){
+		ArrayList<Course> courseArr = new ArrayList<Course>();
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet resultSet = stmt.executeQuery("SELECT * FROM course ");
+			while (resultSet.next()) {
+
+				Course course = new Course(resultSet.getInt(1), resultSet.getString(2), resultSet.getInt(4), resultSet.getInt(3));
+				courseArr.add(course);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return courseArr;
+		
 	}
 
 	private static void printMetaData(ResultSet resultSet) {

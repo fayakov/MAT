@@ -7,30 +7,38 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DefineCourseController">
    <children>
-      <Text layoutX="203.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Define course">
+      <Text layoutX="200.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Define course">
          <font>
-            <Font size="32.0" />
+            <Font size="33.0" />
          </font>
       </Text>
-      <TextField fx:id="courseNameText" layoutX="306.0" layoutY="114.0" />
-      <Text layoutX="146.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Name :">
+      <TextField fx:id="courseNameText" layoutX="164.0" layoutY="87.0" />
+      <Text layoutX="29.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Name :">
          <font>
             <Font size="18.0" />
          </font></Text>
-      <Button layoutX="281.0" layoutY="297.0" mnemonicParsing="false" onAction="#defineCourseSend" text="Create" />
-      <Text layoutX="146.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teaching Unit :">
+      <Button layoutX="265.0" layoutY="342.0" mnemonicParsing="false" onAction="#defineCourseSend" text="Create course" />
+      <Text layoutX="28.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teaching Unit :">
          <font>
             <Font size="18.0" />
          </font></Text>
-      <TextField fx:id="teachingUnitText" layoutX="306.0" layoutY="166.0" />
-      <TextField fx:id="teachingHoursText" layoutX="306.0" layoutY="222.0" />
-      <Text layoutX="146.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teaching Hours :">
+      <TextField fx:id="teachingUnitText" layoutX="164.0" layoutY="120.0" />
+      <TextField fx:id="teachingHoursText" layoutX="164.0" layoutY="154.0" />
+      <Text layoutX="14.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teaching Hours :">
          <font>
             <Font size="18.0" />
          </font></Text>
-      <Text layoutX="138.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System maneger menu">
+      <TableView fx:id="perCourse" layoutX="197.0" layoutY="200.0" prefHeight="129.0" prefWidth="365.0">
+        <columns>
+          <TableColumn fx:id="courseId" prefWidth="75.0" text="course id " />
+          <TableColumn fx:id="courseName" prefWidth="92.0" text="course name " />
+            <TableColumn fx:id="teachingHours" prefWidth="108.0" text="teaching hours" />
+            <TableColumn fx:id="teachingUnit" prefWidth="89.0" text="teaching unit" />
+        </columns>
+      </TableView>
+      <Text layoutX="14.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose pre-courses :">
          <font>
-            <Font size="32.0" />
+            <Font size="18.0" />
          </font>
       </Text>
    </children>

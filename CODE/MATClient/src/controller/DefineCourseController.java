@@ -1,23 +1,29 @@
 package controller;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 import communication.DefineCourseRequest;
 import communication.DefineCourseResponse;
 import communication.Dispatcher;
 import communication.MATClientController;
 import communication.Message;
+import entities.Course;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.control.cell.PropertyValueFactory;
 import utils.Handler;
 
 /**
  * The Class DefineCourseController.
  */
-public class DefineCourseController implements Handler {
+public class DefineCourseController implements Handler, Initializable {
 	
 	/**
 	 * Instantiates a new define course controller.
@@ -26,11 +32,30 @@ public class DefineCourseController implements Handler {
 		Dispatcher.addHandler(DefineCourseResponse.class.getCanonicalName(), this);
 	}
 	
+
+    @FXML
+    private TableColumn<Course, Integer> courseId;
+    
+    @FXML
+    private TableColumn<Course, String> courseName;
+    
+    @FXML
+    private TableColumn<Course, Integer> teachingHours;
+    
+    @FXML
+    private TableColumn<Course, Integer> teachingUnit;
+
+    @FXML
+    private TableView<Course> perCourse;
+
+
+    
+    
 	/** The t unit. */
 	private int teachHours, tUnit;
 	
 	/** The course name. */
-	private String courseName;
+	private String newCourseName;
 
 	 /** The teaching unit text. */
  	@FXML
@@ -44,15 +69,31 @@ public class DefineCourseController implements Handler {
  	@FXML
 	 private TextField teachingHoursText;
 	
+ 	
+    @FXML 
+    ObservableList<Course> data= FXCollections.observableArrayList();
+    
+    /**
+     * Inits the data.
+     *
+     * @param allCourses the all courses
+     */
+    public void initData(ArrayList<Course> allCourses) {
+    	data.clear();
+		
+		for (Course course : allCourses) 
+				data.add(course);
+
+	}
+    
+    
     /**
      * Define course send.
-     *
-     * @param event the event
      */
     @FXML
     void defineCourseSend(ActionEvent event) {
     	
-    	courseName = courseNameText.getText().toString(); 	
+    	newCourseName = courseNameText.getText().toString(); 	
     	
     	if(courseNameText.getText().isEmpty() || teachingUnitText.getText().isEmpty() || teachingHoursText.getText().isEmpty()) 
     		Prompt.alert(3,  "one or more of the fields is empty");    
@@ -62,7 +103,7 @@ public class DefineCourseController implements Handler {
     		teachHours = Integer.parseInt(teachingHoursText.getText());
     		tUnit =  Integer.parseInt(teachingUnitText.getText());
     		
-    		DefineCourseRequest defineClassReq = new DefineCourseRequest(courseName, teachHours, tUnit);
+    		DefineCourseRequest defineClassReq = new DefineCourseRequest(newCourseName, teachHours, tUnit);
 	        MATClientController.getInstance().sendRequestToServer(defineClassReq);  
     		}
     		catch(NumberFormatException e){
@@ -71,20 +112,6 @@ public class DefineCourseController implements Handler {
     	}
 
     }
-    
-/**
- * Start.
- *
- * @param primaryStage the primary stage
- * @throws Exception the exception
- */
-public void start(Stage primaryStage) throws Exception {
-		
-		Parent root = FXMLLoader.load(getClass().getResource("/gui/DefineCourse.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-	}
 
 /* (non-Javadoc)
  * @see utils.Handler#handle(communication.Message, java.lang.Object)
@@ -102,5 +129,19 @@ public void handle(Message msg, Object obj) {
 		}
 	
 }
+
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		courseId.setCellValueFactory(new PropertyValueFactory<Course, Integer>("courseId"));
+		courseName.setCellValueFactory(new PropertyValueFactory<Course, String>("courseName"));
+		teachingHours.setCellValueFactory(new PropertyValueFactory<Course, Integer>("duration"));
+		teachingUnit.setCellValueFactory(new PropertyValueFactory<Course, Integer>("teachingUnit"));
+
+		
+		perCourse.setItems(data);
+	
+	}
 
 }

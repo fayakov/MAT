@@ -31,12 +31,6 @@ public class Course implements Serializable {
 	
 	/**
 	 * Instantiates a new course.
-	 */
-	public Course(){
-	}
-	
-	/**
-	 * Instantiates a new course.
 	 *
 	 * @param courseId the course id
 	 * @param courseName the course name
@@ -53,6 +47,18 @@ public class Course implements Serializable {
 		this.duration = duration;
 	}
 	
+	public Course() {
+		super();
+	}
+
+	public Course(int courseId, String courseName, int teachingUnit, int duration) {
+		super();
+		this.courseId = courseId;
+		this.courseName = courseName;
+		this.teachingUnit = teachingUnit;
+		this.duration = duration;
+	}
+
 	/**
 	 * Gets the duration.
 	 *
