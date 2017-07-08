@@ -51,6 +51,9 @@ public class DefineAssignment implements Initializable, Handler
 		Dispatcher.addHandler(CreateAssignmentResponse.class.getCanonicalName(), this);
 	}
 	
+	
+	
+	
 	/** The coid. */
 	int clid, coid;  // class id, course id
 	
@@ -134,7 +137,7 @@ public class DefineAssignment implements Initializable, Handler
     			Alert alert = new Alert(AlertType.INFORMATION);
     			alert.setTitle("Error");
     			alert.setHeaderText(null);
-    			alert.setContentText("לא נבחר קובץ להעלאה");
+    			alert.setContentText("No upload file selected");
     			alert.showAndWait();
     			return;
     		}
@@ -143,7 +146,7 @@ public class DefineAssignment implements Initializable, Handler
     			Alert alert = new Alert(AlertType.INFORMATION);
     			alert.setTitle("Error");
     			alert.setHeaderText(null);
-    			alert.setContentText("חובה להכניס מספר קורס");
+    			alert.setContentText("No course number entered");
     			alert.showAndWait();
     			return;
     		}

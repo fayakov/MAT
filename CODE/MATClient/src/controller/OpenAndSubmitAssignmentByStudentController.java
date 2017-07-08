@@ -10,7 +10,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import javax.swing.JFileChooser;
@@ -18,6 +23,7 @@ import javax.swing.filechooser.FileSystemView;
 
 import communication.AddAssignmentForResponse;
 import communication.AddAssignmentForStudentRequest;
+import communication.DefineAssignmentRequest;
 import communication.Dispatcher;
 import communication.MATClientController;
 import communication.Message;
@@ -25,10 +31,11 @@ import entities.Assignment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import utils.Handler;
@@ -38,15 +45,7 @@ import utils.Handler;
  */
 public class OpenAndSubmitAssignmentByStudentController implements Initializable, Handler
 {
-	
-	/**
-	 * Instantiates a new open and submit assignment by student controller.
-	 */
-	public OpenAndSubmitAssignmentByStudentController()
-	{
-		Dispatcher.addHandler(AddAssignmentForResponse.class.getCanonicalName(), this);
-	}
-	
+
 	    /** The text field ass num. */
     	@FXML
 	    private TextField textFieldAssNum;
@@ -75,14 +74,24 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
     	@FXML
 	    private Button buttonSendSub;
 
-    	
 		private Assignment assignment;
 		
 		@FXML
 	    private TextField textFieldChoosen;
 
 		private int userId;
+		private File selectedFile;
+		
+		
+		/**
+		 * Instantiates a new open and submit assignment by student controller.
+		 */
+		public OpenAndSubmitAssignmentByStudentController()
+		{
+			Dispatcher.addHandler(AddAssignmentForResponse.class.getCanonicalName(), this);
+		}
 
+		
 	    public void initData(Assignment assignment, int userId) {
 	    	this.assignment = assignment;
 			textFieldAssNum.setText(Integer.toString(assignment.getAssignmentNumber()));
@@ -100,7 +109,7 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 	    void pressDownload(ActionEvent event) throws Exception 
 	    {
     		try {
-    			// Yinon: Save the file to Documents folder of current user.
+    			//Save the file to Documents folder of current user.
     			String fileDirectory = System.getProperty("user.home") + File.separator + "Documents" + File.separator;
     			String outputFile = fileDirectory + assignment.getFileName();
     			
@@ -117,23 +126,6 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
     			e.printStackTrace();
     		}
     		
-    		
-    		/*
-	    	 String line;
-	         BufferedReader in;
-
-	         in = new BufferedReader(new FileReader("testFile"));
-	         line = in.readLine();
-
-	         while(line != null)
-	         {
-	                System.out.println(line);
-	                line = in.readLine();
-	         }
-
-	         System.out.println(line);
-	    	
-	    	*/
 	    }
 
 	    
@@ -149,61 +141,9 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
     	    chooser.setTitle("Open File");
     	    File selectedFile = chooser.showOpenDialog(new Stage());
     	    if (selectedFile == null) return;
-    	    
-    	    System.out.println(selectedFile.getAbsolutePath());
-    	    
-    	    DataInputStream diStream;
-			try {
-				diStream = new DataInputStream(new FileInputStream(selectedFile));
-				long len = (int) selectedFile.length();
-	    		byte[] fileBytes = new byte[(int) len];
-	    		int read = 0;
-	    		int numRead = 0;
-	    		while (read < fileBytes.length && (numRead = diStream.read(fileBytes, read, fileBytes.length - read)) >= 0) {
-	    			read = read + numRead;
-	    		}
-	    			    		
-	    		AddAssignmentForStudentRequest newAssignment = new AddAssignmentForStudentRequest(
-	    					new java.sql.Date(Calendar.getInstance().getTime().getTime()),
-	    					selectedFile.getName(),
-	    					fileBytes,
-	    					assignment.getAssignmentNumber(),
-	    					this.userId);
-	    		
-	    		MATClientController.getInstance().sendRequestToServer(newAssignment);
-	    		
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-<<<<<<< HEAD
-=======
-    		
-			textFieldChoosen.setText(selectedFile.getName());
-    	    
-    		/*
-	    	JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
-			int returnValue = jfc.showOpenDialog(null);
-			// int returnValue = jfc.showSaveDialog(null);
-
-			if (returnValue == JFileChooser.APPROVE_OPTION) {
-				File selectedFile = jfc.getSelectedFile();
-				System.out.println(selectedFile.getAbsolutePath());
-			} */
-//			
-//			
-//			//check format file:
-//	    	 String fileName= selectedFile.getName();
-//	    	    int dotIndex = fileName.lastIndexOf('.');
-//	    	    String format= (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
-//	    	 if ((Objects.equals(format, new String("word"))) ||
-//	    	    (Objects.equals(format, new String("PDF"))) ||
-//	    		(Objects.equals(format, new String("Excel")))  )
-//	    		        Prompt.alert(3,"please upload a file with valid format");
->>>>>>> dd548c6562eb4b35bef17d4654f692fb4bf62711
-	    }
-    
+    	    textFieldChoosen.setText(selectedFile.getName());
+		} 
 
 	    
     /**
@@ -214,21 +154,72 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
     @FXML
     void sendSubmission(ActionEvent event) 
     {
-//    	//get date of today:
-//    	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-//		LocalDate todayDate = LocalDate.now();
-//		System.out.println(dtf.format(todayDate)); //2017/06/29 FORMAT
-//		
-//		//check if late the submission
-//		if(todayDate.compareTo(todayDate)>0){
-//            System.out.println("Date1 is after Date2");
-//        }else if(todayDate.compareTo(todayDate)<0){
-//            System.out.println("Date1 is before Date2");
-//        //if late-send sign....?
-//		
-//		
-//    	AddAssignmentForResponse addAssignmentForReq = new AddAssignmentForResponse(fileName, file,assignment.teacherId, assignment.courseName, todayDate,assignment.assignmentNumber, studentId);
-//    	MATClientController.getInstance().sendRequestToServer(addAssignmentForReq);
+    	if (this.selectedFile == null)
+		{
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Error");
+			alert.setHeaderText(null);
+			alert.setContentText("No upload file selected");
+			alert.showAndWait();
+			return;
+		}
+	    
+    	System.out.println(selectedFile.getAbsolutePath());
+    	
+    	
+    	DataInputStream diStream;
+		try {
+			diStream = new DataInputStream(new FileInputStream(selectedFile));
+			long len = (int) selectedFile.length();
+    		byte[] fileBytes = new byte[(int) len];
+    		int read = 0;
+    		int numRead = 0;
+    		while (read < fileBytes.length && (numRead = diStream.read(fileBytes, read, fileBytes.length - read)) >= 0) {
+    			read = read + numRead;
+    		}
+    		
+
+    		//check format file:
+      	 String fileName= selectedFile.getName();
+       	    int dotIndex = fileName.lastIndexOf('.');
+       	    String format= (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
+       	 if ((Objects.equals(format, new String("word"))) ||
+       	    (Objects.equals(format, new String("PDF"))) ||
+       		(Objects.equals(format, new String("Excel")))  )
+       		        Prompt.alert(3,"please upload a file with valid format");
+    		
+    		
+//        	//get date of today:
+        	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+    		LocalDate todayDate = LocalDate.now();
+    		System.out.println(dtf.format(todayDate)); //2017/06/29 FORMAT
+//    		//check if late the submission
+    		Date s= assignment.getDate();
+    		if(todayDate.compareTo(todayDate)>0){
+                System.out.println("Date1 is after Date2");
+            }else if(todayDate.compareTo(todayDate)<0){
+                System.out.println("Date1 is before Date2");
+//            //if late-send sign....?
+
+
+    		
+
+    		AddAssignmentForStudentRequest newAssignment = new AddAssignmentForStudentRequest(
+					new java.sql.Date(Calendar.getInstance().getTime().getTime()),
+					selectedFile.getName(),
+					fileBytes,
+					assignment.getAssignmentNumber(),
+					this.userId);
+		
+		MATClientController.getInstance().sendRequestToServer(newAssignment);
+            }
+		} catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+
     }
    
 
@@ -265,17 +256,7 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 		// TODO Auto-generated method stub
 		
 	}
-	
  
-    /**
-     * Initialize.
-     */
-    @FXML
-    void initialize() {
-         
-    }
-    
-   
 }
 
 
