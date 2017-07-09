@@ -22,8 +22,8 @@ public class DefineAssignment {
 		newAssignment.newAssignmentName = name;
 	}
 	
-	public void Assignmentfile() {
-		newAssignment.Assignmentfile = tUnit;
+	public void Assignmentfile(byte[] file) {
+		newAssignment.Assignmentfile = file;
 	}
 	
 	public void fileName(String name) {
