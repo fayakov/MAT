@@ -2,6 +2,7 @@ package Fixtures.Mat;
 
 import java.sql.Date;
 
+import DAL.CDal;
 import controller.DefineAssignmentController;
 
 public class DefineAssignment {
@@ -16,28 +17,32 @@ public class DefineAssignment {
 		newAssignment = new DefineAssignmentController();
 	}
 	
-	public void assignmentNumber(int num) {
-		newAssignment.assignmentNumber = num;
-		}
-		
+	public void fileName (String fileName) {
+		newAssignment.fileName = fileName;
+	}
 	
+	public void fileData(byte[] file) {
+		newAssignment.fileData = file;
+	}
 	
-	//public void assignmentfile(byte[] file) {
-	//	newAssignment.assignmentfile = file;
-	//}
-	
-	public void courseNumber(int num) {
+	public void courseId(int num) {
 		newAssignment.courseNumber = num;
 	}
 	
-	public void submissionDate(Date date) {
-		newAssignment.submissionDate = date;
+	public void dueDate(Date date) {
+		newAssignment.dueDate = date;
+	}
+		
+	public void teacherId(int teacherId) {
+		newAssignment.teacherId =teacherId;
 	}
 	
 	
+	
 	public boolean defineAssignment() {
-		isSucceed = newAssignment.sendToDB();
-		return isSucceed;
+		// TODO Auto-generated method stub
+		//return true;
+		return CDal.createAssignment(newAssignment.getdueDate(), newAssignment.getfileData(), newAssignment.getfileName(), newAssignment.getteacherId(), newAssignment.getcourseId());
 	}
 
 	

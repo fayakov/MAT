@@ -5,21 +5,21 @@
 	<body>
 		<p>
 			Acceptance Test -Define Assignment</p>
-		<table border="1" cellpadding="1" cellspacing="1" style="width: 516px; height: 459px">
+		<table border="1" cellpadding="1" cellspacing="1" style="width: 444px; height: 741px">
 			<tbody>
 				<tr>
 					<td>
-						fit.ActionFixure&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						fit.ActionFixture</td>
 					<td>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 					<td>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 				</tr>
 				<tr>
 					<td>
 						start</td>
 					<td>
-						Fixtures.Mat.DefineAssignment</td>
+						Fixures.Mat.DefineAssignment</td>
 					<td>
 						&nbsp;</td>
 				</tr>
@@ -35,15 +35,25 @@
 					<td>
 						enter</td>
 					<td>
-						assignmentNumber</td>
+						<p>
+							<font size="2">fileName</font></p>
+					</td>
 					<td>
-						1</td>
+						abra</td>
 				</tr>
 				<tr>
 					<td>
 						enter</td>
 					<td>
-						submissionDate</td>
+						fileData</td>
+					<td>
+						128</td>
+				</tr>
+				<tr>
+					<td>
+						enter</td>
+					<td>
+						dueDate</td>
 					<td>
 						10/07/2017</td>
 				</tr>
@@ -51,31 +61,115 @@
 					<td>
 						enter</td>
 					<td>
-						courseNumber</td>
+						teacherId</td>
 					<td>
 						1</td>
 				</tr>
 				<tr>
 					<td>
+						enter</td>
+					<td>
+						courseId</td>
+					<td>
+						2</td>
+				</tr>
+				<tr>
+					<td>
 						check</td>
 					<td>
-						defineAssignment</td>
+						defineAssigment</td>
 					<td>
 						true</td>
 				</tr>
 				<tr>
 					<td>
-						enter</td>
+						press</td>
 					<td>
-						assignmentNumber</td>
+						startAssignment</td>
 					<td>
-						a</td>
+						&nbsp;</td>
 				</tr>
 				<tr>
 					<td>
 						enter</td>
 					<td>
-						submissionDate</td>
+						<p>
+							<font size="2">fileName</font></p>
+					</td>
+					<td>
+						abra</td>
+				</tr>
+				<tr>
+					<td>
+						enter</td>
+					<td>
+						fileData</td>
+					<td>
+						128</td>
+				</tr>
+				<tr>
+					<td>
+						enter</td>
+					<td>
+						dueDate</td>
+					<td>
+						10/07/aa</td>
+				</tr>
+				<tr>
+					<td>
+						enter</td>
+					<td>
+						teacherId</td>
+					<td>
+						1</td>
+				</tr>
+				<tr>
+					<td>
+						enter</td>
+					<td>
+						courseId</td>
+					<td>
+						2</td>
+				</tr>
+				<tr>
+					<td>
+						check</td>
+					<td>
+						defineAssigment</td>
+					<td>
+						false</td>
+				</tr>
+				<tr>
+					<td>
+						press</td>
+					<td>
+						startAssignment</td>
+					<td>
+						&nbsp;</td>
+				</tr>
+				<tr>
+					<td>
+						enter</td>
+					<td>
+						<p>
+							<font size="2">fileName</font></p>
+					</td>
+					<td>
+						abra</td>
+				</tr>
+				<tr>
+					<td>
+						enter</td>
+					<td>
+						fileData</td>
+					<td>
+						128</td>
+				</tr>
+				<tr>
+					<td>
+						enter</td>
+					<td>
+						dueDate</td>
 					<td>
 						10/07/2017</td>
 				</tr>
@@ -83,63 +177,57 @@
 					<td>
 						enter</td>
 					<td>
-						courseNumber</td>
+						teacherId</td>
 					<td>
-						1</td>
+						aa</td>
+				</tr>
+				<tr>
+					<td>
+						enter</td>
+					<td>
+						courseId</td>
+					<td>
+						2</td>
 				</tr>
 				<tr>
 					<td>
 						check</td>
 					<td>
-						defineAssignment</td>
+						defineAssigment</td>
 					<td>
 						false</td>
 				</tr>
 				<tr>
 					<td>
-						enter</td>
+						press</td>
 					<td>
-						assignmentNumber</td>
+						startAssignment</td>
 					<td>
-						1</td>
+						&nbsp;</td>
 				</tr>
 				<tr>
 					<td>
 						enter</td>
 					<td>
-						submissionDate</td>
+						<p>
+							<font size="2">fileName</font></p>
+					</td>
 					<td>
-						a/07/2017</td>
+						abra</td>
 				</tr>
 				<tr>
 					<td>
 						enter</td>
 					<td>
-						courseNumber</td>
+						fileData</td>
 					<td>
-						1</td>
-				</tr>
-				<tr>
-					<td>
-						check</td>
-					<td>
-						defineAssignment</td>
-					<td>
-						false</td>
+						128</td>
 				</tr>
 				<tr>
 					<td>
 						enter</td>
 					<td>
-						assignmentNumber</td>
-					<td>
-						1</td>
-				</tr>
-				<tr>
-					<td>
-						enter</td>
-					<td>
-						submissionDate</td>
+						dueDate</td>
 					<td>
 						10/07/2017</td>
 				</tr>
@@ -147,15 +235,23 @@
 					<td>
 						enter</td>
 					<td>
-						courseNumber</td>
+						teacherId</td>
 					<td>
-						sd</td>
+						1</td>
+				</tr>
+				<tr>
+					<td>
+						enter</td>
+					<td>
+						courseId</td>
+					<td>
+						afd</td>
 				</tr>
 				<tr>
 					<td>
 						check</td>
 					<td>
-						defineAssignment</td>
+						defineAssigment</td>
 					<td>
 						false</td>
 				</tr>
