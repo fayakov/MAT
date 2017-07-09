@@ -163,4 +163,16 @@ public class OpenAndSubmitAssignmentByStudentControllerTest extends TestCase
 		assertEquals(expected, result);
 	
 	}
+	
+	@Test
+	 public void testSelectedFile()
+	{
+		
+		expected=false;
+		result =openSubmit.selectedFile(null);
+		assertEquals(expected, result);
+		
+	}
+	
+	
 }
