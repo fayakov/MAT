@@ -17,10 +17,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Objects;
 import java.util.ResourceBundle;
-
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
-
 import communication.AddAssignmentForResponse;
 import communication.AddAssignmentForStudentRequest;
 import communication.DefineAssignmentRequest;
@@ -46,7 +44,30 @@ import utils.Handler;
 public class OpenAndSubmitAssignmentByStudentController implements Initializable, Handler
 {
 
-	    /** The text field ass num. */
+		public OpenAndSubmitAssignmentByStudentController(File selectedFile)
+		{
+			super();
+			this.selectedFile = selectedFile;
+		}
+
+
+		public OpenAndSubmitAssignmentByStudentController(Boolean isFormatValid) 
+		{
+			super();
+			this.isFormatValid = isFormatValid;
+		}
+		
+		/**
+		 * Instantiates a new open and submit assignment by student controller.
+		 */
+		public OpenAndSubmitAssignmentByStudentController()
+		{
+			Dispatcher.addHandler(AddAssignmentForResponse.class.getCanonicalName(), this);
+			
+		}
+
+
+		/** The text field ass num. */
     	@FXML
 	    private TextField textFieldAssNum;
 	    
@@ -81,18 +102,15 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 
 		private int userId;
 		private File selectedFile;
-		
-		
-		/**
-		 * Instantiates a new open and submit assignment by student controller.
-		 */
-		public OpenAndSubmitAssignmentByStudentController()
-		{
-			Dispatcher.addHandler(AddAssignmentForResponse.class.getCanonicalName(), this);
-		}
+		private String format;
+		private String fileName;
+		private Boolean isFormatValid;
+		private Boolean isDateLate;
+		private Date submission;
 
 		
-	    public void initData(Assignment assignment, int userId) {
+	    public void initData(Assignment assignment, int userId) 
+	    {
 	    	this.assignment = assignment;
 			textFieldAssNum.setText(Integer.toString(assignment.getAssignmentNumber()));
 			this.userId = userId;
@@ -179,31 +197,17 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
     		}
     		
 
-    		//check format file:
-      	 String fileName= selectedFile.getName();
-       	    int dotIndex = fileName.lastIndexOf('.');
-       	    String format= (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
-       	 if ((Objects.equals(format, new String("word"))) ||
-       	    (Objects.equals(format, new String("PDF"))) ||
-       		(Objects.equals(format, new String("Excel")))  )
-       		        Prompt.alert(3,"please upload a file with valid format");
+    		isFormatValid=checkFormat(selectedFile);
+    		if (isFormatValid == false)
+    			Prompt.alert(3,"please upload a file with valid format");
     		
     		
-//        	//get date of today:
-        	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-    		LocalDate todayDate = LocalDate.now();
-    		System.out.println(dtf.format(todayDate)); //2017/06/29 FORMAT
-//    		//check if late the submission
-    		Date s= assignment.getDate();
-    		if(todayDate.compareTo(todayDate)>0){
-                System.out.println("Date1 is after Date2");
-            }else if(todayDate.compareTo(todayDate)<0){
-                System.out.println("Date1 is before Date2");
-//            //if late-send sign....?
-
+    		submission = assignment.getDate();
+    		isDateLate = DateLate(submission);
+    		if (isDateLate == false)
+    			Prompt.alert(3,"date of submission passed");
 
     		
-
     		AddAssignmentForStudentRequest newAssignment = new AddAssignmentForStudentRequest(
 					new java.sql.Date(Calendar.getInstance().getTime().getTime()),
 					selectedFile.getName(),
@@ -212,7 +216,7 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 					this.userId);
 		
 		MATClientController.getInstance().sendRequestToServer(newAssignment);
-            }
+            
 		} catch (IOException e) 
 		{
 			// TODO Auto-generated catch block
@@ -223,7 +227,49 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
     }
    
 
+   public Boolean checkFormat(File selectedFile)
+   {
+	 //check format file:
+    	 fileName= selectedFile.getName();
+     	    int dotIndex = fileName.lastIndexOf('.');
+     	    format= (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
+     	 
+     	
+		if (!((Objects.equals(format, new String("docx"))) ||
+	     	    (Objects.equals(format, new String("pdf"))) ||
+	     		(Objects.equals(format, new String("xlsx")))  ))
+			return false;
+		else 
+			return true;
+   }
+   
+   
+public Boolean DateLate(Date submission)
+{
+	//get date of today:
+	
+	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	LocalDate todayDate = LocalDate.now();
+	System.out.println(dtf.format(todayDate)); //2017/06/29 FORMAT
+	
+	//check if late the submission
+	
+	LocalDate date = submission.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	
+	if((todayDate.compareTo(date))<=0)
+	{
+       System.out.println("Date1 is after Date2");
+       return true;
+	}
+	else 
+		return false;
+	
+//   //if late-send sign....?
 
+   
+}
+	
+   
 	/* (non-Javadoc)
 	 * @see utils.Handler#handle(communication.Message, java.lang.Object)
 	 */
@@ -255,6 +301,36 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 	{
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	public File getSelectedFile() {
+		return selectedFile;
+	}
+
+
+	public void setSelectedFile(File selectedFile) {
+		this.selectedFile = selectedFile;
+	}
+
+
+	public String getFormat() {
+		return format;
+	}
+
+
+	public void setFormat(String format) {
+		this.format = format;
+	}
+
+
+	public String getFileName() {
+		return fileName;
+	}
+
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
  
 }
