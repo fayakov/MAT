@@ -16,11 +16,15 @@ public class DefineAssignment {
 		newAssignment = new DefineAssignmentController();
 	}
 	
+	public void assignmentNumber(int num) {
+		newAssignment.assignmentNumber = num;
+		}
+		
 	
 	
-	public void assignmentfile(byte[] file) {
-		newAssignment.assignmentfile = file;
-	}
+	//public void assignmentfile(byte[] file) {
+	//	newAssignment.assignmentfile = file;
+	//}
 	
 	public void courseNumber(int num) {
 		newAssignment.courseNumber = num;
