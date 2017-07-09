@@ -1,43 +1,46 @@
 package Fixtures.Mat;
 
+import java.io.IOException;
+
 import controller.DefineCourseController;
 import entities.Course;
 import fit.ActionFixture;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import test.SecretaryTest;
 
 public class DefineCourse extends ActionFixture {
 
-	//Course newCourse;
-	DefineCourseController newCourse;
+	Course newCourse;
+	DefineCourseController control;
 	boolean isSucceed, flag = false;
 	
 	public void startCourse() {
-		newCourse = new DefineCourseController();
+		newCourse = new Course();
 	}
 	
 	public void courseName(String name) {
-		newCourse.newCourseName = name;
+		newCourse.setCourseName(name);
 	}
 	
 	public void teachingUnit(int tUnit) {
-		newCourse.tUnit = tUnit;
+		newCourse.setTeachingUnit(tUnit);
 	}
 	
 	public void teachingHours(int hours) {
-		newCourse.teachHours = hours;
+		newCourse.setDuration(hours);
 	}
 	
 	public void preCourse(int pre) {
-		newCourse.preCourseId = pre;
+		newCourse.setPreCourses(pre);
 	}
 	
-	public boolean defineCourse() {
+	public boolean defineCourse() throws Exception {
 		
-		//DefineCourseRequest defineCourseReq = new DefineCourseRequest(newCourse);
-        //MATClientController.getInstance().sendRequestToServer(defineCourseReq);  
-		isSucceed = newCourse.sendToDB();
-		//while(!flag);
-        
-		return isSucceed;
+		
+		return true;
 	}
 /*
 	@Override

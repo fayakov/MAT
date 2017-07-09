@@ -38,7 +38,12 @@ public class DefineCourseController implements Initializable, Handler {
 		tUnit = newCourse.getTeachingUnit();
 		teachHours = newCourse.getDuration();
 		preCourseId = newCourse.getPreCourses();
+		
+		DefineCourseRequest defineCourseReq = new DefineCourseRequest(newCourseName, tUnit, teachHours, preCourseId);
+	    MATClientController.getInstance().sendRequestToServer(defineCourseReq); 
 	}
+	
+	
 
     @FXML
     private TableColumn<Course, Integer> courseId;
@@ -124,11 +129,13 @@ public class DefineCourseController implements Initializable, Handler {
     	}
 
     }
+    
+    
     public boolean sendToDB() {
     	
-    	DefineCourseRequest defineCourseReq = new DefineCourseRequest(newCourseName, tUnit, teachHours, preCourseId);
-        MATClientController.getInstance().sendRequestToServer(defineCourseReq); 
-        while(!flag);
+    	//DefineCourseRequest defineCourseReq = new DefineCourseRequest(newCourseName, tUnit, teachHours, preCourseId);
+        //MATClientController.getInstance().sendRequestToServer(defineCourseReq); 
+      //  while(!flag);
         
         return result;
     }
@@ -145,7 +152,7 @@ public void handle(Message msg, Object obj) {
 				if(buttonPressed) localPrompt(newCourseName, res.getErrText(), res.actionSucceed());
 				else {					
 					result = res.actionSucceed();
-					flag = true;
+					//flag = true;
 				}
 				
 			} catch (Exception e) {
