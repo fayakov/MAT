@@ -1,27 +1,21 @@
 package controller;
 
-import java.io.BufferedReader;
+
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileSystemView;
 import communication.AddAssignmentForResponse;
 import communication.AddAssignmentForStudentRequest;
-import communication.DefineAssignmentRequest;
 import communication.Dispatcher;
 import communication.MATClientController;
 import communication.Message;
@@ -41,6 +35,7 @@ import utils.Handler;
 /**
  * The Class OpenAndSubmitAssignmentByStudentController.
  */
+
 public class OpenAndSubmitAssignmentByStudentController implements Initializable, Handler
 {
 
@@ -106,6 +101,7 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
 		private String fileName;
 		private Boolean isFormatValid;
 		private Boolean isDateLate;
+		private Boolean isSelectedFile;
 		private Date submission;
 
 		
@@ -158,10 +154,17 @@ public class OpenAndSubmitAssignmentByStudentController implements Initializable
     		FileChooser chooser = new FileChooser();
     	    chooser.setTitle("Open File");
     	    this.selectedFile = chooser.showOpenDialog(new Stage());
-    	    if (selectedFile == null) return;
+    	    isSelectedFile = selectedFile(selectedFile);
+    	    if (!(isSelectedFile)) return;
 
     	    textFieldChoosen.setText(selectedFile.getName());
 		} 
+    	
+    	public boolean selectedFile(File selectedFile)
+    	{
+    		 if (selectedFile == null) return false;
+    		 else return true;
+    	}
 
 	    
     /**

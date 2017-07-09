@@ -8,7 +8,10 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -133,7 +136,31 @@ public class OpenAndSubmitAssignmentByStudentControllerTest extends TestCase
 	}
 
 	@Test
-	public void testDateLate() {
+	public void testDateLate1() 
+	{
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(2017, Calendar.JULY, 1);
+		Date date = cal.getTime();
+	
+		expected=false;
+		result =openSubmit.DateLate(date);
+		assertEquals(expected, result);
+	
+	}
+	
+	
+	@Test
+	public void testDateLate2() 
+	{
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(2017, Calendar.JULY, 18);
+		Date date = cal.getTime();
+	
+		expected=true;
+		result =openSubmit.DateLate(date);
+		assertEquals(expected, result);
 	
 	}
 }
