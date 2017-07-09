@@ -4,37 +4,39 @@ import java.sql.Date;
 
 import DAL.CDal;
 import controller.DefineAssignmentController;
+import entities.Assignment;
 
 public class DefineAssignment {
 
 	
 	
-	//Assignment newAssignment;
-	DefineAssignmentController newAssignment;
-	boolean isSucceed, flag = false;
+	Assignment newAssignment;
+	//DefineAssignmentController newAssignment;
+	//boolean isSucceed, flag = false;
+	
 	
 	public void startAssignment() {
-		newAssignment = new DefineAssignmentController();
+		newAssignment = new Assignment();
 	}
 	
 	public void fileName (String fileName) {
-		newAssignment.fileName = fileName;
+		newAssignment.setFileName(fileName);
 	}
 	
 	public void fileData(byte[] file) {
-		newAssignment.fileData = file;
+		newAssignment.setFile(file);
 	}
 	
 	public void courseId(int num) {
-		newAssignment.courseNumber = num;
+		newAssignment.setCourseName(courseName);
 	}
 	
 	public void dueDate(Date date) {
-		newAssignment.dueDate = date;
+		newAssignment.setDate(date);
 	}
 		
 	public void teacherId(int teacherId) {
-		newAssignment.teacherId =teacherId;
+		newAssignment.setTeacherId(teacherId);
 	}
 	
 	

@@ -46,7 +46,13 @@ public class DefineCourse extends ActionFixture {
 		//return true;
 		return CDal.createCourse(newCourse.getCourseName(), newCourse.getTeachingUnit(), newCourse.getDuration(), newCourse.getPreCourses());
 	}
-  
-
+	
+	public boolean isPrev() {
+		return CDal.isCourseInPrevCourse(CDal.getCourseId(newCourse.getCourseName()), newCourse.getPreCourses());
+}
+	public boolean isExist() {
+		return CDal.isCourseExist(newCourse.getCourseName());
+	}
+	
 }
 
