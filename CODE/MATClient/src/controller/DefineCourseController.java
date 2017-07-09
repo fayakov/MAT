@@ -9,6 +9,7 @@ import communication.Dispatcher;
 import communication.MATClientController;
 import communication.Message;
 import entities.Course;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -49,7 +50,7 @@ public class DefineCourseController implements Initializable, Handler {
     private TableView<Course> perCourse;
 
 
-    
+   
     
 	/** The t unit. */
 	private int teachHours, tUnit, preCourseId;
@@ -96,7 +97,7 @@ public class DefineCourseController implements Initializable, Handler {
     	newCourseName = courseNameText.getText().toString(); 	
     	
     	if(courseNameText.getText().isEmpty() || teachingUnitText.getText().isEmpty() || teachingHoursText.getText().isEmpty()) 
-    		Prompt.alert(3,  "one or more of the fields is empty");    
+    		Prompt.alert(3, "one or more of the fields is empty");     
     	
     	else {
     		try {
@@ -121,16 +122,34 @@ public class DefineCourseController implements Initializable, Handler {
  */
 public void handle(Message msg, Object obj) {
 	// TODO Auto-generated method stub
-		if (msg instanceof DefineCourseRequest) {
+		if (msg instanceof DefineCourseResponse) {
 			DefineCourseResponse res = (DefineCourseResponse)msg;
-			if (res.actionSucceed()) {
-				Prompt.alert(1, "course " + newCourseName + " was added succesfully");
-			} else {
-				Prompt.alert(3, res.getErrText());	
+			
+			try {
+				localPrompt(newCourseName, res.getErrText(), res.actionSucceed());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
 		}
 	
+}
+
+public void localPrompt(final String clName1,final String eror1, final boolean succ)  throws Exception {
+	
+	Platform.runLater(new Runnable() {
+		String clName = clName1;
+		String erorText = eror1;
+		boolean success = succ;
+		
+		public void run() {
+			if(success)
+				Prompt.alert(1, "course " + clName + " was added succesfully");	
+			else
+				Prompt.alert(3, erorText);
+		}
+	} );
 }
 
 

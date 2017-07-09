@@ -1,5 +1,7 @@
 package communication;
 
+import entities.Course;
+
 /**
  * The Class DefineCourseRequest.
  */
@@ -35,6 +37,14 @@ public class DefineCourseRequest extends Message {
 		this.teachingUnit = teachingUnit;
 		this.teachingHours = teachingHours;
 		this.preCourse = preCourse;
+	}
+	
+	public DefineCourseRequest(Course newCourse) {
+		super();
+		this.courseName = newCourse.getCourseName();
+		this.teachingUnit = newCourse.getTeachingUnit();
+		this.teachingHours = newCourse.getDuration();
+		this.preCourse = newCourse.getPreCourses();
 	}
 
 	/**

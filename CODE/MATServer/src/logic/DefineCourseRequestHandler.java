@@ -30,7 +30,9 @@ public class DefineCourseRequestHandler implements Handler {
 		CDALError error = new CDALError();
 		boolean isSucceeded = CDal.createCourse(addCourseMsg.getCourseName(), addCourseMsg.getTeachingUnit(), addCourseMsg.getTeachingHours(), addCourseMsg.getPreCourse());		
 		
-		DefineCourseResponse res = new DefineCourseResponse(isSucceeded, error.getString());
+		boolean isSucceeded2 = CDal.addPrevCourseToCourse(CDal.getCourseId(addCourseMsg.getCourseName()), addCourseMsg.getPreCourse());
+		
+		DefineCourseResponse res = new DefineCourseResponse(isSucceeded && isSucceeded2, error.getString());
 		try {
 			client.sendToClient(res);
 		} catch (IOException e) {
