@@ -33,6 +33,12 @@ public class DefineCourseController implements Initializable, Handler {
 		Dispatcher.addHandler(DefineCourseResponse.class.getCanonicalName(), this);
 	}
 	
+	public DefineCourseController(Course newCourse) {
+		newCourseName = newCourse.getCourseName();
+		tUnit = newCourse.getTeachingUnit();
+		teachHours = newCourse.getDuration();
+		preCourseId = newCourse.getPreCourses();
+	}
 
     @FXML
     private TableColumn<Course, Integer> courseId;
@@ -51,12 +57,12 @@ public class DefineCourseController implements Initializable, Handler {
 
 
    
-    
+    boolean flag = false , buttonPressed, result;
 	/** The t unit. */
-	private int teachHours, tUnit, preCourseId;
+	public int teachHours, tUnit, preCourseId;
 	
 	/** The course name. */
-	private String newCourseName;
+	public String newCourseName;
 
 	 /** The teaching unit text. */
  	@FXML
@@ -94,7 +100,9 @@ public class DefineCourseController implements Initializable, Handler {
     @FXML
     void defineCourseSend(ActionEvent event) {
     	
-    	newCourseName = courseNameText.getText().toString(); 	
+    	buttonPressed = true;
+    	newCourseName = courseNameText.getText().toString(); 
+    	
     	
     	if(courseNameText.getText().isEmpty() || teachingUnitText.getText().isEmpty() || teachingHoursText.getText().isEmpty()) 
     		Prompt.alert(3, "one or more of the fields is empty");     
@@ -116,6 +124,14 @@ public class DefineCourseController implements Initializable, Handler {
     	}
 
     }
+    public boolean sendToDB() {
+    	
+    	DefineCourseRequest defineCourseReq = new DefineCourseRequest(newCourseName, tUnit, teachHours, preCourseId);
+        MATClientController.getInstance().sendRequestToServer(defineCourseReq); 
+        while(!flag);
+        
+        return result;
+    }
 
 /* (non-Javadoc)
  * @see utils.Handler#handle(communication.Message, java.lang.Object)
@@ -126,7 +142,12 @@ public void handle(Message msg, Object obj) {
 			DefineCourseResponse res = (DefineCourseResponse)msg;
 			
 			try {
-				localPrompt(newCourseName, res.getErrText(), res.actionSucceed());
+				if(buttonPressed) localPrompt(newCourseName, res.getErrText(), res.actionSucceed());
+				else {					
+					result = res.actionSucceed();
+					flag = true;
+				}
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
