@@ -1,5 +1,7 @@
 package Fixtures.Mat;
 
+import java.sql.Date;
+
 import controller.DefineAssignmentController;
 
 public class DefineAssignment {
@@ -14,25 +16,20 @@ public class DefineAssignment {
 		newAssignment = new DefineAssignmentController();
 	}
 	
-	public void AssignmentNumber(int num){
-		newAssignment.newAssignmentNumber = num;
+	
+	
+	public void assignmentfile(byte[] file) {
+		newAssignment.assignmentfile = file;
 	}
 	
-	public void AssignmentName(String name) {
-		newAssignment.newAssignmentName = name;
+	public void courseNumber(int num) {
+		newAssignment.courseNumber = num;
 	}
 	
-	public void Assignmentfile(byte[] file) {
-		newAssignment.Assignmentfile = file;
+	public void submissionDate(Date date) {
+		newAssignment.submissionDate = date;
 	}
 	
-	public void fileName(String name) {
-		newAssignment.teachHours = name;
-	}
-	
-	public void CourseName(String name) {
-		newAssignment.CourseName = name;
-	}
 	
 	public boolean defineAssignment() {
 		isSucceed = newAssignment.sendToDB();
