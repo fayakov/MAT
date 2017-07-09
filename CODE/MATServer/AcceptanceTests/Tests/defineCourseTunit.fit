@@ -6,8 +6,11 @@
 	</body>
 </html>
 <title></title>
-<br type="_moz" />
 <body>
+	<p>
+		DefineCourse Acceptance Test</p>
+	<p>
+		teaching unit get value that doesnt exist in DB - we expecting to get False</p>
 	<table border="1" cellpadding="1" cellspacing="1" style="width: 200px;">
 		<tbody>
 			<tr>
@@ -40,7 +43,7 @@
 				<td>
 					teaching unit</td>
 				<td>
-					2</td>
+					7</td>
 			</tr>
 			<tr>
 				<td>
@@ -48,7 +51,7 @@
 				<td>
 					course name</td>
 				<td>
-					testunit</td>
+					testunit2</td>
 			</tr>
 			<tr>
 				<td>
@@ -64,7 +67,7 @@
 				<td>
 					pre course</td>
 				<td>
-					1</td>
+					2</td>
 			</tr>
 			<tr>
 				<td>
@@ -72,10 +75,7 @@
 				<td>
 					define course</td>
 				<td>
-					true</td>
+					false</td>
 			</tr>
 		</tbody>
-	</table>
-	<p>
-		DefineCourse Acceptance Test</p>
-</body>
+	</table></body>

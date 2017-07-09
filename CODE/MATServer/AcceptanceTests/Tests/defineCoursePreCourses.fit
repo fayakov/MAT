@@ -1,0 +1,81 @@
+<html>
+	<head>
+		<meta content="MSHTML 11.00.10570.1001" name="GENERATOR" />
+	</head>
+	<body>
+	</body>
+</html>
+<title></title>
+<body>
+	<p>
+		DefineCourse Acceptance Test</p>
+	<p>
+		pre course&nbsp;get value that doesnt exist in DB - we expecting to get False</p>
+	<table border="1" cellpadding="1" cellspacing="1" style="width: 200px;">
+		<tbody>
+			<tr>
+				<td>
+					fit.ActionFixture</td>
+				<td>
+					&nbsp;</td>
+				<td>
+					&nbsp;</td>
+			</tr>
+			<tr>
+				<td>
+					start</td>
+				<td>
+					Fixtures.Mat.DefineCourse</td>
+				<td>
+					&nbsp;</td>
+			</tr>
+			<tr>
+				<td>
+					press</td>
+				<td>
+					start course</td>
+				<td>
+					&nbsp;</td>
+			</tr>
+			<tr>
+				<td>
+					enter</td>
+				<td>
+					teaching unit</td>
+				<td>
+					2</td>
+			</tr>
+			<tr>
+				<td>
+					enter</td>
+				<td>
+					course name</td>
+				<td>
+					testunit2</td>
+			</tr>
+			<tr>
+				<td>
+					enter</td>
+				<td>
+					teaching hours</td>
+				<td>
+					15</td>
+			</tr>
+			<tr>
+				<td>
+					enter</td>
+				<td>
+					pre course</td>
+				<td>
+					6</td>
+			</tr>
+			<tr>
+				<td>
+					check</td>
+				<td>
+					define course</td>
+				<td>
+					false</td>
+			</tr>
+		</tbody>
+	</table></body>
