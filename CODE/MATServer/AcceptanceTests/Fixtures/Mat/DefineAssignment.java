@@ -3,7 +3,6 @@ package Fixtures.Mat;
 import java.sql.Date;
 
 import DAL.CDal;
-import controller.DefineAssignmentController;
 import entities.Assignment;
 
 public class DefineAssignment {
@@ -27,7 +26,7 @@ public class DefineAssignment {
 		newAssignment.setFile(file);
 	}
 	
-	public void courseId(int num) {
+	public void courseId(String courseName) {
 		newAssignment.setCourseName(courseName);
 	}
 	
@@ -43,8 +42,12 @@ public class DefineAssignment {
 	
 	public boolean defineAssignment() {
 		// TODO Auto-generated method stub
-		//return true;
-		return CDal.createAssignment(newAssignment.getdueDate(), newAssignment.getfileData(), newAssignment.getfileName(), newAssignment.getteacherId(), newAssignment.getcourseId());
+		//return true;  
+		int assignmentId = CDal.createAssignment(newAssignment.getDate(), newAssignment.getFileData(), newAssignment.getFileName(), newAssignment.getTeacherId(), CDal.getCourseId(newAssignment.getCourseName()) );
+		if(assignmentId != 0)
+			return true;
+		else
+			return false;
 	}
 
 	

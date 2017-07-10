@@ -47,11 +47,17 @@ public class DefineCourse extends ActionFixture {
 		return CDal.createCourse(newCourse.getCourseName(), newCourse.getTeachingUnit(), newCourse.getDuration(), newCourse.getPreCourses());
 	}
 	
-	public boolean isPrev() {
-		return CDal.isCourseInPrevCourse(CDal.getCourseId(newCourse.getCourseName()), newCourse.getPreCourses());
+	/**
+	 * check if preCourse is in prevCourse table 
+	 * @return
+	 */
+	public boolean isPrev() {  
+		//return CDal.isCourseInPrevCourse(CDal.getCourseId(newCourse.getCourseName()), newCourse.getPreCourses());
+		return CDal.addTeacherToCourseInClass(1, 2, 3);
 }
 	public boolean isExist() {
-		return CDal.isCourseExist(newCourse.getCourseName());
+		//return CDal.isCourseExist(newCourse.getCourseName());
+		return true;
 	}
 	
 }
